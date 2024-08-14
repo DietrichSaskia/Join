@@ -1,0 +1,21 @@
+.loginHeader {
+  display: flex;
+}
+
+.loginImg {
+  width: 100.03px;
+  height: 121.97px;
+  position: absolute;
+  top: 80px;
+  left: 77px;
+}
+
+.SignUpContainer {
+  display: flex;
+  position: absolute;
+  width: 297px;
+  height: 49px;
+  top: 67px;
+  left: 1039px;
+  gap: 35px;
+}
