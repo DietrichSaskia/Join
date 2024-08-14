@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    font-family: Inter;
+    text-decoration: none;
+}
+
+.sideBar {
+    position: fixed;
+    background-color: #2A3647;
+    width: 232px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sideBarLogo {
+    width: 100px;
+    margin: 64px 0 64px 0;
+}
+
+.sideBarMenu {
+    display: flex;
+    flex-direction: column;
+    width: 232px;
+}
+
+.sideBarMenu a {
+    color: #CDCDCD;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 8px 0 8px 56px;
+}
+
+.sideBarMenu :hover {
+    color: #FFFFFF;
+}
+
+/* Wird für das Highlighten der einzelnen Seiten benötigt */
+.sideBarMenuActiveSite {
+    color: #FFFFFF;
+    background-color: #091931;
+}
+
+.sideBarPic {
+    width: 25px;
+    padding-right: 8px;
+}
+
+.sideBarLegal {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: absolute;
+    bottom: 48px;
+}
+
+.sideBarLegal :hover {
+    color: #FFFFFF;
+}
+
+.sideBarLegalLink {
+    color: #A8A8A8;
+    font-size: 16px;
+}
+
+header {
+    margin-left: 232px;
+    width: calc(100% - 232px);
+    height: 96px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.headerDiv {
+    visibility: hidden;
+}
+
+.headerText {
+    font-size: 20px;
+    margin-left: 116px;
+}
+
+.headerBtns {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headerHelpBtn {
+    width: 26px;
+}
+
+#headerProfile {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    border: 4px solid #2a3647;
+    font-size: 18px;
+    font-weight: 800;
+    color: #29ABE2;
+    margin-right: 40px;
+    margin-left: 16px;
+    align-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.seperator {
+    height: 3px;
+    width: 100%;
+    background-color: #b4b4b4;
+    filter: drop-shadow(0px 2px 2px #b4b4b4);
+}
