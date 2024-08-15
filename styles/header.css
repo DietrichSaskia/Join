@@ -65,7 +65,7 @@
     font-size: 16px;
 }
 
-header {
+.header {
     margin-left: 232px;
     width: calc(100% - 232px);
     height: 96px;
@@ -109,8 +109,7 @@ header {
 }
 
 .seperator {
-    height: 3px;
+    height: 4px;
     width: 100%;
     background-color: #b4b4b4;
-    filter: drop-shadow(0px 2px 2px #b4b4b4);
 }
