@@ -3,9 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="/styles/fonts.css">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/styles/board.css">
+  <link rel="stylesheet" href="/styles/">
+  <title>Board</title>
 </head>
 <body>
-  
+  <section class="boardHeadline">
+    <div class="headlineAndSearch">
+      <div>
+        <h1>Board</h1>
+      </div>
+      <div class="searchContainer">
+        <input type="text" placeholder="Find Task">
+        <button class="btnAddTask" id="btnAddTask" onclick="addTask()">Add task <img src="/assets/icons/addWhiteNoBorder.png" alt=""></button>
+      </div>
+    </div>
+    <div class="headlineTasksContainer">
+      <div class="headlineTasks">
+        <a href="#">To do</a>
+        <img src="/assets/icons/add.png" alt="">
+      </div>
+      <div class="headlineTasks">
+        <a href="#">In progress</a>
+        <img src="/assets/icons/add.png" alt="">
+      </div>
+      <div class="headlineTasks">
+        <a href="#">Await feedback</a>
+        <img src="/assets/icons/add.png" alt="">
+      </div>
+      <div class="headlineTasks">
+       <a href="#">Done</a>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
