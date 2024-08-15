@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header</title>
-    <link href="../style.css" rel="stylesheet">
-    <link href="../styles/fonts.css" rel="stylesheet">
-</head>
-
-<body>
-    <section class="sideBar">
+function renderHeader() {
+    document.getElementsByTagName('header')[0].innerHTML = /*html*/`
+        <section class="sideBar">
         <img class="sideBarLogo" src="../assets/icons/logoWhite.png">
         <div class="sideBarMenu">
             <a id="SideBarSummary" href="../htmls/summary.html"><img class="sideBarPic" src="../assets/icons/summary.png">Summary</a>
@@ -36,10 +26,5 @@
         <div class="seperator"></div>
 
     </div>
-
-
-
-
-</body>
-
-</html>
+    `
+}
