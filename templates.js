@@ -1,5 +1,7 @@
-function renderHeader() {
-    document.getElementsByTagName('header')[0].innerHTML = /*html*/`
+function renderHeader(id) {
+    console.log(id);
+    
+    document.getElementById(id).innerHTML = /*html*/`
         <section class="sideBar">
         <img class="sideBarLogo" src="../assets/icons/logoWhite.png">
         <div class="sideBarMenu">
