@@ -10,3 +10,7 @@ function checkCurrentPage() {
     if(currentPage == '/index.html')
         document.getElementById('SideBarSummary').classList.add('sideBarMenuActiveSite');
 }
+
+function goBack() {
+    window.history.back();
+}
