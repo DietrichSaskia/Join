@@ -19,7 +19,7 @@ function renderHeader(id) {
     <div class="header">
         <div class="headerDiv"></div>
         <div class="headerBtns">
-            <p class="headerText">Kanban Project Management Tool</p>
+            <div class="headerText">Kanban Project Management Tool</div>
             <div class="headerBtns">
                 <a href="../htmls/help.html"><img class="headerHelpBtn" src="../assets/icons/help.png"></a>
                 <a href="../htmls/summary.html" id="headerProfile"><div>SM</div></a>

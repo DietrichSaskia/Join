@@ -10,14 +10,13 @@ h1 {
 }
 
 h2 {
-    margin-top: 35px;
+    margin-top: 24px;
     margin-bottom: 10px;
     font-size: 28px;
     font-weight: 800;
 }
 
 h3 {
-    margin-top: 24px;
     font-size: 20px;
     font-weight: 800;
 }
@@ -32,4 +31,13 @@ h3 {
 
 .backButton {
     cursor: pointer;
+}
+
+p {
+    margin-bottom: 24px;
+}
+
+ol li {
+    font-weight: 800;
+    font-size: 21px;
 }
