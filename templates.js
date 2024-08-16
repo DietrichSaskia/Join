@@ -3,14 +3,14 @@ function renderHeader(id) {
         <section class="sideBar">
         <img class="sideBarLogo" src="../assets/icons/logoWhite.png">
         <div class="sideBarMenu">
-            <a id="SideBarSummary" href="../htmls/summary.html"><img class="sideBarPic" src="../assets/icons/summary.png">Summary</a>
-            <a id="SideBarAddTask" href="../htmls/addTask.html"><img class="sideBarPic" src="../assets/icons/addTask.png">Add Task</a>
-            <a id="SideBarBoard" href="../htmls/board.html"><img class="sideBarPic" src="../assets/icons/board.png">Board</a>
-            <a id="SideBarContacts" href="../htmls/contacts.html"><img class="sideBarPic" src="../assets/icons/contacts.png">Contacts</a>
+            <a id="sideBarsummary" href="../htmls/summary.html"><img id="picsummary" class="sideBarPic" src="../assets/icons/summary.png">Summary</a>
+            <a id="sideBaraddTask" href="../htmls/addTask.html"><img id="picaddTask" class="sideBarPic" src="../assets/icons/addTask.png">Add Task</a>
+            <a id="sideBarboard" href="../htmls/board.html"><img id="picboard" class="sideBarPic" src="../assets/icons/board.png">Board</a>
+            <a id="sideBarcontacts" href="../htmls/contacts.html"><img id="piccontacts" class="sideBarPic" src="../assets/icons/contacts.png">Contacts</a>
         </div>
         <div class="sideBarLegal">
-            <a id="SideBarprivacyPolicy" class="sideBarLegalLink" href="../htmls/privacyPolicy.html">Privacy Policy</a>
-            <a id="SideBarlegalNotice" class="sideBarLegalLink" href="../htmls/legalNotice.html">Legal Notice</a>
+            <a id="sideBarprivacyPolicy" class="sideBarLegalLink" href="../htmls/privacyPolicy.html">Privacy Policy</a>
+            <a id="sideBarlegalNotice" class="sideBarLegalLink" href="../htmls/legalNotice.html">Legal Notice</a>
         </div>
     </section>
 
