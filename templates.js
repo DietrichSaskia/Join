@@ -28,3 +28,10 @@ function renderHeader(id) {
     </div>
     `
 }
+
+async function showUser() {
+    let i = await checkUser();
+    document.getElementById('headerProfile').innerHTML = /*html*/`
+        <div>${i}</div>
+    `
+}

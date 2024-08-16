@@ -1,6 +1,7 @@
 function init(id) {
     renderHeader(id);
     checkCurrentPage();
+    showUser();
 }
 
 function checkCurrentPage() {
@@ -18,4 +19,13 @@ function checkCurrentPage() {
 
 function goBack() {
     window.history.back();
+}
+
+async function checkUser() {
+    let response = await fetch("https://join-317-default-rtdb.europe-west1.firebasedatabase.app/" + ".json");
+    let json = await response.json();
+    let user = json.contactall[0].name
+    let nameParts = user.split(' ');
+    let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
+    return initials;
 }
