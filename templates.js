@@ -1,6 +1,4 @@
 function renderHeader(id) {
-    console.log(id);
-    
     document.getElementById(id).innerHTML = /*html*/`
         <section class="sideBar">
         <img class="sideBarLogo" src="../assets/icons/logoWhite.png">

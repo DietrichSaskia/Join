@@ -5,10 +5,10 @@ function init(id) {
 
 function checkCurrentPage() {
     let i = window.location.href;
-    currentPage = i.substring(i.lastIndexOf('/'));
+    currentPageHTML = i.substring(i.lastIndexOf('/')).replace('/', "");
+    currentPage = currentPageHTML.split('.')[0];
     console.log(currentPage);
-    if(currentPage == '/index.html')
-        document.getElementById('SideBarSummary').classList.add('sideBarMenuActiveSite');
+    document.getElementById('SideBar' + currentPage).classList.add('sideBarMenuActiveSite');
 }
 
 function goBack() {
