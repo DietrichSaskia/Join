@@ -35,11 +35,11 @@
 
 .sideBarMenu :hover {
     color: #FFFFFF;
+    background-color: #40516c;
 }
 
 /* Wird für das Highlighten der einzelnen Seiten benötigt */
 .sideBarMenuActiveSite {
-    color: #FFFFFF;
     background-color: #091931;
 }
 
@@ -54,6 +54,8 @@
     gap: 16px;
     position: absolute;
     bottom: 48px;
+    width: 100%;
+    text-align: center;
 }
 
 .sideBarLegal :hover {

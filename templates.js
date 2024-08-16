@@ -9,8 +9,8 @@ function renderHeader(id) {
             <a id="SideBarContacts" href="../htmls/contacts.html"><img class="sideBarPic" src="../assets/icons/contacts.png">Contacts</a>
         </div>
         <div class="sideBarLegal">
-            <a class="sideBarLegalLink" href="../htmls/privacyPolicy.html">Privacy Policy</a>
-            <a class="sideBarLegalLink" href="../htmls/legalNotice.html">Legal Notice</a>
+            <a id="SideBarprivacyPolicy" class="sideBarLegalLink" href="../htmls/privacyPolicy.html">Privacy Policy</a>
+            <a id="SideBarlegalNotice" class="sideBarLegalLink" href="../htmls/legalNotice.html">Legal Notice</a>
         </div>
     </section>
 
