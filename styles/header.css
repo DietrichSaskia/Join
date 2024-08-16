@@ -4,6 +4,24 @@
     text-decoration: none;
 }
 
+.dNone {
+    display: none!important;
+}
+
+.showHeaderOverlay {
+    display: flex !important;
+}
+
+.headerOverlay {
+    display: none;
+    z-index: 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 .sideBar {
     position: fixed;
     background-color: #2A3647;
@@ -34,12 +52,12 @@
 }
 
 .sideBarMenu :hover {
-    background-color: #40516c;
+    background-color: #2a3d59;
 }
 
 .sideBarMenuActiveSite {
     background-color: #091931;
-    color: #FFFFFF!important;
+    color: #FFFFFF !important;
 }
 
 .sideBarPic {
@@ -63,7 +81,7 @@
 
 .sideBarLegalActiveSite {
     background-color: #091931;
-    color: #A8A8A8!important;
+    color: #A8A8A8 !important;
 }
 
 .sideBarLegalLink {
@@ -119,6 +137,29 @@
 
 #headerProfile:hover {
     background-color: #e1e6ed;
+}
+
+#burgerMenu {
+    border-radius: 12% 0% 12% 12%;
+    z-index: 3;
+    position: fixed;
+    top: 94px;
+    right: 20px;
+    background-color: #2A3647;
+    width: 145px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+}
+
+#burgerMenu a {
+    color: #CDCDCD;
+    margin: 14px 6px 0px 6px;
+    padding: 8px 0 8px 6px;
+}
+
+#burgerMenu :hover {
+    background-color: #2a3d59;
 }
 
 .seperator {

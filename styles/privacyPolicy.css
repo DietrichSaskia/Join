@@ -6,12 +6,14 @@
 }
 
 h1 {
+    padding-top: 100px;
     font-size: 61px;
+    margin-bottom: 32px;
 }
 
 h2 {
     margin-top: 24px;
-    margin-bottom: 10px;
+    padding-bottom: 16px;
     font-size: 28px;
     font-weight: 800;
 }
@@ -21,20 +23,26 @@ h3 {
     font-weight: 800;
 }
 
-.backButtonBox {
-    margin-top: 100px;
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
 .backButton {
     cursor: pointer;
+    position: fixed;
+    top: 215px;
+    right: 96px;
+    z-index: 1;
+}
+
+.backButton:hover {
+    background-color: #ededed;
+    border-radius: 50%;
+    scale: 1.1;
 }
 
 p {
-    margin-bottom: 24px;
+    padding-bottom: 24px;
+}
+
+span {
+    color: #29ABE2;
 }
 
 ol li {

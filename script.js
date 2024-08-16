@@ -29,3 +29,13 @@ async function checkUser() {
     let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
     return initials;
 }
+
+function showBurgerMenu() {
+    document.getElementById('burgerMenu').classList.remove('dNone');
+    document.getElementById('headerOverlay').classList.add('showHeaderOverlay');
+}
+
+function removeBurgerMenu() {
+        document.getElementById('burgerMenu').classList.add('dNone');
+        document.getElementById('headerOverlay').classList.remove('showHeaderOverlay');
+}

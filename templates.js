@@ -1,5 +1,6 @@
 function renderHeader(id) {
     document.getElementById(id).innerHTML = /*html*/`
+    <section onclick="removeBurgerMenu()" class="headerOverlay" id="headerOverlay"></section>
         <section class="sideBar">
         <img class="sideBarLogo" src="../assets/icons/logoWhite.png">
         <div class="sideBarMenu">
@@ -20,8 +21,13 @@ function renderHeader(id) {
             <div class="headerText">Kanban Project Management Tool</div>
             <div class="headerBtns">
                 <a href="../htmls/help.html"><img class="headerHelpBtn" src="../assets/icons/help.png"></a>
-                <a href="../htmls/summary.html" id="headerProfile"><div>SM</div></a>
+                <a id="headerProfile" onclick="showBurgerMenu()"><div>??</div></a>
             </div>
+        </div>
+        <div id="burgerMenu" class="dNone">
+            <a href="../htmls/legalNotice.html">Legal Notice</a>
+            <a href="../htmls/privacyPolicy.html">Privacy Policy</a>
+            <a href="../htmls/logIn.html">Log out</a>
         </div>
         <div class="seperator"></div>
 
