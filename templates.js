@@ -1,6 +1,6 @@
 function renderHeader(id) {
     document.getElementById(id).innerHTML = /*html*/`
-    <section onclick="removeBurgerMenu()" class="headerOverlay" id="headerOverlay"></section>
+    <section onclick="hideBurgerMenu()" class="headerOverlay" id="headerOverlay"></section>
         <section class="sideBar">
         <img class="sideBarLogo" src="../assets/icons/logoWhite.png">
         <div class="sideBarMenu">
@@ -21,7 +21,7 @@ function renderHeader(id) {
             <div class="headerText">Kanban Project Management Tool</div>
             <div class="headerBtns">
                 <a href="../htmls/help.html"><img class="headerHelpBtn" src="../assets/icons/help.png"></a>
-                <a id="headerProfile" onclick="showBurgerMenu()"><div>??</div></a>
+                <a id="headerProfile" onclick="toggleBurgerMenu()"><div>??</div></a>
             </div>
         </div>
         <div id="burgerMenu" class="dNone">

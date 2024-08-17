@@ -30,12 +30,21 @@ async function checkUser() {
     return initials;
 }
 
+function toggleBurgerMenu() {
+    if(document.getElementById('burgerMenu').classList.contains("dNone")) {
+        showBurgerMenu();
+    }
+    else {
+        hideBurgerMenu();
+    }
+}
+
 function showBurgerMenu() {
     document.getElementById('burgerMenu').classList.remove('dNone');
     document.getElementById('headerOverlay').classList.add('showHeaderOverlay');
 }
 
-function removeBurgerMenu() {
+function hideBurgerMenu() {
         document.getElementById('burgerMenu').classList.add('dNone');
         document.getElementById('headerOverlay').classList.remove('showHeaderOverlay');
 }
