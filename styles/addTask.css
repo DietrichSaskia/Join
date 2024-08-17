@@ -18,3 +18,10 @@ span {
 .taskForm {
     display: flex;
 }
+
+.taskSeperator {
+    width: 2px;
+    border-radius: 2px;
+    background-color: #D1D1D1;
+    height: 424px;
+}
