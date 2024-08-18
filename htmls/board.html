@@ -6,18 +6,30 @@
   <link rel="stylesheet" href="/styles/fonts.css">
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/styles/board.css">
-  <link rel="stylesheet" href="/styles/">
+  <link rel="stylesheet" href="/styles/header.css">
+  <script src="/script.js"></script>
+  <script src="/templates.js"></script>
+  <script src="/scripts/board.js"></script>
   <title>Board</title>
 </head>
-<body>
+<body onload="init(), loadTasks()">
+  <header></header>
   <section class="boardHeadline">
     <div class="headlineAndSearch">
       <div>
         <h1>Board</h1>
       </div>
       <div class="searchContainer">
-        <input type="text" placeholder="Find Task">
-        <button class="btnAddTask" id="btnAddTask" onclick="addTask()">Add task <img src="/assets/icons/addWhiteNoBorder.png" alt=""></button>
+        <div class="searchWrapper">
+          <input type="text" placeholder="Find Task">
+          <div class="verticalLine"></div>
+          <button class="searchButton">
+            <img src="/assets/icons/search.png" alt="Search">
+          </button>
+        </div>
+        <button class="btnAddTask" id="btnAddTask" onclick="addTask()">
+          Add task <img src="/assets/icons/addWhiteNoBorder.png" alt="">
+        </button>
       </div>
     </div>
     <div class="headlineTasksContainer">
@@ -35,6 +47,12 @@
       </div>
       <div class="headlineTasks">
        <a href="#">Done</a>
+      </div>
+      <div class="allTasks" id="allTasks">
+        <div id="toDo"></div>
+        <div id="inProgress"></div>
+        <div id="awaitFeedback"></div>
+        <div id="done"></div>
       </div>
     </div>
   </section>
