@@ -1,0 +1,27 @@
+.mainContent {
+    margin-left: 232px;
+    padding: 96px 96px 0 96px;
+    background-color: #f5f6f7;
+    min-height: calc(100vh - 96px);
+}
+
+h1 {
+    padding-top: 100px;
+    font-size: 61px;
+    margin-bottom: 32px;
+}
+
+span {
+    color: #FF8190;
+}
+
+.taskForm {
+    display: flex;
+}
+
+.taskSeperator {
+    width: 2px;
+    border-radius: 2px;
+    background-color: #D1D1D1;
+    height: 424px;
+}

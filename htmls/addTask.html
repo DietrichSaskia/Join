@@ -1,11 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Add Task</title>
+  <link href="../styles/addTask.css" rel="stylesheet">
+  <link href="../styles/header.css" rel="stylesheet">
+  <script src="../script.js"></script>
+  <script src="../templates.js"></script>
 </head>
-<body>
-  
+
+<body onload="init('header')">
+
+  <div id="header"></div>
+
+  <main class="mainContent">
+
+    <h1>Add Task</h1>
+
+    <form class="taskForm">
+      <div>
+        <p>Title<span>*</span></p>
+        <input type="text" required>
+
+        <p>Description</p>
+        <textarea placeholder="Enter a Description"></textarea>
+
+        <p>Assigned to</p>
+        <input> Search Field with Input
+
+        <p>This field is required<span>*</span></p>
+
+      </div>
+
+      <div class="taskSeperator"></div>
+
+      <div>
+        <p>Due Date<span>*</span></p>
+        <input type="date" required>
+
+        <div>
+          <p>Prio</p>
+
+          <input type="checkbox">
+          <div>High</div>
+
+          <input type="checkbox">
+          <div>Medium</div>
+
+          <input type="checkbox">
+          <div>Low</div>
+        
+        </div>
+
+        <div class="dropdown">
+          <p>Category<span>*</span></p>
+          <button class="dropbtn">Dropdown
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">Technical Task</a>
+            <a href="#">User Story</a>
+          </div>
+
+        </div>
+        <p>Subtask</p>
+        <input>
+
+        <div>
+          <button>Clear</button>
+          <button>Create Task</button>
+        </div>
+
+      </div>
+
+    </form>
+
+  </main>
 </body>
+
 </html>
