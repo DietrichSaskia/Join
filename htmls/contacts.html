@@ -4,8 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="../styles/Contact.css">
+  <link rel="stylesheet" href="/styles/fonts.css">
+  <script src="/Contact.js"></script>
+  <link rel="stylesheet" href="/styles/header.css">
+  <script src="/script.js"></script>
+  <script src="/templates.js"></script>
+
 </head>
-<body>
-  
+<body onload="init('headerContact')">
+  <div class="none" id="EditContactIDWIn"></div>
+  <main class="mainareasplit">
+    <section class="Contactsection">
+      <header id="headerContact" class="headerZIndex"></header>
+      <section class="Contactcontent">
+        <section class="ContactleftSection">
+          <div class="Contactleftbetween">
+            <div class="contactleft">
+              <button  onclick="editContactShowWindow() ,editNewContactHtmlChange()" class="AddContactButton">
+                <span class="AddContactText">Add new contact</span>
+                <img class="PersonaddIcon" src="../assets/icons/person_add.png">
+              </button>
+            </div>
+          </div>
+          <div class="EveryContactStyle" id="EveryContact">
+          </div>
+        </section>
+        <section>
+          <section class="Rightsectionheadline">
+            <span class="Contactheadline">Contacts</span>
+            <div class="Contactyline"></div>
+            <span class="Contactsmallheadline">Better with a team</span>
+          </section>
+          <div id="Contenttext">
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+  <script src="/Contacthtml.js"></script>
+  <script src="/ContactWindow.js"></script>
 </body>
 </html>
