@@ -18,7 +18,7 @@ h1 {
 
 p {
     padding-bottom: 8px;
-    padding-top: 12px;
+    margin-top: 18px;
 }
 
 span {
@@ -144,7 +144,12 @@ input {
 
 .category {
     width: 440px;
-    height: 38px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    padding-left: 20px;
+    font-size: 20px;
 }
 
 .subtasks {

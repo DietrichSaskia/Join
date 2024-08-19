@@ -55,24 +55,21 @@
 
         </div>
 
-        <div class="category" id="categoryInput" placeholder="Select task category">
-          <p>Category<span>*</span></p>
-          <button class="dropbtn">Dropdown
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <a href="#">Technical Task</a>
-            <a href="#">User Story</a>
-          </div>
+        <p>Category<span>*</span></p>
+          <select name="category" id="category" class="category" required>
+            <option value="">Select task category</option>
+            <option value="technicalTask">Technical Task</option>
+            <option value="userStory">User Story</option>
+          </select>
 
-        </div>
-        <p>Subtasks</p>
-        <input class="subtasks" id="subtasksInput" placeholder="Add new subtask">
+      </div>
+      <p>Subtasks</p>
+      <input class="subtasks" id="subtasksInput" placeholder="Add new subtask">
 
-        <div>
-          <button>Clear</button>
-          <button>Create Task</button>
-        </div>
+      <div>
+        <button onclick="clearaddTask()">Clear</button>
+        <button onclick="createTask()">Create Task</button>
+      </div>
 
       </div>
 
