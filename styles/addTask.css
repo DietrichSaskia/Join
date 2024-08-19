@@ -156,3 +156,46 @@ input {
     width: 440px;
     height: 38px;
 }
+
+.taskButtons {
+    position: absolute;
+    top: 890px;
+    left: 995px;
+}
+
+.clearButton {
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    color: #2A3647;
+    cursor: pointer;
+    width: 110px;
+    height: 56px;
+    padding: 16px;
+    margin-right: 16px;
+    font-size: 21px;
+}
+
+.clearButton:active {
+    color: #29ABE2;
+    border: 1px solid #29ABE2;
+}
+
+.createTaskButton {
+    background-color: #2A3647;
+    cursor: pointer;
+    height: 56px;
+    width: 183px;
+    padding: 16px;
+    font-size: 21px;
+    color: white;
+}
+
+.createTaskButton:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 2px 2px #D1D1D1;
+    border: 1px solid #29ABE2;
+}
+
+.createTaskButton:active {
+    box-shadow: 1px 2px 2px 2px #D1D1D1;
+}

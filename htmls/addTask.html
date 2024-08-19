@@ -56,19 +56,19 @@
         </div>
 
         <p>Category<span>*</span></p>
-          <select name="category" id="category" class="category" required>
-            <option value="">Select task category</option>
-            <option value="technicalTask">Technical Task</option>
-            <option value="userStory">User Story</option>
-          </select>
+        <select name="category" id="category" class="category" required>
+          <option value="">Select task category</option>
+          <option value="technicalTask">Technical Task</option>
+          <option value="userStory">User Story</option>
+        </select>
 
+        <p>Subtasks</p>
+        <input class="subtasks" id="subtasksInput" placeholder="Add new subtask">
       </div>
-      <p>Subtasks</p>
-      <input class="subtasks" id="subtasksInput" placeholder="Add new subtask">
 
-      <div>
-        <button onclick="clearaddTask()">Clear</button>
-        <button onclick="createTask()">Create Task</button>
+      <div class="taskButtons">
+        <button class="clearButton" onclick="clearaddTask()">Clear</button>
+        <button class="createTaskButton" onclick="createTask()">Create Task</button>
       </div>
 
       </div>
