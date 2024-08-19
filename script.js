@@ -4,6 +4,7 @@ function init(id) {
     showUser();
 }
 
+
 function checkCurrentPage() {
     let i = window.location.href;
     currentPageHTML = i.substring(i.lastIndexOf('/')).replace('/', "");
@@ -11,15 +12,17 @@ function checkCurrentPage() {
     if (currentPage == 'privacyPolicy' || currentPage == 'legalNotice') {
         document.getElementById('sideBar' + currentPage).classList.add('sideBarLegalActiveSite');
     }
-    else if(currentPage == 'summary' || currentPage == 'addTask' || currentPage == 'board' || currentPage == 'contacts') {   
+    else if (currentPage == 'summary' || currentPage == 'addTask' || currentPage == 'board' || currentPage == 'contacts') {
         document.getElementById('pic' + currentPage).src = "../assets/icons/" + currentPage + "White.png";
         document.getElementById('sideBar' + currentPage).classList.add('sideBarMenuActiveSite');
     }
 }
 
+
 function goBack() {
     window.history.back();
 }
+
 
 async function checkUser() {
     let response = await fetch("https://join-317-default-rtdb.europe-west1.firebasedatabase.app/" + ".json");
@@ -31,7 +34,7 @@ async function checkUser() {
 }
 
 function toggleBurgerMenu() {
-    if(document.getElementById('burgerMenu').classList.contains("dNone")) {
+    if (document.getElementById('burgerMenu').classList.contains("dNone")) {
         showBurgerMenu();
     }
     else {
@@ -39,12 +42,32 @@ function toggleBurgerMenu() {
     }
 }
 
+
 function showBurgerMenu() {
     document.getElementById('burgerMenu').classList.remove('dNone');
     document.getElementById('headerOverlay').classList.add('showHeaderOverlay');
 }
 
+
 function hideBurgerMenu() {
-        document.getElementById('burgerMenu').classList.add('dNone');
-        document.getElementById('headerOverlay').classList.remove('showHeaderOverlay');
+    document.getElementById('burgerMenu').classList.add('dNone');
+    document.getElementById('headerOverlay').classList.remove('showHeaderOverlay');
+}
+
+
+function prioButtons(i) {
+    document.getElementById('prio0').classList.remove('high', 'active');
+    document.getElementById('prio1').classList.remove('medium', 'active');
+    document.getElementById('prio2').classList.remove('low', 'active');
+    switch (i) {
+        case 0:
+            document.getElementById('prio0').classList.add('high', 'active');
+            break;
+        case 1:
+            document.getElementById('prio1').classList.add('medium', 'active');
+            break;
+        case 2:
+            document.getElementById('prio2').classList.add('low', 'active');
+            break;
+    }
 }

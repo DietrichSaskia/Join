@@ -103,6 +103,45 @@ input {
     opacity: 0;
 }
 
+.prio {
+    display: flex;
+    justify-content: space-between;
+    width: 440px;
+}
+
+.prioButton {
+    width: 136px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.prioButton:hover {
+    box-shadow: 0px 4px 2px 2px #D1D1D1;
+}
+
+.prioButton.active:hover {
+    box-shadow: none;
+}
+
+.high {
+    background-color: #ff3c00;
+    color: white;
+}
+
+.medium {
+    background-color: #ffaa00;
+    color: white;
+}
+
+.low {
+    background-color: #79e329;
+    color: white;
+}
+
 .category {
     width: 440px;
     height: 38px;
