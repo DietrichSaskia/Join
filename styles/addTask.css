@@ -3,6 +3,7 @@
     padding: 96px 96px 0 96px;
     background-color: #f5f6f7;
     min-height: calc(100vh - 96px);
+    font-size: 20px;
 }
 
 h1 {
@@ -24,4 +25,43 @@ span {
     border-radius: 2px;
     background-color: #D1D1D1;
     height: 424px;
+}
+
+.required {
+    position: absolute;
+    top: 926px;
+    font-size: 16px;
+}
+
+.title {
+    width: 440px;
+    height: 38px;
+    border-radius: 12px;
+    color: #D1D1D1;
+}
+
+.description {
+    width: 440px;
+    height: 38px;
+    color: #D1D1D1;
+}
+
+.assignedTo {
+    height: 38px;
+    width: 440px;
+}
+
+.dueDate {
+    width: 440px;
+    height: 38px;
+}
+
+.category {
+    width: 440px;
+    height: 38px;
+}
+
+.subtasks {
+    width: 440px;
+    height: 38px;
 }

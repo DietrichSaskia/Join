@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Task</title>
+  <link href="../styles/fonts.css" rel="stylesheet">
   <link href="../styles/addTask.css" rel="stylesheet">
   <link href="../styles/header.css" rel="stylesheet">
   <script src="../script.js"></script>
@@ -22,15 +23,15 @@
     <form class="taskForm">
       <div>
         <p>Title<span>*</span></p>
-        <input type="text" required>
+        <input class="title" id="titleInput" placeholder="Enter a title" type="text" required>
 
         <p>Description</p>
-        <textarea placeholder="Enter a Description"></textarea>
+        <textarea class="description" id="descriptionInput" placeholder="Enter a Description"></textarea>
 
         <p>Assigned to</p>
-        <input> Search Field with Input
+        <input class="assignedTo" id="assignedToInput" placeholder="Select Contacts to assign">
 
-        <p>This field is required<span>*</span></p>
+        <p class="required">This field is required<span>*</span></p>
 
       </div>
 
@@ -38,7 +39,7 @@
 
       <div>
         <p>Due Date<span>*</span></p>
-        <input type="date" required>
+        <input class="dueDate" id="dueDateInput" type="date" required>
 
         <div>
           <p>Prio</p>
@@ -54,7 +55,7 @@
         
         </div>
 
-        <div class="dropdown">
+        <div class="category" id="categoryInput" placeholder="Select task category">
           <p>Category<span>*</span></p>
           <button class="dropbtn">Dropdown
             <i class="fa fa-caret-down"></i>
@@ -65,8 +66,8 @@
           </div>
 
         </div>
-        <p>Subtask</p>
-        <input>
+        <p>Subtasks</p>
+        <input class="subtasks" id="subtasksInput" placeholder="Add new subtask">
 
         <div>
           <button>Clear</button>
