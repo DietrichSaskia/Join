@@ -29,7 +29,9 @@
         <textarea class="description" id="descriptionInput" placeholder="Enter a Description"></textarea>
 
         <p>Assigned to</p>
-        <input class="assignedTo" id="assignedToInput" placeholder="Select Contacts to assign">
+        <select onclick="showMembers()" name="assignedTo" id="assignedToInput" class="assignedTo">
+          <option value="">Select Contacts to assign</option>
+        </select>
 
         <p class="required">This field is required<span>*</span></p>
 

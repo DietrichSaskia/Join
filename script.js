@@ -71,3 +71,15 @@ function prioButtons(i) {
             break;
     }
 }
+
+function clearaddTask() {
+
+}
+
+function createTask() {
+
+}
+
+function showMembers() {
+    
+}
