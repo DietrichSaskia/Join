@@ -1,46 +1,46 @@
 const BaseUrl = "https://join-317-default-rtdb.europe-west1.firebasedatabase.app/";
-
 let charContactArray = [];
 let emailsArray = [];
 let contactNameArray = [];
 let PhonenumberArray = [];
-let usedColors = {}; 
-const colorPalette = [
-    '#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A133FF', 
-    '#33FFF2', '#FF9A33', '#FF5733', '#A1FF33', '#33FF9A'
-];
+let colorPalette = [];
 
 contactLoad();
-loadUsedColors();
-
 
 /**
- * holt die daten aus der datenbank und wandelt es in einen json um.
- * 
+ * Fetches the data from the database and converts it into a json.
+ * Fills several arrays with the corresponding information using a for loop.
  * @param {*} name
  */
 async function contactLoad() {
-    contactNameArray = [];
-    emailsArray = [];
-    PhonenumberArray = [];
-    charContactArray = [];
+    cleanarray()
     let pathcontact = 'contactall';
     let contactall = await fetch(BaseUrl + pathcontact + '.json');
     let contactallshow = await contactall.json();
-    
     for (let key in contactallshow) {  // Verwende "for...in", um die Keys durchzugehen
         contactNameArray.push(contactallshow[key].name);
         emailsArray.push(contactallshow[key].email);
         PhonenumberArray.push(contactallshow[key].phone);
         charContactArray.push({ key: key, name: contactallshow[key].name, email: contactallshow[key].email, phone: contactallshow[key].phone });
+        colorPalette.push(contactallshow[key].color)
     }
-    
     contactloadchar(contactNameArray);
 }
 
 /**
- * charContactArray wird befüllt, und anschließend wird das Array alphabetisch nach den Initialen und dann nach den Namen sortiert.
+ * Several arrays are emptied.
+ */
+function cleanarray(){
+    contactNameArray = [];
+    emailsArray = [];
+    PhonenumberArray = [];
+    charContactArray = [];
+    colorPalette = [];
+}
+
+/**
  * 
+ * charContactArray is filled, and then the array is sorted alphabetically by initials and then by name.
  * @param {*} contactNameArray 
  */
 function contactloadchar(contactNameArray){
@@ -61,72 +61,77 @@ function contactloadchar(contactNameArray){
 }
 
 /**
- * Jedes Element von charContactArray wird ausgewählt und überprüft, ob die Initialen übereinstimmen.
- * Falls nicht, wird eine neue Initiale angezeigt.
+ * A div container is created here and extensive functions are called up.
+ * 
  */
 function contactloadcontainer(){
     let container = document.createElement('div');
     let currentInitial = '';
     charContactArray.forEach((obj) => {
-        if (obj.initial !== currentInitial) {
-            currentInitial = obj.initial;
-            // Füge die Initialen und die horizontale Linie hinzu
-            let span = document.createElement('span');
-            span.textContent = currentInitial;
-            span.classList.add('initial-span');
-            container.appendChild(span);
-
-            let lineDiv = document.createElement('div');
-            lineDiv.classList.add('gray-line');
-            container.appendChild(lineDiv);
-        }
-        contactloadcontainer2(container, obj);
+        contactloadcontainer1(obj, currentInitial, container)
     });
     contactLoadTargetid(container);
 }
 
 /**
- * Die Buttons werden erstellt und ihnen eine ID zugewiesen, die auf dem Firebase-Key basiert.
+ * Each element of charContactArray is selected and checked to see if the initials match.
+ * If not, a new initial is displayed. A horizontal line is also created.
+ * @param {*} obj 
+ * @param {*} currentInitial 
+ * @param {*} container 
+ */
+function contactloadcontainer1(obj, currentInitial, container){
+    if (obj.initial !== currentInitial) {
+        currentInitial = obj.initial;
+        let span = document.createElement('span');
+        span.textContent = currentInitial;
+        span.classList.add('initial-span');
+        container.appendChild(span);
+        let lineDiv = document.createElement('div');
+        lineDiv.classList.add('gray-line');
+        container.appendChild(lineDiv);
+    }
+    contactloadcontainer2(container, obj);
+}
+
+/**
  * 
+ * The buttons are created and assigned an ID based on the Firebase key.
  * @param {*} container 
  * @param {*} obj 
  */
 function contactloadcontainer2(container, obj){
     let button = document.createElement('button');
     button.classList.add('person-button');
-    button.id = `contact-button-${obj.key}`;  // Verwende den Key als Teil der ID
+    button.id = `contact-button-${obj.key}`;
     button.classList.add('Backgroundgray');
-    
     contactloadcontainer3(container, obj, button);
 }
 
 /**
- * Hier wird das Kreis-Element für die Initialen erstellt und eine Farbe ausgewählt.
- * Name und E-Mail werden ebenfalls hinzugefügt.
  * 
+ * The circle element for the initials is created here and equipped with the appropriate color contained in the colorPalette array.
+ * A div container is created from name and e-mail
  * @param {*} container 
  * @param {*} obj 
  * @param {*} button 
  */
-function contactloadcontainer3(container, obj, button){
+function contactloadcontainer3(container, obj, button) {
     let circleDiv = document.createElement('div');
     circleDiv.textContent = obj.initials;
     circleDiv.classList.add('initial-circle');
-    // Verwende addOrUpdateColorForContact, um die richtige Farbe zu erhalten
-    let color = addOrUpdateColorForContact(obj);
+    let colorIndex = obj.key; 
+    let color = colorPalette[colorIndex % colorPalette.length]; 
     circleDiv.style.backgroundColor = color;
     button.appendChild(circleDiv);
-
-    // Name und E-Mail in einem div erstellen
     let nameEmailDiv = document.createElement('div');
     nameEmailDiv.classList.add('name-email');
-
     contactloadcontainer4(container, nameEmailDiv, button, obj);
 }
 
 /**
- * Der Name und die E-Mail werden in ein Div eingefügt.
  * 
+ * A div container is created from name and e-mail
  * @param {*} container 
  * @param {*} nameEmailDiv 
  * @param {*} button 
@@ -137,19 +142,17 @@ function contactloadcontainer4(container, nameEmailDiv, button, obj){
     nameDiv.textContent = obj.name;
     nameDiv.classList.add('person-name');
     nameEmailDiv.appendChild(nameDiv);
-
     let emailDiv = document.createElement('div');
     emailDiv.textContent = obj.email;
     emailDiv.classList.add('person-email');
     nameEmailDiv.appendChild(emailDiv);
-    
     button.appendChild(nameEmailDiv);
     contactloadcontainer5(container, button);
 }
 
 /**
- * Event Listener für Buttons, um die Hintergrundfarbe zu ändern und Details anzuzeigen.
  * 
+ * Event listener for buttons to change the background color. In addition, classes are removed and added based on the behavior of the listener.
  * @param {*} container 
  * @param {*} button 
  */
@@ -161,7 +164,6 @@ function contactloadcontainer5(container, button){
         });
         button.classList.add('button-active');
         button.classList.remove('Backgroundgray');
-
         let clickedButtonId = event.currentTarget.id;
         let buttonColor = event.currentTarget.querySelector('.initial-circle').style.backgroundColor;
         contactInfo(clickedButtonId, buttonColor);
@@ -169,10 +171,14 @@ function contactloadcontainer5(container, button){
     container.appendChild(button);
 }
 
+/**
+ * 
+ * The key is extracted from the ID. The corresponding object in the array is also filtered out.
+ * @param {*} clickedButtonId 
+ * @param {*} buttonColor 
+ */
 function contactInfo(clickedButtonId, buttonColor){
-    let key = clickedButtonId.split('-').pop();  // Extrahiere den Key aus der ID
-
-    // Finde das entsprechende Objekt im Array
+    let key = clickedButtonId.split('-').pop(); 
     let contact = charContactArray.find(obj => obj.key === key);
     if (contact) {
         let { initials, name, email, phone } = contact;
@@ -182,9 +188,8 @@ function contactInfo(clickedButtonId, buttonColor){
     }
 }
 
-
 /**
- * Hier wird die Ziel Id angegeben wo sie sich befinden sollen.
+ * The destination ID where they should be located is specified here.
  * 
  * @param {*} container 
  */
@@ -193,127 +198,6 @@ function contactLoadTargetid(container){
     let targetElement = document.getElementById('EveryContact'); 
     if (targetElement) {
         targetElement.appendChild(container);
-    }
-}
-
-/**
- * Hier wird entweder eine vor definierte Farbe verwendet oder es wird eine neue generiert.
- * 
- * @returns 
- */
-
-// Entfernt die Farbe, wenn ein Kontakt gelöscht wird
-function removeColorForContact(contactName) {
-    if (usedColors[contactName]) {
-        delete usedColors[contactName];
-        saveUsedColors(); // Speichere den Zustand nach dem Löschen
-    }
-}
-
-// Speichert das `usedColors` Objekt im LocalStorage
-function saveUsedColors() {
-    localStorage.setItem('usedColors', JSON.stringify(usedColors));
-}
-
-// Lädt das `usedColors` Objekt aus dem LocalStorage
-function loadUsedColors() {
-    const savedColors = localStorage.getItem('usedColors');
-    if (savedColors) {
-        usedColors = JSON.parse(savedColors);
-    } else {
-        usedColors = {};
-    }
-}
-
-
-// Fügt eine neue Farbe für den Kontakt hinzu oder aktualisiert sie
-function addOrUpdateColorForContact(obj) {
-    
-    console.log(usedColors[obj.key])
-    // Falls dem Kontakt bereits eine Farbe zugewiesen wurde, behalte sie bei
-    if (usedColors[obj.name]) {
-        return usedColors[obj.name];
-    }
-    
-    // Verwende eine verfügbare Farbe oder generiere eine neue
-    let color = getNextAvailableColor(obj);
-    usedColors[obj.name] = color;
-    saveUsedColors(); // Speichere den Zustand nach jeder Änderung
-    return color;
-}
-
-// Gibt die nächste verfügbare Farbe zurück
-function getNextAvailableColor(obj) {
-    // Überprüfen, ob diesem Kontakt bereits eine Farbe zugewiesen wurde
-    if (usedColors[obj.name]) {
-        return usedColors[obj.name];
-    }
-
-    // Wenn noch nicht alle Farben vergeben sind, verwende eine aus dem colorPalette-Array
-    for (let color of colorPalette) {
-        if (!Object.values(usedColors).includes(color)) {
-            return color;
-        }
-    }
-
-    // Wenn alle Farben vergeben sind, generiere eine zufällige Farbe
-    let generatedColor = generateRandomColor();
-    return generatedColor;
-}
-
-// Generiert eine zufällige Farbe
-function generateRandomColor() {
-    let letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-
-let IMGPfadon = ['deleteBlue','editBlue']
-let IMGPfadof = ['delete',  'edit']
-
-function onmouse(id){
-        let pfadextra;
-        if(id == 'ContactEditChange'){
-            pfadextra = IMGPfadon[1]
-        }
-        else{
-            pfadextra = IMGPfadon[0]
-        }
-        document.getElementById(id).innerHTML=`
-        <img class="ContactDeleteEdit" src="/assets/icons/${pfadextra}.png"></img>
-        `;
-}
-
-function outmouse(id){
-    let pfadextra;
-        if(id == 'ContactEditChange'){
-            pfadextra = IMGPfadof[1]
-        }
-        else{
-            pfadextra = IMGPfadof[0]
-        }
-        document.getElementById(id).innerHTML=`
-        <img class="ContactDeleteEdit" src="/assets/icons/${pfadextra}.png"></img>
-        `;
-}
-
-function onmouseClose(id){
-    if(id == 'XCloseID'){
-        document.getElementById(id).innerHTML=`
-        <img id="XCloseother" class="ImgCloseStyle2" src="/assets/icons/closeBlue.png">
-    `;
-    }
-}
-
-function outmouseClose(id){
-    if(id == 'XCloseID'){
-        document.getElementById(id).innerHTML=`
-        <img id="XClose" class="ImgCloseStyle2" src="/assets/icons/close.png">
-    `;
     }
 }
 

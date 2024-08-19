@@ -48,7 +48,7 @@ function  contactInfoHtml(initials, name, email, phone, buttonColor, index){
 
 function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
     document.getElementById('EditContactIDWIn').innerHTML = `
-    <div class="EditWindowNew">
+    <div class="EditWindowNew" onclick="protect(event)">
         <section class="EditWindowLeftArea">
             <div class="EditLeftTopStyle">
                 <img class="EditJoinLogo" src="/assets/icons/logoWhite.png">
@@ -102,7 +102,17 @@ function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
         </section>
     </div>
     `;
-
     editNewContactSave(name, email, phone, index);
 }
  
+function editNewContactChangeHTML(){
+    document.getElementById('EditWindowDeleteSaveID2').innerHTML=`
+    <button onclick="editContactCloseWindow()" onmouseover="onmouseClose('XCloseID')" onmouseout="outmouseClose('XCloseID')" id="CloseButtonID" type="button" class="EditWindowDeleteButton">Cancel 
+        <div class="XButtonCloseStyle" id="XCloseID">
+            <img  class="ImgCloseStyle2" src="/assets/icons/close.png">
+        </div>
+    </button>
+    <button  onclick="createNewContact()" class="EditWindowSaveButton">Create contact <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
+    `;
+    
+}
