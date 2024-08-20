@@ -10,7 +10,7 @@ async function loadTasks() {
       throw new Error(`HTTP-Fehler! Status: ${response.status}`);
     }
     let responseToJson = await response.json();
-    allTasks = Array.isArray(responseToJson) ? responseToJson : [responseToJson];
+    allTasks = Array.isArray(responseToJson) ? responseToJson : Object.values(responseToJson);
     console.log(allTasks);
 
     renderToDos();
@@ -22,61 +22,87 @@ async function loadTasks() {
   }
 }
 
+loadTasks();
+
 
 function renderToDos() {
   let toDo = allTasks.filter(function(t) {
-    return t['section'] == 'toDo';
+    return t['section'] === 'toDo';
   });
-  document.getElementById('toDo').innerHTML = '';
+  
+  let container = document.getElementById('toDo');
+  container.innerHTML = '';
 
-  for (let index = 0; index < toDo.length; index++) {
-    let element = toDo[index];
-    document.getElementById('toDo').innerHTML += generateTasksHTML(element);
+  if (toDo.length === 0) {
+    container.innerHTML = '<div class="noTasks">No tasks To Do</div>';
+  } else {
+    for (let index = 0; index < toDo.length; index++) {
+      let element = toDo[index];
+      container.innerHTML += generateTasksHTML(element);
+    }
   }
 }
 
 
-function renderInProgress(){
+function renderInProgress() {
   let inProgress = allTasks.filter(function(t) {
-    return t['section'] == 'inProgress';
+    return t['section'] === 'inProgress';
   });
-  document.getElementById('inProgress').innerHTML = '';
 
-  for (let index = 0; index < inProgress.length; index++) {
-    let element = inProgress[index];
-    document.getElementById('inProgress').innerHTML += generateTasksHTML(element);
+  let container = document.getElementById('inProgress');
+  container.innerHTML = '';
+
+  if (inProgress.length === 0) {
+    container.innerHTML = '<div class="noTasks">No tasks in Progress</div>';
+  } else {
+    for (let index = 0; index < inProgress.length; index++) {
+      let element = inProgress[index];
+      container.innerHTML += generateTasksHTML(element);
+    }
   }
 }
 
 
-function renderAwaitFeedback(){
+function renderAwaitFeedback() {
   let awaitFeedback = allTasks.filter(function(t) {
-    return t['section'] == 'awaitFeedback';
+    return t['section'] === 'awaitFeedback';
   });
-  document.getElementById('awaitFeedback').innerHTML = '';
 
-  for (let index = 0; index < awaitFeedback.length; index++) {
-    let element = awaitFeedback[index];
-    document.getElementById('awaitFeedback').innerHTML += generateTasksHTML(element);
+  let container = document.getElementById('awaitFeedback');
+  container.innerHTML = '';
+
+  if (awaitFeedback.length === 0) {
+    container.innerHTML = '<div class="noTasks">No tasks Await Feedback</div>';
+  } else {
+    for (let index = 0; index < awaitFeedback.length; index++) {
+      let element = awaitFeedback[index];
+      container.innerHTML += generateTasksHTML(element);
+    }
   }
 }
 
 
-function renderDone(){
+function renderDone() {
   let done = allTasks.filter(function(t) {
-    return t['section'] == 'done';
+    return t['section'] === 'done';
   });
-  document.getElementById('done').innerHTML = '';
 
-  for (let index = 0; index < done.length; index++) {
-    let element = done[index];
-    document.getElementById('done').innerHTML += generateTasksHTML(element);
+  let container = document.getElementById('done');
+  container.innerHTML = '';
+
+  if (done.length === 0) {
+    container.innerHTML = '<div class="noTasks">No tasks Done</div>';
+  } else {
+    for (let index = 0; index < done.length; index++) {
+      let element = done[index];
+      container.innerHTML += generateTasksHTML(element);
+    }
   }
 }
 
 
-function startDragging(index) {
-  currentDraggedIndex = index;
+function startDragging(id) {
+  currentDraggedElement = id;
 }
 
 
@@ -86,14 +112,15 @@ function allowDrop(ev) {
 
 
 function moveTo(section) {
-  if (currentDraggedElement && allTasks[currentDraggedElement]) {
-    allTasks[currentDraggedElement]['section'] = section;
+  let task = allTasks.find(task => task.id === currentDraggedElement);
+  if (task) {
+    task.section = section;
     renderToDos();
     renderInProgress();
     renderAwaitFeedback();
     renderDone();
   } else {
-    console.error('Current dragged element is not defined or not found in allTasks.');
+    console.error('Task not found for id:', currentDraggedElement);
   }
 }
 
@@ -135,16 +162,16 @@ function truncateDescription(description, wordLimit) {
 }
 
 
-function generateTasksHTML(element, index) {
+function generateTasksHTML(element) {
   let categoryClass = element['category'].replace(/\s+/g, '');
   let title = element['title'].replace(/"/g, '&quot;');
   let truncatedDescription = truncateDescription(element['description'], 7);
   let initials = getInitials(element['assignedTo']);
 
   return /*html*/`
-  <div draggable="true" ondragstart="startDragging('${index}')" class="task" onclick="openTask(${index})">
+  <div draggable="true" ondragstart="startDragging(${element['id']})" class="task" onclick="showTaskDetail(${element['id']})">
     <div class="category ${categoryClass}">${element['category']}</div>
-    <div class="title">${element['title']}</div>
+    <div class="title">${title}</div>
     <div class="description">${truncatedDescription}</div>
     <div class="subtasks"></div>
     <div class="assignedToAndPrio">
@@ -154,5 +181,62 @@ function generateTasksHTML(element, index) {
   </div>
   `;
 }
+
+
+function showTaskDetail(id) {
+  let element = allTasks.find(task => task.id === id);
+  if (!element) {
+    console.error("Task not found with id:", id);
+    return;
+  }
+
+  let taskContent = document.getElementById('containerTasksDetail');
+  taskContent.innerHTML = '';
+
+  taskContent.innerHTML += generateTaskDetailHTML(
+    element.category, 
+    element.title, 
+    element.description, 
+    element.prio, 
+    element.assignedTo, 
+    element.subtasks
+  );
+  openTask();
+}
+
+function openTask() {
+  document.getElementById('containerTasksDetail').classList.remove('d-none');
+}
+
+
+function closeTask() {
+  document.getElementById('containerTasksDetail').classList.add('d-none');
+}
+
+
+function generateTaskDetailHTML(category, title, description, prio, assignedTo, subtasks) {
+  let categoryClass = category.replace(/\s+/g, '');
+  let initials = getInitials(assignedTo);
+
+  return /*html*/`
+  <div class="detailtask">
+    <div>
+      <div class="category ${categoryClass}">${categoryClass}</div>
+      <button onclick="closeTask()"><img src="/assets/icons/close.png" alt="Close"></button>
+    </div>
+    <div class="titleDetail">${title}</div>
+    <div class="descriptionDetail">${description}</div>
+    <div>Due date: Date</div>
+    <div class="subtasksDetail">${subtasks}</div>
+    <div class="assignedToAndPrio">
+      <div class="assignedTo">${initials}</div>
+      <img src="${prio}" alt="PriorityImage">
+    </div>
+  </div>
+  `;
+}
+
+
+
 
 

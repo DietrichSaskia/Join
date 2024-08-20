@@ -12,8 +12,8 @@
   <script src="/scripts/board.js"></script>
   <title>Board</title>
 </head>
-<body onload="loadTasks()">
-  <header></header>
+<body onload="init('headerBoard')">
+  <header id="headerBoard"></header>
   <section class="boardHeadline">
     <div class="headlineAndSearch">
       <div>
@@ -49,12 +49,13 @@
        <a href="#">Done</a>
       </div>
       <div class="allTasks" id="allTasks">
-        <div id="toDo"></div>
-        <div id="inProgress"></div>
-        <div id="awaitFeedback"></div>
-        <div id="done"></div>
+        <div id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
+        <div id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)"></div>
+        <div id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
+        <div id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
       </div>
     </div>
+    <div id="containerTasksDetail" class="containerTasksDetail d-none"></div>
   </section>
 </body>
 </html>
