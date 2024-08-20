@@ -33,6 +33,7 @@ async function checkUser() {
     return initials;
 }
 
+
 function toggleBurgerMenu() {
     if (document.getElementById('burgerMenu').classList.contains("dNone")) {
         showBurgerMenu();
@@ -55,30 +56,44 @@ function hideBurgerMenu() {
 }
 
 
-function prioButtons(i) {
-    document.getElementById('prio0').classList.remove('high', 'active');
-    document.getElementById('prio1').classList.remove('medium', 'active');
-    document.getElementById('prio2').classList.remove('low', 'active');
+function activateprioButton(i) {
+    resetprioButtons()
     switch (i) {
         case 0:
             document.getElementById('prio0').classList.add('high', 'active');
+            document.getElementById('prioHigh').src="../assets/icons/prioHightWhite.png";
             break;
         case 1:
             document.getElementById('prio1').classList.add('medium', 'active');
+            document.getElementById('prioMed').src="../assets/icons/prioMediumWhite.png";
             break;
         case 2:
             document.getElementById('prio2').classList.add('low', 'active');
+            document.getElementById('prioLow').src="../assets/icons/prioLowWhite.png";
             break;
     }
 }
+
+
+function resetprioButtons() {
+document.getElementById('prio0').classList.remove('high', 'active');
+document.getElementById('prio1').classList.remove('medium', 'active');
+document.getElementById('prio2').classList.remove('low', 'active');
+document.getElementById('prioHigh').src="../assets/icons/prioHight.png";
+document.getElementById('prioHigh').src="../assets/icons/prioMedium.png";
+document.getElementById('prioHigh').src="../assets/icons/prioLow.png";
+}
+
 
 function clearaddTask() {
 
 }
 
+
 function createTask() {
 
 }
+
 
 function showMembers() {
     

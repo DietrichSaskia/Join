@@ -50,9 +50,17 @@
           <p>Prio</p>
 
           <div class="prio">
-            <div id="prio0" class="prioButton" onclick="prioButtons(0)">Urgent</div>
-            <div id="prio1" class="prioButton medium" onclick="prioButtons(1)">Medium</div>
-            <div id="prio2" class="prioButton" onclick="prioButtons(2)">Low</div>
+            <div id="prio0" class="prioButton" onclick="activateprioButton(0)">Urgent
+              <img id="prioHigh" src="../assets/icons/prioHight.png">
+            </div>
+
+            <div id="prio1" class="prioButton medium" onclick="activateprioButton(1)">Medium
+              <img id="prioMed" src="../assets/icons/prioMedium.png">
+            </div>
+
+            <div id="prio2" class="prioButton" onclick="activateprioButton(2)">Low
+              <img id="prioLow" src="../assets/icons/prioLow.png">
+            </div>
           </div>
 
         </div>

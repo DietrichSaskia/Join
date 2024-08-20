@@ -125,6 +125,7 @@ input {
     align-items: center;
     background-color: white;
     border-radius: 8px;
+    gap: 8px;
 }
 
 .prioButton:hover {
