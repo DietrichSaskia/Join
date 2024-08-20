@@ -53,7 +53,7 @@ async function showMembers() {
 
 
 function getusers(users) {
-    document.getElementById('dropdown').innerHTML = ``;
+    document.getElementById('dropdownUser').innerHTML = ``;
     for (let i = 0; i < users.length; i++) {
         let user = users[i];
         let nameParts = user.name.split(' ');
@@ -64,38 +64,28 @@ function getusers(users) {
 
 
 function renderAssignedTo(user, initials, i) {
-    document.getElementById('dropdown').innerHTML += /*html*/`
-        
-          <div>
-            <div class="userCircle">${initials}</div>
-            <span>${user}</span>
-            <input type="checkbox">
+    document.getElementById('dropdownUser').innerHTML += /*html*/`
+        <div class="dropdownButton">
+            <div class="dropdownUser">
+                <div class="userCircle" id="userCircle${i}">${initials}</div>
+                <div id="user${i}">${user.name}</div>
+            </div>
+            <img class="dropdownCheckMark" src="../assets/icons/checkButtonblank.png" type="checkbox">
           </div>
-        
     `
 }
 
-function toggleDropdown() {
+function toggleUserDropdown() {
     showMembers();
-    var dropdown = document.getElementById("dropdown");
+    let dropdown = document.getElementById("dropdownUser");
     dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 }
 
-window.onclick = function(event) {
-    if (!event.target.matches('.dropdown-btn')) {
-        var dropdowns = document.getElementsByClassName("dropdown");
-        for (var i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.style.display === "block") {
-                openDropdown.style.display = "none";
-            }
-        }
-    }
+
+function toggleCategory() {
+    let dropdown = document.getElementById("dropdownCategory");
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 }
-
-function getInitials(i) { }
-function getColors(i) { }
-
 
 function createTask() {
 

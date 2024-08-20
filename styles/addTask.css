@@ -76,16 +76,17 @@ input {
     font-size: 20px;
 }
 
-.assignedTo {
-    width: 440px;
-    height: 48px;
-    border: 1px solid #D1D1D1;
-    padding-left: 20px;
-    font-size: 20px;
+.dropdownButtonArea {
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 440px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    padding-left: 20px;
+    font-size: 20px;
 }
 
 .arrow {
@@ -94,24 +95,23 @@ input {
 }
 
 .dropdown {
-    /* display: none; */
+    display: none;
     background-color: white;
     width: 440px;
-}
-
-.dropdownButton:hover {
-    background-color: #D1D1D1;
 }
 
 .dropdownButton {
     height: 48px;
     border-radius: 10px;
     background-color: white;
-    cursor: pointer!important;
-    text-align: left;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.dropdownButton:hover {
+    background-color: #D1D1D1;
 }
 
 .userCircle {
@@ -125,6 +125,13 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.dropdownUser {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: 20px;
 }
 
 .dropdownCheckMark {
@@ -201,16 +208,6 @@ input {
 .low {
     background-color: #79e329;
     color: white;
-}
-
-.category {
-    width: 440px;
-    height: 48px;
-    border-radius: 8px;
-    border: 1px solid #D1D1D1;
-    box-sizing: border-box;
-    padding-left: 20px;
-    font-size: 20px;
 }
 
 .subtasks {

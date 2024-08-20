@@ -30,13 +30,9 @@
         <textarea class="description" id="descriptionInput" placeholder="Enter a Description"></textarea>
 
         <p>Assigned to</p>
-        <button type="button" class="assignedTo" onclick="toggleDropdown()">Select Contacts to assign<img class="arrow" src="../assets/icons/arrowDrop.png"></button>
-        <div class="dropdown" id="dropdown">
-          <div class="dropdownButton">
-            <div class="userCircle">SM</div>
-            <div>Sofia Müller (You)</div>
-            <img class="dropdownCheckMark" src="../assets/icons/checkButtonblank.png" type="checkbox">
-          </div>
+        <button type="button" class="dropdownButtonArea" onclick="toggleUserDropdown()">Select Contacts to assign<img class="arrow"
+            src="../assets/icons/arrowDrop.png"></button>
+        <div class="dropdown" id="dropdownUser">
         </div>
 
         <p class="required"><span>*</span>This field is required</p>
@@ -72,19 +68,20 @@
         </div>
 
         <p>Category<span>*</span></p>
-        <select name="category" id="category" class="category" required>
-          <option value="">Select task category</option>
-          <option value="technicalTask">Technical Task</option>
-          <option value="userStory">User Story</option>
-        </select>
-
-        <p>Subtasks</p>
-        <input class="subtasks" id="subtasksInput" placeholder="Add new subtask">
-
-        <div class="taskButtons">
-          <button class="clearButton" onclick="clearAddTask()">Clear</button>
-          <button class="createTaskButton" onclick="createTask()">Create Task</button>
+        <button type="button" class="dropdownButtonArea" id="category" onclick="toggleCategory()">Select task category<img
+            class="arrow" src="../assets/icons/arrowDrop.png"></button>
+        <div class="dropdown" id="dropdownCategory">
+          <div class="dropdownButton">Technical Task</div>
+          <div class="dropdownButton">User Story</div>
         </div>
+
+      <p>Subtasks</p>
+      <input class="subtasks" id="subtasksInput" placeholder="Add new subtask">
+
+      <div class="taskButtons">
+        <button class="clearButton" onclick="clearAddTask()">Clear</button>
+        <button class="createTaskButton" onclick="createTask()">Create Task</button>
+      </div>
 
       </div>
 
