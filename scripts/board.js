@@ -111,16 +111,40 @@ function allowDrop(ev) {
 }
 
 
-function moveTo(section) {
+
+async function moveTo(section) {
   let task = allTasks.find(task => task.id === currentDraggedElement);
+  
   if (task) {
     task.section = section;
-    renderToDos();
-    renderInProgress();
-    renderAwaitFeedback();
-    renderDone();
+    
+    try {
+      await updateTaskSectionInDB(task.id, section);
+      renderToDos();
+      renderInProgress();
+      renderAwaitFeedback();
+      renderDone();
+    } catch (error) {
+      console.error('Failed to update task section in the database:', error);
+    }
   } else {
     console.error('Task not found for id:', currentDraggedElement);
+  }
+}
+
+
+async function updateTaskSectionInDB(taskId, section) {
+  const url = `${taskUrl}${taskId}.json`;
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ section: section })
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! Status: ${response.status}`);
   }
 }
 
