@@ -9,6 +9,7 @@
   <link href="../styles/addTask.css" rel="stylesheet">
   <link href="../styles/header.css" rel="stylesheet">
   <script src="../script.js"></script>
+  <script src="../scripts/addTask.js"></script>
   <script src="../templates.js"></script>
 </head>
 
@@ -20,8 +21,8 @@
 
     <h1>Add Task</h1>
 
-    <form class="taskForm">
-      <div>
+    <form class="dFlex">
+      <div class="taskForm">
         <p>Title<span>*</span></p>
         <input class="title" id="titleInput" placeholder="Enter a title" type="text" required>
 
@@ -29,38 +30,43 @@
         <textarea class="description" id="descriptionInput" placeholder="Enter a Description"></textarea>
 
         <p>Assigned to</p>
-        <select onclick="showMembers()" name="assignedTo" id="assignedToInput" class="assignedTo">
-          <option value="">Select Contacts to assign</option>
-        </select>
+        <button type="button" class="assignedTo" onclick="toggleDropdown()">Select Contacts to assign<img class="arrow" src="../assets/icons/arrowDrop.png"></button>
+        <div class="dropdown" id="dropdown">
+          <div class="dropdownButton">
+            <div class="userCircle">SM</div>
+            <div>Sofia Müller (You)</div>
+            <img class="dropdownCheckMark" src="../assets/icons/checkButtonblank.png" type="checkbox">
+          </div>
+        </div>
 
-        <p class="required">This field is required<span>*</span></p>
+        <p class="required"><span>*</span>This field is required</p>
 
       </div>
 
       <div class="taskSeperator"></div>
 
-      <div>
+      <div class="taskForm">
+
         <p>Due Date<span>*</span></p>
         <div class="dueDate">
           <input id="dueDateInput" type="date" required>
           <img class="calendar" src="../assets/icons/calendar.png">
         </div>
 
-        <div>
-          <p>Prio</p>
+        <p>Prio</p>
 
-          <div class="prio">
-            <div id="prio0" class="prioButton" onclick="activateprioButton(0)">Urgent
-              <img id="prioHigh" src="../assets/icons/prioHight.png">
-            </div>
+        <div class="prio">
 
-            <div id="prio1" class="prioButton medium" onclick="activateprioButton(1)">Medium
-              <img id="prioMed" src="../assets/icons/prioMedium.png">
-            </div>
+          <div id="prio0" class="prioButton" onclick="activateprioButton(0)">Urgent
+            <img id="prioHigh" src="../assets/icons/prioHight.png">
+          </div>
 
-            <div id="prio2" class="prioButton" onclick="activateprioButton(2)">Low
-              <img id="prioLow" src="../assets/icons/prioLow.png">
-            </div>
+          <div id="prio1" class="prioButton medium" onclick="activateprioButton(1)">Medium
+            <img id="prioMed" src="../assets/icons/prioMediumWhite.png">
+          </div>
+
+          <div id="prio2" class="prioButton" onclick="activateprioButton(2)">Low
+            <img id="prioLow" src="../assets/icons/prioLow.png">
           </div>
 
         </div>
@@ -74,12 +80,11 @@
 
         <p>Subtasks</p>
         <input class="subtasks" id="subtasksInput" placeholder="Add new subtask">
-      </div>
 
-      <div class="taskButtons">
-        <button class="clearButton" onclick="clearaddTask()">Clear</button>
-        <button class="createTaskButton" onclick="createTask()">Create Task</button>
-      </div>
+        <div class="taskButtons">
+          <button class="clearButton" onclick="clearAddTask()">Clear</button>
+          <button class="createTaskButton" onclick="createTask()">Create Task</button>
+        </div>
 
       </div>
 

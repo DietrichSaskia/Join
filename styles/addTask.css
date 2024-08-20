@@ -23,10 +23,17 @@ p {
 
 span {
     color: #FF8190;
+    font-size: 18px;
+}
+
+.dFlex {
+    display: flex;
 }
 
 .taskForm {
     display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 327px);
 }
 
 .taskSeperator {
@@ -39,8 +46,8 @@ span {
 }
 
 .required {
-    position: absolute;
-    top: 926px;
+    margin: auto 0;
+    margin-bottom: 22px;
     font-size: 16px;
 }
 
@@ -72,11 +79,56 @@ input {
 .assignedTo {
     width: 440px;
     height: 48px;
-    border-radius: 8px;
     border: 1px solid #D1D1D1;
-    box-sizing: border-box;
     padding-left: 20px;
     font-size: 20px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.arrow {
+    rotate: 180deg;
+    margin-right: 10px;
+}
+
+.dropdown {
+    /* display: none; */
+    background-color: white;
+    width: 440px;
+}
+
+.dropdownButton:hover {
+    background-color: #D1D1D1;
+}
+
+.dropdownButton {
+    height: 48px;
+    border-radius: 10px;
+    background-color: white;
+    cursor: pointer!important;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.userCircle {
+    height: 40px;
+    width: 40px;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: #ff3c00;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdownCheckMark {
+    margin-right: 20px;
 }
 
 .dueDate {
@@ -167,9 +219,9 @@ input {
 }
 
 .taskButtons {
-    position: absolute;
-    top: 890px;
-    left: 995px;
+    margin: auto 0;
+    margin-bottom: 59px;
+    align-self: flex-end;
 }
 
 .clearButton {
