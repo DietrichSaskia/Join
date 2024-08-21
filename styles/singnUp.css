@@ -1,0 +1,132 @@
+
+.SingUpheader{
+    display: flex;
+    
+}
+.SignUpLeftarrowStyle{
+    width: 32px;
+    height: 32px;
+    color: #29ABE2;
+}
+
+.SignUpLeftArrow{
+    margin-left: 40px;
+    margin-top: 48px;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    border-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+.SignUpLeftArrow:hover{
+    cursor: pointer;
+    background-color: rgb(241,243, 244);
+}
+.SignUpMain{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 460px;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    padding: 32px 88px 32px 88px;
+    background-color: white;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.SignUpInputfields{
+    width: 350px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 24px;
+}
+.SignUpInput{
+    height: 24px;
+    width: 300px;
+    border-style: none;
+    outline: none;
+    font-size: 20px;
+    font-weight: 400;
+}
+.SignInputIcon {
+    display: flex;
+    align-items: center;
+    width: 350px;
+    height: 40px;
+    justify-content: center;
+    border-radius: 10px;
+    border: solid 1px;
+    gap: 10px;
+}
+.SignUpPrivacyPolicy{
+    display: flex;
+    align-items: center;
+    
+}
+.SignUpAcceptPrivacy{
+    display: flex;
+    align-items: center;
+    height: 24px;
+    gap: 10px;
+    justify-content: center;
+}
+.SignUpPrivacyLegalText {
+    text-decoration: none;
+    color:#29ABE2;
+    display: flex;
+    gap: 8px;
+    width: 109px;
+    padding: 8px;
+    height: 35px;
+    align-items: center;
+}
+.SignUpAcceptText{
+    display: flex;
+}
+.SignUpButton{
+    width: 126px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+    border-style: none;
+    background-color: #2A3647;
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+}
+.SignUpTextStyle{
+    font-weight: 700;
+    font-size: 55px;
+    height: 58px;
+}
+.SignUpTextLine{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 74px;
+    width: 315px;
+}
+.ButtonAddDisabled{
+    opacity: 0.7;
+    background-color: grey;
+}
+.ButtonRemoveDisabled:hover{
+    cursor: pointer;
+    background-color: #29ABE2;
+}

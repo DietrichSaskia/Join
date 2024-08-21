@@ -17,7 +17,7 @@ async function contactLoad() {
     let pathcontact = 'contactall';
     let contactall = await fetch(BaseUrl + pathcontact + '.json');
     let contactallshow = await contactall.json();
-    for (let key in contactallshow) {  // Verwende "for...in", um die Keys durchzugehen
+    for (let key in contactallshow) {  
         contactNameArray.push(contactallshow[key].name);
         emailsArray.push(contactallshow[key].email);
         PhonenumberArray.push(contactallshow[key].phone);

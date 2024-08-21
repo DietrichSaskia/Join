@@ -462,7 +462,6 @@ body{
     margin-bottom: 12px;
     margin-top: -8px;
 }
-
 @keyframes slideInRight {
     from {
         transform: translateX(100%);
@@ -473,7 +472,6 @@ body{
         opacity: 1;
     }
 }
-
 @keyframes slideInLeft {
     from {
         transform: translateX(0);
@@ -484,18 +482,12 @@ body{
         opacity: 0;
     }
 }
-
-
-
-/* Flexibles Styling für den <span> mit Initialbuchstaben */
 .initial-span {
     font-size: 24px;
     font-weight: bold;
     display: block;
-    margin: 5px 0; /* Optionaler Abstand */
+    margin: 5px 0;
 }
-
-/* Styling für den Button */
 .person-button {
     width: 350px;
     display: flex;
@@ -506,19 +498,15 @@ body{
     padding: 10px 15px;
     margin: 10px 0;
     cursor: pointer;
-    background-color: white; /* Standard-Hintergrundfarbe */
+    background-color: white; 
     border-radius: 8px;
     transition: background-color 0.3s ease;
     gap: 35px;
 }
-
-/* Aktivierter Button-Hintergrund */
 .person-button.button-active {
-    background-color: #2A3647; /* Blau für aktiven Zustand */
-    color: white; /* Optional: Textfarbe ändern */
+    background-color: #2A3647; 
+    color: white;
 }
-
-/* Styling für den Kreis mit Initialen */
 .initial-circle {
     width: 40px;
     height: 40px;
@@ -530,22 +518,18 @@ body{
     font-weight: bold;
     border: solid 1px;
 }
-
-/* Flexibles Styling für den Namen und die E-Mail */
 .name-email {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 240px;
 }
-
 .person-name {
     font-size: 20px;
     font-weight: 400;
 }
-
 .person-email {
     margin-top: 4px;
     font-size: 20px;
-    color: #007CEE; /* Optional: hellere Textfarbe für die E-Mail */
+    color: #007CEE; 
 }

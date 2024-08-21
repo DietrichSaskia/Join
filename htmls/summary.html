@@ -4,8 +4,84 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="../styles/summary.css">
+  <link rel="stylesheet" href="/styles/fonts.css">
+  <link rel="stylesheet" href="/styles/header.css">
+  <script src="/script.js"></script>
+  <script src="/templates.js"></script>
 </head>
-<body>
-  
+<body onload="init('headerContact')">
+  <header id="headerContact"></header>
+  <main class="SummaryMain">
+    <section class="SummarySection">
+      <header class="Summaryheaderheadline">
+        <span class="headerheadlinefirst">Join 360</span>
+        <div class="SummaryYLine"></div>
+        <span class="headerheadlinesecond">Key Metrics at a Glance</span>
+      </header>
+      <section class="SummaryFirstSection">
+        <div class="SummaryLeftToDo">
+          <div class="SummaryLeftToDoFirst">
+            <button onmouseover="toDoChangeOn('ChangeIcon1')" onmouseout="toDoChangeOut('ChangeIcon1')" class="SummaryButtonFirst">
+              <div id="ChangeIcon1">
+                <img class="SummaryCircleDark" src="/assets/icons/editCircleDark.png">
+              </div>
+              <div class="SummaryCountText">
+                <span  id="SummaryToDoCount" class="SummaryCount"></span>
+                <span class="SummaryText">To-do</span>
+              </div>
+            </button>
+            <button onmouseover="toDoChangeOn('ChangeIcon2')" onmouseout="toDoChangeOut('ChangeIcon2')" class="SummaryButtonFirst">
+              <div id="ChangeIcon2">
+                <img class="SummaryCircleDark" src="/assets/icons/checkCircleDark.png">
+              </div>
+              <div class="SummaryCountText">
+                <span  id="SummaryDoneCount" class="SummaryCount"></span>
+                <span class="SummaryText">Done</span>
+              </div>
+            </button> 
+          </div>
+          <button class="SummaryLeftSecond">
+            <div class="SummaryButtonSecond">
+              <div>
+                <img class="SummaryCircleDark" src="/assets/icons/prioHightCircle.png">
+              </div>
+              <div class="SummaryCountText">
+                <span  class="SummaryCount">1</span>
+                <span class="SummaryText">Urgent</span>
+              </div>
+            </div>
+            <div class="SummarySecondYLine"></div>
+            <div class="SummarySecondDeadline">
+              <span class="SummarySecondDate">20 Oktober, 2022</span>
+              <span class="SummarySecondDeadlineText">Upcoming Deadline</span>
+            </div>
+          </button>
+          <div class="SummaryLeftToDoThird">
+            <button class="SummaryButtonThird1">
+              <span id="SummaryBoardCount" class="SummaryAreaThird"></span>
+              <span class="SummaryAreaThirdText">Tasks in</span>
+              <span class="SummaryAreaThirdText">Board</span>
+            </button>
+            <button class="SummaryButtonThird2">
+              <span id="SummaryTaskProgressCount" class="SummaryAreaThird"></span>
+              <span class="SummaryAreaThirdText">Tasks in</span>
+              <span class="SummaryAreaThirdText">Progress</span>
+            </button>
+            <button class="SummaryButtonThird3">
+              <span  id="SummaryAwaitFeedbackCount" class="SummaryAreaThird"></span>
+              <span class="SummaryAreaThirdText">Awaiting</span>
+              <span class="SummaryAreaThirdText">Feedback</span>
+            </button>
+          </div>
+        </div>
+        <section class="SummarayRightSection">
+          <span class="SummarayRightSectionText1">Good morning,</span>
+          <span class="SummarayRightSectionText2">Sofia Mueller</span>
+        </section>
+      </section>
+    </section>
+  </main>
+  <script src="/Summary.js"></script>
 </body>
 </html>

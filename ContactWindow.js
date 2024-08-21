@@ -146,19 +146,18 @@ async function fetchContacts() {
  * 
  */
 async function createNewContact() {
-    let contactallshow = await fetchContacts()
+    let pathcontact = 'contactall';
+    let contactallshow = await fetchContacts();
     const name = document.getElementById('editNameInput').value.trim();
     const email = document.getElementById('editEmailInput').value.trim();
     const phone = document.getElementById('editPhoneInput').value.trim();
     let contactKey = contactallshow ? Object.keys(contactallshow).length : 0;
     let newContact = {"name": name,"email": email,"phone": phone,"color": getRandomColor()};
-    try {
-        let putResponse = await fetch(`${BaseUrl}${pathcontact}/${contactKey}.json`, {
-            method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(newContact)});
-        editContactCloseWindow(); 
-        contactLoad()
-    } catch {}
+    let putResponse = await fetch(`${BaseUrl}${pathcontact}/${contactKey}.json`, {method: 'PUT',headers: {'Content-Type': 'application/json'},body: JSON.stringify(newContact)});
+    editContactCloseWindow();
+    contactLoad();
 }
+
 
 /**
  * The data is transferred from the database in an object. The length of the array containing the objects is then determined.

@@ -5,17 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="./assets/icons/logo.png">
   <link rel="stylesheet" href="./styles/fonts.css">
-  <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./styles/login.css">
-  <link rel="stylesheet" href="./styles/header.css">
-  <script src="script.js"></script>
-  <script src="templates.js"></script>
+  <link rel="stylesheet" href="./styles/singnUp.css">
   <title>Join</title>
 </head>
-<body onload="init('header')">
-
-  <header id="header">
+<body>
+  <header class="MainPageHeader">
+    <div class="JoinLogoDistance">
+        <img class="JoinLogoStyle" src="/assets/icons/logo.png" >
+    </div>
+    <div id="SignUpButtonWindow" class="LoginPageSignUp">
+      <span class="LoginPageSignUpText">Not a Join User?</span>
+      <button onclick="signUpWindow()" class="LoginPageSignUpButton">Sign up</button>
+    </div>
   </header>
-  
+  <main id="SignUpWindow" class="none"></main>
+  <main id="LoginWindow" class="LoginPageMain">
+    <div class="LoginTextLine">
+      <span class="LogInTextStyle">Log in</span>
+      <div class="LoginXLineStyle"></div>
+    </div>
+    <form action=""> 
+      <section class="LoginPageInputfields">
+          <div class="LoginInputIcon">
+            <input class="LoginInputfield" type="text" placeholder="Email">
+            <img class="LoginInputfieldIcon" src="/assets/icons/mail.png">
+          </div>
+          <div class="LoginInputIcon">
+            <input class="LoginInputfield" type="text" placeholder="Password">
+            <img class="LoginInputfieldIcon" src="/assets/icons/lock.png">
+          </div>
+          <div class="LoginRememberCheck">
+            <input class="LoginCheckbox" type="checkbox">
+            <span class="LoginCheckRemember">Remember me</span>
+          </div>
+      </section>
+    </form>
+    <div class="LoginPageGuestLogin">
+      <button class="LoginPageLoginButton">Log in</button>
+      <button class="LoginPageGuestButton">Guest Log in</button>
+    </div>
+  </main>
+  <section class="LogInPrivacyLegal">
+    <a class="LogInPrivacyLegalText" href="">Privacy Policy</a>
+    <a class="LogInPrivacyLegalText" href="">Legal notice</a>
+  </section>
+  <script src="/SignUp.js"></script>
+  <script src="/SignUpHtml.js"></script>
 </body>
 </html>
