@@ -65,15 +65,27 @@ function getusers(users) {
 
 function renderAssignedTo(user, initials, i) {
     document.getElementById('dropdownUser').innerHTML += /*html*/`
-        <div class="dropdownButton">
+        <div class="dropdownButton" id="user${i}" onclick="toggleAssignedUser(${i})">
             <div class="dropdownUser">
-                <div class="userCircle" id="userCircle${i}">${initials}</div>
-                <div id="user${i}">${user.name}</div>
+                <div class="userCircle" id="userCircle${i}" style="background-color:${user.color};">${initials}</div>
+                <div>${user.name}</div>
             </div>
-            <img class="dropdownCheckMark" src="../assets/icons/checkButtonblank.png" type="checkbox">
+            <img id="assignedCheck${i}" class="dropdownCheckMark" src="../assets/icons/checkButtonblank.png" type="checkbox">
           </div>
     `
 }
+
+
+function toggleAssignedUser(i) {
+    let buttonChecked = "/assets/icons/checkButtonMobile.png";
+    let buttonUnchecked = "../assets/icons/checkButtonblank.png";
+    let check = document.getElementById(`assignedCheck${i}`);
+    let currentCheck = check.src.split('/').pop();
+    document.getElementById(`user${i}`).classList.toggle('dropdownButtonSelected');
+    check.src = currentCheck === 'checkButtonMobile.png' ? buttonUnchecked : buttonChecked;
+    // Hier den User adden in einem JSON Array
+}
+
 
 function toggleUserDropdown() {
     showMembers();
