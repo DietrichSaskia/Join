@@ -320,7 +320,7 @@ function validateBorderChange(NameInput, parentDiv, NameRegex){
         parentDiv.style.border = "1px solid red";
         return false;
     } else {
-        parentDiv.style.border = "1px solid green";
+        parentDiv.style.border = "1px solid #29ABE2";
         return true;
     }
 }
