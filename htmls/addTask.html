@@ -57,7 +57,7 @@
         <div class="prio">
 
           <div id="prio0" class="prioButton" onclick="activateprioButton(0)">Urgent
-            <img id="prioHigh" src="../assets/icons/prioHight.png">
+            <img id="prioHigh" src="../assets/icons/prioHigh.png">
           </div>
 
           <div id="prio1" class="prioButton medium" onclick="activateprioButton(1)">Medium
@@ -73,9 +73,11 @@
         <p>Category<span>*</span></p>
         <button type="button" class="dropdownButtonArea" id="category" onclick="toggleCategory()">Select task
           category<img class="arrow" src="../assets/icons/arrowDrop.png"></button>
-        <div class="dropdown" id="dropdownCategory">
-          <div class="dropdownButton" onclick="selectCategory('Technical Task')">Technical Task</div>
-          <div class="dropdownButton" onclick="selectCategory('User Story')">User Story</div>
+        <div class="dropdownWrapper">
+          <div class="dropdown" id="dropdownCategory">
+            <div class="dropdownButton" id="techTask" onclick="selectCategory('Technical Task')">Technical Task</div>
+            <div class="dropdownButton" id="userStory" onclick="selectCategory('User Story')">User Story</div>
+          </div>
         </div>
 
         <p class="subtaskHeadline">Subtasks</p>

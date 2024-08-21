@@ -10,7 +10,7 @@ function activateprioButton(i) {
     switch (i) {
         case 0:
             document.getElementById('prio0').classList.add('high', 'active');
-            document.getElementById('prioHigh').src = "../assets/icons/prioHightWhite.png";
+            document.getElementById('prioHigh').src = "../assets/icons/prioHighWhite.png";
             break;
         case 1:
             document.getElementById('prio1').classList.add('medium', 'active');
@@ -28,7 +28,7 @@ function resetprioButtons() {
     document.getElementById('prio0').classList.remove('high', 'active');
     document.getElementById('prio1').classList.remove('medium', 'active');
     document.getElementById('prio2').classList.remove('low', 'active');
-    document.getElementById('prioHigh').src = "../assets/icons/prioHight.png";
+    document.getElementById('prioHigh').src = "../assets/icons/prioHigh.png";
     document.getElementById('prioMed').src = "../assets/icons/prioMedium.png";
     document.getElementById('prioLow').src = "../assets/icons/prioLow.png";
 }
@@ -98,6 +98,14 @@ function toggleAssignedUser(i) {
 
 
 function selectCategory(cat) {
+    if (cat === "User Story") {
+        document.getElementById('userStory').classList.toggle('dropdownButtonSelected');
+        document.getElementById('techTask').classList.remove('dropdownButtonSelected');
+    }
+    else {
+        document.getElementById('techTask').classList.toggle('dropdownButtonSelected');
+        document.getElementById('userStory').classList.remove('dropdownButtonSelected');
+    }
     // Hier die Kategorie zum JSON Array adden
 }
 
