@@ -13,10 +13,7 @@ async function loadTasks() {
     allTasks = Array.isArray(responseToJson) ? responseToJson : Object.values(responseToJson);
     console.log(allTasks);
 
-    renderToDos();
-    renderInProgress();
-    renderAwaitFeedback();
-    renderDone();
+    renderSections();
   } catch (error) {
     console.error("Fehler beim Laden der Aufgaben:", error);
   }
@@ -25,81 +22,19 @@ async function loadTasks() {
 loadTasks();
 
 
-function renderToDos() {
-  let toDo = allTasks.filter(function(t) {
-    return t['section'] === 'toDo';
+function renderSections() {
+  ['toDo', 'inProgress', 'awaitFeedback', 'done'].forEach(section => {
+    let tasks = allTasks.filter(t => t['section'] === section);
+    let container = document.getElementById(section);
+    container.innerHTML = tasks.length 
+      ? tasks.map(generateTasksHTML).join('')
+      : `<div class="noTasks">No tasks ${capitalizeFirstLetter(section)}</div>`;
   });
-  
-  let container = document.getElementById('toDo');
-  container.innerHTML = '';
-
-  if (toDo.length === 0) {
-    container.innerHTML = '<div class="noTasks">No tasks To Do</div>';
-  } else {
-    for (let index = 0; index < toDo.length; index++) {
-      let element = toDo[index];
-      container.innerHTML += generateTasksHTML(element);
-    }
-  }
 }
 
-
-function renderInProgress() {
-  let inProgress = allTasks.filter(function(t) {
-    return t['section'] === 'inProgress';
-  });
-
-  let container = document.getElementById('inProgress');
-  container.innerHTML = '';
-
-  if (inProgress.length === 0) {
-    container.innerHTML = '<div class="noTasks">No tasks in Progress</div>';
-  } else {
-    for (let index = 0; index < inProgress.length; index++) {
-      let element = inProgress[index];
-      container.innerHTML += generateTasksHTML(element);
-    }
-  }
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
-
-function renderAwaitFeedback() {
-  let awaitFeedback = allTasks.filter(function(t) {
-    return t['section'] === 'awaitFeedback';
-  });
-
-  let container = document.getElementById('awaitFeedback');
-  container.innerHTML = '';
-
-  if (awaitFeedback.length === 0) {
-    container.innerHTML = '<div class="noTasks">No tasks Await Feedback</div>';
-  } else {
-    for (let index = 0; index < awaitFeedback.length; index++) {
-      let element = awaitFeedback[index];
-      container.innerHTML += generateTasksHTML(element);
-    }
-  }
-}
-
-
-function renderDone() {
-  let done = allTasks.filter(function(t) {
-    return t['section'] === 'done';
-  });
-
-  let container = document.getElementById('done');
-  container.innerHTML = '';
-
-  if (done.length === 0) {
-    container.innerHTML = '<div class="noTasks">No tasks Done</div>';
-  } else {
-    for (let index = 0; index < done.length; index++) {
-      let element = done[index];
-      container.innerHTML += generateTasksHTML(element);
-    }
-  }
-}
-
 
 function startDragging(id) {
   currentDraggedElement = id;
@@ -111,24 +46,21 @@ function allowDrop(ev) {
 }
 
 
-
 async function moveTo(section) {
   let task = allTasks.find(task => task.id === currentDraggedElement);
-  
-  if (task) {
-    task.section = section;
-    
-    try {
-      await updateTaskSectionInDB(task.id, section);
-      renderToDos();
-      renderInProgress();
-      renderAwaitFeedback();
-      renderDone();
-    } catch (error) {
-      console.error('Failed to update task section in the database:', error);
-    }
-  } else {
-    console.error('Task not found for id:', currentDraggedElement);
+
+  if (!task) {
+    console.error(`Task with id ${currentDraggedElement} not found`);
+    return;
+  }
+
+  task.section = section;
+
+  try {
+    await updateTaskSectionInDB(task.id, section);
+    renderSections(); // Re-render all sections
+  } catch (error) {
+    console.error(`Failed to update task (id: ${task.id}) section to "${section}":`, error);
   }
 }
 
@@ -140,25 +72,24 @@ async function updateTaskSectionInDB(taskId, section) {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ section: section })
+    body: JSON.stringify({ section })
   });
 
   if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
+    throw new Error(`Failed to update task (id: ${taskId}) section to "${section}". Status: ${response.status}`);
   }
 }
 
 
 function truncateDescription(description, wordLimit) {
-  let words = description.split(' ');
-  if (words.length > wordLimit) {
-    return words.slice(0, wordLimit).join(' ') + '...';
-  }
-  return description;
+  let words = (typeof description === 'string' ? description.split(' ') : []);
+  return words.length > wordLimit
+    ? words.slice(0, wordLimit).join(' ') + '...'
+    : description;
 }
 
 
-function getInitials(names) {
+/*function getInitials(names) {
   let initials = [];
   for (let i = 0; i < names.length; i++) {
     let name = names[i];
@@ -174,92 +105,39 @@ function getInitials(names) {
     }
   }
   return initials.join(' ');
-}
-
-
-function truncateDescription(description, wordLimit) {
-  const words = description.split(' ');
-  if (words.length > wordLimit) {
-    return words.slice(0, wordLimit).join(' ') + '...';
-  }
-  return description;
-}
+}*/
 
 
 function generateTasksHTML(element) {
-  let categoryClass = element['category'].replace(/\s+/g, '');
-  let title = element['title'].replace(/"/g, '&quot;');
-  let truncatedDescription = truncateDescription(element['description'], 7);
-  let initials = getInitials(element['assignedTo']);
+  let { category, title, description, assignedTo, subtasks = [], prio, id } = element;
+  let categoryClass = (typeof category === 'string') ? category.replace(/\s+/g, '') : '';
+  let truncatedDescription = truncateDescription(description, 7);
+  //let initials = getInitials(assignedTo);
 
-  return /*html*/`
-  <div draggable="true" ondragstart="startDragging(${element['id']})" class="task" onclick="showTaskDetail(${element['id']})">
-    <div class="category ${categoryClass}">${element['category']}</div>
+  let subtaskCount = subtasks.length;
+  let completedSubtasks = subtasks.filter(s => s.completed).length;
+  let subtaskBarWidth = (subtaskCount > 0) ? (completedSubtasks / subtaskCount) * 100 : 0;
+
+  let subtaskHTML = subtaskCount ? `
+    <div class="subtasks">
+      <div class="subtask-bar-container" style="width: 100%; background-color: lightgray; border-radius: 5px; overflow: hidden;">
+        <div class="subtask-bar" style="width: ${subtaskBarWidth}%; height: 10px; background-color: blue;"></div>
+      </div>
+      <span class="subtask-count">${completedSubtasks}/${subtaskCount} Subtasks</span>
+    </div>` : '';
+
+  return `
+  <div draggable="true" ondragstart="startDragging('${id}')" class="task" onclick="showTaskDetail('${id}')">
+    <div class="category ${categoryClass}">${category}</div>
     <div class="title">${title}</div>
     <div class="description">${truncatedDescription}</div>
-    <div class="subtasks"></div>
+    ${subtaskHTML}
     <div class="assignedToAndPrio">
-      <div class="assignedTo">${initials}</div>
-      <img src="${element['prio']}" alt="PriorityImage">
-    </div>
-  </div>
-  `;
-}
-
-
-function showTaskDetail(id) {
-  let element = allTasks.find(task => task.id === id);
-  if (!element) {
-    console.error("Task not found with id:", id);
-    return;
-  }
-
-  let taskContent = document.getElementById('containerTasksDetail');
-  taskContent.innerHTML = '';
-
-  taskContent.innerHTML += generateTaskDetailHTML(
-    element.category, 
-    element.title, 
-    element.description, 
-    element.prio, 
-    element.assignedTo, 
-    element.subtasks
-  );
-  openTask();
-}
-
-function openTask() {
-  document.getElementById('containerTasksDetail').classList.remove('d-none');
-}
-
-
-function closeTask() {
-  document.getElementById('containerTasksDetail').classList.add('d-none');
-}
-
-
-function generateTaskDetailHTML(category, title, description, prio, assignedTo, subtasks) {
-  let categoryClass = category.replace(/\s+/g, '');
-  let initials = getInitials(assignedTo);
-
-  return /*html*/`
-  <div class="detailtask">
-    <div>
-      <div class="category ${categoryClass}">${categoryClass}</div>
-      <button onclick="closeTask()"><img src="/assets/icons/close.png" alt="Close"></button>
-    </div>
-    <div class="titleDetail">${title}</div>
-    <div class="descriptionDetail">${description}</div>
-    <div>Due date: Date</div>
-    <div class="subtasksDetail">${subtasks}</div>
-    <div class="assignedToAndPrio">
-      <div class="assignedTo">${initials}</div>
+      <div class="assignedTo">${element['assignedTo']}</div>
       <img src="${prio}" alt="PriorityImage">
     </div>
-  </div>
-  `;
+  </div>`;
 }
-
 
 
 

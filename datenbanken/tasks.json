@@ -1,50 +1,71 @@
 [
   {
+    "id": "0",
     "assignedTo": ["Anton Mayer", "Matteo Santos"],
     "category": "User Story",
     "description": "Set up a summary for the user",
     "prio": "/assets/icons/prioMedium.png",
     "section": "inProgress",
-    "title": "implement summary"
+    "title": "implement summary",
+    "date": "17/08/2024",
+    "prioName": "Medium"
   },
   {
+    "id": "1",
     "assignedTo": ["Matteo Santos"],
     "category": "User Story",
     "description": "Create a login page for the user",
     "prio": "/assets/icons/prioHigh.png",
     "section": "inProgress",
-    "title": "user Login set up"
+    "title": "user Login set up",
+    "subtasks": ["Create an HTML login form with username and password input fields and a login button", "JavaScript code to process and authenticate login details"],
+    "date": "17/08/2024",
+    "prioName": "High"
   },
   {
+    "id": "2",
     "assignedTo": ["Alex Schmidt"],
     "category": "User Story",
     "description": "New contacts can be added using a button",
     "prio": "/assets/icons/prioMedium.png",
     "section": "awaitFeedback",
-    "title": "the user can add contacts"
+    "title": "the user can add contacts",
+    "subtasks": ["Add a button that displays a contact form when clicked", "Implement the logic to display the form and process the contact details upon submission"],
+    "date": "18/08/2024",
+    "prioName": "Medium"
   },
   {
+    "id": "3",
     "assignedTo": ["Julia Fischer"],
     "category": "Technical Task",
     "description": "The same template header and footer for every page",
     "prio": "/assets/icons/prioMedium.png",
     "section": "awaitFeedback",
-    "title": "HTML template header and footer"
+    "title": "HTML template header and footer",
+    "date": "17/08/2024",
+    "prioName": "Medium"
   },
   {
+    "id": "4",
     "assignedTo": ["Nina Braun"],
     "category": "Technical Task",
     "description": "Define CSS classes and structure them",
     "prio": "/assets/icons/prioMedium.png",
     "section": "inProgress",
-    "title": "CSS Architecture Planning"
+    "title": "CSS Architecture Planning",
+    "date": "19/08/2024",
+    "prioName": "Medium"
   },
   {
+    "id": "5",
     "assignedTo": ["Tom Keller"],
     "category": "Technical Task",
-    "description": "The layout is intended to ensure that the website looks good and is user-friendly on desktops, tablets, and smartphones.",
+    "description": "Optimize design for desktop and tablet",
     "prio": "/assets/icons/prioLow.png",
     "section": "done",
-    "title": "Responsive layout for the website"
+    "title": "Responsive layout for the website",
+    "subtasks": ["Adjust layout and styles for large screen sizes (desktops)", "Optimize layout and styles for medium screen sizes (tablets)"],
+    "date": "19/08/2024",
+    "prioName": "Low"
   }
 ]

@@ -10,6 +10,8 @@
   <script src="/script.js"></script>
   <script src="/templates.js"></script>
   <script src="/scripts/board.js"></script>
+  <script src="/scripts/searchTask.js"></script>
+  <script src="/scripts/detailTask.js"></script>
   <title>Board</title>
 </head>
 <body onload="init('headerBoard')">
@@ -21,9 +23,9 @@
       </div>
       <div class="searchContainer">
         <div class="searchWrapper">
-          <input type="text" placeholder="Find Task">
+          <input type="text" id="searchInput" placeholder="Find Task">
           <div class="verticalLine"></div>
-          <button class="searchButton">
+          <button class="searchButton" onclick="searchTask()">
             <img src="/assets/icons/search.png" alt="Search">
           </button>
         </div>
@@ -31,6 +33,7 @@
           Add task <img src="/assets/icons/addWhiteNoBorder.png" alt="">
         </button>
       </div>
+    </div>
     </div>
     <div class="headlineTasksContainer">
       <div class="headlineTasks">
