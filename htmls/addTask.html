@@ -13,7 +13,7 @@
   <script src="../templates.js"></script>
 </head>
 
-<body onload="init('header')">
+<body onload="init('header'), loadMembers()">
 
   <div id="header"></div>
 
@@ -30,10 +30,12 @@
         <textarea class="description" id="descriptionInput" placeholder="Enter a Description"></textarea>
 
         <p>Assigned to</p>
-        <button type="button" class="dropdownButtonArea" onclick="toggleUserDropdown()">Select Contacts to assign<img class="arrow"
-            src="../assets/icons/arrowDrop.png"></button>
-        <div class="dropdown" id="dropdownUser">
+        <button type="button" class="dropdownButtonArea" onclick="toggleUserDropdown()">Select Contacts to assign<img
+            class="arrow" src="../assets/icons/arrowDrop.png"></button>
+        <div class="dropdownWrapper">
+          <div class="dropdown" id="dropdown"></div>
         </div>
+
         <div id="assignedUsers" class="assignedUsers"></div>
 
         <p class="required"><span>*</span>This field is required</p>
@@ -69,20 +71,20 @@
         </div>
 
         <p>Category<span>*</span></p>
-        <button type="button" class="dropdownButtonArea" id="category" onclick="toggleCategory()">Select task category<img
-            class="arrow" src="../assets/icons/arrowDrop.png"></button>
+        <button type="button" class="dropdownButtonArea" id="category" onclick="toggleCategory()">Select task
+          category<img class="arrow" src="../assets/icons/arrowDrop.png"></button>
         <div class="dropdown" id="dropdownCategory">
           <div class="dropdownButton" onclick="selectCategory('Technical Task')">Technical Task</div>
           <div class="dropdownButton" onclick="selectCategory('User Story')">User Story</div>
         </div>
 
-      <p class="subtaskHeadline">Subtasks</p>
-      <input class="subtasks" id="subtasksInput" placeholder="Add new subtask">
+        <p class="subtaskHeadline">Subtasks</p>
+        <input class="subtasks" id="subtasksInput" placeholder="Add new subtask">
 
-      <div class="taskButtons">
-        <button class="clearButton" onclick="clearAddTask()">Clear</button>
-        <button class="createTaskButton" onclick="createTask()">Create Task</button>
-      </div>
+        <div class="taskButtons">
+          <button class="clearButton" onclick="clearAddTask()">Clear</button>
+          <button class="createTaskButton" onclick="createTask()">Create Task</button>
+        </div>
 
       </div>
 

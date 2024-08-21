@@ -99,10 +99,17 @@ input {
     margin-right: 10px;
 }
 
+.dropdownWrapper {
+    position: relative;
+    height: 1px;
+    width: 440px;
+}
+
 .dropdown {
     display: none;
     background-color: white;
     width: 440px;
+    position: absolute;
 }
 
 .dropdownButton {

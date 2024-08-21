@@ -45,7 +45,7 @@ function clearAddTask() {
 }
 
 
-async function showMembers() {
+async function loadMembers() {
     let response = await fetch(userURL + '.json');
     let json = await response.json();
     getusers(json);
@@ -53,7 +53,7 @@ async function showMembers() {
 
 
 function getusers(users) {
-    document.getElementById('dropdownUser').innerHTML = ``;
+    document.getElementById('dropdown').innerHTML = ``;
     document.getElementById('assignedUsers').innerHTML = ``;
     for (let i = 0; i < users.length; i++) {
         let user = users[i];
@@ -66,10 +66,10 @@ function getusers(users) {
 
 
 function renderAssignedTo(user, initials, i) {
-    document.getElementById('dropdownUser').innerHTML += /*html*/`
+    document.getElementById('dropdown').innerHTML += /*html*/`
         <div class="dropdownButton" id="user${i}" onclick="toggleAssignedUser(${i})">
             <div class="dropdownUser">
-                <div class="userCircle" id="userCircle${i}" style="background-color:${user.color};">${initials}</div>
+                <div class="userCircle" style="background-color:${user.color};">${initials}</div>
                 <div>${user.name}</div>
             </div>
             <img id="assignedCheck${i}" class="dropdownCheckMark" src="../assets/icons/checkButtonblank.png" type="checkbox">
@@ -94,7 +94,6 @@ function toggleAssignedUser(i) {
     document.getElementById(`userCircle${i}`).classList.toggle('dNone');
     check.src = currentCheck === 'checkButtonMobile.png' ? buttonUnchecked : buttonChecked;
     // Hier den User adden in einem JSON Array
-    //https://stackoverflow.com/questions/25970787/use-a-div-as-a-background-for-another-element
 }
 
 
@@ -104,8 +103,7 @@ function selectCategory(cat) {
 
 
 function toggleUserDropdown() {
-    showMembers();
-    let dropdown = document.getElementById("dropdownUser");
+    let dropdown = document.getElementById("dropdown");
     dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 }
 
