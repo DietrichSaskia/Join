@@ -34,6 +34,7 @@
             src="../assets/icons/arrowDrop.png"></button>
         <div class="dropdown" id="dropdownUser">
         </div>
+        <div id="assignedUsers" class="assignedUsers"></div>
 
         <p class="required"><span>*</span>This field is required</p>
 
@@ -71,8 +72,8 @@
         <button type="button" class="dropdownButtonArea" id="category" onclick="toggleCategory()">Select task category<img
             class="arrow" src="../assets/icons/arrowDrop.png"></button>
         <div class="dropdown" id="dropdownCategory">
-          <div class="dropdownButton">Technical Task</div>
-          <div class="dropdownButton">User Story</div>
+          <div class="dropdownButton" onclick="selectCategory('Technical Task')">Technical Task</div>
+          <div class="dropdownButton" onclick="selectCategory('User Story')">User Story</div>
         </div>
 
       <p class="subtaskHeadline">Subtasks</p>

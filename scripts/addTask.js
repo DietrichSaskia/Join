@@ -54,11 +54,13 @@ async function showMembers() {
 
 function getusers(users) {
     document.getElementById('dropdownUser').innerHTML = ``;
+    document.getElementById('assignedUsers').innerHTML = ``;
     for (let i = 0; i < users.length; i++) {
         let user = users[i];
         let nameParts = user.name.split(' ');
         let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
         renderAssignedTo(user, initials, i);
+        renderAssignedUser(user, initials, i);
     }
 }
 
@@ -76,14 +78,28 @@ function renderAssignedTo(user, initials, i) {
 }
 
 
+function renderAssignedUser(user, initials, i) {
+    document.getElementById('assignedUsers').innerHTML += /*html*/`
+        <div class="userCircle dNone" id="userCircle${i}" style="background-color:${user.color};">${initials}</div>
+    `
+}
+
+
 function toggleAssignedUser(i) {
     let buttonChecked = "/assets/icons/checkButtonMobile.png";
     let buttonUnchecked = "../assets/icons/checkButtonblank.png";
     let check = document.getElementById(`assignedCheck${i}`);
     let currentCheck = check.src.split('/').pop();
     document.getElementById(`user${i}`).classList.toggle('dropdownButtonSelected');
+    document.getElementById(`userCircle${i}`).classList.toggle('dNone');
     check.src = currentCheck === 'checkButtonMobile.png' ? buttonUnchecked : buttonChecked;
     // Hier den User adden in einem JSON Array
+    //https://stackoverflow.com/questions/25970787/use-a-div-as-a-background-for-another-element
+}
+
+
+function selectCategory(cat) {
+    // Hier die Kategorie zum JSON Array adden
 }
 
 

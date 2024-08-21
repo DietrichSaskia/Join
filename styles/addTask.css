@@ -26,6 +26,10 @@ span {
     font-size: 18px;
 }
 
+.dNone {
+    display: none;
+}
+
 .dFlex {
     display: flex;
 }
@@ -142,6 +146,15 @@ input {
 
 .dropdownCheckMark {
     margin-right: 20px;
+}
+
+.assignedUsers {
+    height: 48px;
+    width: 440px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
 }
 
 .dueDate {
