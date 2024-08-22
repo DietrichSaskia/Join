@@ -2,31 +2,68 @@ const taskURL = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app
 const userURL = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/contactall'
 const dateInput = document.getElementById('dueDateInput');
 
-    dateInput.addEventListener('input', function() {
-        if (dateInput.value) {
-            dateInput.classList.add('has-value');
-        } else {
-            dateInput.classList.remove('has-value');
-        }
-    });
+let tasks = [
+    {
+        'category': '',
+        'date': '',
+        'description': '',
+        'id': '',
+        'prio': '/assets/icons/prioMedium.png',
+        'prioName': 'Medium',
+        'section': '',
+        'subTask': '',
+        'title': '',
+    },
+];
+
+
+dateInput.addEventListener('input', function () {
+    if (dateInput.value) {
+        dateInput.classList.add('has-value');
+    } else {
+        dateInput.classList.remove('has-value');
+    }
+});
 
 
 function activateprioButton(i) {
     resetprioButtons()
+    let task = tasks[0];
     switch (i) {
         case 0:
-            document.getElementById('prio0').classList.add('high', 'active');
-            document.getElementById('prioHigh').src = "../assets/icons/prioHighWhite.png";
+            setPrioHigh(task);
             break;
         case 1:
-            document.getElementById('prio1').classList.add('medium', 'active');
-            document.getElementById('prioMed').src = "../assets/icons/prioMediumWhite.png";
+            setPrioMedium(task);
             break;
         case 2:
-            document.getElementById('prio2').classList.add('low', 'active');
-            document.getElementById('prioLow').src = "../assets/icons/prioLowWhite.png";
+            setPrioLow(task);
             break;
     }
+}
+
+
+function setPrioHigh(task) {
+    document.getElementById('prio0').classList.add('high', 'active');
+    document.getElementById('prioHigh').src = "../assets/icons/prioHighWhite.png";
+    task['prio'] = '/assets/icons/prioHigh.png';
+    task['prioName'] = 'High';
+}
+
+
+function setPrioMedium(task) {
+    document.getElementById('prio1').classList.add('medium', 'active');
+    document.getElementById('prioMed').src = "../assets/icons/prioMediumWhite.png";
+    task['prio'] = '/assets/icons/prioMedium.png';
+    task['prioName'] = 'Medium';
+}
+
+
+function setPrioLow(task) {
+    document.getElementById('prio2').classList.add('low', 'active');
+    document.getElementById('prioLow').src = "../assets/icons/prioLowWhite.png";
+    task['prio'] = '/assets/icons/prioLow.png';
+    task['prioName'] = 'Low';
 }
 
 
@@ -37,17 +74,6 @@ function resetprioButtons() {
     document.getElementById('prioHigh').src = "../assets/icons/prioHigh.png";
     document.getElementById('prioMed').src = "../assets/icons/prioMedium.png";
     document.getElementById('prioLow').src = "../assets/icons/prioLow.png";
-}
-
-
-function clearAddTask() {
-    document.getElementById('titleInput').value = "";
-    document.getElementById('descriptionInput').value = "";
-    document.getElementById('assignedToInput').value = "";
-    document.getElementById('dueDateInput').value = "";
-    activateprioButton(1)
-    document.getElementById('category').value = "";
-    document.getElementById('subtasksInput').value = "";
 }
 
 
@@ -102,6 +128,7 @@ function toggleAssignedUser(i) {
 
 
 function selectCategory(cat) {
+    let task = tasks[0];
     if (cat === "User Story") {
         document.getElementById('userStory').classList.toggle('dropdownButtonSelected');
         document.getElementById('techTask').classList.remove('dropdownButtonSelected');
@@ -110,7 +137,7 @@ function selectCategory(cat) {
         document.getElementById('techTask').classList.toggle('dropdownButtonSelected');
         document.getElementById('userStory').classList.remove('dropdownButtonSelected');
     }
-    // Hier die Kategorie zum JSON Array adden
+    task['category'] = cat;
 }
 
 
@@ -124,6 +151,29 @@ function toggleCategory() {
     let dropdown = document.getElementById("dropdownCategory");
     dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 }
+
+function createSubtask() {
+    let input = document.getElementById('subtasksInput');
+    let task = tasks[0];
+    if (input.value === '') {
+        document.getElementById('subtasksInput').focus();
+    }
+    else {
+        task['subTask'].push(input);
+    }
+}
+
+
+function clearAddTask() {
+    document.getElementById('titleInput').value = "";
+    document.getElementById('descriptionInput').value = "";
+    document.getElementById('assignedToInput').value = "";
+    document.getElementById('dueDateInput').value = "";
+    activateprioButton(1);
+    document.getElementById('category').value = "";
+    document.getElementById('subtasksInput').value = "";
+}
+
 
 function createTask() {
 
@@ -149,8 +199,10 @@ function searchUser(input) {
 }
 let debounceTimeout;
 document.getElementById('searchUser').addEventListener('input', function () {
-clearTimeout(debounceTimeout);
-debounceTimeout = setTimeout(() => {
-    searchUser(this.value);
-}, 300);
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+        searchUser(this.value);
+    }, 300);
 });
+
+// Habe Saskia ins Array prio und PrioName gepusht prio=der Link vom Bild
