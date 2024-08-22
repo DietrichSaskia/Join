@@ -18,7 +18,7 @@
 
     <h1>Add Task</h1>
 
-    <form class="dFlex" onsubmit="return false" novalidate>
+    <form class="dFlexAlign" onsubmit="return false" novalidate>
       <div class="taskForm">
 
         <p>Title<span>*</span></p>
@@ -86,12 +86,19 @@
 
         <p class="subtaskHeadline">Subtasks</p>
 
-        <input id="subtasksInput" placeholder="Add new subtask">
+        <input id="subtasksInput" placeholder="Add new subtask" onfocus="showSubtaskIcons()" >
         <div class="subtaskIcons">
-          <img class="subtaskIcon" src="../assets/icons/addNoBorder.png" onclick="createSubtask()">
-          <img class="subtaskIcon, dNone" src="../assets/icons/check.png">
-          <img class="subtaskIcon, dNone" src="../assets/icons/close.png">
+
+          <img class="subtaskIcon" id="subtaskInactive" src="../assets/icons/addNoBorder.png" onclick="showSubtask()">
+
+          <div class="dNone dFlexAlign" id="subtaskActive">
+            <img class="subtaskIcon" src="../assets/icons/close.png" onclick="removeSubtask()">
+            <div class="smallSeparator"></div>
+            <img class="subtaskIcon" src="../assets/icons/check.png" onclick="createSubtask()">
+          </div>
+
         </div>
+        <div class="subTasksBox" id="subTasksBox"></div>
 
         <div class="taskButtons">
           <button class="clearButton" onclick="clearAddTask()">Clear</button>

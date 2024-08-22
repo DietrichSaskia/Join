@@ -30,8 +30,9 @@ span {
     display: none;
 }
 
-.dFlex {
+.dFlexAlign {
     display: flex;
+    align-items: center;
 }
 
 .taskForm {
@@ -277,10 +278,33 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     cursor: pointer;
 }
 
+.subTasksBox {
+    height: 100px;
+    width: 440px;
+}
+
+.subTasksBox ul {
+    display: flex;
+    align-items: center;
+    padding-right: 6px;
+}
+
+.subTasksBox li {
+    font-size: 16px;
+    padding-top: 6px;
+}
+
 .taskButtons {
     margin: auto 0;
     margin-bottom: 59px;
     align-self: flex-end;
+}
+
+.smallSeparator {
+    width: 2px;
+    height: 24px;
+    background-color: #d1d1d1;
+    margin: 3px;
 }
 
 .clearButton {

@@ -11,11 +11,15 @@ let tasks = [
         'prio': '/assets/icons/prioMedium.png',
         'prioName': 'Medium',
         'section': 'toDo',
-        'subTask': '',
+        'subTask': [],
         'title': '',
     },
 ];
 let task = tasks[0];
+
+
+document.getElementById('subtasksInput').addEventListener("focusout", (event) => {showSubtaskIcons()});
+
 
 dateInput.addEventListener('input', function () {
     if (dateInput.value) {
@@ -160,27 +164,48 @@ function toggleCategory() {
     dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 }
 
+
+function showSubtaskIcons() {
+    setTimeout(function() {
+    document.getElementById('subtaskActive').classList.toggle('dNone');
+    document.getElementById('subtaskInactive').classList.toggle('dNone');
+    }, 100);
+}
+
+
+function showSubtask() {
+    document.getElementById('subtasksInput').focus();
+}
+
+
 function createSubtask() {
     let input = document.getElementById('subtasksInput');
-    if (input.value === '') {
-        document.getElementById('subtasksInput').focus();
-    }
-    else {
         task['subTask'].push(input);
-    }
+        putSubTask(input.value);
+        document.getElementById('subtasksInput').value = "";
+}
+
+
+function removeSubtask() {
+    document.getElementById('subtasksInput').value = "";
+}
+
+
+function putSubTask(input) {
+    document.getElementById('subTasksBox').innerHTML += /*html*/`
+        <ul><li>${input}</li></ul>
+    `
 }
 
 
 function clearAddTask() {
     document.getElementById('titleInput').value = "";
     document.getElementById('descriptionInput').value = "";
-    document.getElementById('assignedToInput').value = "";
     document.getElementById('dueDateInput').value = "";
     activateprioButton(1);
     document.getElementById('category').value = "";
     document.getElementById('subtasksInput').value = "";
     console.log(tasks);
-    
 }
 
 
