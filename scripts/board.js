@@ -89,7 +89,7 @@ function truncateDescription(description, wordLimit) {
 }
 
 
-/*function getInitials(names) {
+function getInitials(names) {
   let initials = [];
   for (let i = 0; i < names.length; i++) {
     let name = names[i];
@@ -105,14 +105,14 @@ function truncateDescription(description, wordLimit) {
     }
   }
   return initials.join(' ');
-}*/
+}
 
 
 function generateTasksHTML(element) {
   let { category, title, description, assignedTo, subtasks = [], prio, id } = element;
   let categoryClass = (typeof category === 'string') ? category.replace(/\s+/g, '') : '';
   let truncatedDescription = truncateDescription(description, 7);
-  //let initials = getInitials(assignedTo);
+  let initials = getInitials(assignedTo);
 
   let subtaskCount = subtasks.length;
   let completedSubtasks = subtasks.filter(s => s.completed).length;

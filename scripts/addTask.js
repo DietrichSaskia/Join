@@ -1,8 +1,14 @@
 const taskURL = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/tasksAll/';
 const userURL = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/contactall'
-let users = [];
-let initial = [];
-let color = [];
+const dateInput = document.getElementById('dueDateInput');
+
+    dateInput.addEventListener('input', function() {
+        if (dateInput.value) {
+            dateInput.classList.add('has-value');
+        } else {
+            dateInput.classList.remove('has-value');
+        }
+    });
 
 
 function activateprioButton(i) {
@@ -53,8 +59,6 @@ async function loadMembers() {
 
 
 function getusers(users) {
-    document.getElementById('dropdown').innerHTML = ``;
-    document.getElementById('assignedUsers').innerHTML = ``;
     for (let i = 0; i < users.length; i++) {
         let user = users[i];
         let nameParts = user.name.split(' ');
@@ -124,3 +128,29 @@ function toggleCategory() {
 function createTask() {
 
 }
+
+
+function searchUser(input) {
+    input = input.toLowerCase();
+    let users = document.getElementsByClassName('dropdownUser');
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        const id = user.id.toLowerCase();
+        if (input.length >= 3) {
+            if (id.includes(input)) {
+                card.style.display = 'inline-block';
+            } else {
+                card.style.display = 'none';
+            }
+        } else {
+            card.style.display = 'inline-block';
+        }
+    }
+}
+let debounceTimeout;
+document.getElementById('searchUser').addEventListener('input', function () {
+clearTimeout(debounceTimeout);
+debounceTimeout = setTimeout(() => {
+    searchUser(this.value);
+}, 300);
+});

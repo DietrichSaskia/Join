@@ -66,6 +66,22 @@ input {
     font-size: 20px;
 }
 
+input:invalid:not(:placeholder-shown):not(:focus) {
+    border: 1px solid #ff8291;
+}
+
+.inputError {
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
+input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
 .description {
     width: 440px;
     height: 120px;
@@ -80,6 +96,12 @@ input {
     font-size: 20px;
 }
 
+.searchUser {
+    border: 1px solid #29abe3;
+    position: relative;
+    top: 1px;
+}
+
 .dropdownButtonArea {
     background-color: white;
     display: flex;
@@ -92,6 +114,7 @@ input {
     padding-left: 20px;
     font-size: 20px;
     margin-bottom: -5px;
+    cursor: pointer;
 }
 
 .arrow {
@@ -110,6 +133,7 @@ input {
     background-color: white;
     width: 440px;
     position: absolute;
+    z-index: 3;
 }
 
 .dropdownButton {
@@ -173,23 +197,16 @@ input {
     position: relative;
     right: 43px;
     align-self: center;
+    pointer-events: none;
     cursor: pointer;
 }
 
-::-webkit-datetime-edit-day-field {
+.dateInput {
     color: #D1D1D1;
 }
 
-::-webkit-datetime-edit-text {
-    color: #D1D1D1;
-}
-
-::-webkit-datetime-edit-month-field {
-    color: #D1D1D1;
-}
-
-::-webkit-datetime-edit-year-field {
-    color: #D1D1D1;
+.dateInput.has-value {
+    color: #000000;
 }
 
 ::-webkit-calendar-picker-indicator {
@@ -240,10 +257,24 @@ input {
     margin-top: 24px;
 }
 
-.subtasks {
+/* #subtasksInput {
+    width: 360px;
+    border-right: none;
+    border-radius: 8px 0px 0px 8px;
+} */
+
+.subtaskIcons {
+    height: 1px;
     width: 440px;
-    height: 38px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-end;
+    right: 20px;
+    bottom: 25px;
 }
+
+.subtaskIcon {}
 
 .taskButtons {
     margin: auto 0;
