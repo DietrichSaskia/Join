@@ -274,6 +274,17 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     bottom: 25px;
 }
 
+.subtaskIconsLower {
+    height: 1px;
+    width: 440px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-end;
+    right: 20px;
+    bottom: -3px;
+}
+
 .subtaskIcon {
     cursor: pointer;
 }

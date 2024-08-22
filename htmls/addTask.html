@@ -10,7 +10,7 @@
   <link href="../styles/header.css" rel="stylesheet">
 </head>
 
-<body onload="init('header'), loadMembers()">
+<body onload="init('header'), loadMembers(), activateprioButton(1)">
 
   <div id="header"></div>
 
@@ -64,8 +64,8 @@
             <img id="prioHigh" src="../assets/icons/prioHigh.png">
           </div>
 
-          <div id="prio1" class="prioButton medium" onclick="activateprioButton(1)">Medium
-            <img id="prioMed" src="../assets/icons/prioMediumWhite.png">
+          <div id="prio1" class="prioButton" onclick="activateprioButton(1)">Medium
+            <img id="prioMed" src="../assets/icons/prioMedium.png">
           </div>
 
           <div id="prio2" class="prioButton" onclick="activateprioButton(2)">Low

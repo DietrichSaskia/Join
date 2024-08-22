@@ -18,7 +18,7 @@ let tasks = [
 let task = tasks[0];
 
 
-document.getElementById('subtasksInput').addEventListener("focusout", (event) => {showSubtaskIcons()});
+document.getElementById('subtasksInput').addEventListener("focusout", (event) => { showSubtaskIcons() });
 
 
 dateInput.addEventListener('input', function () {
@@ -166,10 +166,10 @@ function toggleCategory() {
 
 
 function showSubtaskIcons() {
-    setTimeout(function() {
-    document.getElementById('subtaskActive').classList.toggle('dNone');
-    document.getElementById('subtaskInactive').classList.toggle('dNone');
-    }, 100);
+    setTimeout(function () {
+        document.getElementById('subtaskActive').classList.toggle('dNone');
+        document.getElementById('subtaskInactive').classList.toggle('dNone');
+    }, 1000);
 }
 
 
@@ -179,10 +179,21 @@ function showSubtask() {
 
 
 function createSubtask() {
-    let input = document.getElementById('subtasksInput');
+    let input = document.getElementById('subtasksInput').value;
+    if (task['subTask'].length === 0) {
+        putSubTask(input, 0);
         task['subTask'].push(input);
-        putSubTask(input.value);
-        document.getElementById('subtasksInput').value = "";
+        removeSubtask();
+    }
+    else if (task['subTask'].length === 1) {
+        putSubTask(input, 1);
+        task['subTask'].push(input);
+        removeSubtask();
+    }
+    else {
+        return
+    }
+
 }
 
 
@@ -191,9 +202,16 @@ function removeSubtask() {
 }
 
 
-function putSubTask(input) {
+function putSubTask(input, i) {
     document.getElementById('subTasksBox').innerHTML += /*html*/`
-        <ul><li>${input}</li></ul>
+        <ul>
+            <li id="subTask${i}">${input}</li>
+            <div class="subtaskIconsLower">
+                <img class="subtaskIcon" src="../assets/icons/delete.png">
+                <div class="smallSeparator"></div>
+                <img class="subtaskIcon" src="../assets/icons/check.png">
+            </div>
+        </ul>
     `
 }
 
@@ -205,7 +223,6 @@ function clearAddTask() {
     activateprioButton(1);
     document.getElementById('category').value = "";
     document.getElementById('subtasksInput').value = "";
-    console.log(tasks);
 }
 
 
