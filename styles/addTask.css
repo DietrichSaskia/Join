@@ -86,7 +86,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     width: 440px;
     height: 120px;
     resize: none;
-    color: #D1D1D1;
     border-radius: 8px;
     border: 1px solid #D1D1D1;
     box-sizing: border-box;

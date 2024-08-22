@@ -10,12 +10,12 @@ let tasks = [
         'id': '',
         'prio': '/assets/icons/prioMedium.png',
         'prioName': 'Medium',
-        'section': '',
+        'section': 'toDo',
         'subTask': '',
         'title': '',
     },
 ];
-
+let task = tasks[0];
 
 dateInput.addEventListener('input', function () {
     if (dateInput.value) {
@@ -28,7 +28,6 @@ dateInput.addEventListener('input', function () {
 
 function activateprioButton(i) {
     resetprioButtons()
-    let task = tasks[0];
     switch (i) {
         case 0:
             setPrioHigh(task);
@@ -128,16 +127,25 @@ function toggleAssignedUser(i) {
 
 
 function selectCategory(cat) {
-    let task = tasks[0];
-    if (cat === "User Story") {
-        document.getElementById('userStory').classList.toggle('dropdownButtonSelected');
-        document.getElementById('techTask').classList.remove('dropdownButtonSelected');
+    let userstory = document.getElementById('userStory');
+    let techTask = document.getElementById('techTask');
+    if (cat === "User Story" && !userstory.classList.contains('dropdownButtonSelected')) {
+        userstory.classList.toggle('dropdownButtonSelected');
+        techTask.classList.remove('dropdownButtonSelected');
+        document.getElementById('category').innerHTML = "User Story";
+    }
+    else if (cat === "Technical Task" && !techTask.classList.contains('dropdownButtonSelected')) {
+        techTask.classList.toggle('dropdownButtonSelected');
+        userstory.classList.remove('dropdownButtonSelected');
+        document.getElementById('category').innerHTML = "Technical Task";
     }
     else {
-        document.getElementById('techTask').classList.toggle('dropdownButtonSelected');
-        document.getElementById('userStory').classList.remove('dropdownButtonSelected');
+        userstory.classList.remove('dropdownButtonSelected');
+        techTask.classList.remove('dropdownButtonSelected');
+        document.getElementById('category').innerHTML = "Select task category";
     }
     task['category'] = cat;
+    toggleCategory()
 }
 
 
@@ -154,7 +162,6 @@ function toggleCategory() {
 
 function createSubtask() {
     let input = document.getElementById('subtasksInput');
-    let task = tasks[0];
     if (input.value === '') {
         document.getElementById('subtasksInput').focus();
     }
@@ -172,10 +179,18 @@ function clearAddTask() {
     activateprioButton(1);
     document.getElementById('category').value = "";
     document.getElementById('subtasksInput').value = "";
+    console.log(tasks);
+    
 }
 
 
 function createTask() {
+    // task['category'] = document.getElementById('category').value;
+    task['date'] = document.getElementById('dueDateInput').value;
+    task['description'] = document.getElementById('descriptionInput').value;
+    task['subTask'] = document.getElementById('subtasksInput').value;
+    task['title'] = document.getElementById('titleInput').value;
+    clearAddTask()
 
 }
 

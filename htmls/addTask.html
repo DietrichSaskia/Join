@@ -18,7 +18,7 @@
 
     <h1>Add Task</h1>
 
-    <form class="dFlex" onsubmit="createTask()" novalidate>
+    <form class="dFlex" onsubmit="return false" novalidate>
       <div class="taskForm">
 
         <p>Title<span>*</span></p>
@@ -95,7 +95,7 @@
 
         <div class="taskButtons">
           <button class="clearButton" onclick="clearAddTask()">Clear</button>
-          <button class="createTaskButton" type="submit">Create Task</button>
+          <button class="createTaskButton" type="submit" onclick="createTask()">Create Task</button>
         </div>
 
       </div>
