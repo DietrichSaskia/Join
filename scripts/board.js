@@ -186,6 +186,7 @@ function generateTasksHTML(element) {
   let { category, title, description, subtasks = [], prio, id } = element;
   let categoryClass = (typeof category === 'string') ? category.replace(/\s+/g, '') : '';
   let truncatedDescription = truncateDescription(description, 7);
+  //let initials = getInitials(assignedTo);
 
   let subtaskCount = subtasks.length;
   let completedSubtasks = subtasks.filter(s => s.completed).length;
