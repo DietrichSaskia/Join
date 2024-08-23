@@ -1,7 +1,7 @@
 function init(id, name) {
-    renderHeader(id, name);
+    renderHeader(id);
     checkCurrentPage();
-    showUser();
+    showUser(name);
 }
 
 
@@ -24,13 +24,16 @@ function goBack() {
 }
 
 
-async function checkUser() {
-    let response = await fetch("https://join-317-default-rtdb.europe-west1.firebasedatabase.app/" + ".json");
-    let json = await response.json();
-    let user = json.contactall[0].name
-    let nameParts = user.split(' ');
+async function checkUser(name) {
+    let nameParts = name.split(' ');
     let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
-    return initials;
+    if (initials.length === 1) {
+        document.getElementById('headerProfile').classList.add('guestLogin');
+        return initials;
+    }
+    else {
+        return initials;
+    }
 }
 
 

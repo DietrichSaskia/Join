@@ -1,4 +1,4 @@
-function renderHeader(id) {
+function renderHeader(id, name) {
     document.getElementById(id).innerHTML = /*html*/`
     <section onclick="hideBurgerMenu()" class="headerOverlay" id="headerOverlay"></section>
         <section class="sideBar">
@@ -35,8 +35,8 @@ function renderHeader(id) {
     `
 }
 
-async function showUser() {
-    let i = await checkUser();
+async function showUser(name) {
+    let i = await checkUser(name);
     document.getElementById('headerProfile').innerHTML = /*html*/`
         <div>${i}</div>
     `

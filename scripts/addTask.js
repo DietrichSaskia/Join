@@ -257,24 +257,22 @@ function createTask() {
 function searchUsers() {
     let timeout;
     document.getElementById('searchUser').addEventListener('input', function () {
-        console.log('test');
         clearTimeout(timeout);
         timeout = setTimeout(() => {
             searchUser(this.value);
-            console.log(this.value);
         }, 300);
     })
 };
 
 
 function searchUser(input) {
-    console.log('suchfunktion klappt');
     input = input.toLowerCase();
     let users = document.getElementsByClassName('searchUserName');
     console.log(users);
     for (let i = 0; i < users.length; i++) {
-        const user = users[i];
-        const id = user.id.toLowerCase();
+        const user = users[i].innerHTML;
+        console.log(user);
+        const id = user.toLowerCase();
         if (input.length >= 3) {
             if (id.includes(input)) {
                 user.style.display = 'inline-block';
