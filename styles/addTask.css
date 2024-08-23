@@ -122,6 +122,13 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     margin-right: 10px;
 }
 
+.upArrow {
+    position: absolute;
+    top: 13px;
+    right: 16px;
+    cursor: pointer;
+}
+
 .dropdownWrapper {
     position: relative;
     height: 1px;
@@ -132,7 +139,18 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     background-color: white;
     width: 440px;
     position: absolute;
+    top: -43px;
     z-index: 3;
+    border-radius: 10px;
+}
+
+.dropdownCat {
+    background-color: white;
+    width: 440px;
+    position: absolute;
+    top: -43px;
+    z-index: 3;
+    border-radius: 10px;
 }
 
 .dropdownButton {

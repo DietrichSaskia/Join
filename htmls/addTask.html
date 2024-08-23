@@ -11,7 +11,7 @@
   <link href="../styles/header.css" rel="stylesheet">
 </head>
 
-<body onload="init('header'), loadMembers(), activateprioButton(1)">
+<body onload="init('header'), loadFunctions()">
 
   <div id="header"></div>
 
@@ -32,12 +32,15 @@
 
         <p>Assigned to</p>
         <div class="dropdownWrapper">
-          <input id="searchUser" class="searchUser dNone" type="search">
         </div>
-        <button type="button" class="dropdownButtonArea" id="userButton" onclick="toggleUserDropdown()">Select Contacts to assign<img
-            class="arrow" src="../assets/icons/arrowDrop.png"></button>
+        <button type="button" class="dropdownButtonArea" id="userButton" onclick="toggleUserDropdown()">Select Contacts
+          to assign<img class="arrow" src="../assets/icons/arrowDrop.png"></button>
+
         <div class="dropdownWrapper">
-          <div class="dropdown dNone" id="dropdown"></div>
+          <div class="dropdown dNone" id="dropdown">
+            <input id="searchUser" class="searchUser" type="search">
+            <img class="upArrow" src="../assets/icons/arrowDrop.png" onclick="toggleUserDropdown()">
+          </div>
         </div>
 
         <div id="assignedUsers" class="assignedUsers"></div>
@@ -79,7 +82,7 @@
         <button type="button" class="dropdownButtonArea" id="category" onclick="toggleCategory()">Select task
           category<img class="arrow" src="../assets/icons/arrowDrop.png"></button>
         <div class="dropdownWrapper">
-          <div class="dropdown dNone" id="dropdownCategory">
+          <div class="dropdowncat dNone" id="dropdownCategory">
             <div class="dropdownButton" id="techTask" onclick="selectCategory('Technical Task')">Technical Task</div>
             <div class="dropdownButton" id="userStory" onclick="selectCategory('User Story')">User Story</div>
           </div>
@@ -87,7 +90,7 @@
 
         <p class="subtaskHeadline">Subtasks</p>
 
-        <input id="subtasksInput" placeholder="Add new subtask" onfocus="showSubtaskIcons()" >
+        <input id="subtasksInput" placeholder="Add new subtask" onfocus="showSubtaskIcons()">
         <div class="subtaskIcons">
 
           <img class="subtaskIcon" id="subtaskInactive" src="../assets/icons/addNoBorder.png" onclick="showSubtask()">

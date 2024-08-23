@@ -16,6 +16,14 @@ let tasks = [
     },
 ];
 let task = tasks[0];
+let debounceTimeout;
+
+
+function loadFunctions() {
+    searchStart();
+    loadMembers();
+    activateprioButton(1);
+}
 
 
 document.getElementById('subtasksInput').addEventListener("focusout", (event) => { showSubtaskIcons() });
@@ -30,10 +38,10 @@ dateInput.addEventListener('input', function () {
 });
 
 
-document.addEventListener('click', function (event) {
+document.addEventListener('click', function (clickEvent) {
     let dropdown = document.getElementById("dropdown");
     let button = document.getElementById('userButton');
-    if (!dropdown.contains(event.target) && !button.contains(event.target) && !dropdown.classList.contains('dNone')) {
+    if (!dropdown.contains(clickEvent.target) && !button.contains(clickEvent.target) && !dropdown.classList.contains('dNone')) {
         toggleUserDropdown();
     }
 });
@@ -97,7 +105,7 @@ async function loadMembers() {
 
 
 function getusers(users) {
-    for (let i = 0; i < users.length; i++) {
+    for (let i = 0; i < 5; i++) {
         let user = users[i];
         let nameParts = user.name.split(' ');
         let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
@@ -112,7 +120,7 @@ function renderAssignedTo(user, initials, i) {
         <div class="dropdownButton" id="user${i}" onclick="toggleAssignedUser(${i})">
             <div class="dropdownUser">
                 <div class="userCircle" style="background-color:${user.color};">${initials}</div>
-                <div>${user.name}</div>
+                <div class="searchUserName">${user.name}</div>
             </div>
             <img id="assignedCheck${i}" class="dropdownCheckMark" src="../assets/icons/checkButtonblank.png" type="checkbox">
           </div>
@@ -165,6 +173,7 @@ function selectCategory(cat) {
 function toggleUserDropdown() {
     let dropdown = document.getElementById("dropdown");
     dropdown.classList.toggle("dNone");
+    document.getElementById('searchUser').focus();
 }
 
 
@@ -178,7 +187,7 @@ function showSubtaskIcons() {
     setTimeout(function () {
         document.getElementById('subtaskActive').classList.toggle('dNone');
         document.getElementById('subtaskInactive').classList.toggle('dNone');
-    }, 1000);
+    }, 200);
 }
 
 
@@ -246,29 +255,37 @@ function createTask() {
 }
 
 
+function searchStart() {
+    document.getElementById('searchUser').addEventListener('input', function () {
+        console.log('test');
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => {
+            searchUser(this.value);
+            console.log(this.value);
+        }, 300);
+    });
+}
+
+
 function searchUser(input) {
+    console.log('suchfunktion klappt');
     input = input.toLowerCase();
-    let users = document.getElementsByClassName('dropdownUser');
+    let users = document.getElementsByClassName('searchUserName');
+    console.log(users);
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
         const id = user.id.toLowerCase();
         if (input.length >= 3) {
             if (id.includes(input)) {
-                card.style.display = 'inline-block';
+                user.style.display = 'inline-block';
             } else {
-                card.style.display = 'none';
+                user.style.display = 'none';
             }
         } else {
-            card.style.display = 'inline-block';
+            user.style.display = 'inline-block';
         }
     }
 }
-let debounceTimeout;
-document.getElementById('searchUser').addEventListener('input', function () {
-    clearTimeout(debounceTimeout);
-    debounceTimeout = setTimeout(() => {
-        searchUser(this.value);
-    }, 300);
-});
+
 
 // Habe Saskia ins Array prio und PrioName gepusht prio=der Link vom Bild
