@@ -406,7 +406,3 @@ function logInAnimation(){
         }, 1000); // Startet das Einblenden 1 Sekunde nach dem Start der Logo-Animation
     }, 400); // Optional: Warte eine halbe Sekunde nach dem Laden der Seite
 }
-
-function sidebarChangeView(){
-
-}
