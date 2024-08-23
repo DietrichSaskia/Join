@@ -16,7 +16,6 @@ let tasks = [
     },
 ];
 let task = tasks[0];
-let debounceTimeout;
 
 
 function loadFunctions() {
@@ -255,16 +254,15 @@ function createTask() {
 }
 
 
-function searchStart() {
+    let timeout;
     document.getElementById('searchUser').addEventListener('input', function () {
         console.log('test');
-        clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(() => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
             searchUser(this.value);
             console.log(this.value);
         }, 300);
     });
-}
 
 
 function searchUser(input) {
