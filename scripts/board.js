@@ -2,6 +2,7 @@ let allTasks = [];
 let currentDraggedElement;
 
 const taskUrl = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/tasksAll/';
+const userURL = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/contactall';
 
 async function loadTasks() {
   try {
@@ -13,7 +14,10 @@ async function loadTasks() {
     allTasks = Array.isArray(responseToJson) ? responseToJson : Object.values(responseToJson);
     console.log(allTasks);
 
-    renderSections();
+    renderToDos();
+    renderInProgress();
+    renderAwaitFeedback();
+    renderDone();
   } catch (error) {
     console.error("Fehler beim Laden der Aufgaben:", error);
   }
@@ -22,7 +26,7 @@ async function loadTasks() {
 loadTasks();
 
 
-function renderSections() {
+/*function renderSections() {
   ['toDo', 'inProgress', 'awaitFeedback', 'done'].forEach(section => {
     let tasks = allTasks.filter(t => t['section'] === section);
     let container = document.getElementById(section);
@@ -30,11 +34,89 @@ function renderSections() {
       ? tasks.map(generateTasksHTML).join('')
       : `<div class="noTasks">No tasks ${capitalizeFirstLetter(section)}</div>`;
   });
+}*/
+
+
+/*function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}*/
+
+
+function renderToDos() {
+  let toDo = allTasks.filter(function(element) {
+    return element['section'] === 'toDo';
+  });
+  
+  let container = document.getElementById('toDo');
+  container.innerHTML = '';
+
+  if (toDo.length === 0) {
+    container.innerHTML = '<div class="noTasks">No tasks To Do</div>';
+  } else {
+    for (let index = 0; index < toDo.length; index++) {
+      let element = toDo[index];
+      container.innerHTML += generateTasksHTML(element);
+    }
+  }
 }
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+
+function renderInProgress() {
+  let inProgress = allTasks.filter(function(element) {
+    return element['section'] === 'inProgress';
+  });
+
+  let container = document.getElementById('inProgress');
+  container.innerHTML = '';
+
+  if (inProgress.length === 0) {
+    container.innerHTML = '<div class="noTasks">No tasks in Progress</div>';
+  } else {
+    for (let index = 0; index < inProgress.length; index++) {
+      let element = inProgress[index];
+      container.innerHTML += generateTasksHTML(element);
+    }
+  }
 }
+
+
+function renderAwaitFeedback() {
+  let awaitFeedback = allTasks.filter(function(element) {
+    return element['section'] === 'awaitFeedback';
+  });
+
+  let container = document.getElementById('awaitFeedback');
+  container.innerHTML = '';
+
+  if (awaitFeedback.length === 0) {
+    container.innerHTML = '<div class="noTasks">No tasks Await Feedback</div>';
+  } else {
+    for (let index = 0; index < awaitFeedback.length; index++) {
+      let element = awaitFeedback[index];
+      container.innerHTML += generateTasksHTML(element);
+    }
+  }
+}
+
+
+function renderDone() {
+  let done = allTasks.filter(function(element) {
+    return element['section'] === 'done';
+  });
+  
+  let container = document.getElementById('done');
+  container.innerHTML = '';
+
+  if (done.length === 0) {
+    container.innerHTML = '<div class="noTasks">No tasks Done</div>';
+  } else {
+    for (let index = 0; index < done.length; index++) {
+      let element = done[index];
+      container.innerHTML += generateTasksHTML(element);
+    }
+  }
+}
+
 
 function startDragging(id) {
   currentDraggedElement = id;
@@ -46,39 +128,15 @@ function allowDrop(ev) {
 }
 
 
-async function moveTo(section) {
+function moveTo(section) {
   let task = allTasks.find(task => task.id === currentDraggedElement);
-
   if (!task) {
     console.error(`Task with id ${currentDraggedElement} not found`);
     return;
   }
-
   task.section = section;
-
-  try {
-    await updateTaskSectionInDB(task.id, section);
-    renderSections(); // Re-render all sections
-  } catch (error) {
-    console.error(`Failed to update task (id: ${task.id}) section to "${section}":`, error);
-  }
-}
-
-
-async function updateTaskSectionInDB(taskId, section) {
-  const url = `${taskUrl}${taskId}.json`;
-  const response = await fetch(url, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ section })
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to update task (id: ${taskId}) section to "${section}". Status: ${response.status}`);
-  }
-}
+  renderSections();
+  } 
 
 
 function truncateDescription(description, wordLimit) {
@@ -89,30 +147,45 @@ function truncateDescription(description, wordLimit) {
 }
 
 
-/*function getInitials(names) {
-  let initials = [];
-  for (let i = 0; i < names.length; i++) {
-    let name = names[i];
-    let nameParts = name.split(' ');
-    if (nameParts.length < 2) {
-      initials.push(nameParts[0].charAt(0).toUpperCase());
-    } else {
-      let initialsPart = '';
-      for (let j = 0; j < nameParts.length; j++) {
-        initialsPart += nameParts[j].charAt(0).toUpperCase();
-      }
-      initials.push(initialsPart);
+async function showMembers() {
+  try {
+    let response = await fetch(userURL + '.json');
+    if (!response.ok) {
+      throw new Error(`HTTP-Fehler! Status: ${response.status}`);
     }
+    let users = await response.json();
+    getAssignedTo(users);
+  } catch (error) {
+    console.error("Fehler beim Abrufen der Benutzerdaten:", error);
   }
-  return initials.join(' ');
-}*/
+}
+
+
+function getAssignedTo(users) {
+  const assignedUsersContainer = document.getElementById('assignedUsers');
+
+  assignedUsersContainer.innerHTML = '';
+
+  users.forEach(user => {
+    if (!user || !user.name) {
+      return;
+    }
+    let nameParts = user.name.trim().split(/\s+/);
+    let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
+
+    assignedUsersContainer.innerHTML += `
+      <div class="assigned-user">
+        <span class="user-initials">${initials}</span>
+      </div>
+    `;
+  });
+}
 
 
 function generateTasksHTML(element) {
-  let { category, title, description, assignedTo, subtasks = [], prio, id } = element;
+  let { category, title, description, subtasks = [], prio, id } = element;
   let categoryClass = (typeof category === 'string') ? category.replace(/\s+/g, '') : '';
   let truncatedDescription = truncateDescription(description, 7);
-  //let initials = getInitials(assignedTo);
 
   let subtaskCount = subtasks.length;
   let completedSubtasks = subtasks.filter(s => s.completed).length;
@@ -133,7 +206,7 @@ function generateTasksHTML(element) {
     <div class="description">${truncatedDescription}</div>
     ${subtaskHTML}
     <div class="assignedToAndPrio">
-      <div class="assignedTo">${element['assignedTo']}</div>
+      <div class="assignedTo" id="assignedUsers"></div>
       <img src="${prio}" alt="PriorityImage">
     </div>
   </div>`;
