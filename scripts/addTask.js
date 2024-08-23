@@ -19,7 +19,7 @@ let task = tasks[0];
 
 
 function loadFunctions() {
-    searchStart();
+    cookies();
     loadMembers();
     activateprioButton(1);
 }
@@ -43,6 +43,17 @@ document.addEventListener('click', function (clickEvent) {
     if (!dropdown.contains(clickEvent.target) && !button.contains(clickEvent.target) && !dropdown.classList.contains('dNone')) {
         toggleUserDropdown();
     }
+});
+
+
+let timeout;
+document.getElementById('searchUser').addEventListener('input', function () {
+    console.log('test');
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        searchUser(this.value);
+        console.log(this.value);
+    }, 300);
 });
 
 
@@ -252,17 +263,6 @@ function createTask() {
     clearAddTask()
 
 }
-
-
-    let timeout;
-    document.getElementById('searchUser').addEventListener('input', function () {
-        console.log('test');
-        clearTimeout(timeout);
-        timeout = setTimeout(() => {
-            searchUser(this.value);
-            console.log(this.value);
-        }, 300);
-    });
 
 
 function searchUser(input) {
