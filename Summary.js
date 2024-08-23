@@ -59,13 +59,6 @@ async function summaryLoad() {
         SectionPrioDateArray.push(item.date);
         SectionPrioArray.push(item.prioName);
     }
-
-    // Falls du Daten aus contactAllArray extrahieren möchtest, könntest du das hier tun
-    // for (let item of contactAllArray) {
-    //     // Beispiel: SectionTypArray.push(item.someField);
-    // }
-
-    // Führe die nächste Funktion aus
     summarySectionCheck();
 }
 
@@ -192,13 +185,10 @@ function getUserNameFromURL() {
 
 function LoginSummary(){
     const userName = getUserNameFromURL();
-    init('headerContact', userName)
-    if(userName == 'null'){
-        GoodMorningName = ''
-    }
-    else{
-        GoodMorningName = userName;
-    }
+    localStorage.removeItem('CurrentUser');
+    localStorage.setItem('CurrentUser', JSON.stringify(userName));
+    init('headerContact')
+    
     
 }
 

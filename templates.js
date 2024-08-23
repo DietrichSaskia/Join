@@ -35,8 +35,8 @@ function renderHeader(id, name) {
     `
 }
 
-async function showUser(name) {
-    let i = await checkUser(name);
+async function showUser() {
+    let i = await checkUser();
     document.getElementById('headerProfile').innerHTML = /*html*/`
         <div>${i}</div>
     `

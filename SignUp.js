@@ -306,6 +306,7 @@ window.onload = function() {
 
 function guestLogIN(){
     let matchingUser = 'Guest'
+    console.log(matchingUser)
     window.location.href = `/htmls/summary.html?name=${encodeURIComponent(matchingUser)}`;
 }
 

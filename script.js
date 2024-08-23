@@ -1,7 +1,7 @@
-function init(id, name) {
+function init(id) {
     renderHeader(id);
     checkCurrentPage();
-    showUser(name);
+    showUser();
 }
 
 
@@ -24,7 +24,12 @@ function goBack() {
 }
 
 
-async function checkUser(name) {
+async function checkUser() {
+    let name;
+    let Currentname = localStorage.getItem('CurrentUser');
+    if (Currentname) {
+        name = JSON.parse(Currentname);
+    }
     let nameParts = name.split(' ');
     let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
     if (initials.length === 1) {
