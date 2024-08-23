@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./styles/login.css">
   <link rel="stylesheet" href="./styles/singnUp.css">
   <title>Join</title>
+
 </head>
 <body>
   <header class="MainPageHeader">
@@ -25,32 +26,38 @@
       <span class="LogInTextStyle">Log in</span>
       <div class="LoginXLineStyle"></div>
     </div>
-    <form action=""> 
+    <form id="loginForm">
       <section class="LoginPageInputfields">
           <div class="LoginInputIcon">
-            <input class="LoginInputfield" type="text" placeholder="Email">
+            <input id="emailInput" class="LoginInputfield" type="text" placeholder="Email">
             <img class="LoginInputfieldIcon" src="/assets/icons/mail.png">
           </div>
           <div class="LoginInputIcon">
-            <input class="LoginInputfield" type="text" placeholder="Password">
+            <input id="passwordInput" class="LoginInputfield" type="password" placeholder="Password">
             <img class="LoginInputfieldIcon" src="/assets/icons/lock.png">
           </div>
           <div class="LoginRememberCheck">
-            <input class="LoginCheckbox" type="checkbox">
-            <span class="LoginCheckRemember">Remember me</span>
+            <label class="custom-checkbox">
+              <input id="rememberMe" class="LoginCheckbox" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+            <span class="checkmark2">Remember me</span>
           </div>
+          
       </section>
     </form>
     <div class="LoginPageGuestLogin">
-      <button class="LoginPageLoginButton">Log in</button>
-      <button class="LoginPageGuestButton">Guest Log in</button>
+      <button class="LoginPageLoginButton" onclick="loginUser()">Log in</button>
+      <button class="LoginPageGuestButton" onclick="guestLogIN()">Guest Log in</button>
     </div>
   </main>
   <section class="LogInPrivacyLegal">
-    <a class="LogInPrivacyLegalText" href="">Privacy Policy</a>
-    <a class="LogInPrivacyLegalText" href="">Legal notice</a>
+    <a class="LogInPrivacyLegalText" onclick="sidebarChangeView()" href="/htmls/privacyPolicy.html">Privacy Policy</a>
+    <a class="LogInPrivacyLegalText" onclick="sidebarChangeView()" href="/htmls/legalNotice.html">Legal notice</a>
   </section>
-  <script src="/SignUp.js"></script>
   <script src="/SignUpHtml.js"></script>
+  <script type="module"> 
+    import { submitToFirebase } from '/SignUp.js';
+  </script>
 </body>
 </html>

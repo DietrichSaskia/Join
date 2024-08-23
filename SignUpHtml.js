@@ -35,7 +35,7 @@ function singUpWindowHtml(){
             </div>
         </section>
     </form>
-    <button id="SignUpButtondisabled" onclick="signUpContact()" class="SignUpButton">Sign up</button>
+    <button onclick="submitToFirebase(event)" id="SignUpButtondisabled" class="SignUpButton">Sign up</button>
     <button onclick="backToLogin()" class="SignUpLeftArrow">
         <img class="SignUpLeftarrowAStyle" src="/assets/icons/arrowLeft.png">
     </button>

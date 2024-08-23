@@ -10,7 +10,7 @@
   <script src="/script.js"></script>
   <script src="/templates.js"></script>
 </head>
-<body onload="init('headerContact')">
+<body onload="LoginSummary()">
   <header id="headerContact"></header>
   <main class="SummaryMain">
     <section class="SummarySection">
@@ -22,7 +22,7 @@
       <section class="SummaryFirstSection">
         <div class="SummaryLeftToDo">
           <div class="SummaryLeftToDoFirst">
-            <button onmouseover="toDoChangeOn('ChangeIcon1')" onmouseout="toDoChangeOut('ChangeIcon1')" class="SummaryButtonFirst">
+            <button onmouseover="toDoChangeOn('ChangeIcon1')" onmouseout="toDoChangeOut('ChangeIcon1')" class="SummaryButtonFirst" autocomplete="email">
               <div id="ChangeIcon1">
                 <img class="SummaryCircleDark" src="/assets/icons/editCircleDark.png">
               </div>
@@ -31,7 +31,7 @@
                 <span class="SummaryText">To-do</span>
               </div>
             </button>
-            <button onmouseover="toDoChangeOn('ChangeIcon2')" onmouseout="toDoChangeOut('ChangeIcon2')" class="SummaryButtonFirst">
+            <button onmouseover="toDoChangeOn('ChangeIcon2')" onmouseout="toDoChangeOut('ChangeIcon2')" class="SummaryButtonFirst" autocomplete="current-password">
               <div id="ChangeIcon2">
                 <img class="SummaryCircleDark" src="/assets/icons/checkCircleDark.png">
               </div>
@@ -44,16 +44,16 @@
           <button class="SummaryLeftSecond">
             <div class="SummaryButtonSecond">
               <div>
-                <img class="SummaryCircleDark" src="/assets/icons/prioHightCircle.png">
+                <img class="SummaryCircleDark" src="/assets/icons/prioHighCircle.png">
               </div>
               <div class="SummaryCountText">
-                <span  class="SummaryCount">1</span>
+                <span id="SummaryCount"  class="SummaryCount"></span>
                 <span class="SummaryText">Urgent</span>
               </div>
             </div>
             <div class="SummarySecondYLine"></div>
             <div class="SummarySecondDeadline">
-              <span class="SummarySecondDate">20 Oktober, 2022</span>
+              <span id="currentDate" class="SummarySecondDate"></span>
               <span class="SummarySecondDeadlineText">Upcoming Deadline</span>
             </div>
           </button>
@@ -77,7 +77,7 @@
         </div>
         <section class="SummarayRightSection">
           <span class="SummarayRightSectionText1">Good morning,</span>
-          <span class="SummarayRightSectionText2">Sofia Mueller</span>
+          <span id="UserLogGoodMorning" class="SummarayRightSectionText2"></span>
         </section>
       </section>
     </section>
