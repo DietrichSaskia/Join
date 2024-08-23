@@ -33,10 +33,7 @@ dateInput.addEventListener('input', function () {
 document.addEventListener('click', function (event) {
     let dropdown = document.getElementById("dropdown");
     let button = document.getElementById('userButton');
-    if (!dropdown.contains(event.target) && !dropdown.classList.contains('dNone')) {
-        toggleUserDropdown();
-    }
-    else if (button && button.contains(event.target)) {
+    if (!dropdown.contains(event.target) && !button.contains(event.target) && !dropdown.classList.contains('dNone')) {
         toggleUserDropdown();
     }
 });
