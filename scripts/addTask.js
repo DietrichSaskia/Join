@@ -30,6 +30,18 @@ dateInput.addEventListener('input', function () {
 });
 
 
+document.addEventListener('click', function (event) {
+    let dropdown = document.getElementById("dropdown");
+    let button = document.getElementById('userButton');
+    if (!dropdown.contains(event.target) && !dropdown.classList.contains('dNone')) {
+        toggleUserDropdown();
+    }
+    else if (button && button.contains(event.target)) {
+        toggleUserDropdown();
+    }
+});
+
+
 function activateprioButton(i) {
     resetprioButtons()
     switch (i) {
@@ -155,13 +167,13 @@ function selectCategory(cat) {
 
 function toggleUserDropdown() {
     let dropdown = document.getElementById("dropdown");
-    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    dropdown.classList.toggle("dNone");
 }
 
 
 function toggleCategory() {
     let dropdown = document.getElementById("dropdownCategory");
-    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    dropdown.classList.toggle("dNone");
 }
 
 

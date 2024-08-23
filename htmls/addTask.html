@@ -36,7 +36,7 @@
         <button type="button" class="dropdownButtonArea" onclick="toggleUserDropdown()">Select Contacts to assign<img
             class="arrow" src="../assets/icons/arrowDrop.png"></button>
         <div class="dropdownWrapper">
-          <div class="dropdown" id="dropdown"></div>
+          <div class="dropdown dNone" id="dropdown"></div>
         </div>
 
         <div id="assignedUsers" class="assignedUsers"></div>
@@ -78,7 +78,7 @@
         <button type="button" class="dropdownButtonArea" id="category" onclick="toggleCategory()">Select task
           category<img class="arrow" src="../assets/icons/arrowDrop.png"></button>
         <div class="dropdownWrapper">
-          <div class="dropdown" id="dropdownCategory">
+          <div class="dropdown dNone" id="dropdownCategory">
             <div class="dropdownButton" id="techTask" onclick="selectCategory('Technical Task')">Technical Task</div>
             <div class="dropdownButton" id="userStory" onclick="selectCategory('User Story')">User Story</div>
           </div>

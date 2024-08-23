@@ -129,7 +129,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 
 .dropdown {
-    display: none;
     background-color: white;
     width: 440px;
     position: absolute;
