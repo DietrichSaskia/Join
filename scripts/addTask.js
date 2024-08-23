@@ -13,8 +13,11 @@ let tasks = [
         'section': 'toDo',
         'subTask': [],
         'title': '',
+        'assignedInitals': '',
+        'assignedName': '',
     },
 ];
+
 let task = tasks[0];
 
 
@@ -210,7 +213,6 @@ function createSubtask() {
     else {
         return
     }
-
 }
 
 
@@ -284,6 +286,3 @@ function searchUser(input) {
         }
     }
 }
-
-
-// Habe Saskia ins Array prio und PrioName gepusht prio=der Link vom Bild
