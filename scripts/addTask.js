@@ -18,10 +18,10 @@ let tasks = [
 let task = tasks[0];
 
 
-function loadFunctions() {
-    cookies();
-    loadMembers();
+async function loadFunctions() {
     activateprioButton(1);
+    await loadMembers();
+    searchUsers();
 }
 
 
@@ -43,17 +43,6 @@ document.addEventListener('click', function (clickEvent) {
     if (!dropdown.contains(clickEvent.target) && !button.contains(clickEvent.target) && !dropdown.classList.contains('dNone')) {
         toggleUserDropdown();
     }
-});
-
-
-let timeout;
-document.getElementById('searchUser').addEventListener('input', function () {
-    console.log('test');
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-        searchUser(this.value);
-        console.log(this.value);
-    }, 300);
 });
 
 
@@ -263,6 +252,19 @@ function createTask() {
     clearAddTask()
 
 }
+
+
+function searchUsers() {
+    let timeout;
+    document.getElementById('searchUser').addEventListener('input', function () {
+        console.log('test');
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            searchUser(this.value);
+            console.log(this.value);
+        }, 300);
+    })
+};
 
 
 function searchUser(input) {
