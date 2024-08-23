@@ -1,5 +1,5 @@
-function init(id) {
-    renderHeader(id);
+function init(id, name) {
+    renderHeader(id, name);
     checkCurrentPage();
     showUser();
 }
