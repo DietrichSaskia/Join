@@ -6,12 +6,19 @@ const userURL = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app
 
 async function loadTasks() {
   try {
-    let response = await fetch(taskUrl + '.json');
-    if (!response.ok) {
-      throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+    let storedTasks = localStorage.getItem('allTasks');
+    if (storedTasks) {
+      // Wenn Aufgaben im Local Storage vorhanden sind, lade diese
+      allTasks = JSON.parse(storedTasks);
+    } else {
+      // Wenn keine Aufgaben im Local Storage vorhanden sind, lade von der API
+      let response = await fetch(taskUrl + '.json');
+      if (!response.ok) {
+        throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+      }
+      let responseToJson = await response.json();
+      allTasks = Array.isArray(responseToJson) ? responseToJson : Object.values(responseToJson);
     }
-    let responseToJson = await response.json();
-    allTasks = Array.isArray(responseToJson) ? responseToJson : Object.values(responseToJson);
     console.log(allTasks);
 
     renderToDos();
@@ -21,7 +28,9 @@ async function loadTasks() {
   } catch (error) {
     console.error("Fehler beim Laden der Aufgaben:", error);
   }
+  await showMembers();
 }
+
 
 loadTasks();
 
@@ -127,6 +136,30 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 
+function saveTasksToLocalStorage() {
+  localStorage.setItem('allTasks', JSON.stringify(allTasks));
+}
+
+function loadTasksFromLocalStorage() {
+  const storedTasks = localStorage.getItem('tasks');
+  if (storedTasks) {
+    allTasks = JSON.parse(storedTasks);
+    renderAllTasks(); // Eine Funktion, die alle Aufgaben rendert
+  }
+}
+
+function renderAllTasks() {
+  renderToDos();
+  renderInProgress();
+  renderAwaitFeedback();
+  renderDone();
+}
+
+// Beim Laden der Seite
+document.addEventListener('DOMContentLoaded', () => {
+  loadTasksFromLocalStorage();
+  showMembers();
+});
 
 function moveTo(section) {
   let task = allTasks.find(task => task.id === currentDraggedElement);
@@ -135,8 +168,12 @@ function moveTo(section) {
     return;
   }
   task.section = section;
-  renderSections();
-  } 
+  renderToDos();
+  renderInProgress();
+  renderAwaitFeedback();
+  renderDone();
+  saveTasksToLocalStorage();
+} 
 
 
 function truncateDescription(description, wordLimit) {
@@ -154,39 +191,58 @@ async function showMembers() {
       throw new Error(`HTTP-Fehler! Status: ${response.status}`);
     }
     let users = await response.json();
-    getAssignedTo(users);
+    if (allTasks.some(task => !task.assignedMembers)) {
+      assignAndDisplayInitials(users);
+    }
+    renderToDos();
+    renderInProgress();
+    renderAwaitFeedback();
+    renderDone();  // Tasks zuerst rendern
   } catch (error) {
     console.error("Fehler beim Abrufen der Benutzerdaten:", error);
   }
+  saveTasksToLocalStorage();
 }
 
 
-function getAssignedTo(users) {
-  const assignedUsersContainer = document.getElementById('assignedUsers');
+function assignAndDisplayInitials(users) {
+  allTasks.forEach(task => {
+    let randomMembers = getRandomMembers(users, 2, 3); // 2-3 zufällige Mitglieder
+    task.assignedTo = randomMembers.map(user => ({
+      initials: getInitials(user.name),
+      name: user.name,
+      bgColor: user.color
+    }));
 
-  assignedUsersContainer.innerHTML = '';
-
-  users.forEach(user => {
-    if (!user || !user.name) {
-      return;
+    // Finde das HTML-Element für diesen Task über seine ID
+    let taskElement = document.querySelector(`#task-${task.id} .assignedTo`);
+    if (taskElement) {
+      taskElement.innerHTML = task.assignedTo.map(member => `
+        <div class="assigned-user" style="background-color: ${member.bgColor};">
+          <span class="user-initials">${member.initials}</span>
+        </div>`
+      ).join('');
     }
-    let nameParts = user.name.trim().split(/\s+/);
-    let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
-
-    assignedUsersContainer.innerHTML += `
-      <div class="assigned-user">
-        <span class="user-initials">${initials}</span>
-      </div>
-    `;
   });
+}
+
+function getRandomMembers(users, min, max) {
+  let shuffled = users.sort(() => 0.5 - Math.random());
+  let count = Math.floor(Math.random() * (max - min + 1)) + min;
+  return shuffled.slice(0, count);
+}
+
+function getInitials(name) {
+  if (!name) return '';
+  let nameParts = name.trim().split(/\s+/);
+  return nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
 }
 
 
 function generateTasksHTML(element) {
-  let { category, title, description, subtasks = [], prio, id } = element;
+  let { category, title, description, subtasks = [], prio, id, assignedMembers = [] } = element;
   let categoryClass = (typeof category === 'string') ? category.replace(/\s+/g, '') : '';
   let truncatedDescription = truncateDescription(description, 7);
-  //let initials = getInitials(assignedTo);
 
   let subtaskCount = subtasks.length;
   let completedSubtasks = subtasks.filter(s => s.completed).length;
@@ -194,24 +250,31 @@ function generateTasksHTML(element) {
 
   let subtaskHTML = subtaskCount ? `
     <div class="subtasks">
-      <div class="subtask-bar-container" style="width: 100%; background-color: lightgray; border-radius: 5px; overflow: hidden;">
-        <div class="subtask-bar" style="width: ${subtaskBarWidth}%; height: 10px; background-color: blue;"></div>
+      <div class="subtaskBarContainer">
+        <div class="subtaskBar" style="width: ${subtaskBarWidth}%"></div>
       </div>
-      <span class="subtask-count">${completedSubtasks}/${subtaskCount} Subtasks</span>
+      <span class="subtaskCount">${completedSubtasks}/${subtaskCount} Subtasks</span>
     </div>` : '';
 
+    let assignedMembersHTML = assignedMembers.map(initials => `
+      <div class="assignedUser" style="background-color: ${initials.bgColor};">
+        <span class="userInitials">${initials.initials}</span>
+      </div>`
+    ).join('');
+
   return `
-  <div draggable="true" ondragstart="startDragging('${id}')" class="task" onclick="showTaskDetail('${id}')">
+  <div id="task-${id}" draggable="true" ondragstart="startDragging('${id}')" ondragover="allowDrop(event)" ondrop="moveTo('${element.section}')" class="task" onclick="showTaskDetail('${id}')">
     <div class="category ${categoryClass}">${category}</div>
     <div class="title">${title}</div>
     <div class="description">${truncatedDescription}</div>
     ${subtaskHTML}
     <div class="assignedToAndPrio">
-      <div class="assignedTo" id="assignedUsers"></div>
+      <div class="assignedTo">${assignedMembersHTML}</div>  <!-- Initialen werden hier eingefügt -->
       <img src="${prio}" alt="PriorityImage">
     </div>
   </div>`;
 }
+
 
 
 

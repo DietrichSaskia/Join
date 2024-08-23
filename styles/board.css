@@ -186,11 +186,61 @@ input[type="text"] {
   color:  #A8A8A8;
 }
 
+.subtasks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.subtasksContainer {
+  display: flex;
+  align-items: center; /* Zentriert vertikal */
+  margin-top: 5px; /* Abstand zum vorherigen Inhalt */
+}
+
+.subtaskBarContainer {
+  flex: 1; /* Füllt den verfügbaren Raum aus */
+  height: 10px; /* Höhe des Balkens */
+  background-color: lightgray; /* Hintergrundfarbe des Containers */
+  border-radius: 5px;
+  overflow: hidden;
+  margin-right: 10px; /* Abstand zwischen Balken und Zähler */
+  width: 100px;
+}
+
+.subtaskBar {
+  height: 100%; /* Höhe des Balkens füllt den Container */
+  background-color: blue; /* Farbe des Balkens */
+  border-radius: 5px;
+}
+
+.subtaskCount {
+  font-size: 14px;
+  color: #333; /* Farbe des Textes */
+}
+
 .assignedToAndPrio {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+
+.assignedUser {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  line-height: 30px;
+  margin-right: -10px;
+  padding: 3px;
+}
+
+.userInitials {
+  font-size: 14px;
 }
 
 .noTasks {
