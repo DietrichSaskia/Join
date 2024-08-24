@@ -78,6 +78,7 @@ input:valid {
 .inputError {
     font-size: 12px;
     margin-top: 4px;
+    display: none;
 }
 
 #subtasksInput:not(:placeholder-shown) {
@@ -120,9 +121,12 @@ input[type="search"]::-webkit-search-results-decoration {
     font-size: 20px;
 }
 
-.description:focus-visible {
-    outline: 1px #29abe3;
+.description:not(:placeholder-shown) {
     border: 1px solid #29abe3;
+}
+
+.description:placeholder-shown {
+    border: 1px solid #D1D1D1;
 }
 
 .description::-webkit-scrollbar {

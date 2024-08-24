@@ -25,7 +25,7 @@
         <p>Title<span>*</span></p>
 
         <input id="titleInput" placeholder="Enter a title" type="text" required>
-        <span class="inputError dNone" id="inputerror1">This field is required</span>
+        <span class="inputError" id="inputerror1">This field is required</span>
 
         <p>Description</p>
         <textarea class="description" id="descriptionInput" placeholder="Enter a Description"></textarea>
@@ -59,7 +59,7 @@
           <input id="dueDateInput" class="dateInput" type="date" required>
           <img class="calendar" src="../assets/icons/calendar.png">
         </div>
-        <span class="inputError dNone" id="inputerror2">This field is required</span>
+        <span class="inputError" id="inputerror2">This field is required</span>
 
         <p>Prio</p>
 
@@ -92,17 +92,20 @@
         <p class="subtaskHeadline">Subtasks</p>
 
         <input id="subtasksInput" placeholder="Add new subtask" onfocus="showSubtaskIcons()">
-        <div class="subtaskIcons">
 
+        <div class="subtaskIcons">
           <img class="subtaskIcon" id="subtaskInactive" src="../assets/icons/addNoBorder.png" onclick="showSubtask()">
 
           <div class="dNone dFlexAlign" id="subtaskActive">
-            <img class="subtaskIcon" src="../assets/icons/close.png" onclick="removeSubtask()">
+            <img class="subtaskIcon" src="../assets/icons/close.png" onclick="clearSubtask()">
             <div class="smallSeparator"></div>
-            <img class="subtaskIcon" src="../assets/icons/check.png" onclick="createSubtask()">
+            <img class="subtaskIcon" src="../assets/icons/check.png" onclick="checkSubtask()">
           </div>
 
         </div>
+
+        <span class="inputError" id="inputerrorSubTask1">Subtask needs Description</span>
+        <span class="inputError" id="inputerrorSubTask2">Max 2 Subtasks allowed</span>
         <div class="subTasksBox" id="subTasksBox"></div>
 
         <div class="taskButtons">
