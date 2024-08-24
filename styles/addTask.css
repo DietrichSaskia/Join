@@ -67,8 +67,12 @@ input {
     font-size: 20px;
 }
 
-input:invalid:not(:placeholder-shown):not(:focus) {
+/* input:invalid:not(:placeholder-shown):not(:focus) {
     border: 1px solid #ff8291;
+} */
+
+input:valid {
+    border: 1px solid #29abe3;
 }
 
 .inputError {
@@ -76,12 +80,32 @@ input:invalid:not(:placeholder-shown):not(:focus) {
     margin-top: 4px;
 }
 
-input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
-input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
+#subtasksInput:not(:placeholder-shown) {
+    border: 1px solid #29abe3;
+}
+
+#subtasksInput:placeholder-shown {
+    border: 1px solid #D1D1D1;
+}
+
+input[type=search]::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input[type=search]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration { display: none; }
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
 
 .description {
     width: 440px;
@@ -94,6 +118,28 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     padding-left: 20px;
     padding-top: 20px;
     font-size: 20px;
+}
+
+.description:focus-visible {
+    outline: 1px #29abe3;
+    border: 1px solid #29abe3;
+}
+
+.description::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+}
+
+.description::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.description::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
 }
 
 .searchUser {
@@ -159,15 +205,17 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     top: 1px;
 }
 
-.dropdownUsers::-webkit-scrollbar{
+.dropdownUsers::-webkit-scrollbar {
     width: 12px;
     height: 20px;
 }
-.dropdownUsers::-webkit-scrollbar-track{
+
+.dropdownUsers::-webkit-scrollbar-track {
     background-color: #fff;
     border-radius: 8px;
 }
-.dropdownUsers::-webkit-scrollbar-thumb{
+
+.dropdownUsers::-webkit-scrollbar-thumb {
     background: rgb(168, 168, 168);
     border-radius: 8px;
 }
