@@ -107,18 +107,23 @@ async function loadMembers() {
 
 
 function getusers(users) {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < users.length; i++) {
         let user = users[i];
-        let nameParts = user.name.split(' ');
-        let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
-        renderAssignedTo(user, initials, i);
-        renderAssignedUser(user, initials, i);
+        loadUser(user, i)
     }
 }
 
 
+function loadUser(user, i) {
+    let nameParts = user.name.split(' ');
+    let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
+    renderAssignedTo(user, initials, i);
+    renderAssignedUser(user, initials, i);
+}
+
+
 function renderAssignedTo(user, initials, i) {
-    document.getElementById('dropdown').innerHTML += /*html*/`
+    document.getElementById('dropdownUsers').innerHTML += /*html*/`
         <div class="dropdownButton" id="user${i}" onclick="toggleAssignedUser(${i})">
             <div class="dropdownUser">
                 <div class="userCircle" style="background-color:${user.color};">${initials}</div>
@@ -174,7 +179,9 @@ function selectCategory(cat) {
 
 function toggleUserDropdown() {
     let dropdown = document.getElementById("dropdown");
+    let dropdownUsers = document.getElementById("dropdownUsers");
     dropdown.classList.toggle("dNone");
+    dropdownUsers.classList.toggle("dNone");
     document.getElementById('searchUser').focus();
 }
 
@@ -269,20 +276,19 @@ function searchUsers() {
 
 function searchUser(input) {
     input = input.toLowerCase();
-    let users = document.getElementsByClassName('searchUserName');
-    console.log(users);
+    let users = document.getElementsByClassName('dropdownButton');
     for (let i = 0; i < users.length; i++) {
-        const user = users[i].innerHTML;
-        console.log(user);
-        const id = user.toLowerCase();
+        let userNameElement = users[i].getElementsByClassName('searchUserName')[0];
+        let userName = userNameElement.innerHTML;
+        const id = userName.toLowerCase();
         if (input.length >= 3) {
             if (id.includes(input)) {
-                user.style.display = 'inline-block';
+                users[i].style.display = 'flex';
             } else {
-                user.style.display = 'none';
+                users[i].style.display = 'none';
             }
         } else {
-            user.style.display = 'inline-block';
+            users[i].style.display = 'flex';
         }
     }
 }

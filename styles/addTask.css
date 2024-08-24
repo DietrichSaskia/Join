@@ -102,6 +102,10 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     top: 1px;
 }
 
+.searchUser:focus-visible {
+    outline: 1px #29abe3;
+}
+
 .dropdownButtonArea {
     background-color: white;
     display: flex;
@@ -138,10 +142,34 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .dropdown {
     background-color: white;
     width: 440px;
+    max-width: 100%;
     position: absolute;
     top: -43px;
     z-index: 3;
     border-radius: 10px;
+}
+
+.dropdownUsers {
+    background-color: white;
+    width: 440px;
+    max-width: 100%;
+    max-height: 240px;
+    overflow-y: auto;
+    position: relative;
+    top: 1px;
+}
+
+.dropdownUsers::-webkit-scrollbar{
+    width: 12px;
+    height: 20px;
+}
+.dropdownUsers::-webkit-scrollbar-track{
+    background-color: #fff;
+    border-radius: 8px;
+}
+.dropdownUsers::-webkit-scrollbar-thumb{
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
 }
 
 .dropdownCat {
