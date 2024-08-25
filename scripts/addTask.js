@@ -162,7 +162,7 @@ function toggleAssignedUser(i) {
     let buttonUnchecked = "../assets/icons/checkButtonblank.png";
     let check = document.getElementById(`assignedCheck${i}`);
     let currentCheck = check.src.split('/').pop();
-    document.getElementById(`user${i}`).classList.toggle('dropdownButtonSelected');
+    document.getElementById(`user${i}`).classList.toggle('dropdownButtonSelectedUser');
     document.getElementById(`userCircle${i}`).classList.toggle('dNone');
     check.src = currentCheck === 'checkButtonMobile.png' ? buttonUnchecked : buttonChecked;
 }
@@ -249,12 +249,12 @@ function createSubtask(input) {
     if (task['subTask'][0] === null || task['subTask'].length === 0) {
         putSubTask(input, 0);
         task['subTask'].splice(0, 1, input);
-        clearSubtask(0);
+        clearSubtaskInput(0);
     }
     else if (task['subTask'][1] === null || task['subTask'].length === 1) {
         putSubTask(input, 1);
         task['subTask'].splice(1, 1, input);
-        clearSubtask(1);
+        clearSubtaskInput(1);
     }
     else {
         document.getElementById('inputerrorSubTask2').style.display = 'block';
@@ -263,7 +263,7 @@ function createSubtask(input) {
 }
 
 
-function clearSubtask() {
+function clearSubtaskInput() {
     document.getElementById('subtasksInput').value = "";
 }
 
@@ -286,6 +286,11 @@ function putSubTask(input, i) {
 
 function deleteSubtask(i) {
     task['subTask'][i] = null;
+    document.getElementById(`subTaskBox${i}`).remove();
+}
+
+
+function clearSubtask(i) {
     document.getElementById(`subTaskBox${i}`).remove();
 }
 
@@ -331,24 +336,26 @@ async function clearAddTask() {
     document.getElementById('subtasksInput').value = "";
     activateprioButton(1);
     clearCategory();
-    deleteSubtask(0);
-    deleteSubtask(1);
+    clearSubtask(0);
+    clearSubtask(1);
 }
 
 
-// function createTask() {
-//     task['assignedName'].push(0, 1, input);
-//     task['assignedInitals'].splice(0, 1, input);
-//     let assignedName['assignedName'] = document.getElementById(`searchUserName${i}`).innerText;
-//     task['assignedInitals'] = document.getElementById(`userCircle${i}`).innerText;
-//     //assignesInitials
-//     //assignedName
-//     task['date'] = document.getElementById('dueDateInput').value;
-//     task['description'] = document.getElementById('descriptionInput').value;
-//     // ID
-//     task['title'] = document.getElementById('titleInput').value;
-//     clearAddTask()
-// }
+function createTask() {
+    let users = document.getElementsByClassName('dropdownButton');
+    for (let i = 0; i < users.length; i++) {
+        if (users[i].classList.contains('dropdownButtonSelectedUser')) {
+            task['assignedName'].push(document.getElementById(`searchUserName${i}`).innerText);
+            task['assignedInitals'].push(document.getElementById(`userCircle${i}`).innerText);
+        }
+    }
+    task['date'] = document.getElementById('dueDateInput').value;
+    task['description'] = document.getElementById('descriptionInput').value;
+    // ID from local storage
+    task['title'] = document.getElementById('titleInput').value;
+    // Push to Local Storage
+    clearAddTask()
+}
 
 
 function searchUsers() {

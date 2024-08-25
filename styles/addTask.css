@@ -265,6 +265,11 @@ input[type="search"]::-webkit-search-results-decoration {
     color: white;
 }
 
+.dropdownButtonSelectedUser {
+    background-color: #2A3647;
+    color: white;
+}
+
 .userCircle {
     height: 40px;
     width: 40px;
