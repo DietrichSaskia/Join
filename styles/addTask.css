@@ -35,6 +35,13 @@ span {
     align-items: center;
 }
 
+.backgroundWhite {
+    background-color: white;
+    border-bottom: solid #29abe3 1px;
+    padding-bottom: 4px;
+    padding-right: 6px;
+}
+
 .taskForm {
     display: flex;
     flex-direction: column;
@@ -361,12 +368,22 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .subTaskBox {
     margin-top: 4px;
-    padding-bottom: 4px;
 }
 
 .subTaskBox:hover {
     background-color: #D1D1D1;
     border-radius: 10px;
+}
+
+.editSubtaskInput {
+    border-radius: 0;
+    border: none !important;
+    height: 26px;
+    font-size: 16px;
+}
+
+.editSubtaskInput:focus {
+    outline: none;
 }
 
 /* #subtasksInput {
@@ -410,6 +427,7 @@ input[type="search"]::-webkit-search-results-decoration {
     display: flex;
     align-items: center;
     padding-right: 6px;
+    padding-bottom: 4px;
 }
 
 .subTasksBox li {

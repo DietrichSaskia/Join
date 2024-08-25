@@ -40,6 +40,19 @@ dateInput.addEventListener('input', function () {
 });
 
 
+
+document.addEventListener('dblclick', function (dblclickEvent) {
+    let subTaskInput0 = document.getElementById("subTaskBox0");
+    let subTaskInput1 = document.getElementById("subTaskBox0");
+    if (subTaskInput0.contains(dblclickEvent.target)) {
+        editSubtask(0);
+    }
+    else if (subTaskInput1.contains(dblclickEvent.target)) {
+        editSubtask(1);
+    }
+});
+
+
 document.addEventListener('click', function (clickEvent) {
     let dropdown = document.getElementById("dropdown");
     let button = document.getElementById('userButton');
@@ -266,7 +279,35 @@ function deleteSubtask(i) {
 
 
 function editSubtask(i) {
-    
+    let info = task['subTask'][i];
+    document.getElementById(`subTaskBox${i}`).remove();
+    putSubTaskInput(info, i);
+    let input = document.getElementById(`subTask${i}`);
+    input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
+}
+
+
+function putSubTaskInput(input, i) {
+    document.getElementById('subTasksBox').innerHTML += /*html*/`
+    <div id="subTaskBox${i}" class="subTaskBox">
+        <div class="dFlexAlign backgroundWhite">
+            <input id="subTask${i}" value="${input}" class="editSubtaskInput">
+            <div class="subtaskIconsLower">
+                <img class="subtaskIcon" onclick="deleteSubtask(${i})" src="../assets/icons/delete.png">
+                <div class="smallSeparator"></div>
+                <img class="subtaskIcon" src="../assets/icons/check.png" onclick="changeSubtask(${i})">
+            </div>
+        </div>
+    </div>
+    `
+}
+
+
+function changeSubtask(i) {
+    let input = document.getElementById(`subTask${i}`).value;
+    document.getElementById(`subTaskBox${i}`).remove();
+    putSubTask(input, i);
 }
 
 
