@@ -13,8 +13,8 @@ let tasks = [
         'section': 'toDo',
         'subTask': [],
         'title': '',
-        'assignedInitals': '',
-        'assignedName': '',
+        'assignedInitals': [],
+        'assignedName': [],
     },
 ];
 
@@ -142,7 +142,7 @@ function renderAssignedTo(user, initials, i) {
         <div class="dropdownButton" id="user${i}" onclick="toggleAssignedUser(${i})">
             <div class="dropdownUser">
                 <div class="userCircle" style="background-color:${user.color};">${initials}</div>
-                <div class="searchUserName">${user.name}</div>
+                <div class="searchUserName" id="searchUserName${i}">${user.name}</div>
             </div>
             <img id="assignedCheck${i}" class="dropdownCheckMark" src="../assets/icons/checkButtonblank.png" type="checkbox">
           </div>
@@ -165,7 +165,6 @@ function toggleAssignedUser(i) {
     document.getElementById(`user${i}`).classList.toggle('dropdownButtonSelected');
     document.getElementById(`userCircle${i}`).classList.toggle('dNone');
     check.src = currentCheck === 'checkButtonMobile.png' ? buttonUnchecked : buttonChecked;
-    // Hier den User adden in einem JSON Array
 }
 
 
@@ -173,25 +172,29 @@ function selectCategory(cat) {
     let userstory = document.getElementById('userStory');
     let techTask = document.getElementById('techTask');
     if (cat === "User Story" && !userstory.classList.contains('dropdownButtonSelected')) {
-        userstory.classList.toggle('dropdownButtonSelected');
-        techTask.classList.remove('dropdownButtonSelected');
-        document.getElementById('category').innerHTML = "User Story";
+        selectUserStory(userstory, techTask)
     }
     else if (cat === "Technical Task" && !techTask.classList.contains('dropdownButtonSelected')) {
-        techTask.classList.toggle('dropdownButtonSelected');
-        userstory.classList.remove('dropdownButtonSelected');
-        document.getElementById('category').innerHTML = "Technical Task";
+        selectTechTask(userstory, techTask)
     }
     else {
-        userstory.classList.remove('dropdownButtonSelected');
-        techTask.classList.remove('dropdownButtonSelected');
-        document.getElementById('category').innerHTML = "Select task category";
+        clearCategory();
     }
     task['category'] = cat;
     toggleCategory()
 }
 
 
+function selectUserStory(userstory, techTask) {
+    userstory.classList.toggle('dropdownButtonSelected');
+    techTask.classList.remove('dropdownButtonSelected');
+    document.getElementById('category').innerHTML = "User Story";
+}
+function selectTechTask(userstory, techTask) {
+    techTask.classList.toggle('dropdownButtonSelected');
+    userstory.classList.remove('dropdownButtonSelected');
+    document.getElementById('category').innerHTML = "Technical Task";
+}
 function clearCategory() {
     document.getElementById('userStory').classList.remove('dropdownButtonSelected');
     document.getElementById('techTask').classList.remove('dropdownButtonSelected');
@@ -333,15 +336,19 @@ async function clearAddTask() {
 }
 
 
-function createTask() {
-    // task['category'] = document.getElementById('category').value;
-    task['date'] = document.getElementById('dueDateInput').value;
-    task['description'] = document.getElementById('descriptionInput').value;
-    task['subTask'] = document.getElementById('subtasksInput').value;
-    task['title'] = document.getElementById('titleInput').value;
-    clearAddTask()
-
-}
+// function createTask() {
+//     task['assignedName'].push(0, 1, input);
+//     task['assignedInitals'].splice(0, 1, input);
+//     let assignedName['assignedName'] = document.getElementById(`searchUserName${i}`).innerText;
+//     task['assignedInitals'] = document.getElementById(`userCircle${i}`).innerText;
+//     //assignesInitials
+//     //assignedName
+//     task['date'] = document.getElementById('dueDateInput').value;
+//     task['description'] = document.getElementById('descriptionInput').value;
+//     // ID
+//     task['title'] = document.getElementById('titleInput').value;
+//     clearAddTask()
+// }
 
 
 function searchUsers() {
