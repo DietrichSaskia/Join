@@ -209,8 +209,10 @@ function checkSubtask() {
     let input = document.getElementById('subtasksInput').value;
     document.getElementById('inputerrorSubTask1').style.display = 'none';
     document.getElementById('inputerrorSubTask2').style.display = 'none';
+    document.getElementById('subtasksInput').classList.remove('redInputBorder');
     if (input.length === 0) {
         document.getElementById('inputerrorSubTask1').style.display = 'block';
+        document.getElementById('subtasksInput').classList.add('redInputBorder');
     }
     else {
         createSubtask(input)
@@ -221,16 +223,17 @@ function checkSubtask() {
 function createSubtask(input) {
     if (task['subTask'][0] === null || task['subTask'].length === 0) {
         putSubTask(input, 0);
-        task['subTask'].splice(0, 0, input);
+        task['subTask'].splice(0, 1, input);
         clearSubtask(0);
     }
     else if (task['subTask'][1] === null || task['subTask'].length === 1) {
         putSubTask(input, 1);
-        task['subTask'].splice(1, 0, input);
+        task['subTask'].splice(1, 1, input);
         clearSubtask(1);
     }
     else {
         document.getElementById('inputerrorSubTask2').style.display = 'block';
+        document.getElementById('subtasksInput').classList.add('redInputBorder');
     }
 }
 
@@ -242,11 +245,11 @@ function clearSubtask() {
 
 function putSubTask(input, i) {
     document.getElementById('subTasksBox').innerHTML += /*html*/`
-    <div id="subTaskBox${i}">
+    <div id="subTaskBox${i}" class="subTaskBox">
         <ul>
             <li id="subTask${i}">${input}</li>
             <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="editSubtask(${i})" src="../assets/icons/check.png">
+                <img class="subtaskIcon" onclick="editSubtask(${i})" src="../assets/icons/edit.png">
                 <div class="smallSeparator"></div>
                 <img class="subtaskIcon" onclick="deleteSubtask(${i})" src="../assets/icons/delete.png">
             </div>
@@ -258,13 +261,12 @@ function putSubTask(input, i) {
 
 function deleteSubtask(i) {
     task['subTask'][i] = null;
-    console.log(task['subTask']);
     document.getElementById(`subTaskBox${i}`).remove();
 }
 
 
 function editSubtask(i) {
-
+    
 }
 
 

@@ -71,6 +71,11 @@ input {
     border: 1px solid #ff8291;
 } */
 
+
+.redInputBorder {
+    border: 1px solid #ff8291;
+}
+
 input:valid {
     border: 1px solid #29abe3;
 }
@@ -354,6 +359,16 @@ input[type="search"]::-webkit-search-results-decoration {
     margin-top: 24px;
 }
 
+.subTaskBox {
+    margin-top: 4px;
+    padding-bottom: 4px;
+}
+
+.subTaskBox:hover {
+    background-color: #D1D1D1;
+    border-radius: 10px;
+}
+
 /* #subtasksInput {
     width: 360px;
     border-right: none;
@@ -378,7 +393,7 @@ input[type="search"]::-webkit-search-results-decoration {
     align-items: center;
     position: relative;
     justify-content: flex-end;
-    right: 20px;
+    right: 14px;
     bottom: -3px;
 }
 
