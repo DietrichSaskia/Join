@@ -120,6 +120,8 @@ async function loadMembers() {
 
 
 function getusers(users) {
+    document.getElementById('dropdownUsers').innerHTML = ``;
+    document.getElementById('assignedUsers').innerHTML = ``;
     for (let i = 0; i < users.length; i++) {
         let user = users[i];
         loadUser(user, i)
@@ -187,6 +189,13 @@ function selectCategory(cat) {
     }
     task['category'] = cat;
     toggleCategory()
+}
+
+
+function clearCategory() {
+    document.getElementById('userStory').classList.remove('dropdownButtonSelected');
+    document.getElementById('techTask').classList.remove('dropdownButtonSelected');
+    document.getElementById('category').innerHTML = "Select task category";
 }
 
 
@@ -311,13 +320,16 @@ function changeSubtask(i) {
 }
 
 
-function clearAddTask() {
+async function clearAddTask() {
+    await loadMembers();
     document.getElementById('titleInput').value = "";
     document.getElementById('descriptionInput').value = "";
     document.getElementById('dueDateInput').value = "";
-    activateprioButton(1);
-    document.getElementById('category').value = "";
     document.getElementById('subtasksInput').value = "";
+    activateprioButton(1);
+    clearCategory();
+    deleteSubtask(0);
+    deleteSubtask(1);
 }
 
 
