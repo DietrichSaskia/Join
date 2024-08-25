@@ -1,14 +1,12 @@
 
 .SingUpheader{
     display: flex;
-    
 }
 .SignUpLeftarrowStyle{
     width: 32px;
     height: 32px;
     color: #29ABE2;
 }
-
 .SignUpLeftArrow{
     margin-left: 40px;
     margin-top: 48px;
@@ -41,7 +39,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
 .SignUpInputfields{
     width: 350px;
@@ -129,4 +126,21 @@
 .ButtonRemoveDisabled:hover{
     cursor: pointer;
     background-color: #29ABE2;
+}
+.UserInforWindow{
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translateY(-50% -50%);
+    background-color: rgba(9, 9, 9, 0.3);
+}
+.UserInformation{
+    width: 340px;
+    height: 140px;
+    background-color: #2A3647;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

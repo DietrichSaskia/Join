@@ -10,22 +10,22 @@ contactLoad();
 /**
  * Fetches the data from the database and converts it into a json.
  * Fills several arrays with the corresponding information using a for loop.
+ * 
  * @param {*} name
  */
-async function contactLoad() {
-    cleanarray()
-    let pathcontact = 'contactall';
-    let contactall = await fetch(BaseUrl + pathcontact + '.json');
-    let contactallshow = await contactall.json();
-    for (let key in contactallshow) {  
-        contactNameArray.push(contactallshow[key].name);
-        emailsArray.push(contactallshow[key].email);
-        PhonenumberArray.push(contactallshow[key].phone);
-        charContactArray.push({ key: key, name: contactallshow[key].name, email: contactallshow[key].email, phone: contactallshow[key].phone });
-        colorPalette.push(contactallshow[key].color)
+function contactLoad() {
+    cleanarray();
+    let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
+    for (let key in contactAllArray) {  
+        contactNameArray.push(contactAllArray[key].name);
+        emailsArray.push(contactAllArray[key].email);
+        PhonenumberArray.push(contactAllArray[key].phone);
+        charContactArray.push({ key: key, name: contactAllArray[key].name, email: contactAllArray[key].email, phone: contactAllArray[key].phone });
+        colorPalette.push(contactAllArray[key].color);
     }
     contactloadchar(contactNameArray);
 }
+
 
 /**
  * Several arrays are emptied.
@@ -38,9 +38,11 @@ function cleanarray(){
     colorPalette = [];
 }
 
+
 /**
  * 
  * charContactArray is filled, and then the array is sorted alphabetically by initials and then by name.
+ * 
  * @param {*} contactNameArray 
  */
 function contactloadchar(contactNameArray){
@@ -60,6 +62,7 @@ function contactloadchar(contactNameArray){
     contactloadcontainer();
 }
 
+
 /**
  * A div container is created here and extensive functions are called up.
  * 
@@ -73,9 +76,11 @@ function contactloadcontainer(){
     contactLoadTargetid(container);
 }
 
+
 /**
  * Each element of charContactArray is selected and checked to see if the initials match.
  * If not, a new initial is displayed. A horizontal line is also created.
+ * 
  * @param {*} obj 
  * @param {*} currentInitial 
  * @param {*} container 
@@ -83,20 +88,24 @@ function contactloadcontainer(){
 function contactloadcontainer1(obj, currentInitial, container){
     if (obj.initial !== currentInitial) {
         currentInitial = obj.initial;
-        let span = document.createElement('span');
-        span.textContent = currentInitial;
-        span.classList.add('initial-span');
-        container.appendChild(span);
-        let lineDiv = document.createElement('div');
-        lineDiv.classList.add('gray-line');
-        container.appendChild(lineDiv);
-    }
+        let initialExists = Array.from(container.children).some(child => 
+            child.classList.contains('initial-span') && child.textContent === currentInitial);
+        if (!initialExists) {
+            let span = document.createElement('span');
+            span.textContent = currentInitial;
+            span.classList.add('initial-span');
+            container.appendChild(span);
+            let lineDiv = document.createElement('div');
+            lineDiv.classList.add('gray-line');
+            container.appendChild(lineDiv);}}
     contactloadcontainer2(container, obj);
 }
+
 
 /**
  * 
  * The buttons are created and assigned an ID based on the Firebase key.
+ * 
  * @param {*} container 
  * @param {*} obj 
  */
@@ -108,10 +117,12 @@ function contactloadcontainer2(container, obj){
     contactloadcontainer3(container, obj, button);
 }
 
+
 /**
  * 
  * The circle element for the initials is created here and equipped with the appropriate color contained in the colorPalette array.
  * A div container is created from name and e-mail
+ * 
  * @param {*} container 
  * @param {*} obj 
  * @param {*} button 
@@ -129,9 +140,11 @@ function contactloadcontainer3(container, obj, button) {
     contactloadcontainer4(container, nameEmailDiv, button, obj);
 }
 
+
 /**
  * 
  * A div container is created from name and e-mail
+ * 
  * @param {*} container 
  * @param {*} nameEmailDiv 
  * @param {*} button 
@@ -150,9 +163,11 @@ function contactloadcontainer4(container, nameEmailDiv, button, obj){
     contactloadcontainer5(container, button);
 }
 
+
 /**
  * 
  * Event listener for buttons to change the background color. In addition, classes are removed and added based on the behavior of the listener.
+ * 
  * @param {*} container 
  * @param {*} button 
  */
@@ -171,9 +186,11 @@ function contactloadcontainer5(container, button){
     container.appendChild(button);
 }
 
+
 /**
  * 
  * The key is extracted from the ID. The corresponding object in the array is also filtered out.
+ * 
  * @param {*} clickedButtonId 
  * @param {*} buttonColor 
  */
@@ -187,6 +204,7 @@ function contactInfo(clickedButtonId, buttonColor){
         document.getElementById('ContactfieldInfodiv').classList.remove('Slideinleft');
     }
 }
+
 
 /**
  * The destination ID where they should be located is specified here.

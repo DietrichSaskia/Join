@@ -1,6 +1,8 @@
 let contactDetails = {};
 let IMGPfadon = ['deleteBlue','editBlue']
 let IMGPfadof = ['delete',  'edit']
+
+
 /**
  * Classes are removed and added and a function call takes place.
  * 
@@ -16,6 +18,7 @@ function editNewContact(initials, name, email, phone, buttonColor, index) {
   document.getElementById("EditContactIDWIn").classList.add("EditContactWindow");
   editNewContactHtml2(initials, name, email, phone, buttonColor, index, true);
 }
+
 
 /**
  * The values for name, email and phone are read out. If this is not the case, the respective function is called. 
@@ -37,6 +40,7 @@ function editNewContactSave(name, email, phone, index) {
   editNewContactSave2(index) 
 }
 
+
 /**
  * Here we check if name, email and phone are filled in.
  * 
@@ -55,6 +59,7 @@ function editNewContactSave1(nameelement, emailelement, phoneelement){
         validatePhone("editPhoneInput")
       }
 }
+
 
 /**
  * This is where the form validation takes place and the information is prevented from being sent.
@@ -79,6 +84,7 @@ function editNewContactSave2(index) {
     });
 }
 
+
 /**
  * Depending on which boolean is passed, the values name, email, phone, buttonColor and initials are filled or empty.
  * 
@@ -99,6 +105,7 @@ function editNewContactHtml2(initialsValue, nameValue, emailValue, phoneValue, b
     editNewContactHtml(initials, name, email, phone, buttonColor, index);
 }
 
+
 /**
  * Here initials, name, email, phone, buttonColor and index are added to an object.
  * 
@@ -112,6 +119,7 @@ function editNewContactHtml2(initialsValue, nameValue, emailValue, phoneValue, b
 function setContactDetails(initials, name, email, phone, buttonColor, index) {
     contactDetails = { initials, name, email, phone, buttonColor, index };
 }
+
 
 /**
  * In the Add new contact window, text and buttons are changed using functions and class.
@@ -127,16 +135,6 @@ function editNewContactHtmlChange() {
     editNewContactChangeHTML()
 }
 
-/**
- * The data from the database is fetched and processed into a json. The json is then returned
- * 
- */
-async function fetchContacts() {
-    let pathcontact = 'contactall';
-    let response = await fetch(BaseUrl + pathcontact + '.json');
-    let contactallshow = await response.json();
-    return contactallshow;
-}
 
 /**
  * First of all I get the formatted json and then the values from the input fields are assigned to the variables name, email and phone.
@@ -145,18 +143,19 @@ async function fetchContacts() {
  * The main function is rendered to get the current changes and the window is closed.
  * 
  */
-async function createNewContact() {
-    let pathcontact = 'contactall';
-    let contactallshow = await fetchContacts();
+function createNewContact() {
+    let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
     const name = document.getElementById('editNameInput').value.trim();
     const email = document.getElementById('editEmailInput').value.trim();
     const phone = document.getElementById('editPhoneInput').value.trim();
-    let contactKey = contactallshow ? Object.keys(contactallshow).length : 0;
+    let contactKey = contactAllArray.length;
     let newContact = {"name": name,"email": email,"phone": phone,"color": getRandomColor()};
-    let putResponse = await fetch(`${BaseUrl}${pathcontact}/${contactKey}.json`, {method: 'PUT',headers: {'Content-Type': 'application/json'},body: JSON.stringify(newContact)});
+    contactAllArray.push(newContact);
+    localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
     editContactCloseWindow();
     contactLoad();
 }
+
 
 
 /**
@@ -166,19 +165,17 @@ async function createNewContact() {
  * @param {*} index 
  * @param {*} name 
  */
-async function deleteContactList(index,name) {
-    let contactallshow = await fetchContacts()
-    if (index >= 0 && index < contactallshow.length) {
-        contactallshow.splice(index, 1);
-        try {
-            await fetch(BaseUrl + pathcontact + '.json', {method: 'PUT',headers: {'Content-Type': 'application/json'}, body: JSON.stringify(contactallshow)});
-            document.getElementById('ContactfieldInfodiv').classList.remove('Slideinright')
-            document.getElementById('ContactfieldInfodiv').classList.add('Slideinleft')
-            contactLoad()
-        } catch(error){}
+function deleteContactList(index) {
+    let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
+    if (index >= 0 && index < contactAllArray.length) {
+        contactAllArray.splice(index, 1);
+        localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
+        document.getElementById('ContactfieldInfodiv').classList.remove('Slideinright');
+        document.getElementById('ContactfieldInfodiv').classList.add('Slideinleft');
+        contactLoad();
+    } else {
+        console.error('Ungültiger Index: Der Kontakt konnte nicht gelöscht werden.');
     }
-        
-    
 }
 
 /**
@@ -231,22 +228,29 @@ function getRandomColor() {
  * @param {*} phone 
  * @param {*} index 
  */
-async function editNewContactChange(name, email, phone, index) {
-    let contactallshow = await fetchContacts()
-    let duplicate = contactallshow.some(contact => 
+function editNewContactChange(name, email, phone, index) {
+    let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
+    let duplicate = contactAllArray.some(contact => 
         contact.name === name && contact.email === email && contact.phone === phone
-    );
-    if (index >= 0 && index < contactallshow.length) {
-        contactallshow.splice(index, 1);
-        let newContact = {"email": `${email}`,"name": `${name}`,"phone": `${phone}`,"color": getRandomColor()};
-        contactallshow.splice(index, 0, newContact);
-        await fetch(BaseUrl + pathcontact + '.json', {method: 'PUT',headers: {'Content-Type': 'application/json'},body: JSON.stringify(contactallshow)});
-        document.getElementById('ContactfieldInfodiv').classList.remove('Slideinright')
-        document.getElementById('ContactfieldInfodiv').classList.add('Slideinleft')
-        contactLoad()
-        document.getElementById('EditContactIDWIn').classList.add('none')
+);
+    if (index >= 0 && index < contactAllArray.length && !duplicate) {
+        editNewContactChange2(name, email, phone, index, contactAllArray)
+    } else {
+        console.error('Ungültiger Index oder doppelter Kontakt: Änderung nicht durchgeführt.');
     }
 }
+
+function editNewContactChange2(name, email, phone, index, contactAllArray){
+    contactAllArray.splice(index, 1);
+    let newContact = {"email": email,"name": name,"phone": phone,"color": getRandomColor()};
+    contactAllArray.splice(index, 0, newContact);
+    localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
+    document.getElementById('ContactfieldInfodiv').classList.remove('Slideinright');
+    document.getElementById('ContactfieldInfodiv').classList.add('Slideinleft');
+    contactLoad();
+    document.getElementById('EditContactIDWIn').classList.add('none');
+}
+
 
 /**
  * First a function is executed that capitalizes every first letter. Then the value in the input field is updated.

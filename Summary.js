@@ -9,7 +9,7 @@ let awaitFeedbackCount = 0;
 let doneCount = 0;
 let toDoCount = 0;
 let SectionTypLength = 0;
-let GoodMorningName = '';
+
 
 summaryLoad()
 
@@ -100,8 +100,9 @@ function summarySectionCheck3(SectionTypLength){
     document.getElementById('SummaryAwaitFeedbackCount').innerHTML=`${awaitFeedbackCount}`;
     document.getElementById('SummaryToDoCount').innerHTML=`${toDoCount}`;
     document.getElementById('SummaryDoneCount').innerHTML=`${doneCount}`;
+    console.log(SectionPrioArray)
     SectionPrioArray.forEach((value, index) => {
-        if (value === "Medium") {
+        if (value === "High") {
             highCount++;
             highIndices.push(index); 
         }
@@ -159,7 +160,7 @@ function convertDateFormat(dateString) {
 
 function toDoChangeOn(id){
     if(id == 'ChangeIcon1'){
-        document.getElementById(id).innerHTML= `<img  class="SummaryCircleDark" src="/assets/icons/editCircle.png"> `;
+        document.getElementById(id).innerHTML= `<img  class="SummaryCircleDark" src="/assets/icons/Frame 59.png"> `;
     }
     if(id == 'ChangeIcon2'){
         document.getElementById(id).innerHTML= `<img class="SummaryCircleDark"  src="/assets/icons/checkCircle.png">`;
@@ -175,25 +176,12 @@ function toDoChangeOut(id){
     }
 }
 
-
-
-function getUserNameFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    const userName = params.get('name');
-    return decodeURIComponent(userName);
-}
-
-function LoginSummary(){
-    const userName = getUserNameFromURL();
-    localStorage.removeItem('CurrentUser');
-    localStorage.setItem('CurrentUser', JSON.stringify(userName));
-    init('headerContact')
-    
-    
-}
-
 function LoginGoodMorning(){
-    console.log('drin', GoodMorningName)
+    let GoodMorningName = '';
+    let Currentname = localStorage.getItem('CurrentUser');
+    if (Currentname) {
+        GoodMorningName = JSON.parse(Currentname);
+    }
     document.getElementById('UserLogGoodMorning').innerHTML=`${GoodMorningName}`; 
 }
 

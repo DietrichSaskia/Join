@@ -11,6 +11,7 @@
 
 </head>
 <body>
+  <div id="UserInfoPopUp" class="none"></div>
   <header class="MainPageHeader">
     <div class="JoinLogoDistance">
         <img class="JoinLogoStyle" src="/assets/icons/logo.png" >
@@ -33,9 +34,11 @@
             <img class="LoginInputfieldIcon" src="/assets/icons/mail.png">
           </div>
           <div class="LoginInputIcon">
-            <input id="passwordInput" class="LoginInputfield" type="password" placeholder="Password">
-            <img class="LoginInputfieldIcon" src="/assets/icons/lock.png">
-          </div>
+            <input id="passwordInput1" class="LoginInputfield" type="password" placeholder="Password">
+            <div>
+                <img id="toggleIcon" onclick="togglePasswordVisibility('toggleIcon', 'passwordInput1')" class="LoginInputfieldIconLock" src="/assets/icons/lock.png" alt="Toggle Password Visibility">
+            </div> 
+          </div> 
           <div class="LoginRememberCheck">
             <label class="custom-checkbox">
               <input id="rememberMe" class="LoginCheckbox" type="checkbox">
@@ -59,5 +62,6 @@
   <script type="module"> 
     import { submitToFirebase } from '/SignUp.js';
   </script>
+  <script src="/LogIn.js"></script>
 </body>
 </html>

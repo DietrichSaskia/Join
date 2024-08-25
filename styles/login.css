@@ -52,7 +52,7 @@ body{
     display: flex;
 }
 .none{
-  display: none;
+  display: none!important;
 }
 .JoinLogoStyle{
   width: 100px;
@@ -131,6 +131,11 @@ body{
 .LoginInputfieldIcon{
   height: 24px;
   width: 24px;
+}
+.LoginInputfieldIconLock{
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
 }
 .LoginInputfield{
   height: 24px;

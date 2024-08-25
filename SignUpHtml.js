@@ -20,11 +20,11 @@ function singUpWindowHtml(){
             </div>
             <div id="SignInputIconthird" class="SignInputIcon">
                 <input id="passwordInput" title="Password with 8 characters, one capital letter, one number and one special character" required class="SignUpInput" type="password" placeholder="Password">
-                <img class="LoginInputfieldIcon" src="/assets/icons/lock.png">
+                <img id="toggleIcon1" onclick="togglePasswordVisibility('toggleIcon1', 'passwordInput')" class="LoginInputfieldIconLock" src="/assets/icons/lock.png">
             </div>
             <div id="SignInputIconfourth" class="SignInputIcon">
                 <input id="confirmPasswordInput" title="Repeat your password" required  class="SignUpInput" type="password" placeholder="Confirm Password">
-                <img class="LoginInputfieldIcon" src="/assets/icons/lock.png">
+                <img id="toggleIcon2" onclick="togglePasswordVisibility('toggleIcon2', 'confirmPasswordInput')"  class="LoginInputfieldIconLock" src="/assets/icons/lock.png">
             </div>
             <div class="SignUpAcceptPrivacy">
                 <input id="checkboxInput" class="LoginCheckbox" type="checkbox">
@@ -39,7 +39,14 @@ function singUpWindowHtml(){
     <button onclick="backToLogin()" class="SignUpLeftArrow">
         <img class="SignUpLeftarrowAStyle" src="/assets/icons/arrowLeft.png">
     </button>
-   
-    
     `;
+}
+
+
+function userInformationPopUpHTML(text){
+    document.getElementById('UserInfoPopUp').innerHTML=`
+    <div class="UserInformation">
+        <div id="UserInformationText">${text}</div>
+    </div>
+    `; 
 }
