@@ -22,6 +22,7 @@ let taskAllArray = [];
 
 
 function loadFunctions() {
+    loadAddTaskComplete();
     activateprioButton(1);
     loadMembers();
     searchUsers();
