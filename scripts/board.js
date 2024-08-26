@@ -1,99 +1,86 @@
-// Eine leere Liste, um alle Aufgaben zu speichern
 let allTasks = [];
-
-// Variable, um das gerade gezogene Element zu speichern
 let currentDraggedElement;
 
-// URLs, um Aufgaben und Benutzer aus einer Datenbank zu laden
+
 let taskUrl = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/tasksAll/';
 let userURL = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/contactall';
 
-// Funktion, um Aufgaben zu laden, entweder aus dem lokalen Speicher oder von einem Server
+
 async function loadTasks() {
   try {
-    // Lade Aufgaben entweder aus dem lokalen Speicher oder vom Server
-    let storedTasks = localStorage.getItem('allTasks');
-    if (!storedTasks) {
-      let response = await fetch(taskUrl + '.json');
-      if (!response.ok) throw new Error(`HTTP-Fehler! Status: ${response.status}`);
-      
-      let responseToJson = await response.json();
-      allTasks = Array.isArray(responseToJson) ? responseToJson : Object.values(responseToJson);
-    } else {
-      allTasks = JSON.parse(storedTasks);
-    }
-    renderSections();
-    await showMembers(); // Zeige Benutzer nach dem Laden der Aufgaben
+    allTasks = JSON.parse(localStorage.getItem('allTasks')) || await fetchTasksFromAPI();
+    renderAllTasks();
   } catch (error) {
     console.error("Fehler beim Laden der Aufgaben:", error);
   }
+  await showMembers();
 }
 
-// Warte, bis das HTML-Dokument vollständig geladen ist, bevor die Aufgaben geladen werden
-document.addEventListener('DOMContentLoaded', () => {
-  loadTasks();
-});
 
-// Funktion, um die Aufgaben in den verschiedenen Abschnitten (toDo, inProgress, etc.) zu zeigen
-function renderSections() {
-  // Gehe durch die verschiedenen Abschnitte
-  ['toDo', 'inProgress', 'awaitFeedback', 'done'].forEach(section => {
-    let container = document.getElementById(section);
-    if (!container) {
-      console.error(`Container mit ID "${section}" nicht gefunden.`);
-      return;
-    }
-    // Filtere die Aufgaben nach dem Abschnitt, in dem sie sich befinden
-    let tasks = allTasks.filter(t => t['section'] === section);
-    // Wenn Aufgaben vorhanden sind, zeige sie an, ansonsten zeige eine Nachricht an
-    container.innerHTML = tasks.length 
-      ? tasks.map(generateTasksHTML).join('')
-      : `<div class="noTasks">No tasks ${capitalizeFirstLetter(section)}</div>`;
-  });
+async function fetchTasksFromAPI() {
+  let response = await fetch(`${taskUrl}.json`);
+  if (!response.ok) throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+  
+  let responseToJson = await response.json();
+  let tasks = Array.isArray(responseToJson) ? responseToJson : Object.values(responseToJson);
+  
+  localStorage.setItem('allTasks', JSON.stringify(tasks));
+  
+  return tasks;
 }
 
-// Funktion, um den ersten Buchstaben eines Wortes groß zu schreiben
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
 
-// Funktion, die aufgerufen wird, wenn ein Ziehvorgang beginnt
-function startDragging(id) {
-  currentDraggedElement = id;
-}
-
-// Erlaubt das Ablegen eines gezogenen Elements
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-
-// Speichert die aktuellen Aufgaben im lokalen Speicher des Browsers
 function saveTasksToLocalStorage() {
   localStorage.setItem('allTasks', JSON.stringify(allTasks));
 }
 
-// Lädt Aufgaben aus dem lokalen Speicher und zeigt sie an
-function loadTasksFromLocalStorage() {
-  let storedTasks = localStorage.getItem('allTasks');
-  if (storedTasks) {
-    allTasks = JSON.parse(storedTasks);
-    renderSections();
+
+function renderAllTasks() {
+  renderSection('toDo', 'toDo');
+  renderSection('inProgress', 'inProgress');
+  renderSection('awaitFeedback', 'awaitFeedback');
+  renderSection('done', 'done');
+}
+
+
+function renderSection(sectionName, containerId) {
+  let tasks = allTasks.filter(task => task.section === sectionName);
+  let container = document.getElementById(containerId);
+  container.innerHTML = '';
+  let formattedSectionName = sectionName.charAt(0).toUpperCase() + sectionName.slice(1).replace(/([A-Z])/g, ' $1').trim();
+
+  if (tasks.length === 0) {
+    container.innerHTML = `<div class="noTasks">No tasks ${formattedSectionName}</div>`;
+  } else {
+    tasks.forEach(task => {
+      container.innerHTML += generateTasksHTML(task);
+    });
   }
 }
 
-// Funktion, um eine Aufgabe in einen anderen Abschnitt zu verschieben
+
+function startDragging(id) {
+  currentDraggedElement = id;
+}
+
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+
 function moveTo(section) {
   let task = allTasks.find(task => task.id === currentDraggedElement);
   if (!task) {
     console.error(`Task with id ${currentDraggedElement} not found`);
     return;
   }
-  task.section = section; // Ändere den Abschnitt der Aufgabe
-  renderSections(); // Zeige die aktualisierten Aufgaben an
-  saveTasksToLocalStorage(); // Speichere die Änderungen
+  task.section = section;
+  renderAllTasks();
+  saveTasksToLocalStorage();
 }
 
-// Funktion, um die Beschreibung einer Aufgabe auf eine bestimmte Anzahl von Wörtern zu kürzen
+
 function truncateDescription(description, wordLimit) {
   let words = (typeof description === 'string' ? description.split(' ') : []);
   return words.length > wordLimit
@@ -101,7 +88,7 @@ function truncateDescription(description, wordLimit) {
     : description;
 }
 
-// Funktion, um Benutzer von einem Server zu laden und ihnen Aufgaben zuzuweisen
+
 async function showMembers() {
   try {
     let response = await fetch(userURL + '.json');
@@ -109,65 +96,102 @@ async function showMembers() {
       throw new Error(`HTTP-Fehler! Status: ${response.status}`);
     }
     let users = await response.json();
-    if (allTasks.some(task => !task.assignedMembers)) {
+    if (allTasks.some(task => !task.assignedTo || task.assignedTo.length === 0)) {
       assignAndDisplayInitials(users);
     }
-    renderSections();
+    renderAllTasks();
   } catch (error) {
     console.error("Fehler beim Abrufen der Benutzerdaten:", error);
   }
   saveTasksToLocalStorage();
 }
 
-// Funktion, um das HTML für die zugewiesenen Mitglieder einer Aufgabe zu generieren
-function generateAssignedMembersHTML(assignedMembers) {
-  return assignedMembers.map(member => `
-    <div class="assignedUser" style="background-color: ${member.bgColor};">
-      <span class="userInitials">${getInitials(member.name)}</span>
-    </div>`
-  ).join('');
+
+function assignAndDisplayInitials(users) {
+  allTasks.forEach(task => {
+    let randomMembers = getRandomMembers(users, 2, 3);
+    task.assignedTo = randomMembers.map(user => ({
+      initials: getInitials(user.name),
+      name: user.name,
+      bgColor: user.color
+    }));
+
+    let taskElement = document.querySelector(`#task-${task.id} .assignedTo`);
+    if (taskElement) {
+      taskElement.innerHTML = task.assignedTo.map(member => `
+        <div class="assignedUser" style="background-color: ${member.bgColor};">
+          <span class="userInitials">${member.initials}</span>
+        </div>`
+      ).join('');
+    }
+  });
+  saveTasksToLocalStorage();
 }
 
-// Funktion, um die Initialen eines Namens zu erhalten
+
+function getRandomMembers(users, min, max) {
+  let shuffled = users.sort(() => 0.5 - Math.random());
+  let count = Math.floor(Math.random() * (max - min + 1)) + min;
+  return shuffled.slice(0, count);
+}
+
+
 function getInitials(name) {
   if (!name) return '';
   let nameParts = name.trim().split(/\s+/);
   return nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
 }
 
-// Funktion, um das HTML für eine Aufgabe zu erstellen
+
 function generateTasksHTML(element) {
   let { category, title, description, subtasks = [], prio, id, assignedTo = [] } = element;
-  let categoryClass = (typeof category === 'string') ? category.replace(/\s+/g, '') : '';
+  let categoryClass = formatCategoryClass(category);
   let truncatedDescription = truncateDescription(description, 7);
-
-  // Verwende die ausgelagerte Funktion für die Subtasks
   let subtaskHTML = generateSubtaskHTML(subtasks);
-
+  let assignedMembersHTML = generateAssignedMembersHTML(assignedTo);
   return `
-  <div id="task-${id}" draggable="true" ondragstart="startDragging('${id}')" ondragover="allowDrop(event)" ondrop="moveTo('${element.section}')" class="task" onclick="showTaskDetail(${id})">
-    <div class="category ${categoryClass}">${category}</div>
-    <div class="title">${title}</div>
-    <div class="description">${truncatedDescription}</div>
-    ${subtaskHTML}
-    <div class="assignedToAndPrio">
-      <div class="assignedTo">${generateAssignedMembersHTML(assignedTo)}</div>
-      <img src="${prio}" alt="PriorityImage">
+    <div id="task-${id}" draggable="true" ondragstart="startDragging('${id}')"ondragover="allowDrop(event)" ondrop="moveTo('${element.section}')"class="task" onclick="showTaskDetail('${id}')">
+      <div class="category ${categoryClass}">${category}</div>
+      <div class="title">${title}</div>
+      <div class="description">${truncatedDescription}</div>
+      ${subtaskHTML}
+      <div class="assignedToAndPrio">
+        <div class="assignedTo">${assignedMembersHTML}</div>
+        <img src="${prio}" alt="PriorityImage" class="priority-icon">
+      </div>
     </div>
-  </div>`;
+  `;
 }
 
+
+function formatCategoryClass(category) {
+  return category ? category.replace(/\s+/g, '') : '';
+}
+
+
 function generateSubtaskHTML(subtasks) {
+  if (subtasks.length === 0) return '';
+
   let subtaskCount = subtasks.length;
   let completedSubtasks = subtasks.filter(s => s.completed).length;
-  let subtaskBarWidth = (subtaskCount > 0) ? (completedSubtasks / subtaskCount) * 100 : 0;
+  let subtaskBarWidth = (completedSubtasks / subtaskCount) * 100;
 
-  return subtaskCount ? `
+  return `
     <div class="subtasks">
       <div class="subtaskBarContainer">
         <div class="subtaskBar" style="width: ${subtaskBarWidth}%"></div>
       </div>
       <span class="subtaskCount">${completedSubtasks}/${subtaskCount} Subtasks</span>
-    </div>` : '';
+    </div>`;
 }
 
+
+function generateAssignedMembersHTML(assignedTo) {
+  return assignedTo.map(member => `
+    <div class="assignedUser" style="background-color: ${member.bgColor};">
+      <span class="userInitials">${member.initials}</span>
+    </div>`).join('');
+}
+
+
+loadTasks();
