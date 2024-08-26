@@ -19,7 +19,7 @@
 
     <h1>Add Task</h1>
 
-    <form class="dFlexAlign" onsubmit="return false" novalidate>
+    <form class="dFlex" onsubmit="return false" novalidate>
       <div class="taskForm">
 
         <p>Title<span>*</span></p>
@@ -97,7 +97,7 @@
           <img class="subtaskIcon" id="subtaskInactive" src="../assets/icons/addNoBorder.png" onclick="showSubtask()">
 
           <div class="dNone dFlexAlign" id="subtaskActive">
-            <img class="subtaskIcon" src="../assets/icons/close.png" onclick="clearSubtask()">
+            <img class="subtaskIcon" src="../assets/icons/close.png" onclick="clearSubtaskInput()">
             <div class="smallSeparator"></div>
             <img class="subtaskIcon" src="../assets/icons/check.png" onclick="checkSubtask()">
           </div>

@@ -30,6 +30,10 @@ span {
     display: none;
 }
 
+.dFlex {
+    display: flex;
+}
+
 .dFlexAlign {
     display: flex;
     align-items: center;

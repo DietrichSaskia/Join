@@ -21,9 +21,9 @@ let tasks = [
 let task = tasks[0];
 
 
-async function loadFunctions() {
+function loadFunctions() {
     activateprioButton(1);
-    await loadMembers();
+    loadMembers();
     searchUsers();
 }
 
@@ -112,9 +112,11 @@ function resetprioButtons() {
 }
 
 
-async function loadMembers() {
-    let response = await fetch(userURL + '.json');
-    let json = await response.json();
+function loadMembers() {
+        let tasksAsText = localStorage.getItem('taskAllArray');
+        if (tasksAsText) {
+            json = JSON.parse(tasksAsText);
+        }
     getusers(json);
 }
 
@@ -328,8 +330,8 @@ function changeSubtask(i) {
 }
 
 
-async function clearAddTask() {
-    await loadMembers();
+function clearAddTask() {
+    loadMembers();
     document.getElementById('titleInput').value = "";
     document.getElementById('descriptionInput').value = "";
     document.getElementById('dueDateInput').value = "";
@@ -386,4 +388,10 @@ function searchUser(input) {
             users[i].style.display = 'flex';
         }
     }
+}
+
+
+function save() {
+    let tasksAsText = JSON.stringify(tasks);
+    localStorage.setItem('taskAllArray', tasksAsText);
 }
