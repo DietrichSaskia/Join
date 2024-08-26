@@ -1,10 +1,12 @@
-function showTaskDetail(task) {
-  renderTaskDetails(task);
+function showTaskDetail(taskIndex) {
+  let task = allTasks[taskIndex];
+  console.log('Task:', task);
+  renderTaskDetails(task, taskIndex);
   openTask();
 }
 
-
-function renderTaskDetails(task) {
+function renderTaskDetails(task, taskIndex) {
+  console.log('Rendering task details:', task);
   let taskContent = document.getElementById('taskDetailCard');
   taskContent.innerHTML = generateTaskDetailHTML(
     task.category, 
@@ -13,8 +15,8 @@ function renderTaskDetails(task) {
     task.date,
     task.prioName,
     task.prio, 
-    task.assignedMembers,
-    renderSubtasks(task.subtasks)
+    task.assignedTo,
+    renderSubtasks(taskIndex, task.subtasks)
   );
 }
 
@@ -29,8 +31,19 @@ function closeTask() {
 }
 
 
-function updateSubtaskStatus(subtaskIndex, subtaskTitle) {
-  const task = allTasks.find(t => t.subtasks.includes(subtaskTitle));
+function renderSubtasks(taskIndex, subtasks) {
+  if (!subtasks || subtasks.length === 0) return '';
+
+  return subtasks.map((subtask, index) => `
+    <div class="subtask">
+      <input type="checkbox" id="subtask-${index}" onchange="updateSubtaskStatus(${taskIndex}, ${index}, '${subtask}')" />
+      <label for="subtask-${index}">${subtask}</label>
+    </div>
+  `).join('');
+}
+
+function updateSubtaskStatus(taskIndex, subtaskIndex, subtaskTitle) {
+  const task = allTasks[taskIndex];
   if (!task) return;
 
   let checkbox = document.getElementById(`subtask-${subtaskIndex}`);
@@ -43,18 +56,15 @@ function updateSubtaskStatus(subtaskIndex, subtaskTitle) {
     task.completedSubtasks = task.completedSubtasks.filter(subtask => subtask !== subtaskTitle);
   }
 
-  updateTaskProgress(task.id);
+  updateTaskProgress(task);
 }
 
-function updateTaskProgress(taskId) {
-  const task = allTasks.find(t => t.id === taskId);
-  if (!task) return;
-
+function updateTaskProgress(task) {
   let completedSubtasks = task.completedSubtasks ? task.completedSubtasks.length : 0;
   let subtaskCount = task.subtasks.length;
   let subtaskBarWidth = (completedSubtasks / subtaskCount) * 100;
 
-  const taskElement = document.getElementById(`task-${taskId}`);
+  const taskElement = document.querySelector(`[data-task-index='${taskIndex}']`);
   if (taskElement) {
     const subtaskBar = taskElement.querySelector('.subtaskBar');
     if (subtaskBar) {
@@ -69,36 +79,22 @@ function updateTaskProgress(taskId) {
 }
 
 
-
-
-function renderSubtasks(subtasks) {
-  if (!subtasks || subtasks.length === 0) return '';
-
-  return subtasks.map((subtask, index) => `
-    <div class="subtask">
-      <input type="checkbox" id="subtask-${index}" onchange="updateSubtaskStatus(${index}, '${subtask}')" />
-      <label for="subtask-${index}">${subtask}</label>
-    </div>
-  `).join('');
-}
-
-
 function generateAssignedMembersHTMLDetail(assignedTo) {
-  return assignedTo.map(name => {
-    let initials = getInitials(name);
-    let bgColor = getRandomColor();  // Beispielhafte Funktion, um eine zufällige Farbe zu generieren
+  return assignedTo.map(member => {
+    let initials = member.initials || getInitials(member.name);
+    let bgColor = member.bgColor || getRandomColor();
     return `
       <div class="assigned-member">
-        <div class="assigned-user" style="background-color: ${bgColor};">
-          <span class="user-initials">${initials}</span>
+        <div class="assignedUser" style="background-color: ${bgColor};">
+          <span class="userInitials">${initials}</span>
         </div>
-        <span class="user-name">${name}</span>
+        <span class="user-name">${member.name}</span>
       </div>`;
   }).join('');
 }
 
 function generateTaskDetailHTML(category, title, description, date, prioName, prio, assignedTo, subtasks) {
-  let categoryClass = category.replace(/\s+/g, '');
+  let categoryClass = category ? category.replace(/\s+/g, '') : 'default-category';
 
   // Aufruf der neuen Funktion
   let assignedMembersHTML = generateAssignedMembersHTMLDetail(assignedTo);
@@ -117,5 +113,6 @@ function generateTaskDetailHTML(category, title, description, date, prioName, pr
       <div class="subtasksDetail">${subtasks}</div>
     </div>`;
 }
+
 
 
