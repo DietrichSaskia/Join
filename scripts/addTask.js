@@ -418,7 +418,7 @@ function setArray() {
     }
     task['date'] = document.getElementById('dueDateInput').value;
     task['description'] = document.getElementById('descriptionInput').value;
-    let id = taskAllArray.length + 1;
+    let id = taskAllArray.length;
     task['id'] = id;
     task['title'] = document.getElementById('titleInput').value;
 }
