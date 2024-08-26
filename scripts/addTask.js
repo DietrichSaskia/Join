@@ -17,14 +17,15 @@ let tasks = [
         'assignedName': [],
     },
 ];
-
 let task = tasks[0];
+let taskAllArray = [];
 
 
 function loadFunctions() {
     activateprioButton(1);
     loadMembers();
     searchUsers();
+    load();
 }
 
 
@@ -113,10 +114,10 @@ function resetprioButtons() {
 
 
 function loadMembers() {
-        let tasksAsText = localStorage.getItem('taskAllArray');
-        if (tasksAsText) {
-            json = JSON.parse(tasksAsText);
-        }
+    let tasksAsText = localStorage.getItem('contactAllArray');
+    if (tasksAsText) {
+        json = JSON.parse(tasksAsText);
+    }
     getusers(json);
 }
 
@@ -344,6 +345,7 @@ function clearAddTask() {
 
 
 function createTask() {
+    load();
     let users = document.getElementsByClassName('dropdownButton');
     for (let i = 0; i < users.length; i++) {
         if (users[i].classList.contains('dropdownButtonSelectedUser')) {
@@ -353,10 +355,11 @@ function createTask() {
     }
     task['date'] = document.getElementById('dueDateInput').value;
     task['description'] = document.getElementById('descriptionInput').value;
-    // ID from local storage
+    let id = taskAllArray.length + 1;
+    task ['id'] = id;
     task['title'] = document.getElementById('titleInput').value;
-    // Push to Local Storage
-    clearAddTask()
+    save();
+    clearAddTask();
 }
 
 
@@ -392,6 +395,15 @@ function searchUser(input) {
 
 
 function save() {
-    let tasksAsText = JSON.stringify(tasks);
+    taskAllArray.push(task);
+    let tasksAsText = JSON.stringify(taskAllArray);
     localStorage.setItem('taskAllArray', tasksAsText);
+}
+
+
+function load() {
+    let tasksAsText = localStorage.getItem('taskAllArray');
+    if (tasksAsText) {
+        taskAllArray = JSON.parse(tasksAsText);
+    }
 }
