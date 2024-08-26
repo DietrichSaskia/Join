@@ -1,7 +1,6 @@
 const taskURL = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/tasksAll/';
 const userURL = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/contactall'
 const dateInput = document.getElementById('dueDateInput');
-const subtasksInput = document.getElementById('subtasksInput');
 
 let tasks = [
     {
@@ -31,12 +30,11 @@ function loadFunctions() {
 }
 
 
-
-if (subtasksInput) {
-    subtasksInput.addEventListener("focusout", (event) => {
+document.addEventListener('focusout', (event) => {
+    if (event.target && event.target.id === 'subtasksInput') {
         showSubtaskIcons();
-    });
-}
+    }
+});
 
 
 if (dateInput) {
@@ -232,23 +230,23 @@ function showSubtaskIcons() {
     setTimeout(function () {
         document.getElementById('subtaskActive').classList.toggle('dNone');
         document.getElementById('subtaskInactive').classList.toggle('dNone');
-    }, 225);
+    }, 10);
 }
 
 
 function showSubtask() {
-    subtasksInput.focus();
+    document.getElementById('subtasksInput').focus();
 }
 
 
 function checkSubtask() {
-    let input = subtasksInput.value;
+    let input = document.getElementById('subtasksInput').value;
     document.getElementById('inputerrorSubTask1').style.display = 'none';
     document.getElementById('inputerrorSubTask2').style.display = 'none';
-    subtasksInput.classList.remove('redInputBorder');
+    document.getElementById('subtasksInput').classList.remove('redInputBorder');
     if (input.length === 0) {
         document.getElementById('inputerrorSubTask1').style.display = 'block';
-        subtasksInput.classList.add('redInputBorder');
+        document.getElementById('subtasksInput').classList.add('redInputBorder');
     }
     else {
         createSubtask(input)
@@ -269,13 +267,13 @@ function createSubtask(input) {
     }
     else {
         document.getElementById('inputerrorSubTask2').style.display = 'block';
-        subtasksInput.classList.add('redInputBorder');
+        document.getElementById('subtasksInput').classList.add('redInputBorder');
     }
 }
 
 
 function clearSubtaskInput() {
-    subtasksInput.value = "";
+    document.getElementById('subtasksInput').value = "";
 }
 
 
@@ -345,8 +343,8 @@ function clearAddTask() {
     loadMembers();
     document.getElementById('titleInput').value = "";
     document.getElementById('descriptionInput').value = "";
-    dateInput.value = "";
-    subtasksInput.value = "";
+    document.getElementById('dueDateInput').value = "";
+    document.getElementById('subtasksInput').value = "";
     activateprioButton(1);
     clearCategory();
     clearSubtask(0);
@@ -387,7 +385,7 @@ function checkInput1() {
 
 
 function checkInput2() {
-    if (dateInput.value === "") {
+    if (document.getElementById('dueDateInput').value === "") {
         document.getElementById('inputerror2').style.display = 'block';
         checked = false;
     }
@@ -418,7 +416,7 @@ function setArray() {
             task['assignedInitals'].push(document.getElementById(`userCircle${i}`).innerText);
         }
     }
-    task['date'] = dateInput.value;
+    task['date'] = document.getElementById('dueDateInput').value;
     task['description'] = document.getElementById('descriptionInput').value;
     let id = taskAllArray.length + 1;
     task['id'] = id;
