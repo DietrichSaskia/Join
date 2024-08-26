@@ -294,7 +294,9 @@ function deleteSubtask(i) {
 
 
 function clearSubtask(i) {
-    document.getElementById(`subTaskBox${i}`).remove();
+    if (document.getElementById(`subTaskBox${i}`)) {
+        document.getElementById(`subTaskBox${i}`).remove();
+    }
 }
 
 
@@ -346,6 +348,61 @@ function clearAddTask() {
 
 function createTask() {
     load();
+    setArray();
+    if (!checkInputs()) {
+        return;
+    }
+    save();
+    clearAddTask();
+}
+
+
+function checkInputs() {
+    let checked = true;
+    checked = checkInput1(checked);
+    checked = checkInput2(checked);
+    checked = checkInput3(checked);
+    return checked;
+}
+
+
+function checkInput1() {
+    if (document.getElementById('titleInput').value === "") {
+        document.getElementById('inputerror1').style.display = 'block';
+        checked = false;
+    }
+    else {
+        document.getElementById('inputerror1').style.display = 'none';
+        return true;
+    }
+}
+
+
+function checkInput2() {
+    if (document.getElementById('dueDateInput').value === "") {
+        document.getElementById('inputerror2').style.display = 'block';
+        checked = false;
+    }
+    else {
+        document.getElementById('inputerror2').style.display = 'none';
+        return true;
+    }
+}
+
+
+function checkInput3() {
+    if (document.getElementById('category').innerText === 'Select task category') {
+        document.getElementById('inputerror3').style.display = 'block';
+        checked = false;
+    }
+    else {
+        document.getElementById('inputerror3').style.display = 'none';
+        return true;
+    }
+}
+
+
+function setArray() {
     let users = document.getElementsByClassName('dropdownButton');
     for (let i = 0; i < users.length; i++) {
         if (users[i].classList.contains('dropdownButtonSelectedUser')) {
@@ -356,10 +413,8 @@ function createTask() {
     task['date'] = document.getElementById('dueDateInput').value;
     task['description'] = document.getElementById('descriptionInput').value;
     let id = taskAllArray.length + 1;
-    task ['id'] = id;
+    task['id'] = id;
     task['title'] = document.getElementById('titleInput').value;
-    save();
-    clearAddTask();
 }
 
 

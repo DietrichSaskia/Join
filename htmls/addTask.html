@@ -19,6 +19,7 @@
 
     <h1>Add Task</h1>
 
+
     <form class="dFlex" onsubmit="return false" novalidate>
       <div class="taskForm">
 
@@ -27,8 +28,10 @@
         <input id="titleInput" placeholder="Enter a title" type="text" required>
         <span class="inputError" id="inputerror1">This field is required</span>
 
+
         <p>Description</p>
         <textarea class="description" id="descriptionInput" placeholder="Enter a Description"></textarea>
+
 
         <p>Assigned to</p>
         <div class="dropdownWrapper">
@@ -50,7 +53,9 @@
 
       </div>
 
+
       <div class="taskSeperator"></div>
+
 
       <div class="taskForm">
 
@@ -60,6 +65,7 @@
           <img class="calendar" src="../assets/icons/calendar.png">
         </div>
         <span class="inputError" id="inputerror2">This field is required</span>
+
 
         <p>Prio</p>
 
@@ -79,6 +85,7 @@
 
         </div>
 
+
         <p>Category<span>*</span></p>
         <button type="button" class="dropdownButtonArea" id="category" onclick="toggleCategory()">Select task
           category<img class="arrow" src="../assets/icons/arrowDrop.png"></button>
@@ -88,6 +95,8 @@
             <div class="dropdownButton" id="userStory" onclick="selectCategory('User Story')">User Story</div>
           </div>
         </div>
+        <span class="inputError" id="inputerror3">This field is required</span>
+
 
         <p class="subtaskHeadline">Subtasks</p>
 
