@@ -1,29 +1,38 @@
+/**
+ * Searches for tasks based on the user's input in the search field.
+ * If the search query is at least 3 characters long, the tasks are filtered.
+ * If the input field is empty, all tasks are displayed.
+ */
 function searchTask() {
   let searchQuery = document.getElementById('searchInput').value.toLowerCase();
-
+  
   if (searchQuery.length >= 3) {
-    const filteredTasks = allTasks.filter(task => {
-      const titleMatch = task.title.toLowerCase().includes(searchQuery);
-      const descriptionMatch = task.description.toLowerCase().includes(searchQuery);
+    let filteredTasks = allTasks.filter(task => {
+      let titleMatch = task.title.toLowerCase().includes(searchQuery);
+      let descriptionMatch = task.description.toLowerCase().includes(searchQuery);
       return titleMatch || descriptionMatch;
     });
-
     renderFilteredTasks(filteredTasks);
   } else {
-    renderToDos();
-    renderInProgress();
-    renderAwaitFeedback();
-    renderDone();
+    renderAllTasks();
   }
-  searchInput.value = '';
+
+  if (searchQuery.length === 0) {
+    renderAllTasks();
+  }
 }
 
 
+/**
+ * Renders the filtered tasks in their respective sections.
+ * 
+ * @param {Array<Object>} tasks - Array of task objects to be filtered and rendered.
+ */
 function renderFilteredTasks(tasks) {
-  let toDoTasks = tasks.filter(t => t.section === 'toDo');
-  let inProgressTasks = tasks.filter(t => t.section === 'inProgress');
-  let awaitFeedbackTasks = tasks.filter(t => t.section === 'awaitFeedback');
-  let doneTasks = tasks.filter(t => t.section === 'done');
+  let toDoTasks = tasks.filter(task => task.section === 'toDo');
+  let inProgressTasks = tasks.filter(task => task.section === 'inProgress');
+  let awaitFeedbackTasks = tasks.filter(task => task.section === 'awaitFeedback');
+  let doneTasks = tasks.filter(task => task.section === 'done');
 
   renderTasksInSection('toDo', toDoTasks);
   renderTasksInSection('inProgress', inProgressTasks);
@@ -32,6 +41,12 @@ function renderFilteredTasks(tasks) {
 }
 
 
+/**
+ * Renders a list of tasks in a specific section.
+ * 
+ * @param {string} sectionId - The ID of the HTML element where the tasks should be rendered.
+ * @param {Array<Object>} tasks - Array of task objects to be rendered in the section.
+ */
 function renderTasksInSection(sectionId, tasks) {
   let container = document.getElementById(sectionId);
   container.innerHTML = '';
