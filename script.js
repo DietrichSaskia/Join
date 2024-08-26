@@ -62,3 +62,9 @@ function hideBurgerMenu() {
     document.getElementById('burgerMenu').classList.add('dNone');
     document.getElementById('headerOverlay').classList.remove('showHeaderOverlay');
 }
+
+
+function resetUser() {
+    let UserAsText = JSON.stringify(null);
+    localStorage.setItem('CurrentUser', UserAsText);
+}

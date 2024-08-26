@@ -27,7 +27,7 @@ function renderHeader(id, name) {
         <div id="burgerMenu" class="dNone">
             <a href="../htmls/legalNotice.html">Legal Notice</a>
             <a href="../htmls/privacyPolicy.html">Privacy Policy</a>
-            <a href="../index.html">Log out</a>
+            <a href="../index.html" onclick="resetUser()">Log out</a>
         </div>
         <div class="seperator"></div>
 
