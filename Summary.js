@@ -12,6 +12,8 @@ let SectionTypLength = 0;
 
 
 summaryLoad()
+setTimeBasedGreeting();
+checkWidthAndExecute();
 
 async function summaryLoad() {
     // Lösche alte Arrays aus dem localStorage
@@ -61,6 +63,25 @@ async function summaryLoad() {
     }
     summarySectionCheck();
 }
+
+
+function setTimeBasedGreeting() {
+    const element = document.getElementById('Timewelcome');
+    const now = new Date();
+    const hour = now.getHours();
+    let greeting;
+
+    if (hour >= 5 && hour < 12) {
+        greeting = "Good morning,";
+    } else if (hour >= 12 && hour < 18) {
+        greeting = "Good afternoon,";
+    } else {
+        greeting = "Good evening,";
+    }
+
+    element.textContent = greeting;
+}
+
 
 
 
@@ -182,4 +203,25 @@ function LoginGoodMorning(){
     }
     document.getElementById('UserLogGoodMorning').innerHTML=`${GoodMorningName}`; 
 }
+
+
+function checkWidthAndExecute() {
+    // Überprüfen der aktuellen Breite des Fensters
+    const viewportWidth = window.innerWidth;
+
+    if (viewportWidth < 1400) {
+        // Wenn die Breite unter 1400px liegt, setTimeout ausführen
+        setTimeout(() => {
+            document.getElementById('SummaryRightSectionNone').style.display='none'
+            document.getElementById('SummaryheaderheadlineNone').style.display='flex'
+            document.getElementById('SummaryLeftToDoNone').style.display='flex'
+        }, 100000); // Timeout auf 1000ms (1 Sekunde) setzen
+        
+    }
+}
+
+// Füge einen Event-Listener für das resize-Event hinzu
+window.addEventListener('resize', checkWidthAndExecute);
+
+// Initiale Überprüfung, falls die Seite bereits unter 1400px geladen wurde
 
