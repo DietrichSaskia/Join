@@ -7,16 +7,13 @@
   <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="/styles/board.css">
   <link rel="stylesheet" href="/styles/header.css">
-  <script src="/script.js"></script>
-  <script src="/templates.js"></script>
-  <script src="/scripts/board.js"></script>
-  <script src="/scripts/searchTask.js"></script>
-  <script src="/scripts/detailTask.js"></script>
-  <script src="/Summary.js"></script>
+  <link rel="stylesheet" href="/styles/addTaskBoard.css">
   <title>Board</title>
   </head>
 <body onload="init('headerBoard')">
   <header id="headerBoard"></header>
+
+  <main class="mainContent" id="mainContent"></main>
   <section class="boardHeadline">
     <div class="headlineAndSearch">
       <div>
@@ -30,7 +27,7 @@
             <img src="/assets/icons/search.png" alt="Search">
           </button>
         </div>
-        <button class="btnAddTask" id="btnAddTask" onclick="addTask()">
+        <button class="btnAddTask" id="btnAddTask" onclick="loadFunctions()">
           Add task <img src="/assets/icons/addWhiteNoBorder.png" alt="">
         </button>
       </div>
@@ -39,15 +36,15 @@
     <div class="headlineTasksContainer">
       <div class="headlineTasks">
         <a href="#">To do</a>
-        <img src="/assets/icons/add.png" alt="">
+        <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
       </div>
       <div class="headlineTasks">
         <a href="#">In progress</a>
-        <img src="/assets/icons/add.png" alt="">
+        <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
       </div>
       <div class="headlineTasks">
         <a href="#">Await feedback</a>
-        <img src="/assets/icons/add.png" alt="">
+        <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
       </div>
       <div class="headlineTasks">
        <a href="#">Done</a>
@@ -63,5 +60,13 @@
       <div id="taskDetailCard"></div>
     </div>
   </section>
+  <script src="/script.js"></script>
+  <script src="/templates.js"></script>
+  <script src="/scripts/board.js"></script>
+  <script src="/scripts/searchTask.js"></script>
+  <script src="/scripts/detailTask.js"></script>
+  <script src="/Summary.js"></script>
+  <script src="/scripts/addTaskTemplate.js"></script>
+  <script src="/scripts/addTaskBoard.js"></script>
 </body>
 </html>

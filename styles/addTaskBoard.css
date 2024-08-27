@@ -1,0 +1,489 @@
+.mainContent {
+    position: absolute;
+    top: -200px;
+    width: 1116px;
+    height: 870px;
+    gap: 0px;
+    border-radius: 30px 0px 0px 0px;
+    opacity: 0px;
+    display: none;
+    z-index: 8000000;
+    background-color: rosybrown;
+  }
+
+.mainContent::placeholder {
+    color: #D1D1D1;
+}
+
+.mainContent h1 {
+    padding-top: 100px;
+    font-size: 61px;
+    margin-bottom: 32px;
+}
+
+.mainContent p {
+    padding-bottom: 8px;
+    margin-top: 18px;
+}
+
+.mainContent span {
+    color: #FF8190;
+    font-size: 18px;
+}
+
+.mainContent .dNone {
+    display: none;
+}
+
+.mainContent .dFlex {
+    display: flex;
+}
+
+.mainContent .dFlexAlign {
+    display: flex;
+    align-items: center;
+}
+
+.mainContent .backgroundWhite {
+    background-color: white;
+    border-bottom: solid #29abe3 1px;
+    padding-bottom: 4px;
+    padding-right: 6px;
+}
+
+.mainContent .taskForm {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 327px);
+}
+
+.mainContent .taskSeperator {
+    width: 2px;
+    border-radius: 2px;
+    background-color: #D1D1D1;
+    height: 424px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.mainContent .required {
+    margin: auto 0;
+    margin-bottom: 38px;
+    font-size: 16px;
+}
+
+.mainContent input {
+    width: 440px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 20px;
+}
+
+.mainContent .redInputBorder {
+    border: 1px solid #ff8291;
+}
+
+.mainContent input:valid {
+    border: 1px solid #29abe3;
+}
+
+.mainContent .inputError {
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
+}
+
+.mainContent #subtasksInput:not(:placeholder-shown) {
+    border: 1px solid #29abe3;
+}
+
+.mainContent #subtasksInput:placeholder-shown {
+    border: 1px solid #D1D1D1;
+}
+
+.mainContent input[type=search]::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.mainContent input[type=search]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.mainContent input[type="search"]::-webkit-search-decoration,
+.mainContent input[type="search"]::-webkit-search-cancel-button,
+.mainContent input[type="search"]::-webkit-search-results-button,
+.mainContent input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
+.mainContent .description {
+    width: 440px;
+    height: 120px;
+    resize: none;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+.mainContent .description:not(:placeholder-shown) {
+    border: 1px solid #29abe3;
+}
+
+.mainContent .description:placeholder-shown {
+    border: 1px solid #D1D1D1;
+}
+
+.mainContent .description::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+}
+
+.mainContent .description::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.mainContent .description::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
+}
+
+.mainContent .searchUser {
+    border: 1px solid #29abe3;
+    position: relative;
+    top: 1px;
+}
+
+.mainContent .searchUser:focus-visible {
+    outline: 1px #29abe3;
+}
+
+.mainContent .dropdownButtonArea {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 440px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    padding-left: 20px;
+    font-size: 20px;
+    margin-bottom: -5px;
+    cursor: pointer;
+}
+
+.mainContent .arrow {
+    rotate: 180deg;
+    margin-right: 10px;
+}
+
+.mainContent .upArrow {
+    position: absolute;
+    top: 13px;
+    right: 16px;
+    cursor: pointer;
+}
+
+.mainContent .dropdownWrapper {
+    position: relative;
+    height: 1px;
+    width: 440px;
+}
+
+.mainContent .dropdown {
+    background-color: white;
+    width: 440px;
+    max-width: 100%;
+    position: absolute;
+    top: -43px;
+    z-index: 3;
+    border-radius: 10px;
+}
+
+.mainContent .dropdownUsers {
+    background-color: white;
+    width: 440px;
+    max-width: 100%;
+    max-height: 240px;
+    overflow-y: auto;
+    position: relative;
+    top: 1px;
+}
+
+.mainContent .dropdownUsers::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+}
+
+.mainContent .dropdownUsers::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.mainContent .dropdownUsers::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
+}
+
+.mainContent .dropdownCat {
+    background-color: white;
+    width: 440px;
+    position: absolute;
+    top: -43px;
+    z-index: 3;
+    border-radius: 10px;
+}
+
+.mainContent .dropdownButton {
+    height: 48px;
+    border-radius: 10px;
+    padding-left: 20px;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mainContent .dropdownButton:hover {
+    filter: brightness(0.9);
+}
+
+.dropdownButtonSelected {
+    background-color: #2A3647;
+    color: white;
+}
+
+.mainContent .dropdownButtonSelectedUser {
+    background-color: #2A3647;
+    color: white;
+}
+
+.mainContent .userCircle {
+    height: 40px;
+    width: 40px;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: #ff3c00;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainContent .dropdownUser {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.mainContent .dropdownCheckMark {
+    margin-right: 20px;
+}
+
+.mainContent .assignedUsers {
+    height: 48px;
+    width: 440px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.mainContent .dueDate {
+    display: flex;
+}
+
+.mainContent .calendar {
+    height: 20px;
+    position: relative;
+    right: 43px;
+    align-self: center;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.mainContent .dateInput {
+    color: #D1D1D1;
+}
+
+.mainContent .dateInput:valid {
+    color: #000000;
+}
+
+.mainContent ::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+.mainContent .prio {
+    display: flex;
+    justify-content: space-between;
+    width: 440px;
+}
+
+.mainContent .prioButton {
+    width: 136px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    gap: 8px;
+}
+
+.mainContent .prioButton:hover {
+    box-shadow: 0px 4px 2px 2px #D1D1D1;
+}
+
+.mainContent .prioButton.active:hover {
+    box-shadow: none;
+}
+
+.mainContent .high {
+    background-color: #ff3c00;
+    color: white;
+}
+
+.mainContent .medium {
+    background-color: #ffaa00;
+    color: white;
+}
+
+.mainContent .low {
+    background-color: #79e329;
+    color: white;
+}
+
+.mainContent .subtaskHeadline {
+    margin-top: 24px;
+}
+
+.mainContent .subTaskBox {
+    margin-top: 4px;
+}
+
+.mainContent .subTaskBox:hover {
+    background-color: #D1D1D1;
+    border-radius: 10px;
+}
+
+.mainContent .editSubtaskInput {
+    border-radius: 0;
+    border: none !important;
+    height: 26px;
+    font-size: 16px;
+}
+
+.mainContent .editSubtaskInput:focus {
+    outline: none;
+}
+
+.mainContent .subtaskIcons {
+    height: 1px;
+    width: 440px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-end;
+    right: 20px;
+    bottom: 25px;
+}
+
+.mainContent .subtaskIconsLower {
+    height: 1px;
+    width: 440px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-end;
+    right: 14px;
+    bottom: -3px;
+}
+
+.mainContent .subtaskIcon {
+    cursor: pointer;
+}
+
+.mainContent .subTasksBox {
+    height: 100px;
+    width: 440px;
+}
+
+.mainContent .subTasksBox ul {
+    display: flex;
+    align-items: center;
+    padding-right: 6px;
+    padding-bottom: 4px;
+}
+
+.mainContent .subTasksBox li {
+    font-size: 16px;
+    padding-top: 6px;
+}
+
+.mainContent .taskButtons {
+    margin: auto 0;
+    margin-top: -18px;
+    align-self: flex-end;
+}
+
+.mainContent .smallSeparator {
+    width: 2px;
+    height: 24px;
+    background-color: #d1d1d1;
+    margin: 3px;
+}
+
+.mainContent .clearButton {
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    color: #2A3647;
+    cursor: pointer;
+    width: 110px;
+    height: 56px;
+    padding: 16px;
+    margin-right: 16px;
+    font-size: 21px;
+}
+
+.mainContent .clearButton:active {
+    color: #29ABE2;
+    border: 1px solid #29ABE2;
+}
+
+.mainContent .createTaskButton {
+    background-color: #2A3647;
+    cursor: pointer;
+    height: 56px;
+    width: 183px;
+    padding: 16px;
+    font-size: 21px;
+    color: white;
+}
+
+.mainContent .createTaskButton:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 2px 2px #D1D1D1;
+    border: 1px solid #29ABE2;
+}
+
+.mainContent .createTaskButton:active {
+    box-shadow: 1px 2px 2px 2px #D1D1D1;
+}
