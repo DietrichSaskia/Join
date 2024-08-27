@@ -318,7 +318,7 @@ input[type="search"]::-webkit-search-results-decoration {
     color: #D1D1D1;
 }
 
-.dateInput.has-value {
+.dateInput:valid {
     color: #000000;
 }
 
