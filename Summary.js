@@ -105,12 +105,14 @@ function summarySectionCheck3(SectionTypLength){
     
     // 4. Sortiere die Datumswerte in aufsteigender Reihenfolge (frühestes Datum zuerst)
     filteredDates.sort((a, b) => new Date(a) - new Date(b));
+    console.log(filteredDates.length)
     if (filteredDates.length > 0) {
         
         const earliestDate = filteredDates[0]; // Das früheste Datum
     
         // 6. Filtere alle Datumswerte, die nicht mit dem frühesten Datum übereinstimmen
         filteredDates = filteredDates.filter(date => date === earliestDate);
+        console.log(filteredDates.length)
         document.getElementById('SummaryCount').innerHTML=`${filteredDates.length}`
         // 7. Formatieren des frühesten Datums im gewünschten Format (Oktober 16, 2022)
         const dateToDisplay = new Date(earliestDate);
