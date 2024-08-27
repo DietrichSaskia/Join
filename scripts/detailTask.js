@@ -49,51 +49,50 @@ function updateSubtaskStatus(taskIndex, subtaskIndex) {
   task.subtasks[subtaskIndex].completed = isChecked;
 
   // Aktualisiere den Fortschritt
-  updateTaskProgress(taskIndex, subtaskIndex, task);
+  updateTaskProgress(taskIndex, task);
   saveTasksToLocalStorage();
 }
 
-function updateTaskProgress(taskIndex, subtaskIndex, task) {
+
+function updateTaskProgress(taskIndex, task) {
   let btn1check = (document.getElementById(`subtask-${taskIndex}-0`).checked == true)
-  let btn2check = (document.getElementById(`subtask-${taskIndex}-1`).checked == true)
-  console.log(subtaskIndex);
-  let amountSubtasks = task['subtasks'].length;
-  if (amountSubtasks === 1) {
-    if (btn1check) {     
-      //Balken 100%     
-      return
-    }
-    else{
-      //Balken 0%
-      return
-    }
-  }
-  if (amountSubtasks === 2) {
-    if (btn1check && btn2check) {
-      //Balken 100%     
-      return
-    }
-    else if (btn1check || btn2check) {
-      //Balken 50%     
+  if (!document.getElementById(`subtask-${taskIndex}-1`)) {
+    let subtaskBar = document.getElementById(`subtaskBar${taskIndex}`);
+    if (btn1check) {
+      subtaskBar.style.width = `100%`;
+      //count 1/1   
       return
     }
     else {
-      //Balken 0%
+      subtaskBar.style.width = `0%`;
+      //Count 0
       return
     }
   }
-  let subtaskBarWidth = (completedSubtasks / subtaskCount) * 100;
+  else {
+    updateTaskProgress2(taskIndex, task)
+  };
+}
 
-  const taskElement = document.querySelector(`[data-task-index='${subtaskIndex}']`);
-  if (taskElement) {
-    const subtaskBar = taskElement.querySelector('.subtaskBar');
-    if (subtaskBar) {
-      subtaskBar.style.width = `${subtaskBarWidth}%`;
-    }
-    const subtaskCountDisplay = taskElement.querySelector('.subtaskCount');
-    if (subtaskCountDisplay) {
-      subtaskCountDisplay.innerText = `${completedSubtasks}/${subtaskCount} Unteraufgaben`;
-    }
+
+function updateTaskProgress2(taskIndex, task) {
+  let btn1check = (document.getElementById(`subtask-${taskIndex}-0`).checked == true)
+  let btn2check = (document.getElementById(`subtask-${taskIndex}-1`).checked == true)
+  let subtaskBar = document.getElementById(`subtaskBar${taskIndex}`);
+  if (btn1check && btn2check) {
+    subtaskBar.style.width = `100%`;
+    //Count 2/2  
+    return
+  }
+  else if (btn1check || btn2check) {
+    subtaskBar.style.width = `50%`;
+    //Count 1/2  
+    return
+  }
+  else {
+    subtaskBar.style.width = `0%`;
+    //Count 0/2
+    return
   }
 }
 

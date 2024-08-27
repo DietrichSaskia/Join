@@ -134,7 +134,7 @@ function generateTasksHTML(element, i) {
   let { category, title, description, subtasks = [], prio, assignedTo = [] } = element;
   let categoryClass = formatCategoryClass(category);
   let truncatedDescription = truncateDescription(description, 7);
-  let subtaskHTML = generateSubtaskProgressHTML(subtasks);
+  let subtaskHTML = generateSubtaskProgressHTML(subtasks, i);
   let assignedMembersHTML = generateAssignedMembersHTML(assignedTo);
   
   return `
@@ -155,7 +155,8 @@ function formatCategoryClass(category) {
   return category ? category.replace(/\s+/g, '') : '';
 }
 
-function generateSubtaskProgressHTML(subtasks) {
+function generateSubtaskProgressHTML(subtasks, taskIndex) {
+
   if (subtasks.length === 0) return '';
 
   let subtaskCount = subtasks.length;
@@ -165,7 +166,7 @@ function generateSubtaskProgressHTML(subtasks) {
   return `
     <div class="subtasks">
       <div class="subtaskBarContainer">
-        <div class="subtaskBar" style="width: ${subtaskBarWidth}%"></div>
+        <div class="subtaskBar" id="subtaskBar${taskIndex}" style="width: ${subtaskBarWidth}%"></div>
       </div>
       <span class="subtaskCount">${completedSubtasks}/${subtaskCount} Unteraufgaben</span>
     </div>`;
