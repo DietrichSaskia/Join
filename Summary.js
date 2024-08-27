@@ -93,6 +93,7 @@ function summarySectionCheck3(SectionTypLength){
         if (value === "High") {
             highCount++;
             highIndices.push(index); 
+            console.log(SectionPrioArray, value, index)
         }
         
     });
