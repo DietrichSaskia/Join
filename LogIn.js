@@ -1,11 +1,12 @@
 import { app, database, ref, get, child, set } from './SignUp.js';
+const BaseUrl = "https://join-317-default-rtdb.europe-west1.firebasedatabase.app/";
 let matchingUser;
 window.loginUser = loginUser;
 window.addInputListeners = addInputListeners;
 window.guestLogIN = guestLogIN;
 window.loadRememberedData = loadRememberedData
 window.logInAnimation = logInAnimation
-
+fetchContactTask()
 
 /**
  * The current password and email are read out here and if the data is not found, the border of the email container changes to red.
@@ -25,6 +26,44 @@ function logInvalidateEmail() {
     });
 }
 
+
+async function fetchContactTask(){
+     // Lösche alte Arrays aus dem localStorage
+     localStorage.removeItem('taskAllArray');       // Entferne das alte 'taskAllArray'
+     localStorage.removeItem('contactAllArray');    // Entferne das alte 'contactAllArray'
+ 
+     // Initialisiere die neuen Arrays
+ 
+     // Setze die Pfade für die Firebase-Abfragen
+     let pathcontact1 = 'tasksAll';
+     let pathcontact2 = 'contactall';
+ 
+     // Lade die Daten von tasksAll
+     let Summaryall = await fetch(BaseUrl + pathcontact1 + '.json');
+     let Summaryallshow = await Summaryall.json();
+ 
+     // Lade die Daten von contactall
+     let Contactall = await fetch(BaseUrl + pathcontact2 + '.json');
+     let Contactallshow = await Contactall.json();
+ 
+     // Speichere die Daten lokal in Arrays
+     let taskAllArray = [];
+     let contactAllArray = [];
+ 
+     // Iteriere durch die empfangenen Daten und fülle taskAllArray
+     for (let key in Summaryallshow) {
+         taskAllArray.push(Summaryallshow[key]);
+     }
+ 
+     // Iteriere durch die empfangenen Daten und fülle contactAllArray
+     for (let key in Contactallshow) {
+         contactAllArray.push(Contactallshow[key]);
+     }
+ 
+     // Speichere die Arrays im localStorage
+     localStorage.setItem('taskAllArray', JSON.stringify(taskAllArray));
+     localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
+}
 
 /**
  * If the email field is empty, the border of the container will turn black.

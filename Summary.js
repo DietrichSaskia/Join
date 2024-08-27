@@ -1,4 +1,4 @@
-const BaseUrl = "https://join-317-default-rtdb.europe-west1.firebasedatabase.app/";
+
 let SectionTypArray = []
 let SectionPrioArray = []
 let SectionPrioDateArray = []
@@ -15,51 +15,19 @@ summaryLoad()
 setTimeBasedGreeting();
 checkWidthAndExecute();
 
-async function summaryLoad() {
-    // Lösche alte Arrays aus dem localStorage
-    localStorage.removeItem('taskAllArray');       // Entferne das alte 'taskAllArray'
-    localStorage.removeItem('contactAllArray');    // Entferne das alte 'contactAllArray'
-
-    // Initialisiere die neuen Arrays
+function summaryLoad() {
+    
     SectionTypArray = [];
     SectionPrioArray = [];
     SectionPrioDateArray = [];
-
-    // Setze die Pfade für die Firebase-Abfragen
-    let pathcontact1 = 'tasksAll';
-    let pathcontact2 = 'contactall';
-
-    // Lade die Daten von tasksAll
-    let Summaryall = await fetch(BaseUrl + pathcontact1 + '.json');
-    let Summaryallshow = await Summaryall.json();
-
-    // Lade die Daten von contactall
-    let Contactall = await fetch(BaseUrl + pathcontact2 + '.json');
-    let Contactallshow = await Contactall.json();
-
-    // Speichere die Daten lokal in Arrays
-    let taskAllArray = [];
-    let contactAllArray = [];
-
-    // Iteriere durch die empfangenen Daten und fülle taskAllArray
-    for (let key in Summaryallshow) {
-        taskAllArray.push(Summaryallshow[key]);
-    }
-
-    // Iteriere durch die empfangenen Daten und fülle contactAllArray
-    for (let key in Contactallshow) {
-        contactAllArray.push(Contactallshow[key]);
-    }
-
-    // Speichere die Arrays im localStorage
-    localStorage.setItem('taskAllArray', JSON.stringify(taskAllArray));
-    localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
-
     // Extrahiere Daten aus taskAllArray, falls erforderlich
+    let taskAllArray = JSON.parse(localStorage.getItem('taskAllArray')) || [];
+
+    // Durchlaufe das taskAllArray und pushe die Daten in die entsprechenden Arrays
     for (let item of taskAllArray) {
-        SectionTypArray.push(item.section);
-        SectionPrioDateArray.push(item.date);
-        SectionPrioArray.push(item.prioName);
+        SectionTypArray.push(item.section);         // Pushe den Abschnitt in SectionTypArray
+        SectionPrioDateArray.push(item.date);       // Pushe das Datum in SectionPrioDateArray
+        SectionPrioArray.push(item.prioName);       // Pushe die Priorität in SectionPrioArray
     }
     summarySectionCheck();
 }
@@ -215,7 +183,7 @@ function checkWidthAndExecute() {
             document.getElementById('SummaryRightSectionNone').style.display='none'
             document.getElementById('SummaryheaderheadlineNone').style.display='flex'
             document.getElementById('SummaryLeftToDoNone').style.display='flex'
-        }, 100000); // Timeout auf 1000ms (1 Sekunde) setzen
+        }, 1000); // Timeout auf 1000ms (1 Sekunde) setzen
         
     }
 }
