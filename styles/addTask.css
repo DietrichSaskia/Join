@@ -63,7 +63,7 @@ span {
 
 .required {
     margin: auto 0;
-    margin-bottom: 22px;
+    margin-bottom: 38px;
     font-size: 16px;
 }
 
@@ -441,7 +441,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .taskButtons {
     margin: auto 0;
-    margin-bottom: 59px;
+    margin-top: -18px;
     align-self: flex-end;
 }
 
