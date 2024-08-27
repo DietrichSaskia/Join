@@ -21,6 +21,9 @@ let task = tasks[0];
 let taskAllArray = [];
 
 
+/**
+ * This Function loads the addTask.html and it's starting Functions
+ */
 function loadFunctions() {
     loadAddTaskComplete();
     activateprioButton(1);
@@ -69,6 +72,11 @@ document.addEventListener('click', function (clickEvent) {
 });
 
 
+/**
+ * This function resets all priority Buttons and activates the clicked priority Button and it's Function
+ * 
+ * @param {number} i This is the number of the priority Button
+ */
 function activateprioButton(i) {
     resetprioButtons()
     switch (i) {
@@ -85,6 +93,11 @@ function activateprioButton(i) {
 }
 
 
+/**
+ * This function sets the priority in the Array[task] to high and colors the button
+ * 
+ * @param {Array} task The array that is used to temporarily save all inputs
+ */
 function setPrioHigh(task) {
     document.getElementById('prio0').classList.add('high', 'active');
     document.getElementById('prioHigh').src = "../assets/icons/prioHighWhite.png";
@@ -93,6 +106,11 @@ function setPrioHigh(task) {
 }
 
 
+/**
+ * This function sets the priority in the Array[task] to medium and colors the button
+ * 
+ * @param {Array} task The array that is used to temporarily save all inputs
+ */
 function setPrioMedium(task) {
     document.getElementById('prio1').classList.add('medium', 'active');
     document.getElementById('prioMed').src = "../assets/icons/prioMediumWhite.png";
@@ -101,6 +119,11 @@ function setPrioMedium(task) {
 }
 
 
+/**
+ * This function sets the priority in the Array[task] to low and colors the button
+ * 
+ * @param {Array} task The array that is used to temporarily save all inputs
+ */
 function setPrioLow(task) {
     document.getElementById('prio2').classList.add('low', 'active');
     document.getElementById('prioLow').src = "../assets/icons/prioLowWhite.png";
@@ -109,6 +132,9 @@ function setPrioLow(task) {
 }
 
 
+/**
+ * This function resets all priority buttons to normal with no colors
+ */
 function resetprioButtons() {
     document.getElementById('prio0').classList.remove('high', 'active');
     document.getElementById('prio1').classList.remove('medium', 'active');
@@ -119,6 +145,9 @@ function resetprioButtons() {
 }
 
 
+/**
+ * This function loads the Users from the local storage
+ */
 function loadMembers() {
     let tasksAsText = localStorage.getItem('contactAllArray');
     if (tasksAsText) {
@@ -128,6 +157,11 @@ function loadMembers() {
 }
 
 
+/**
+ * This function breaks up the array and load the individual user
+ * 
+ * @param {Array} users The Array that is used to temporarily save all users
+ */
 function getusers(users) {
     document.getElementById('dropdownUsers').innerHTML = ``;
     document.getElementById('assignedUsers').innerHTML = ``;
@@ -138,6 +172,12 @@ function getusers(users) {
 }
 
 
+/**
+ * This function gets the initials of the individual user and starts the render Function for the dropdown Menu
+ * 
+ * @param {Object} user The individual User in the Array
+ * @param {number} i The index of the Object in the Array
+ */
 function loadUser(user, i) {
     let nameParts = user.name.split(' ');
     let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
@@ -146,6 +186,13 @@ function loadUser(user, i) {
 }
 
 
+/**
+ * This function renders the dropdown button for 1 user
+ * 
+ * @param {Object} user The individual User in the Array
+ * @param {string} initials The initials of the User
+ * @param {number} i The index of the Object in the Array, used to set the ID of the Button
+ */
 function renderAssignedTo(user, initials, i) {
     document.getElementById('dropdownUsers').innerHTML += /*html*/`
         <div class="dropdownButton" id="user${i}" onclick="toggleAssignedUser(${i})">
@@ -159,6 +206,13 @@ function renderAssignedTo(user, initials, i) {
 }
 
 
+/**
+ * This function renders the circle user icon
+ * 
+ * @param {*} user The individual User in the Array
+ * @param {*} initials The initials of the User
+ * @param {*} i The index of the Object in the Array, used to set the ID of the Button
+ */
 function renderAssignedUser(user, initials, i) {
     document.getElementById('assignedUsers').innerHTML += /*html*/`
         <div class="userCircle dNone" id="userCircle${i}" style="background-color:${user.color};">${initials}</div>
@@ -166,6 +220,11 @@ function renderAssignedUser(user, initials, i) {
 }
 
 
+/**
+ * This function checks the Button of a User in the dropdown Menu
+ * 
+ * @param {*} i The index of the Button
+ */
 function toggleAssignedUser(i) {
     let buttonChecked = "/assets/icons/checkButtonMobile.png";
     let buttonUnchecked = "../assets/icons/checkButtonblank.png";
@@ -177,6 +236,11 @@ function toggleAssignedUser(i) {
 }
 
 
+/**
+ * This function selects the Category in the dropdown Menu and resets it if the same one is clicked and sets it into the array task
+ * 
+ * @param {string} cat This string contains the category
+ */
 function selectCategory(cat) {
     let userstory = document.getElementById('userStory');
     let techTask = document.getElementById('techTask');
@@ -194,16 +258,38 @@ function selectCategory(cat) {
 }
 
 
+/**
+ * This function sets the category userstory as category
+ * 
+ * @param {id} userstory The button User Story
+ * @param {id} techTask The button Technical Task
+ */
 function selectUserStory(userstory, techTask) {
     userstory.classList.toggle('dropdownButtonSelected');
     techTask.classList.remove('dropdownButtonSelected');
     document.getElementById('category').innerHTML = "User Story";
 }
+
+
+/**
+ * This function sets the category userstory as Technical Task
+ * 
+ * @param {id} userstory The button User Story
+ * @param {id} techTask The button Technical Task
+ */
 function selectTechTask(userstory, techTask) {
     techTask.classList.toggle('dropdownButtonSelected');
     userstory.classList.remove('dropdownButtonSelected');
     document.getElementById('category').innerHTML = "Technical Task";
 }
+
+
+/**
+ * This function clears the category Input
+ * 
+ * @param {id} userstory The button User Story
+ * @param {id} techTask The button Technical Task
+ */
 function clearCategory() {
     document.getElementById('userStory').classList.remove('dropdownButtonSelected');
     document.getElementById('techTask').classList.remove('dropdownButtonSelected');
@@ -211,6 +297,9 @@ function clearCategory() {
 }
 
 
+/**
+ * This function toggles the users dropdown menu
+ */
 function toggleUserDropdown() {
     let dropdown = document.getElementById("dropdown");
     let dropdownUsers = document.getElementById("dropdownUsers");
@@ -220,12 +309,18 @@ function toggleUserDropdown() {
 }
 
 
+/**
+ * This function toggles the category dropdown menu
+ */
 function toggleCategory() {
     let dropdown = document.getElementById("dropdownCategory");
     dropdown.classList.toggle("dNone");
 }
 
 
+/**
+ * This function 
+ */
 function showSubtaskIcons() {
     setTimeout(function () {
         document.getElementById('subtaskActive').classList.toggle('dNone');

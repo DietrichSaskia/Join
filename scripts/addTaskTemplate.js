@@ -1,3 +1,7 @@
+/**
+ * This function loads the HTML-Code for the Load Task Site and the Load Task Function in the board.html
+ * 
+ */
 function loadAddTaskComplete() {
     document.getElementById('mainContent').innerHTML = /*html*/`
 <h1>Add Task</h1>
