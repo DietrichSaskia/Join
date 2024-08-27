@@ -534,6 +534,7 @@ function checkInputs() {
 function checkInput1() {
     if (document.getElementById('titleInput').value === "") {
         document.getElementById('inputerror1').style.display = 'block';
+        document.getElementById('titleInput').classList.add('redInputBorder');
         checked = false;
     }
     else {
@@ -551,6 +552,7 @@ function checkInput1() {
 function checkInput2() {
     if (document.getElementById('dueDateInput').value === "") {
         document.getElementById('inputerror2').style.display = 'block';
+        document.getElementById('dueDateInput').classList.add('redInputBorder');
         checked = false;
     }
     else {

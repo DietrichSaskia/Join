@@ -78,11 +78,6 @@ input {
     font-size: 20px;
 }
 
-/* input:invalid:not(:placeholder-shown):not(:focus) {
-    border: 1px solid #ff8291;
-} */
-
-
 .redInputBorder {
     border: 1px solid #ff8291;
 }
