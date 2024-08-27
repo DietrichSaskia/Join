@@ -1,4 +1,4 @@
-function renderHeader(id, name) {
+function renderHeader(id) {
     document.getElementById(id).innerHTML = /*html*/`
     <section onclick="hideBurgerMenu()" class="headerOverlay" id="headerOverlay"></section>
         <section class="sideBar">

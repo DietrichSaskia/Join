@@ -129,17 +129,18 @@
 }
 .UserInforWindow{
     position: absolute;
-    left: 0;
-    top: 0;
-    transform: translateY(-50% -50%);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     background-color: rgba(9, 9, 9, 0.3);
+    z-index: 10;
 }
 .UserInformation{
-    width: 340px;
-    height: 140px;
+    width: fit-content;
     background-color: #2A3647;
     color: white;
-    border-radius: 8px;
+    border-radius: 12px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;

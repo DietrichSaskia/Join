@@ -100,7 +100,6 @@ function summarySectionCheck3(SectionTypLength){
     document.getElementById('SummaryAwaitFeedbackCount').innerHTML=`${awaitFeedbackCount}`;
     document.getElementById('SummaryToDoCount').innerHTML=`${toDoCount}`;
     document.getElementById('SummaryDoneCount').innerHTML=`${doneCount}`;
-    console.log(SectionPrioArray)
     SectionPrioArray.forEach((value, index) => {
         if (value === "High") {
             highCount++;
@@ -135,7 +134,6 @@ function summarySectionCheck3(SectionTypLength){
             console.error('Ungültiges Datum:', earliestDate);
         }
     }
-    console.log(filteredDates)
     LoginGoodMorning()
     
 }

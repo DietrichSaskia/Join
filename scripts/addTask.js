@@ -325,15 +325,21 @@ function showSubtaskIcons() {
     setTimeout(function () {
         document.getElementById('subtaskActive').classList.toggle('dNone');
         document.getElementById('subtaskInactive').classList.toggle('dNone');
-    }, 100);
+    }, 200);
 }
 
 
+/**
+ * Sets the focus on the subtask input field
+ */
 function showSubtask() {
     document.getElementById('subtasksInput').focus();
 }
 
 
+/**
+ * Checks if there are already 2 subtasks and shows an error message if the user tries to create a third
+ */
 function checkSubtask() {
     let input = document.getElementById('subtasksInput').value;
     document.getElementById('inputerrorSubTask1').style.display = 'none';
@@ -349,6 +355,11 @@ function checkSubtask() {
 }
 
 
+/**
+ * Pushes the subtask input field into the task Array and puts it into a subtaskbox
+ * 
+ * @param {string} input The value of the subtask input
+ */
 function createSubtask(input) {
     if (task['subTask'][0] === null || task['subTask'].length === 0) {
         putSubTask(input, 0);
@@ -367,11 +378,20 @@ function createSubtask(input) {
 }
 
 
+/**
+ * clears the value of the subtask input field
+ */
 function clearSubtaskInput() {
     document.getElementById('subtasksInput').value = "";
 }
 
 
+/**
+ * renders a subtask box below the subtask input
+ * 
+ * @param {string} input The value of the subtask input
+ * @param {number} i The number of the subtask box
+ */
 function putSubTask(input, i) {
     document.getElementById('subTasksBox').innerHTML += /*html*/`
     <div id="subTaskBox${i}" class="subTaskBox">
@@ -388,19 +408,34 @@ function putSubTask(input, i) {
 }
 
 
+/**
+ * Deletes a subtask box and removes the value from the array
+ * 
+ * @param {number} i The number of the subtask box
+ */
 function deleteSubtask(i) {
     task['subTask'][i] = null;
     document.getElementById(`subTaskBox${i}`).remove();
 }
 
 
+/**
+ * Deletes a subtask box
+ * 
+ * @param {number} i The number of the subtask box
+ */
 function clearSubtask(i) {
-    if (document.getElementById(`subTaskBox${i}`)) {
+    if  (document.getElementById(`subTaskBox${i}`)) {
         document.getElementById(`subTaskBox${i}`).remove();
     }
 }
 
 
+/**
+ * removes the subtaskbox and replaces it with a box with the same structure but with with an input field
+ * 
+ * @param {number} i The number of the subtask box
+ */
 function editSubtask(i) {
     let info = task['subTask'][i];
     document.getElementById(`subTaskBox${i}`).remove();
@@ -411,6 +446,12 @@ function editSubtask(i) {
 }
 
 
+/**
+ * renders a subtask box below the subtask with an input field
+ * 
+ * @param {string} input The value of the subtask input
+ * @param {number} i The number of the subtask box
+ */
 function putSubTaskInput(input, i) {
     document.getElementById('subTasksBox').innerHTML += /*html*/`
     <div id="subTaskBox${i}" class="subTaskBox">
@@ -427,6 +468,11 @@ function putSubTaskInput(input, i) {
 }
 
 
+/**
+ * changes the new imput on the subtask box with input to the normal subtask box
+ * 
+ * @param {number} i The number of the subtask box
+ */
 function changeSubtask(i) {
     let input = document.getElementById(`subTask${i}`).value;
     document.getElementById(`subTaskBox${i}`).remove();
@@ -434,6 +480,9 @@ function changeSubtask(i) {
 }
 
 
+/**
+ * clears all Input Fields and buttons and puts them into their default state
+ */
 function clearAddTask() {
     loadMembers();
     document.getElementById('titleInput').value = "";
@@ -447,6 +496,11 @@ function clearAddTask() {
 }
 
 
+/**
+ * Creates a new Task and adds it to the local storage
+ * 
+ * @returns stops the function if not all inputs needed are filled
+ */
 function createTask() {
     load();
     setArray();
@@ -458,6 +512,11 @@ function createTask() {
 }
 
 
+/**
+ * checks if all 3 inputs are filled
+ * 
+ * @returns true if all inputs are validated
+ */
 function checkInputs() {
     let checked = true;
     checked = checkInput1(checked);
@@ -467,9 +526,15 @@ function checkInputs() {
 }
 
 
+/**
+ * validates input and shows an error message if not true
+ * 
+ * @returns true if input is validated / false if not 
+ */
 function checkInput1() {
     if (document.getElementById('titleInput').value === "") {
         document.getElementById('inputerror1').style.display = 'block';
+        document.getElementById('titleInput').classList.add('redInputBorder');
         checked = false;
     }
     else {
@@ -479,9 +544,15 @@ function checkInput1() {
 }
 
 
+/**
+ * validates input and shows an error message if not true
+ * 
+ * @returns true if input is validated / false if not 
+ */
 function checkInput2() {
     if (document.getElementById('dueDateInput').value === "") {
         document.getElementById('inputerror2').style.display = 'block';
+        document.getElementById('dueDateInput').classList.add('redInputBorder');
         checked = false;
     }
     else {
@@ -491,6 +562,11 @@ function checkInput2() {
 }
 
 
+/**
+ * validates input and shows an error message if not true
+ * 
+ * @returns true if input is validated / false if not 
+ */
 function checkInput3() {
     if (document.getElementById('category').innerText === 'Select task category') {
         document.getElementById('inputerror3').style.display = 'block';
@@ -503,6 +579,9 @@ function checkInput3() {
 }
 
 
+/**
+ * fills the Object [task] with all inputs from the user
+ */
 function setArray() {
     let users = document.getElementsByClassName('dropdownButton');
     for (let i = 0; i < users.length; i++) {
@@ -519,6 +598,9 @@ function setArray() {
 }
 
 
+/**
+ * checks if the searchUser input is filled and pushes the info to the function searchuser()
+ */
 function searchUsers() {
     let timeout;
     document.getElementById('searchUser').addEventListener('input', function () {
@@ -530,6 +612,11 @@ function searchUsers() {
 };
 
 
+/**
+ * filters the dropdown users by the input and only shows the users that matches the input
+ * 
+ * @param {string} input the input the user writes in searchUser ID
+ */
 function searchUser(input) {
     input = input.toLowerCase();
     let users = document.getElementsByClassName('dropdownButton');
@@ -550,6 +637,9 @@ function searchUser(input) {
 }
 
 
+/**
+ * pushes the current taskAllArray into the local storage Array
+ */
 function save() {
     taskAllArray.push(task);
     let tasksAsText = JSON.stringify(taskAllArray);
@@ -557,6 +647,9 @@ function save() {
 }
 
 
+/**
+ * loads the current Array from the local storage in the taskAllArray
+ */
 function load() {
     let tasksAsText = localStorage.getItem('taskAllArray');
     if (tasksAsText) {
