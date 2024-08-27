@@ -1,20 +1,18 @@
 function showTaskDetail(taskIndex) {
   let task = allTasks[taskIndex];
-  console.log('Task:', task);
   renderTaskDetails(task, taskIndex);
   openTask();
 }
 
 function renderTaskDetails(task, taskIndex) {
-  console.log('Rendering task details:', task);
   let taskContent = document.getElementById('taskDetailCard');
   taskContent.innerHTML = generateTaskDetailHTML(
-    task.category, 
-    task.title, 
-    task.description, 
+    task.category,
+    task.title,
+    task.description,
     task.date,
     task.prioName,
-    task.prio, 
+    task.prio,
     task.assignedTo,
     renderSubtasks(taskIndex, task.subtasks)
   );
@@ -33,39 +31,60 @@ function closeTask() {
 
 function renderSubtasks(taskIndex, subtasks) {
   if (!subtasks || subtasks.length === 0) return '';
-
-  return subtasks.map((subtask, index) => `
+  return subtasks.map((subtask, subtaskIndex) => `
     <div class="subtask">
-      <input type="checkbox" id="subtask-${index}" onchange="updateSubtaskStatus(${taskIndex}, ${index}, '${subtask}')" />
-      <label for="subtask-${index}">${subtask}</label>
+      <input type="checkbox" id="subtask-${taskIndex}-${subtaskIndex}" onchange="updateSubtaskStatus(${taskIndex}, ${subtaskIndex})" />
+      <label for="subtask-${subtaskIndex}">${subtask}</label>
     </div>
-  `).join('');
+  `
+  ).join('');
 }
 
 function updateSubtaskStatus(taskIndex, subtaskIndex) {
   const task = allTasks[taskIndex];
-  if (!task) return;
 
   let checkbox = document.getElementById(`subtask-${taskIndex}-${subtaskIndex}`);
-  if (!checkbox) {
-    console.error(`Checkbox with ID subtask-${taskIndex}-${subtaskIndex} not found!`);
-    return;
-  }
 
   let isChecked = checkbox.checked;
   task.subtasks[subtaskIndex].completed = isChecked;
 
   // Aktualisiere den Fortschritt
-  updateTaskProgress(taskIndex, task);
+  updateTaskProgress(taskIndex, subtaskIndex, task);
   saveTasksToLocalStorage();
 }
 
-function updateTaskProgress(taskIndex, task) {
-  let completedSubtasks = task.subtasks.filter(subtask => subtask.completed).length;
-  let subtaskCount = task.subtasks.length;
+function updateTaskProgress(taskIndex, subtaskIndex, task) {
+  let btn1check = (document.getElementById(`subtask-${taskIndex}-0`).checked == true)
+  let btn2check = (document.getElementById(`subtask-${taskIndex}-1`).checked == true)
+  console.log(subtaskIndex);
+  let amountSubtasks = task['subtasks'].length;
+  if (amountSubtasks === 1) {
+    if (btn1check) {     
+      //Balken 100%     
+      return
+    }
+    else{
+      //Balken 0%
+      return
+    }
+  }
+  if (amountSubtasks === 2) {
+    if (btn1check && btn2check) {
+      //Balken 100%     
+      return
+    }
+    else if (btn1check || btn2check) {
+      //Balken 50%     
+      return
+    }
+    else {
+      //Balken 0%
+      return
+    }
+  }
   let subtaskBarWidth = (completedSubtasks / subtaskCount) * 100;
 
-  const taskElement = document.querySelector(`[data-task-index='${taskIndex}']`);
+  const taskElement = document.querySelector(`[data-task-index='${subtaskIndex}']`);
   if (taskElement) {
     const subtaskBar = taskElement.querySelector('.subtaskBar');
     if (subtaskBar) {
