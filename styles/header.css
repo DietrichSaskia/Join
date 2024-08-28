@@ -11,7 +11,6 @@
 .showHeaderOverlay {
     display: flex !important;
 }
-
 .headerOverlay {
     display: none;
     z-index: 0;
@@ -173,7 +172,6 @@
 #burgerMenu :hover {
     background-color: #2a3d59;
 }
-
 .seperator {
     height: 3px;
     width: 100%;
@@ -332,7 +330,6 @@
         margin-right: 8px;
     }
 }
-
 @media(max-width: 400px){
     .sideBarMenu a{
         width: 56px;
