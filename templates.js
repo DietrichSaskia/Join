@@ -26,6 +26,7 @@ function renderHeader(id) {
             </div>
         </div>
         <div id="burgerMenu" class="dNone">
+            <a href="../htmls/help.html" class="HelpSymbolBurgerMenu">Help</a>
             <a href="../htmls/legalNotice.html">Legal Notice</a>
             <a href="../htmls/privacyPolicy.html">Privacy Policy</a>
             <a href="../index.html" onclick="resetUser()">Log out</a>

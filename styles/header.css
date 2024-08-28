@@ -148,6 +148,9 @@
 .HeaderJoinLogoSmall{
     display: none;
 }
+.HelpSymbolBurgerMenu{
+    display: none;
+}
 #burgerMenu {
     border-radius: 12% 0% 12% 12%;
     z-index: 3;
@@ -228,6 +231,9 @@
     .sideBarLegal{
         display: none;
     }
+    #burgerMenu{
+        top: 77px;
+    }
     .sideBar{
         width: 100%;
         height: 80px;
@@ -296,10 +302,19 @@
         width: 24px;
         height: 24px;
     }
+    .HelpSymbolBurgerMenu{
+        display: block;
+    }
+    #burgerMenu{
+        height: 204px;
+    }
 }
 @media(max-width: 500px){
     #sideBarsummary{
         margin-left: 8px;
+    }
+    #burgerMenu{
+        right: 8px;
     }
     #sideBarcontacts{
         margin-right: 8px;
