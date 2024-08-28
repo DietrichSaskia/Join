@@ -417,6 +417,7 @@
     border: none !important;
     height: 26px;
     font-size: 16px;
+    width: 80%;
 }
 
 .mainContent .editSubtaskInput:focus {
@@ -467,6 +468,7 @@
 .mainContent .subTasksBox li {
     font-size: 16px;
     padding-top: 6px;
+    width: 80%;
 }
 
 .mainContent .taskButtons {
