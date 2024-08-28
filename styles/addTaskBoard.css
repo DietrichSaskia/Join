@@ -4,6 +4,16 @@
     max-width: 1000px;
 }
 
+.addTaskoverlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.225);
+    z-index: 10;
+}
+
 .mainContent {
     margin: 0;
     position: absolute;
@@ -12,9 +22,7 @@
     left: 10%;
     right: 10%;
     border-radius: 30px;
-    /* display: none; */
     z-index: 10;
-    background-color: rosybrown;
     padding: 0px 48px 48px 48px;
     display: flex;
     justify-content: center;

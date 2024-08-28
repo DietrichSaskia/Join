@@ -75,7 +75,7 @@ document.addEventListener('click', function (clickEvent) {
  * Opens the AddTask Window in the board.html
  */
 function openAddTask() {
-    document.getElementById('mainContent').classList.remove('dNone');
+    document.getElementById('addTaskoverlay').classList.remove('dNone');
     document.getElementById('xButton').classList.remove('dNone');
 }
 
@@ -84,8 +84,10 @@ function openAddTask() {
  * Closes the AddTask Window in the board.html
  */
 function closeAddTask() {
-    document.getElementById('mainContent').classList.add('dNone');
-    document.getElementById('xButton').classList.add('dNone');
+    if (event.target.id === 'addTaskoverlay' || event.target.id === 'xButton') {
+        document.getElementById('addTaskoverlay').classList.add('dNone');
+        document.getElementById('xButton').classList.add('dNone');
+    }
 }
 
 
@@ -624,7 +626,7 @@ function changeDateFormat() {
     let date = document.getElementById('dueDateInput').value;
     let formattedDate = date.replace(/-/g, '/');
     let [year, month, day] = formattedDate.split('/');
-    let formattedDateStr = `${ day }/${month}/${ year }`;
+    let formattedDateStr = `${day}/${month}/${year}`;
     return formattedDateStr;
 }
 

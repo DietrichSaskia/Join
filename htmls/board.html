@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,11 +10,14 @@
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/addTaskBoard.css">
   <title>Board</title>
-  </head>
+</head>
+
 <body onload="init('headerBoard')">
   <header id="headerBoard"></header>
 
-  <main class="mainContent dNone" id="mainContent"></main>
+  <div class="addTaskoverlay dNone" id="addTaskoverlay" onclick="closeAddTask()">
+    <main class="mainContent" id="mainContent"></main>
+  </div>
   <section class="boardHeadline">
     <div class="headlineAndSearch">
       <div>
@@ -47,7 +51,7 @@
         <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
       </div>
       <div class="headlineTasks">
-       <a href="#">Done</a>
+        <a href="#">Done</a>
       </div>
       <div class="allTasks" id="allTasks">
         <div id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
@@ -69,4 +73,5 @@
   <script src="/scripts/addTaskTemplate.js"></script>
   <script src="/scripts/addTaskBoard.js"></script>
 </body>
+
 </html>
