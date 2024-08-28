@@ -491,6 +491,20 @@ body{
         gap: 16px;
     }
 }
+@media (max-width: 420px) and (max-height: 700px) {
+    .SummarySection{
+        margin-top: 96px;
+    }
+    .Summaryheaderheadline{
+        gap: 4px;
+    }
+    .SummaryFirstSection{
+        margin-top: 16px;
+    }
+    .SummaryLeftToDo{
+        height: 360px;
+    }
+}
 @media(max-width: 420px){
     .SummaryLeftToDo{
         width: 310px;
