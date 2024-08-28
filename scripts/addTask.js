@@ -679,8 +679,8 @@ function load() {
 function showSuccessTask() {
     document.getElementById('taskSuccessAdd').classList.remove('dNone');
     setTimeout(function() {
-        document.getElementById('taskSuccessAdd').classList.add('show');
-    }, 1000);
+        document.querySelector('.taskSuccessAdd').classList.add('taskSuccessAdded');
+    }, 10);
 }
 
 

@@ -520,6 +520,6 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .taskSuccessAdded {
-    transition: all 1000ms ease-out;
+    transition: all 500ms ease-out;
     transform: translateY(-58vh);
 }

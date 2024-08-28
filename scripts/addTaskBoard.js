@@ -81,16 +81,23 @@ function openAddTask() {
 
 
 /**
- * Closes the AddTask Window in the board.html
+ * Closes the AddTask Window in the board.html if you click on the Overlay
  */
 function closeAddTask() {
-    if (event.target.id === 'addTaskoverlay' || event.target.id === 'xButton') {
+    if (event.target.id === 'addTaskoverlay') {
         document.getElementById('addTaskoverlay').classList.add('dNone');
         document.getElementById('xButton').classList.add('dNone');
     }
 }
 
 
+/**
+ * Closes the AddTask Window in the board.html
+ */
+function closeAddTask2() {
+    document.getElementById('addTaskoverlay').classList.add('dNone');
+    document.getElementById('xButton').classList.add('dNone');
+}
 /**
  * Resets all priority Buttons and activates the clicked priority Button and it's Function
  * 
@@ -527,6 +534,7 @@ function createTask() {
         return;
     }
     save();
+    closeAddTask2();
     clearAddTask();
 }
 
