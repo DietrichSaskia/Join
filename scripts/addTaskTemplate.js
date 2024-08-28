@@ -3,11 +3,13 @@
  * 
  */
 function loadAddTaskComplete() {
-    document.getElementById('mainContent').innerHTML = /*html*/`
-<h1>Add Task</h1>
+  document.getElementById('mainContent').innerHTML = /*html*/`
+<section class="wrapper">
+
+  <h1>Add Task</h1>
 
 
-<form class="dFlex" onsubmit="return false" novalidate>
+  <form class="dFlex" onsubmit="return false" novalidate>
   <div class="taskForm">
 
     <p>Title<span>*</span></p>
@@ -111,6 +113,7 @@ function loadAddTaskComplete() {
 
   </div>
 
-</form>
+  </form>
+</section>
     `
 }

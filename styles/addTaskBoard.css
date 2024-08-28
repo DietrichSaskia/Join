@@ -1,15 +1,17 @@
+.wrapper {}
+
 .mainContent {
     margin: 0;
     position: absolute;
-    top: 8%;
-    bottom: 8%;
-    left: 11%;
-    right: 11%;
+    top: 7%;
+    bottom: 7%;
+    left: 10%;
+    right: 10%;
     border-radius: 30px;
-    padding: 60px;
-    display: none;
-    z-index: 8000000;
+    /* display: none; */
+    z-index: 10;
     background-color: rosybrown;
+    padding: 0px 48px 48px 48px;
 }
 
 .mainContent::placeholder {
@@ -17,6 +19,7 @@
 }
 
 .mainContent h1 {
+    margin-top: 100px;
     font-size: 61px;
     margin-bottom: 32px;
     width: auto;
@@ -56,7 +59,8 @@
 .mainContent .taskForm {
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 327px);
+    max-width: 440px;
+    width: 49%;
 }
 
 .mainContent .taskSeperator {
@@ -70,12 +74,12 @@
 
 .mainContent .required {
     margin: auto 0;
-    margin-bottom: 38px;
     font-size: 16px;
 }
 
 .mainContent input {
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
     height: 48px;
     border-radius: 8px;
     border: 1px solid #D1D1D1;
@@ -83,6 +87,7 @@
     padding-left: 20px;
     padding-right: 20px;
     font-size: 20px;
+    flex: none;
 }
 
 .mainContent .redInputBorder {
@@ -127,7 +132,8 @@
 }
 
 .mainContent .description {
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     height: 120px;
     resize: none;
     border-radius: 8px;
@@ -179,7 +185,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     height: 48px;
     border-radius: 8px;
     border: 1px solid #D1D1D1;
@@ -204,13 +211,14 @@
 .mainContent .dropdownWrapper {
     position: relative;
     height: 1px;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
 }
 
 .mainContent .dropdown {
     background-color: white;
-    width: 440px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 440px;
     position: absolute;
     top: -43px;
     z-index: 3;
@@ -219,8 +227,8 @@
 
 .mainContent .dropdownUsers {
     background-color: white;
-    width: 440px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 440px;
     max-height: 240px;
     overflow-y: auto;
     position: relative;
@@ -244,7 +252,8 @@
 
 .mainContent .dropdownCat {
     background-color: white;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     position: absolute;
     top: -43px;
     z-index: 3;
@@ -301,7 +310,8 @@
 
 .mainContent .assignedUsers {
     height: 48px;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -336,7 +346,8 @@
 .mainContent .prio {
     display: flex;
     justify-content: space-between;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
 }
 
 .mainContent .prioButton {
@@ -399,7 +410,8 @@
 
 .mainContent .subtaskIcons {
     height: 1px;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     display: flex;
     align-items: center;
     position: relative;
@@ -410,7 +422,8 @@
 
 .mainContent .subtaskIconsLower {
     height: 1px;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     display: flex;
     align-items: center;
     position: relative;
@@ -425,7 +438,8 @@
 
 .mainContent .subTasksBox {
     height: 100px;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
 }
 
 .mainContent .subTasksBox ul {
