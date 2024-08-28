@@ -1,0 +1,15 @@
+@media (max-width:1024px) {
+    .sideBarLogo {
+        width: 100%;
+    }
+    .sideBar {
+        flex-direction: row-reverse;
+        bottom: 0;
+        width: 100%;
+        height: 50px;
+        left: 0;
+        top: unset;
+        justify-content: space-around;
+        align-content: center; 
+    }
+}
