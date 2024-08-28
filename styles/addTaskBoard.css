@@ -1,4 +1,8 @@
-.wrapper {}
+.wrapper {
+    width: 100%;
+    min-width: 705px;
+    max-width: 1000px;
+}
 
 .mainContent {
     margin: 0;
@@ -12,6 +16,9 @@
     z-index: 10;
     background-color: rosybrown;
     padding: 0px 48px 48px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .mainContent::placeholder {
@@ -351,7 +358,8 @@
 }
 
 .mainContent .prioButton {
-    width: 136px;
+    width: 33%;
+    max-width: 136px;
     height: 56px;
     display: flex;
     justify-content: center;
