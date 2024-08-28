@@ -508,7 +508,8 @@ function createTask() {
         return;
     }
     save();
-    clearAddTask();
+    showSuccessTask();
+    goToBoard();
 }
 
 
@@ -671,4 +672,24 @@ function load() {
     }
 }
 
+
+/**
+ * This Functions shows a box to the user that the task has been added
+ */
+function showSuccessTask() {
+    document.getElementById('taskSuccessAdd').classList.remove('dNone');
+    setTimeout(function() {
+        document.getElementById('taskSuccessAdd').classList.add('show');
+    }, 1000);
+}
+
+
+/**
+ * This functions sends the user to the board.html
+ */
+function goToBoard() {
+    setTimeout(function() {
+        window.location.href = 'board.html';
+    }, 1500);
+}
 // Füge normales Datum ins Array ein

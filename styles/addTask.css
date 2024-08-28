@@ -1,3 +1,7 @@
+body {
+    overflow-y: hidden;
+}
+
 .mainContent {
     margin-left: 232px;
     padding: 96px 96px 0 96px;
@@ -496,4 +500,26 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .createTaskButton:active {
     box-shadow: 1px 2px 2px 2px #D1D1D1;
+}
+
+.taskSuccessAdd {
+    position: absolute;
+    bottom: -15%;
+    offset-position: bottom;
+    left: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 20px;
+    background-color: #2a3647;
+    color: white;
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    transform: translateY(0);
+}
+
+.taskSuccessAdded {
+    transition: all 1000ms ease-out;
+    transform: translateY(-58vh);
 }
