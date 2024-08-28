@@ -18,9 +18,10 @@ function renderHeader(id) {
     <div class="header">
         <div class="headerDiv"></div>
         <div class="headerBtns">
+            <div class="HeaderJoinLogoSmall"><img class="HeaderJoinLogoSmallStyle" src="/assets/icons/logo.png"></div>
             <div class="headerText">Kanban Project Management Tool</div>
             <div class="headerBtns">
-                <a href="../htmls/help.html"><img class="headerHelpBtn" src="../assets/icons/help.png"></a>
+                <a class="HelpButtonRemove" href="../htmls/help.html"><img class="headerHelpBtn" src="../assets/icons/help.png"></a>
                 <a id="headerProfile" onclick="toggleBurgerMenu()"><div>??</div></a>
             </div>
         </div>

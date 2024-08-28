@@ -145,7 +145,9 @@
 .guestLogin {
     font-size: 24px!important;
 }
-
+.HeaderJoinLogoSmall{
+    display: none;
+}
 #burgerMenu {
     border-radius: 12% 0% 12% 12%;
     z-index: 3;
@@ -174,4 +176,152 @@
     width: 100%;
     background-color: #e1e2e3;
     filter: drop-shadow(0px 2px 2px #e1e2e3);
+}
+
+@media(max-width: 1100px){
+   .sideBar{
+    width: 148px;
+   }
+   .sideBarMenuActiveSite{
+    width: 132px;
+   }
+   .header{
+    margin-left: 148px;
+    width: calc(100% - 148px);
+   }
+   .sideBarMenu a {
+    padding: 8px 0 8px 0;
+    width: 100%;
+    }
+    .sideBarMenu{
+        width: 100%;
+    }
+    .sideBarPic{
+        margin-left: 8px;
+    }
+    .sideBarLogo {
+        width: 100px;
+        margin: 48px 0 48px 0;
+        margin-bottom: 100px;
+    }
+}
+@media(max-width: 900px){
+    .sideBarLogo {
+      display: none;
+    }
+    .sideBarMenu a {
+        flex-direction: column;
+        width: 100px;
+        height: 76px;
+        margin-top: 0;
+        display: flex;
+        justify-content: center;
+    }
+    .sideBarMenu{
+        flex-direction: row;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        height: 80px;
+        align-items: center;
+    }
+    .sideBarLegal{
+        display: none;
+    }
+    .sideBar{
+        width: 100%;
+        height: 80px;
+        bottom: 0;
+    }
+    .sideBarMenu a {
+        padding: 0;
+        border-radius: 10px;
+    }
+    .header{
+        margin-left: 0;
+        width: 100%;
+        height: 80px;
+    }
+    .HeaderJoinLogoSmall{
+        display: flex;
+    }
+    .HeaderJoinLogoSmallStyle{
+        height: 56px;
+        width: 48px;
+        margin-left: 40px;
+    }
+    .headerText{
+        margin-left: 0;
+    }
+}
+
+@media(max-width: 700px){
+    .headerText{
+        display: none;
+    }
+}
+@media(max-width: 600px){
+    .HeaderJoinLogoSmallStyle{
+        height: 39px;
+        width: 32px;
+        margin-left: 24px;
+    }
+    #headerProfile{
+        height: 40px;
+        width: 40px;
+        margin-right: 24px;
+    }
+    .HelpButtonRemove{
+        display: none;
+    }
+    .sideBarMenu a{
+        width: 80px;
+        padding: 0 8px 0 8px;
+        border-radius: 16px;
+        gap: 10px;
+        font-size: 14px;
+    }
+    #sideBarsummary{
+        margin-left: 24px;
+    }
+    #sideBarcontacts{
+        margin-right: 24px;
+    }
+    .sideBarMenu{
+        width: 100%;
+        justify-content: space-between;
+        gap: 0px;
+    }
+    .sideBarMenu a img{
+        width: 24px;
+        height: 24px;
+    }
+}
+@media(max-width: 500px){
+    #sideBarsummary{
+        margin-left: 8px;
+    }
+    #sideBarcontacts{
+        margin-right: 8px;
+    }
+    .sideBarMenu a{
+        width: 64px;
+        font-size: 14px;
+        border-radius: 10px;
+        padding: 0 8px 0 8px;
+    }
+    .HeaderJoinLogoSmallStyle{
+        margin-left: 8px;
+    }
+    #headerProfile{
+        margin-right: 8px;
+    }
+}
+
+@media(max-width: 400px){
+    .sideBarMenu a{
+        width: 56px;
+        font-size: 12px;
+        padding: 0 4px 0 4px;
+    }
 }
