@@ -7,7 +7,7 @@ function loadAddTaskComplete() {
 <section class="wrapper">
 
   <h1>Add Task</h1>
-
+  <img src="../assets/icons/close.png" class="xButton dNone" id="xButton"  onclick="closeAddTask()">
 
   <form class="dFlex" onsubmit="return false" novalidate>
   <div class="taskForm">

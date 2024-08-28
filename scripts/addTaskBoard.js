@@ -23,11 +23,12 @@ let taskAllArray = [];
  * Loads the initial tasks for the addTask.html
  */
 function loadFunctions() {
-    loadAddTaskComplete('mainContent');
+    loadAddTaskComplete();
     activateprioButton(1);
     loadMembers();
     searchUsers();
     load();
+    openAddTask();
 }
 
 
@@ -68,6 +69,24 @@ document.addEventListener('click', function (clickEvent) {
         toggleUserDropdown();
     }
 });
+
+
+/**
+ * Opens the AddTask Window in the board.html
+ */
+function openAddTask() {
+    document.getElementById('mainContent').classList.remove('dNone');
+    document.getElementById('xButton').classList.remove('dNone');
+}
+
+
+/**
+ * Closes the AddTask Window in the board.html
+ */
+function closeAddTask() {
+    document.getElementById('mainContent').classList.add('dNone');
+    document.getElementById('xButton').classList.add('dNone');
+}
 
 
 /**
