@@ -8,9 +8,16 @@
   <link rel="stylesheet" href="/styles/board.css">
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/addTaskBoard.css">
+  <script src="/script.js"></script>
+  <script src="/templates.js"></script>
+  <script src="/scripts/board.js"></script>
+  <script src="/scripts/searchTask.js"></script>
+  <script src="/scripts/detailTask.js"></script>
+  <script src="/scripts/addTaskTemplate.js"></script>
+  <script src="/scripts/addTaskBoard.js"></script>
   <title>Board</title>
   </head>
-<body onload="init('headerBoard')">
+<body onload="init('headerBoard'), loadAll()">
   <header id="headerBoard"></header>
 
   <main class="mainContent" id="mainContent"></main>
@@ -60,13 +67,5 @@
       <div id="taskDetailCard"></div>
     </div>
   </section>
-  <script src="/script.js"></script>
-  <script src="/templates.js"></script>
-  <script src="/scripts/board.js"></script>
-  <script src="/scripts/searchTask.js"></script>
-  <script src="/scripts/detailTask.js"></script>
-  <script src="/Summary.js"></script>
-  <script src="/scripts/addTaskTemplate.js"></script>
-  <script src="/scripts/addTaskBoard.js"></script>
 </body>
 </html>

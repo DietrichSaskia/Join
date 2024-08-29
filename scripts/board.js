@@ -1,32 +1,31 @@
-let allTasks = [];
+let contactAllArray = [];
 let currentDraggedElement;
-let taskUrl = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/tasksAll/';
-let userURL = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/contactall';
 
-async function loadTasks() {
-  try {
-    allTasks = JSON.parse(localStorage.getItem('allTasks')) || await fetchTasksFromAPI();
-    renderAllTasks();
-  } catch (error) {
-    console.error("Fehler beim Laden der Aufgaben:", error);
-  }
-  await showMembers();
+function loadAll() {
+  loadMembers();
+  loadTasks();
 }
 
-async function fetchTasksFromAPI() {
-  let response = await fetch(`${taskUrl}.json`);
-  if (!response.ok) throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+function loadMembers() {
+  let contactAsText = localStorage.getItem('contactAllArray');
+  if (contactAsText) {
+    contactAllArray = JSON.parse(contactAsText);  // Füllt das globale Array
+  }
+  getUsers(contactAllArray);
+  console.log(contactAllArray);  // Gibt das globale Array aus
+}
 
-  let responseToJson = await response.json();
-  let tasks = Array.isArray(responseToJson) ? responseToJson : Object.values(responseToJson);
-
-  localStorage.setItem('allTasks', JSON.stringify(tasks));
-
-  return tasks;
+function loadTasks() {
+  let tasksAsText = localStorage.getItem('taskAllArray');
+  if (tasksAsText) {
+    taskAllArray = JSON.parse(tasksAsText);
+  }
+  getTasks(taskAllArray);
+  console.log(taskAllArray);
 }
 
 function saveTasksToLocalStorage() {
-  localStorage.setItem('allTasks', JSON.stringify(allTasks));
+  localStorage.setItem('taskAllArray', JSON.stringify(taskAllArray));
 }
 
 function renderAllTasks() {
@@ -36,14 +35,16 @@ function renderAllTasks() {
   renderSection('done', 'done');
 }
 
+
+
 function renderSection(sectionName, containerId) {
   let container = document.getElementById(containerId);
   container.innerHTML = '';
   let formattedSectionName = sectionName.charAt(0).toUpperCase() + sectionName.slice(1).replace(/([A-Z])/g, ' $1').trim();
   let tasksFound = false;
 
-  for (let i = 0; i < allTasks.length; i++) {
-    let task = allTasks[i];
+  for (let i = 0; i < taskAllArray.length; i++) {
+    let task = taskAllArray[i];
     if (task.section === sectionName) {
       container.innerHTML += generateTasksHTML(task, i);
       tasksFound = true;
@@ -63,8 +64,8 @@ function allowDrop(ev) {
 }
 
 function moveTo(section) {
-  if (typeof currentDraggedElement === 'number' && currentDraggedElement >= 0 && currentDraggedElement < allTasks.length) {
-    let task = allTasks[currentDraggedElement];
+  if (typeof currentDraggedElement === 'number' && currentDraggedElement >= 0 && currentDraggedElement < taskAllArray.length) {
+    let task = taskAllArray[currentDraggedElement];
     task.section = section;
     renderAllTasks();
     saveTasksToLocalStorage();
@@ -80,25 +81,8 @@ function truncateDescription(description, wordLimit) {
     : description;
 }
 
-async function showMembers() {
-  try {
-    let response = await fetch(`${userURL}.json`);
-    if (!response.ok) {
-      throw new Error(`HTTP-Fehler! Status: ${response.status}`);
-    }
-    let users = await response.json();
-    if (allTasks.some(task => !task.assignedTo || task.assignedTo.length === 0)) {
-      assignAndDisplayInitials(users);
-    }
-    renderAllTasks();
-  } catch (error) {
-    console.error("Fehler beim Abrufen der Benutzerdaten:", error);
-  }
-  saveTasksToLocalStorage();
-}
-
 function assignAndDisplayInitials(users) {
-  allTasks.forEach(task => {
+  taskAllArray.forEach(task => {
     let randomMembers = getRandomMembers(users, 2, 3);
     task.assignedTo = randomMembers.map(user => ({
       initials: getInitials(user.name),
@@ -156,13 +140,10 @@ function formatCategoryClass(category) {
 }
 
 function generateSubtaskProgressHTML(subtasks, taskIndex) {
-
   if (subtasks.length === 0) return '';
-
   let subtaskCount = subtasks.length;
   let completedSubtasks = subtasks.filter(subtask => subtask.completed).length;
   let subtaskBarWidth = (completedSubtasks / subtaskCount) * 100;
-
   return `
     <div class="subtasks">
       <div class="subtaskBarContainer">
@@ -174,13 +155,10 @@ function generateSubtaskProgressHTML(subtasks, taskIndex) {
 
 function generateSubtaskItemsHTML(subtasks, taskIndex) {
   if (subtasks.length === 0) return '';
-
   let subtaskItems = '';
 
-  // Iteriere durch die Subtasks und generiere das HTML für die Checkboxen und Labels
   for (let i = 0; i < subtasks.length; i++) {
     let subtask = subtasks[i];
-
     subtaskItems += `
       <div>
         <input type="checkbox" id="subtask-${taskIndex}-${i}" ${subtask.completed ? 'checked' : ''} onchange="updateSubtaskStatus(${taskIndex}, ${i})">
@@ -188,13 +166,11 @@ function generateSubtaskItemsHTML(subtasks, taskIndex) {
       </div>
     `;
   }
-
   return subtaskItems;
 }
 
-
 function renderTaskWithSubtasks(task, taskIndex) {
-  const progressHTML = generateSubtaskProgressHTML(task.subtasks);
+  const progressHTML = generateSubtaskProgressHTML(task.subtasks, taskIndex);
   const itemsHTML = generateSubtaskItemsHTML(task.subtasks, taskIndex);
   return `
     <div class="task">
@@ -210,5 +186,3 @@ function generateAssignedMembersHTML(assignedTo) {
       <span class="userInitials">${member.initials}</span>
     </div>`).join('');
 }
-
-document.addEventListener('DOMContentLoaded', loadTasks);

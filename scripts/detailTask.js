@@ -166,6 +166,3 @@ function generateTaskDetailHTML(category, title, description, date, prioName, pr
       </div>
     </div>`;
 }
-
-
-
