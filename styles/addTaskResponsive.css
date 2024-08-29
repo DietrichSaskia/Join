@@ -24,14 +24,17 @@
     }
 
     h1 {
-        padding-top: 48px;
-        padding-bottom: 8px;
-        margin-bottom: 0;
+        position: fixed;
+        top: 30px;
+        background-color: #f5f6f7;
+        width: 100%;
+        padding-bottom: 12px;
     }
 
     .mainContent form {
         display: block;
         width: 440px;
+        margin-top: 134px;
     }
 
     .taskSeperator {
@@ -74,5 +77,46 @@
 
     .addTaskBottomBar {
         padding-right: 0;
+        left: 0px;
+    }
+}
+
+@media (max-width:460px) {
+    form {
+        max-width: -webkit-fill-available;
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+
+    .wrapper {
+        width: -webkit-fill-available;
+    }
+
+    input {
+        font-size: 18px;
+    }
+
+    .description {
+        font-size: 18px;
+    }
+
+    .dropdownButtonArea {
+        font-size: 18px;
+    }
+
+    .searchUserName {
+        font-size: 18px;
+    }
+
+    .dropdownButton {
+        font-size: 18px;
+    }
+
+    .required {
+        padding-left: 4px;
+    }
+
+    .createTaskButton {
+        margin-right: 4px;
     }
 }
