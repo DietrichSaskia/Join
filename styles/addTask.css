@@ -1,3 +1,7 @@
+body {
+    overflow-y: hidden;
+}
+
 .mainContent {
     margin-left: 232px;
     padding: 96px 96px 0 96px;
@@ -50,6 +54,8 @@ span {
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 327px);
+    max-width: 440px;
+    width: 100%;
 }
 
 .taskSeperator {
@@ -62,13 +68,12 @@ span {
 }
 
 .required {
-    margin: auto 0;
-    margin-bottom: 38px;
     font-size: 16px;
 }
 
 input {
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
     height: 48px;
     border-radius: 8px;
     border: 1px solid #D1D1D1;
@@ -120,7 +125,8 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .description {
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
     height: 120px;
     resize: none;
     border-radius: 8px;
@@ -172,7 +178,8 @@ input[type="search"]::-webkit-search-results-decoration {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
     height: 48px;
     border-radius: 8px;
     border: 1px solid #D1D1D1;
@@ -197,12 +204,14 @@ input[type="search"]::-webkit-search-results-decoration {
 .dropdownWrapper {
     position: relative;
     height: 1px;
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
 }
 
 .dropdown {
     background-color: white;
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
     max-width: 100%;
     position: absolute;
     top: -43px;
@@ -212,7 +221,8 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .dropdownUsers {
     background-color: white;
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
     max-width: 100%;
     max-height: 240px;
     overflow-y: auto;
@@ -237,7 +247,8 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .dropdownCat {
     background-color: white;
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
     position: absolute;
     top: -43px;
     z-index: 3;
@@ -294,7 +305,8 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .assignedUsers {
     height: 48px;
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -329,11 +341,13 @@ input[type="search"]::-webkit-search-results-decoration {
 .prio {
     display: flex;
     justify-content: space-between;
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
 }
 
 .prioButton {
-    width: 136px;
+    width: 33%;
+    max-width: 136px;
     height: 56px;
     display: flex;
     justify-content: center;
@@ -390,15 +404,10 @@ input[type="search"]::-webkit-search-results-decoration {
     outline: none;
 }
 
-/* #subtasksInput {
-    width: 360px;
-    border-right: none;
-    border-radius: 8px 0px 0px 8px;
-} */
-
 .subtaskIcons {
     height: 1px;
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
     display: flex;
     align-items: center;
     position: relative;
@@ -409,7 +418,8 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .subtaskIconsLower {
     height: 1px;
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
     display: flex;
     align-items: center;
     position: relative;
@@ -424,7 +434,8 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .subTasksBox {
     height: 100px;
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
 }
 
 .subTasksBox ul {
@@ -442,7 +453,6 @@ input[type="search"]::-webkit-search-results-decoration {
 .taskButtons {
     margin: auto 0;
     margin-top: -18px;
-    align-self: flex-end;
 }
 
 .smallSeparator {
@@ -487,4 +497,37 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .createTaskButton:active {
     box-shadow: 1px 2px 2px 2px #D1D1D1;
+}
+
+.taskSuccessAdd {
+    position: absolute;
+    bottom: -15%;
+    offset-position: bottom;
+    left: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 20px;
+    background-color: #2a3647;
+    color: white;
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    transform: translateY(0);
+}
+
+.taskSuccessAdded {
+    transition: all 500ms ease-out;
+    transform: translateY(-58vh);
+}
+
+.addTaskBottomBar {
+    position: fixed;
+    z-index: 3;
+    bottom: 70px;
+    display: flex;
+    width: -webkit-fill-available;
+    max-width: 962px;
+    justify-content: space-between;
+    padding-right: 96px;
 }

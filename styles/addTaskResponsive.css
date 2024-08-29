@@ -1,0 +1,122 @@
+@media (max-width:1170px) {
+    .prioButton {
+        font-size: 16px;
+    }
+}
+
+@media (max-width:1100px) {
+    .prioButton {
+        font-size: 15px;
+    }
+}
+
+@media (max-width:1024px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .mainContent {
+        margin-left: 0;
+        padding: 0;
+        padding-top: 80px;
+        display: flex;
+        justify-content: center;
+    }
+
+    h1 {
+        position: fixed;
+        top: 30px;
+        background-color: #f5f6f7;
+        width: 100%;
+        padding-bottom: 12px;
+    }
+
+    .mainContent form {
+        display: block;
+        width: 440px;
+        margin-top: 134px;
+    }
+
+    .taskSeperator {
+        display: none;
+    }
+
+    .addTaskBottomBar {
+        position: fixed;
+        margin: 0;
+        left: 10px;
+        bottom: 80px;
+        background-color: #f5f6f7;
+        height: 88px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .createTaskButton {
+        border-radius: 10px;
+    }
+
+    .taskButtons {
+        margin: 0;
+    }
+
+    .taskForm {
+        min-height: auto;
+    }
+
+    .emptyBox {
+        margin-top: 136px;
+    }
+}
+
+@media (max-width:750px) {
+    .clearButton {
+        display: none;
+    }
+
+    .addTaskBottomBar {
+        padding-right: 0;
+        left: 0px;
+    }
+}
+
+@media (max-width:460px) {
+    form {
+        max-width: -webkit-fill-available;
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+
+    .wrapper {
+        width: -webkit-fill-available;
+    }
+
+    input {
+        font-size: 18px;
+    }
+
+    .description {
+        font-size: 18px;
+    }
+
+    .dropdownButtonArea {
+        font-size: 18px;
+    }
+
+    .searchUserName {
+        font-size: 18px;
+    }
+
+    .dropdownButton {
+        font-size: 18px;
+    }
+
+    .required {
+        padding-left: 4px;
+    }
+
+    .createTaskButton {
+        margin-right: 4px;
+    }
+}

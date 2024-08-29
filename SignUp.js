@@ -177,7 +177,7 @@ function userInformationPopUp(text){
     setTimeout(() => {
         document.getElementById('UserInfoPopUp').classList.add('none')
         document.getElementById('UserInfoPopUp').classList.remove('UserInforWindow')
-    }, 300000);
+    }, 3000);
    
 }
 

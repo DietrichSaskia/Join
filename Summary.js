@@ -1,4 +1,3 @@
-
 let SectionTypArray = []
 let SectionPrioArray = []
 let SectionPrioDateArray = []
@@ -9,36 +8,40 @@ let awaitFeedbackCount = 0;
 let doneCount = 0;
 let toDoCount = 0;
 let SectionTypLength = 0;
-
-
 summaryLoad()
 setTimeBasedGreeting();
 checkWidthAndExecute();
 
+
+/**
+ * Data is extracted from the array stored in the local storage and stored in a variable. 
+ * The variable is then run through with the help of a for loop and the section, date and name
+ * is pushed into the respective array.
+ * 
+ */
 function summaryLoad() {
-    
     SectionTypArray = [];
     SectionPrioArray = [];
     SectionPrioDateArray = [];
-    // Extrahiere Daten aus taskAllArray, falls erforderlich
     let taskAllArray = JSON.parse(localStorage.getItem('taskAllArray')) || [];
-
-    // Durchlaufe das taskAllArray und pushe die Daten in die entsprechenden Arrays
     for (let item of taskAllArray) {
-        SectionTypArray.push(item.section);         // Pushe den Abschnitt in SectionTypArray
-        SectionPrioDateArray.push(item.date);       // Pushe das Datum in SectionPrioDateArray
-        SectionPrioArray.push(item.prioName);       // Pushe die Priorität in SectionPrioArray
+        SectionTypArray.push(item.section);       
+        SectionPrioDateArray.push(item.date);     
+        SectionPrioArray.push(item.prioName);   
     }
     summarySectionCheck();
 }
 
 
+/**
+ * The current date is checked here and the appropriate text is displayed depending on the time of day.
+ * 
+ */
 function setTimeBasedGreeting() {
     const element = document.getElementById('Timewelcome');
     const now = new Date();
     const hour = now.getHours();
     let greeting;
-
     if (hour >= 5 && hour < 12) {
         greeting = "Good morning,";
     } else if (hour >= 12 && hour < 18) {
@@ -46,14 +49,15 @@ function setTimeBasedGreeting() {
     } else {
         greeting = "Good evening,";
     }
-
     element.textContent = greeting;
 }
 
 
-
-
-
+/**
+ * Here the SectionTypArray is run through and the elements are checked to see which Section 
+ * is present. The number of times an element occurs is stored in a variable. 
+ * 
+ */
 function summarySectionCheck(){
     SectionTypArray.forEach(type => {
         switch(type) {
@@ -68,6 +72,12 @@ function summarySectionCheck(){
     summarySectionCheck2()
 }
 
+
+/**
+ * Here the SectionTypArray is run through and the elements are checked to see which Section 
+ * is present. The number of times an element occurs is stored in a variable. 
+ * 
+ */
 function summarySectionCheck2(){
     SectionTypArray.forEach(type => {
         switch(type) {
@@ -83,6 +93,14 @@ function summarySectionCheck2(){
     summarySectionCheck3(SectionTypLength)
 }
 
+
+/**
+ * In this function, a text is added to several IDs. The SectionPrioArray array is also checked 
+ * how often the variable value contains “High”. On the other hand, a variable is used to count the number of times this is the case.
+ * The index of the variable is pushed into an array.
+ * 
+ * @param {*} SectionTypLength 
+ */
 function summarySectionCheck3(SectionTypLength){
     document.getElementById('SummaryTaskProgressCount').innerHTML=`${inProgressCount}`;
     document.getElementById('SummaryBoardCount').innerHTML=`${SectionTypLength}`;
@@ -93,59 +111,75 @@ function summarySectionCheck3(SectionTypLength){
         if (value === "High") {
             highCount++;
             highIndices.push(index); 
-            console.log(SectionPrioArray, value, index)
         }
-        
     });
-    
-    // 3. Filtere die entsprechenden Datumswerte heraus und konvertiere sie
+    summarySectionCheck4(highCount)
+}
+
+
+/**
+ * In this function, the date values are converted and all zero values are filtered out. 
+ * In addition, the dates are pushed into an array and sorted in ascending order according to the earliest date.
+ * 
+ * @param {*} highCount 
+ */
+function summarySectionCheck4(highCount){
     let filteredDates = highIndices
         .map(index => convertDateFormat(SectionPrioDateArray[index]))
-        .filter(date => date !== null);  // Filtere alle null-Werte heraus
-    
-    // 4. Sortiere die Datumswerte in aufsteigender Reihenfolge (frühestes Datum zuerst)
+        .filter(date => date !== null); 
     filteredDates.sort((a, b) => new Date(a) - new Date(b));
     if (filteredDates.length > 0) {
-        
-        const earliestDate = filteredDates[0]; // Das früheste Datum
-    
-        // 6. Filtere alle Datumswerte, die nicht mit dem frühesten Datum übereinstimmen
-        filteredDates = filteredDates.filter(date => date === earliestDate);
-        document.getElementById('SummaryCount').innerHTML=`${highCount}`
-        // 7. Formatieren des frühesten Datums im gewünschten Format (Oktober 16, 2022)
-        const dateToDisplay = new Date(earliestDate);
-        if (!isNaN(dateToDisplay)) {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const formattedDate = dateToDisplay.toLocaleDateString('de-DE', options);
-    
-            // 8. Einfügen des formatierten Datums in das Element mit der ID 'currentDate'
-            document.getElementById('currentDate').textContent = formattedDate;
-        } else {
-            console.error('Ungültiges Datum:', earliestDate);
-        }
+        summarySectionCheck5(filteredDates, highCount)
     }
     LoginGoodMorning()
-    
 }
-function convertDateFormat(dateString) {
-    // Prüfen, ob der Datumsstring das erwartete Format hat
-    if (!dateString || !dateString.includes(".") && !dateString.includes("/")) {
-        console.error('Ungültiges Datumsformat:', dateString);
-        return null; // Gebe null zurück, wenn das Datum ungültig ist
-    }
-    
-    // Teile das Datum anhand von "." oder "/"
-    const parts = dateString.includes(".") ? dateString.split(".") : dateString.split("/");
 
-    // Teile in der richtigen Reihenfolge anordnen (Tag, Monat, Jahr)
+
+/**
+ * The earliest date is read out here and all date values that do not match are sorted out.
+ * The date is then formatted in the desired format and transferred to the corresponding id as text.
+ * 
+ * @param {*} filteredDates 
+ * @param {*} highCount 
+ */
+function summarySectionCheck5(filteredDates, highCount){
+    const earliestDate = filteredDates[0];
+    filteredDates = filteredDates.filter(date => date === earliestDate);
+    document.getElementById('SummaryCount').innerHTML=`${highCount}`
+    const dateToDisplay = new Date(earliestDate);
+    if (!isNaN(dateToDisplay)) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const formattedDate = dateToDisplay.toLocaleDateString('de-DE', options);
+        document.getElementById('currentDate').textContent = formattedDate;
+    } else {
+        console.error('Ungültiges Datum:', earliestDate);
+    }
+}
+
+
+/**
+ * First of all, it is checked whether the parameter passed has the appropriate format; if this is not the case, null is returned.
+ * The date is then split using “.” or “/”. It is then sorted according to the correct order of day, month, year and returned.
+ * @param {*} dateString 
+ * @returns 
+ */
+function convertDateFormat(dateString) {
+    if (!dateString || !dateString.includes(".") && !dateString.includes("/")) {
+        return null; 
+    }
+    const parts = dateString.includes(".") ? dateString.split(".") : dateString.split("/");
     const day = parts[0].padStart(2, '0');
     const month = parts[1].padStart(2, '0');
     const year = parts[2];
-
-    // Rückgabe im Format "YYYY-MM-DD"
     return `${year}-${month}-${day}`;
 }
 
+
+/**
+ * If you hover over the corresponding button, the respective id is passed as a parameter and the icon is replaced at this point.
+ * 
+ * @param {*} id 
+ */
 function toDoChangeOn(id){
     if(id == 'ChangeIcon1'){
         document.getElementById(id).innerHTML= `<img  class="SummaryCircleDark" src="/assets/icons/Frame 59.png"> `;
@@ -155,6 +189,12 @@ function toDoChangeOn(id){
     }
 }
 
+
+/**
+ * If you hover over the corresponding button, the respective id is passed as a parameter and the icon is replaced at this point.
+ * 
+ * @param {*} id 
+ */
 function toDoChangeOut(id){
     if(id == 'ChangeIcon1'){
         document.getElementById(id).innerHTML= `<img class="SummaryCircleDark" src="/assets/icons/editCircleDark.png"></img>`;
@@ -164,6 +204,11 @@ function toDoChangeOut(id){
     }
 }
 
+
+/**
+ * The current name of the user is read from the local storage and assigned to the id as text.
+ * 
+ */
 function LoginGoodMorning(){
     let GoodMorningName = '';
     let Currentname = localStorage.getItem('CurrentUser');
@@ -174,23 +219,27 @@ function LoginGoodMorning(){
 }
 
 
+/**
+ * If the px width is smaller than 1400px, the greeting is executed first and after 2 sec 
+ * you will be redirected to the Summary Content.
+ * 
+ */
 function checkWidthAndExecute() {
-    // Überprüfen der aktuellen Breite des Fensters
     const viewportWidth = window.innerWidth;
-
     if (viewportWidth < 1400) {
-        // Wenn die Breite unter 1400px liegt, setTimeout ausführen
         setTimeout(() => {
             document.getElementById('SummaryRightSectionNone').style.display='none'
             document.getElementById('SummaryheaderheadlineNone').style.display='flex'
             document.getElementById('SummaryLeftToDoNone').style.display='flex'
-        }, 1000); // Timeout auf 1000ms (1 Sekunde) setzen
-        
+        }, 2000); 
     }
+    else{
+        document.getElementById('SummaryRightSectionNone').style.display='flex'
+    }
+
 }
 
-// Füge einen Event-Listener für das resize-Event hinzu
+
 window.addEventListener('resize', checkWidthAndExecute);
 
-// Initiale Überprüfung, falls die Seite bereits unter 1400px geladen wurde
 

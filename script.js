@@ -1,7 +1,7 @@
 function init(id) {
     renderHeader(id);
     checkCurrentPage();
-    showUser();
+    checkUser()
 }
 
 
@@ -27,19 +27,33 @@ function goBack() {
 async function checkUser() {
     let name;
     let Currentname = localStorage.getItem('CurrentUser');
-    if (Currentname) {
-        name = JSON.parse(Currentname);
+    let initials;
+    if (Currentname == 'null') {
+        initials = checkUser3();
+    } else {
+        initials = checkUser2(Currentname, name);
     }
+    document.getElementById('headerProfile').innerHTML = /*html*/`
+    <div>${initials}</div>
+    `;   
+}
+
+function checkUser2(Currentname, name) {
+    name = JSON.parse(Currentname);
     let nameParts = name.split(' ');
     let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
     if (initials.length === 1) {
         document.getElementById('headerProfile').classList.add('guestLogin');
-        return initials;
     }
-    else {
-        return initials;
-    }
+    return initials;
 }
+
+function checkUser3() {
+    document.getElementById('burgerMenu').classList.add('dNone');
+    document.getElementById('HelpSideOpen').classList.add('dNone');
+    document.getElementById('SidebarMenuFourButtons').classList.add('dNone');
+}
+
 
 
 function toggleBurgerMenu() {

@@ -3,11 +3,13 @@
  * 
  */
 function loadAddTaskComplete() {
-    document.getElementById('mainContent').innerHTML = /*html*/`
-<h1>Add Task</h1>
+  document.getElementById('mainContent').innerHTML = /*html*/`
+<section class="wrapper">
 
+  <h1>Add Task</h1>
+  <img src="../assets/icons/close.png" class="xButton dNone" id="xButton"  onclick="closeAddTask2()">
 
-<form class="dFlex" onsubmit="return false" novalidate>
+  <form class="dFlex" onsubmit="return false" novalidate>
   <div class="taskForm">
 
     <p>Title<span>*</span></p>
@@ -35,8 +37,6 @@ function loadAddTaskComplete() {
     </div>
 
     <div id="assignedUsers" class="assignedUsers"></div>
-
-    <p class="required"><span>*</span>This field is required</p>
 
   </div>
 
@@ -104,13 +104,19 @@ function loadAddTaskComplete() {
     <span class="inputError" id="inputerrorSubTask2">Max 2 Subtasks allowed</span>
     <div class="subTasksBox" id="subTasksBox"></div>
 
-    <div class="taskButtons">
-      <button class="clearButton" onclick="clearAddTask()">Clear</button>
-      <button class="createTaskButton" onclick="createTask()">Create Task</button>
-    </div>
+    <div class="emptyBox"></div>
 
   </div>
 
-</form>
+  <div class="addTaskBottomBar">
+  <p class="required"><span>*</span>This field is required</p>
+  <div class="taskButtons">
+      <button class="clearButton" onclick="clearAddTask()">Clear</button>
+      <button class="createTaskButton" onclick="createTask()">Create Task</button>
+    </div>
+  </div>
+
+  </form>
+</section>
     `
 }

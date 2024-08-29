@@ -1,24 +1,43 @@
-.mainContent {
+.wrapper {
+    width: 100%;
+    min-width: 705px;
+    max-width: 1000px;
+}
+
+.addTaskoverlay {
     position: absolute;
-    top: -200px;
-    width: 1116px;
-    height: 870px;
-    gap: 0px;
-    border-radius: 30px 0px 0px 0px;
-    opacity: 0px;
-    display: none;
-    z-index: 8000000;
-    background-color: rosybrown;
-  }
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.225);
+    z-index: 10;
+}
+
+.mainContent {
+    margin: 0;
+    position: absolute;
+    top: 7%;
+    bottom: 7%;
+    left: 10%;
+    right: 10%;
+    border-radius: 30px;
+    z-index: 10;
+    padding: 0px 48px 48px 48px;
+    display: flex;
+    justify-content: center;
+}
 
 .mainContent::placeholder {
     color: #D1D1D1;
 }
 
 .mainContent h1 {
-    padding-top: 100px;
+    margin-top: 64px;
     font-size: 61px;
     margin-bottom: 32px;
+    width: auto;
+    height: auto;
 }
 
 .mainContent p {
@@ -51,10 +70,18 @@
     padding-right: 6px;
 }
 
+.mainContent .xButton {
+    top: 64px;
+    right: 72px;
+    cursor: pointer;
+    position: absolute;   
+}
+
 .mainContent .taskForm {
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 327px);
+    max-width: 440px;
+    width: 49%;
 }
 
 .mainContent .taskSeperator {
@@ -67,13 +94,12 @@
 }
 
 .mainContent .required {
-    margin: auto 0;
-    margin-bottom: 38px;
     font-size: 16px;
 }
 
 .mainContent input {
-    width: 440px;
+    max-width: 440px;
+    width: 100%;
     height: 48px;
     border-radius: 8px;
     border: 1px solid #D1D1D1;
@@ -81,6 +107,7 @@
     padding-left: 20px;
     padding-right: 20px;
     font-size: 20px;
+    flex: none;
 }
 
 .mainContent .redInputBorder {
@@ -125,7 +152,8 @@
 }
 
 .mainContent .description {
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     height: 120px;
     resize: none;
     border-radius: 8px;
@@ -177,7 +205,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     height: 48px;
     border-radius: 8px;
     border: 1px solid #D1D1D1;
@@ -202,13 +231,14 @@
 .mainContent .dropdownWrapper {
     position: relative;
     height: 1px;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
 }
 
 .mainContent .dropdown {
     background-color: white;
-    width: 440px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 440px;
     position: absolute;
     top: -43px;
     z-index: 3;
@@ -217,8 +247,8 @@
 
 .mainContent .dropdownUsers {
     background-color: white;
-    width: 440px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 440px;
     max-height: 240px;
     overflow-y: auto;
     position: relative;
@@ -242,7 +272,8 @@
 
 .mainContent .dropdownCat {
     background-color: white;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     position: absolute;
     top: -43px;
     z-index: 3;
@@ -299,7 +330,8 @@
 
 .mainContent .assignedUsers {
     height: 48px;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -334,11 +366,14 @@
 .mainContent .prio {
     display: flex;
     justify-content: space-between;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
 }
 
 .mainContent .prioButton {
-    width: 136px;
+    font-size: 20px;
+    width: 33%;
+    max-width: 136px;
     height: 56px;
     display: flex;
     justify-content: center;
@@ -389,6 +424,7 @@
     border: none !important;
     height: 26px;
     font-size: 16px;
+    width: 80%;
 }
 
 .mainContent .editSubtaskInput:focus {
@@ -397,7 +433,8 @@
 
 .mainContent .subtaskIcons {
     height: 1px;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     display: flex;
     align-items: center;
     position: relative;
@@ -408,7 +445,8 @@
 
 .mainContent .subtaskIconsLower {
     height: 1px;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     display: flex;
     align-items: center;
     position: relative;
@@ -423,7 +461,8 @@
 
 .mainContent .subTasksBox {
     height: 100px;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
 }
 
 .mainContent .subTasksBox ul {
@@ -436,12 +475,12 @@
 .mainContent .subTasksBox li {
     font-size: 16px;
     padding-top: 6px;
+    width: 80%;
 }
 
 .mainContent .taskButtons {
     margin: auto 0;
     margin-top: -18px;
-    align-self: flex-end;
 }
 
 .mainContent .smallSeparator {
@@ -486,4 +525,15 @@
 
 .mainContent .createTaskButton:active {
     box-shadow: 1px 2px 2px 2px #D1D1D1;
+}
+
+.mainContent .addTaskBottomBar {
+    position: fixed;
+    z-index: 3;
+    bottom: 70px;
+    display: flex;
+    width: -webkit-fill-available;
+    max-width: 962px;
+    justify-content: space-between;
+    padding-right: 96px;
 }

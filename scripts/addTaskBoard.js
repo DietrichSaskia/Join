@@ -23,11 +23,12 @@ let taskAllArray = [];
  * Loads the initial tasks for the addTask.html
  */
 function loadFunctions() {
-    loadAddTaskComplete('mainContent');
+    loadAddTaskComplete();
     activateprioButton(1);
     loadMembers();
     searchUsers();
     load();
+    openAddTask();
 }
 
 
@@ -70,6 +71,33 @@ document.addEventListener('click', function (clickEvent) {
 });
 
 
+/**
+ * Opens the AddTask Window in the board.html
+ */
+function openAddTask() {
+    document.getElementById('addTaskoverlay').classList.remove('dNone');
+    document.getElementById('xButton').classList.remove('dNone');
+}
+
+
+/**
+ * Closes the AddTask Window in the board.html if you click on the Overlay
+ */
+function closeAddTask() {
+    if (event.target.id === 'addTaskoverlay') {
+        document.getElementById('addTaskoverlay').classList.add('dNone');
+        document.getElementById('xButton').classList.add('dNone');
+    }
+}
+
+
+/**
+ * Closes the AddTask Window in the board.html
+ */
+function closeAddTask2() {
+    document.getElementById('addTaskoverlay').classList.add('dNone');
+    document.getElementById('xButton').classList.add('dNone');
+}
 /**
  * Resets all priority Buttons and activates the clicked priority Button and it's Function
  * 
@@ -506,6 +534,7 @@ function createTask() {
         return;
     }
     save();
+    closeAddTask2();
     clearAddTask();
 }
 
@@ -605,7 +634,7 @@ function changeDateFormat() {
     let date = document.getElementById('dueDateInput').value;
     let formattedDate = date.replace(/-/g, '/');
     let [year, month, day] = formattedDate.split('/');
-    let formattedDateStr = `${ day }/${month}/${ year }`;
+    let formattedDateStr = `${day}/${month}/${year}`;
     return formattedDateStr;
 }
 
