@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="/styles/board.css">
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/addTaskBoard.css">
-  <link rel="stylesheet" href="/styles/addTaskBoardResponsive.css">
   <script src="/script.js"></script>
   <script src="/templates.js"></script>
   <script src="/scripts/board.js"></script>
@@ -17,10 +16,12 @@
   <script src="/scripts/detailTask.js"></script>
   <script src="/scripts/addTaskTemplate.js"></script>
   <script src="/scripts/addTaskBoard.js"></script>
+  <link rel="stylesheet" href="/styles/addTaskBoardResponsive.css">
   <title>Board</title>
   </head>
-<body onload="init('headerBoard'), loadAll()">
+<body onload="init('headerBoard')">
   <header id="headerBoard"></header>
+
   <div class="addTaskoverlay dNone" id="addTaskoverlay" onclick="closeAddTask()">
     <main class="mainContent" id="mainContent"></main>
   </div>

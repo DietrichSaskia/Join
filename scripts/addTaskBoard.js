@@ -16,7 +16,6 @@ let tasks = [
     },
 ];
 let task = tasks[0];
-let taskAllArray = [];
 
 
 /**
@@ -27,7 +26,6 @@ function loadFunctions() {
     activateprioButton(1);
     loadMembers();
     searchUsers();
-    load();
     openAddTask();
 }
 
@@ -685,17 +683,6 @@ function save() {
     taskAllArray.push(task);
     let tasksAsText = JSON.stringify(taskAllArray);
     localStorage.setItem('taskAllArray', tasksAsText);
-}
-
-
-/**
- * loads the current Array from the local storage in the taskAllArray
- */
-function load() {
-    let tasksAsText = localStorage.getItem('taskAllArray');
-    if (tasksAsText) {
-        taskAllArray = JSON.parse(tasksAsText);
-    }
 }
 
 // Füge normales Datum ins Array ein
