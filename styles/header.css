@@ -265,6 +265,11 @@
     }
 }
 @media(max-width: 600px){
+    h1 {
+        font-size: 48px;
+        padding-left: 16px;
+    }
+
     .HeaderJoinLogoSmallStyle{
         height: 39px;
         width: 32px;
