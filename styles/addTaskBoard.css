@@ -94,8 +94,6 @@
 }
 
 .mainContent .required {
-    margin: auto 0;
-    margin-block-end: 0;
     font-size: 16px;
 }
 
@@ -483,7 +481,6 @@
 .mainContent .taskButtons {
     margin: auto 0;
     margin-top: -18px;
-    align-self: flex-end;
 }
 
 .mainContent .smallSeparator {
@@ -528,4 +525,15 @@
 
 .mainContent .createTaskButton:active {
     box-shadow: 1px 2px 2px 2px #D1D1D1;
+}
+
+.mainContent .addTaskBottomBar {
+    position: fixed;
+    z-index: 3;
+    bottom: 70px;
+    display: flex;
+    width: -webkit-fill-available;
+    max-width: 962px;
+    justify-content: space-between;
+    padding-right: 96px;
 }

@@ -11,5 +11,68 @@
 }
 
 @media (max-width:1024px) {
-    
+    body {
+        overflow-y: auto;
+    }
+
+    .mainContent {
+        margin-left: 0;
+        padding: 0;
+        padding-top: 80px;
+        display: flex;
+        justify-content: center;
+    }
+
+    h1 {
+        padding-top: 48px;
+        padding-bottom: 8px;
+        margin-bottom: 0;
+    }
+
+    .mainContent form {
+        display: block;
+        width: 440px;
+    }
+
+    .taskSeperator {
+        display: none;
+    }
+
+    .addTaskBottomBar {
+        position: fixed;
+        margin: 0;
+        left: 10px;
+        bottom: 80px;
+        background-color: #f5f6f7;
+        height: 88px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .createTaskButton {
+        border-radius: 10px;
+    }
+
+    .taskButtons {
+        margin: 0;
+    }
+
+    .taskForm {
+        min-height: auto;
+    }
+
+    .emptyBox {
+        margin-top: 136px;
+    }
+}
+
+@media (max-width:750px) {
+    .clearButton {
+        display: none;
+    }
+
+    .addTaskBottomBar {
+        padding-right: 0;
+    }
 }

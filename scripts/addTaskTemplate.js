@@ -38,8 +38,6 @@ function loadAddTaskComplete() {
 
     <div id="assignedUsers" class="assignedUsers"></div>
 
-    <p class="required"><span>*</span>This field is required</p>
-
   </div>
 
 
@@ -106,11 +104,16 @@ function loadAddTaskComplete() {
     <span class="inputError" id="inputerrorSubTask2">Max 2 Subtasks allowed</span>
     <div class="subTasksBox" id="subTasksBox"></div>
 
-    <div class="taskButtons">
+    <div class="emptyBox"></div>
+
+  </div>
+
+  <div class="addTaskBottomBar">
+  <p class="required"><span>*</span>This field is required</p>
+  <div class="taskButtons">
       <button class="clearButton" onclick="clearAddTask()">Clear</button>
       <button class="createTaskButton" onclick="createTask()">Create Task</button>
     </div>
-
   </div>
 
   </form>
