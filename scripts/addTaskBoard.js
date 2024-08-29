@@ -17,7 +17,16 @@ let tasks = [
 ];
 let task = tasks[0];
 
-
+/**
+ * Loads the Users from the local storage
+ */
+// function loadMembers() {
+//     let contactsAsText = localStorage.getItem('contactAllArray');
+//     if (contactsAsText) {
+//         json = JSON.parse(contactsAsText);
+//     }
+//     getusers(json); ///////GET USERS einbinden
+//   }
 /**
  * Loads the initial tasks for the addTask.html
  */
@@ -166,18 +175,6 @@ function resetprioButtons() {
     document.getElementById('prioHigh').src = "../assets/icons/prioHigh.png";
     document.getElementById('prioMed').src = "../assets/icons/prioMedium.png";
     document.getElementById('prioLow').src = "../assets/icons/prioLow.png";
-}
-
-
-/**
- * Loads the Users from the local storage
- */
-function loadMembers() {
-    let tasksAsText = localStorage.getItem('contactAllArray');
-    if (tasksAsText) {
-        json = JSON.parse(tasksAsText);
-    }
-    getusers(json);
 }
 
 

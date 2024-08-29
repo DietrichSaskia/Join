@@ -5,6 +5,7 @@ let currentDraggedElement;
 function loadAll() {
   loadContact();
   loadTasks();
+  renderAllTasks();
 }
 
 function loadContact() {
@@ -12,8 +13,6 @@ function loadContact() {
   if (contactAsText) {
     contactAllArray = JSON.parse(contactAsText);  // Füllt das globale Array
   }
-  getMembers(contactAllArray);
-  console.log(getMembers);  // Gibt das globale Array aus
 }
 
 function loadTasks() {
@@ -21,8 +20,6 @@ function loadTasks() {
   if (tasksAsText) {
     taskAllArray = JSON.parse(tasksAsText);
   }
-  getTasks(taskAllArray);
-  console.log(taskAllArray);
 }
 
 function saveTasksToLocalStorage() {
@@ -82,62 +79,41 @@ function truncateDescription(description, wordLimit) {
     : description;
 }
 
-function assignAndDisplayInitials(users) {
-  taskAllArray.forEach(task => {
-    let randomMembers = getRandomMembers(users, 2, 3);
-    task.assignedTo = randomMembers.map(user => ({
-      initials: getInitials(user.name),
-      name: user.name,
-      bgColor: user.color
-    }));
-
-    let taskElement = document.querySelector(`.task[data-task='${task.title}'] .assignedTo`);
-    if (taskElement) {
-      taskElement.innerHTML = task.assignedTo.map(member => `
-        <div class="assignedUser" style="background-color: ${member.bgColor};">
-          <span class="userInitials">${member.initials}</span>
-        </div>
-      `).join('');
-    }
-  });
-  saveTasksToLocalStorage();
-}
-
-function getRandomMembers(users, min, max) {
-  let shuffled = users.sort(() => 0.5 - Math.random());
-  let count = Math.floor(Math.random() * (max - min + 1)) + min;
-  return shuffled.slice(0, count);
-}
-
-function getInitials(name) {
-  if (!name) return '';
-  let nameParts = name.trim().split(/\s+/);
-  return nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
-}
-
 function generateTasksHTML(element, i) {
-  let { category, title, description, subtasks = [], prio, assignedTo = [] } = element;
+  let { category, title, description, subtasks = [], prio, assignedInitals = [], color = [] } = element;
   let categoryClass = formatCategoryClass(category);
   let truncatedDescription = truncateDescription(description, 7);
   let subtaskHTML = generateSubtaskProgressHTML(subtasks, i);
-  let assignedMembersHTML = generateAssignedMembersHTML(assignedTo);
-  
+  let initials = generateInitalsHTML(assignedInitals, color, prio)
   return `
    <div class="task" draggable="true" data-task="${title}" ondragstart="startDragging(${i})" ondragover="allowDrop(event)" ondrop="moveTo('${element.section}')" onclick="showTaskDetail(${i})">
       <div class="category ${categoryClass}">${category}</div>
       <div class="title">${title}</div>
       <div class="description">${truncatedDescription}</div>
       ${subtaskHTML}
-      <div class="assignedToAndPrio">
-        <div class="assignedTo">${assignedMembersHTML}</div>
-        <img src="${prio}" alt="PriorityImage" class="priority-icon">
-      </div>
+      ${initials}
     </div>
   `;
 }
 
 function formatCategoryClass(category) {
   return category ? category.replace(/\s+/g, '') : '';
+}
+
+function generateInitalsHTML(assignedInitals, colors, prio) {
+  if (assignedInitals.length === 0) return '';
+  let html = ' <div class="assignedToAndPrio"><div>';
+  for (let j = 0; j < assignedInitals.length; j++) {
+    let initial = assignedInitals[j];
+    let color = colors[j];
+    html += `
+          <div class="assignedUser" style="background-color: ${color};">
+            <span class="userInitials">${initial}</span>
+          </div>
+        `
+  }
+  html += `</div><img src="${prio}" alt="PriorityImage" class="priority-icon"></div>`
+  return html;
 }
 
 function generateSubtaskProgressHTML(subtasks, taskIndex) {

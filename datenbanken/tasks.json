@@ -6,7 +6,22 @@
     "section": "inProgress",
     "title": "implement summary",
     "date": "17/08/2024",
-    "prioName": "Medium"
+    "prioName": "Medium",
+    "assignedInitals": [
+      "MZ",
+      "LB",
+      "MM"
+    ],
+    "assignedName": [
+      "Marie Zimmerman",
+      "Lukas Bauer",
+      "Max Muster"
+    ],
+    "color": [
+      "#CFD41D",
+      "#FB5807",
+      "#CA841B"
+    ]
   },
   {
     "category": "User Story",
@@ -14,9 +29,22 @@
     "prio": "/assets/icons/prioHigh.png",
     "section": "inProgress",
     "title": "user Login set up",
-    "subtasks": ["Create an HTML login form with username and password input fields and a login button", "JavaScript code to process and authenticate login details"],
+    "subtasks": [
+      "Create an HTML login form with username and password input fields and a login button",
+      "JavaScript code to process and authenticate login details"
+    ],
     "date": "17/08/2024",
-    "prioName": "High"
+    "prioName": "High",
+    "assignedInitals": [
+      "MZ",
+      "LB",
+      "MM"
+    ],
+    "assignedName": [
+      "Marie Zimmerman",
+      "Lukas Bauer",
+      "Max Muster"
+    ]
   },
   {
     "category": "User Story",
@@ -24,9 +52,22 @@
     "prio": "/assets/icons/prioMedium.png",
     "section": "awaitFeedback",
     "title": "the user can add contacts",
-    "subtasks": ["Add a button that displays a contact form when clicked", "Implement the logic to display the form and process the contact details upon submission"],
+    "subtasks": [
+      "Add a button that displays a contact form when clicked",
+      "Implement the logic to display the form and process the contact details upon submission"
+    ],
     "date": "18/08/2024",
-    "prioName": "Medium"
+    "prioName": "Medium",
+    "assignedInitals": [
+      "MZ",
+      "LB",
+      "MM"
+    ],
+    "assignedName": [
+      "Marie Zimmerman",
+      "Lukas Bauer",
+      "Max Muster"
+    ]
   },
   {
     "category": "Technical Task",
@@ -35,7 +76,17 @@
     "section": "awaitFeedback",
     "title": "HTML template header and footer",
     "date": "17/08/2024",
-    "prioName": "Medium"
+    "prioName": "Medium",
+    "assignedInitals": [
+      "MZ",
+      "LB",
+      "MM"
+    ],
+    "assignedName": [
+      "Marie Zimmerman",
+      "Lukas Bauer",
+      "Max Muster"
+    ]
   },
   {
     "category": "Technical Task",
@@ -44,7 +95,17 @@
     "section": "inProgress",
     "title": "CSS Architecture Planning",
     "date": "19/08/2024",
-    "prioName": "Medium"
+    "prioName": "Medium",
+    "assignedInitals": [
+      "MZ",
+      "LB",
+      "MM"
+    ],
+    "assignedName": [
+      "Marie Zimmerman",
+      "Lukas Bauer",
+      "Max Muster"
+    ]
   },
   {
     "category": "Technical Task",
@@ -52,8 +113,42 @@
     "prio": "/assets/icons/prioLow.png",
     "section": "done",
     "title": "Responsive layout for the website",
-    "subtasks": ["Adjust layout and styles for large screen sizes (desktops)", "Optimize layout and styles for medium screen sizes (tablets)"],
+    "subtasks": [
+      "Adjust layout and styles for large screen sizes (desktops)",
+      "Optimize layout and styles for medium screen sizes (tablets)"
+    ],
     "date": "19/08/2024",
-    "prioName": "Low"
+    "prioName": "Low",
+    "assignedInitals": [
+      "MZ",
+      "LB",
+      "MM"
+    ],
+    "assignedName": [
+      "Marie Zimmerman",
+      "Lukas Bauer",
+      "Max Muster"
+    ]
+  },
+  {
+    "category": "Technical Task",
+    "date": "29/08/2024",
+    "description": "",
+    "id": 6,
+    "prio": "/assets/icons/prioMedium.png",
+    "prioName": "Medium",
+    "section": "toDo",
+    "subTask": [],
+    "title": "1232",
+    "assignedInitals": [
+      "MZ",
+      "LB",
+      "MM"
+    ],
+    "assignedName": [
+      "Marie Zimmerman",
+      "Lukas Bauer",
+      "Max Muster"
+    ]
   }
 ]

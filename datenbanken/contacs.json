@@ -1,62 +1,44 @@
 [
   {
-    "color": "",
-    "name": "David Eisenberg", 
-    "email": "david.eisenberg@example.com",
-    "phone": "+49 170 1234567"
+      "color": "#CFD41D",
+      "email": "MarieZimmer@gmail.com",
+      "name": "Marie Zimmerman",
+      "phone": "+88 8888 888 88 8"
   },
   {
-    "color": "",
-    "name": "Benedikt Ziegler",
-    "email": "benedikt.ziegler@example.com",
-    "phone": "+49 170 2345678"
+      "color": "#FB5807",
+      "email": "Lukas@gmail.com",
+      "name": "Lukas Bauer",
+      "phone": "+33 3333 333 33 3"
   },
   {
-    "color": "",
-    "name": "Xavi Hernandez", 
-    "email": "xavi.hernandez@example.com",
-    "phone": "+49 170 3456789"
+      "color": "#CA841B",
+      "email": "max@gmail.com",
+      "name": "Max Muster",
+      "phone": "+88 8888 888 88 8"
   },
   {
-    "color": "",
-    "name": "Lisa Müller",
-    "email": "lisa.mueller@example.com",
-    "phone": "+49 170 4567890"
+      "color": "#16C99D",
+      "email": "SophieBach@gmail.com",
+      "name": "Sophie Bach",
+      "phone": "+99 9999 999 99 9"
   },
   {
-    "color": "",
-    "name": "Emmanuel Mauer",
-    "email": "emmanuel.mauer@example.com",
-    "phone": "+49 170 5678901"
+      "color": "#5A52B9",
+      "email": "SarahMueller@gmail.com",
+      "name": "Sarah Mueller",
+      "phone": "+33 3333 333 33 3"
   },
   {
-    "color": "",
-    "name": "Eva Fischer",
-    "email": "eva.fischer@example.com",
-    "phone": "+49 170 6789012"
+      "color": "#0F91AF",
+      "email": "LisaBach@gmail.com",
+      "name": "Lisa Bach",
+      "phone": "+49 4444 444 44 4"
   },
   {
-    "color": "",
-    "name": "Anja Schulz",
-    "email": "anja.schulz@example.com",
-    "telefonnummer": "+49 170 7890123"
-  },
-  {
-    "color": "",
-    "name": "Pedro Gonzales",
-    "email": "pedro.gonzales@example.com",
-    "telefonnummer": "+49 170 8901234"
-  },
-  {
-    "color": "",
-    "name": "Anton Mayer",
-    "email": "anton.mayer@example.com",
-    "telefonnummer": "+49 170 9012345"
-  },
-  {
-    "color": "",
-    "name": "Matteo Santos",
-    "email": "matteo.santos@example.com",
-    "telefonnummer": "+49 170 0123456"
+      "color": "#D8CD92",
+      "email": "Fischer@gmail.com",
+      "name": "Klaus Fischer",
+      "phone": "+44 4444 444 44 4"
   }
 ]
