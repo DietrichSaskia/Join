@@ -1,21 +1,13 @@
 function showTaskDetail(taskIndex) {
-  let task = allTasks[taskIndex];
+  let task = taskAllArray[taskIndex];
   renderTaskDetails(task, taskIndex);
   openTask();
 }
 
 function renderTaskDetails(task, taskIndex) {
   let taskContent = document.getElementById('taskDetailCard');
-  taskContent.innerHTML = generateTaskDetailHTML(
-    task.category,
-    task.title,
-    task.description,
-    task.date,
-    task.prioName,
-    task.prio,
-    task.assignedTo,
-    renderSubtasks(taskIndex, task.subtasks)
-  );
+  taskContent.innerHTML = generateTaskDetailHTML(taskIndex);
+  document.getElementById('subtasksDetail').innerHTML = renderSubtasks(taskIndex, task);
 }
 
 
@@ -29,7 +21,8 @@ function closeTask() {
 }
 
 
-function renderSubtasks(taskIndex, subtasks) {
+function renderSubtasks(taskIndex, task) {
+  let subtasks = task.subtasks;
   if (!subtasks || subtasks.length === 0) return '';
   return subtasks.map((subtask, subtaskIndex) => `
     <div class="subtask">
@@ -41,7 +34,7 @@ function renderSubtasks(taskIndex, subtasks) {
 }
 
 function updateSubtaskStatus(taskIndex, subtaskIndex) {
-  const task = allTasks[taskIndex];
+  const task = taskAllArray[taskIndex];
 
   let checkbox = document.getElementById(`subtask-${taskIndex}-${subtaskIndex}`);
 
@@ -98,6 +91,8 @@ function updateTaskProgress2(taskIndex, task) {
 
 
 function getVisibleAssignedMembers(assignedTo, displayLimit = 3) {
+  console.log(assignedTo);
+
   let visibleMembers = assignedTo.slice(0, displayLimit);
   return visibleMembers.map(member => {
     let initials = member.initials || getInitials(member.name);
@@ -130,29 +125,64 @@ function getRemainingMembersCount(assignedTo, displayLimit = 3) {
 function generateAssignedMembersHTMLDetail(assignedTo) {
   let visibleMembersHTML = getVisibleAssignedMembers(assignedTo);
   let remainingMembersHTML = getRemainingMembersCount(assignedTo);
-
   return visibleMembersHTML + remainingMembersHTML;
 }
 
 
-function generateTaskDetailHTML(category, title, description, date, prioName, prio, assignedTo, subtasks) {
-  let categoryClass = category ? category.replace(/\s+/g, '') : 'default-category';
-  let assignedMembersHTML = generateAssignedMembersHTMLDetail(assignedTo);
+function generateTaskDetailHTML(taskIndex) {
+  let task = taskAllArray[taskIndex];
+  let categoryClass = task.category ? task.category.replace(/\s+/g, '') : 'default-category';
+  if (!task.subtasks || task.subtasks === null) {
+    return (renderTaskDetailsNoSubtask(task, categoryClass));
+  }
+  else {
+    return (renderTaskDetailsSubtask(task, categoryClass));
+  }
+}
 
+function renderTaskDetailsNoSubtask(task, categoryClass) {
+  return  /*html*/`
+  <div class="detailtask">
+    <div class="categoryAndClose">
+      <div class="category ${categoryClass}">${task.category}</div>
+      <img onclick="closeTask()" src="/assets/icons/close.png" alt="Close">
+    </div>
+    <div class="titleDetail">${task.title}</div>
+    <div class="descriptionDetail">${task.description}</div>
+    <div>Due date: ${task.date}</div>
+    <div>Priority: ${task.prioName} <img src="${task.prio}" alt="PriorityImage"></div>
+     <div> Assigned To:</div>
+    <div class="assignedTo">${task.assignedName}</div>
+    <div class="iconContainer">
+      <div class="detailTaskIcon">
+        <img src="/assets/icons/delete.png" alt="">
+        <p>Delete</p>
+      </div>
+      <div class="verticalLine"></div>
+      <div class="detailTaskIcon">
+        <img src="/assets/icons/edit.png" alt="">
+        <p>Edit</p>
+      </div>
+    </div>
+  </div>`;
+
+
+}
+function renderTaskDetailsSubtask(task, categoryClass) {
   return  /*html*/`
     <div class="detailtask">
       <div class="categoryAndClose">
-        <div class="category ${categoryClass}">${category}</div>
+        <div class="category ${categoryClass}">${task.category}</div>
         <img onclick="closeTask()" src="/assets/icons/close.png" alt="Close">
       </div>
-      <div class="titleDetail">${title}</div>
-      <div class="descriptionDetail">${description}</div>
-      <div>Due date: ${date}</div>
-      <div>Priority: ${prioName} <img src="${prio}" alt="PriorityImage"></div>
+      <div class="titleDetail">${task.title}</div>
+      <div class="descriptionDetail">${task.description}</div>
+      <div>Due date: ${task.date}</div>
+      <div>Priority: ${task.prioName} <img src="${task.prio}" alt="PriorityImage"></div>
        <div> Assigned To:</div>
-      <div class="assignedTo">${assignedMembersHTML}</div>
+      <div class="assignedTo">${task.assignedName}</div>
       <div>Subtaks:</div>
-      <div class="subtasksDetail">${subtasks}</div>
+      <div class="subtasksDetail" id="subtasksDetail"></div>
       <div class="iconContainer">
         <div class="detailTaskIcon">
           <img src="/assets/icons/delete.png" alt="">

@@ -9,7 +9,7 @@ let tasks = [
         'prio': '/assets/icons/prioMedium.png',
         'prioName': 'Medium',
         'section': 'toDo',
-        'subTask': [],
+        'subTasks': [],
         'title': '',
         'assignedInitals': [],
         'assignedName': [],
