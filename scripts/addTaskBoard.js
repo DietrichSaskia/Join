@@ -13,27 +13,18 @@ let tasks = [
         'title': '',
         'assignedInitals': [],
         'assignedName': [],
+        'color': [],
     },
 ];
 let task = tasks[0];
 
-/**
- * Loads the Users from the local storage
- */
-// function loadMembers() {
-//     let contactsAsText = localStorage.getItem('contactAllArray');
-//     if (contactsAsText) {
-//         json = JSON.parse(contactsAsText);
-//     }
-//     getusers(json); ///////GET USERS einbinden
-//   }
 /**
  * Loads the initial tasks for the addTask.html
  */
 function loadFunctions() {
     loadAddTaskComplete();
     activateprioButton(1);
-    loadMembers();
+    getusers();
     searchUsers();
     openAddTask();
 }
@@ -181,13 +172,12 @@ function resetprioButtons() {
 /**
  * Breaks up the array and load the individual user
  * 
- * @param {Array} users The Array that is used to temporarily save all users
  */
-function getusers(users) {
+function getusers() {
     document.getElementById('dropdownUsers').innerHTML = ``;
     document.getElementById('assignedUsers').innerHTML = ``;
-    for (let i = 0; i < users.length; i++) {
-        let user = users[i];
+    for (let i = 0; i < contactAllArray.length; i++) {
+        let user = contactAllArray[i];
         loadUser(user, i)
     }
 }
@@ -505,7 +495,6 @@ function changeSubtask(i) {
  * clears all Input Fields and buttons and puts them into their default state
  */
 function clearAddTask() {
-    loadMembers();
     document.getElementById('titleInput').value = "";
     document.getElementById('descriptionInput').value = "";
     document.getElementById('dueDateInput').value = "";
@@ -523,7 +512,6 @@ function clearAddTask() {
  * @returns stops the function if not all inputs needed are filled
  */
 function createTask() {
-    load();
     setArray();
     if (!checkInputs()) {
         return;
@@ -531,6 +519,7 @@ function createTask() {
     save();
     closeAddTask2();
     clearAddTask();
+    loadAll();
 }
 
 
@@ -610,6 +599,7 @@ function setArray() {
         if (users[i].classList.contains('dropdownButtonSelectedUser')) {
             task['assignedName'].push(document.getElementById(`searchUserName${i}`).innerText);
             task['assignedInitals'].push(document.getElementById(`userCircle${i}`).innerText);
+            task['color'].push(document.getElementById(`userCircle${i}`).style.backgroundColor);
         }
     }
     task['date'] = changeDateFormat();
