@@ -1,18 +1,19 @@
+let taskAllArray = [];
 let contactAllArray = [];
 let currentDraggedElement;
 
 function loadAll() {
-  loadMembers();
+  loadContact();
   loadTasks();
 }
 
-function loadMembers() {
+function loadContact() {
   let contactAsText = localStorage.getItem('contactAllArray');
   if (contactAsText) {
     contactAllArray = JSON.parse(contactAsText);  // Füllt das globale Array
   }
-  getUsers(contactAllArray);
-  console.log(contactAllArray);  // Gibt das globale Array aus
+  getMembers(contactAllArray);
+  console.log(getMembers);  // Gibt das globale Array aus
 }
 
 function loadTasks() {
