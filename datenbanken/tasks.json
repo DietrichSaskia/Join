@@ -5,7 +5,6 @@
     "prio": "/assets/icons/prioMedium.png",
     "section": "inProgress",
     "title": "implement summary",
-    "subtasks":[],
     "date": "17/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
@@ -35,8 +34,8 @@
       "JavaScript code to process and authenticate login details"
     ],
     "subtasksCompleted": [
-      "false",
-      "false"
+      false,
+      false
     ],
     "date": "17/08/2024",
     "prioName": "High",
@@ -64,8 +63,8 @@
       "Implement the logic to display the form and process the contact details upon submission"
     ],
     "subtasksCompleted": [
-      "true",
-      "false"
+      true,
+      false
     ],
     "date": "18/08/2024",
     "prioName": "Medium",
@@ -91,7 +90,6 @@
     "prio": "/assets/icons/prioMedium.png",
     "section": "awaitFeedback",
     "title": "HTML template header and footer",
-    "subtasks":[],
     "date": "17/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
@@ -109,9 +107,8 @@
     "category": "Technical Task",
     "description": "Define CSS classes and structure them",
     "prio": "/assets/icons/prioMedium.png",
-    "section": "inProgress",
+    "section": "toDo",
     "title": "CSS Architecture Planning",
-    "subtasks":[],
     "date": "19/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
@@ -136,8 +133,8 @@
       "Optimize layout and styles for medium screen sizes (tablets)"
     ],
     "subtasksCompleted": [
-      "true",
-      "true"
+      true,
+      true
     ],
     "date": "19/08/2024",
     "prioName": "Low",
@@ -160,7 +157,6 @@
     "prio": "/assets/icons/prioMedium.png",
     "prioName": "Medium",
     "section": "toDo",
-    "subTask": [],
     "title": "1232",
     "assignedInitals": [
       "MZ",

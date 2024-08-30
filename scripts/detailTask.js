@@ -53,10 +53,10 @@ function generateTaskDetailHTML(taskIndex) {
   let task = taskAllArray[taskIndex];
   let categoryClass = task.category ? task.category.replace(/\s+/g, '') : 'default-category';
   if (!task.subtasks || task.subtasks === null) {
-    return (renderTaskDetailsNoSubtask(task, categoryClass));
+    return (renderTaskDetailsNoSubtask(task, categoryClass, taskIndex));
   }
   else {
-    return (renderTaskDetailsSubtask(task, categoryClass));
+    return (renderTaskDetailsSubtask(task, categoryClass, taskIndex));
   }
 }
 
