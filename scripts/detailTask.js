@@ -60,9 +60,36 @@ function generateTaskDetailHTML(taskIndex) {
   }
 }
 
+function generateInitalsAndNameDetailHTML(task) {
+  if (!task.assignedInitals || task.assignedInitals.length === 0) return '';
+  if (!task.assignedName || task.assignedName.length === 0) return '';
+  if (!task.color || task.color.length === 0) return '';
+  
+  let detailHtml = '';
+  
+  task.assignedInitals.forEach((initial, index) => {
+    let color = task.color[index]; 
+    let name = task.assignedName[index];
+    
+    detailHtml += /*html*/`
+      <div class="intalsAndName">
+        <div class="assignedInitals" style="background-color: ${color};">
+          ${initial}
+        </div>
+        <div>
+          ${name}
+        </div>
+      </div>
+    `;
+  });
+  return detailHtml;
+}
+
 
 function renderTaskDetailsNoSubtask(task, categoryClass, taskIndex) {
-  return  /*html*/`
+  let initialsAndName = generateInitalsAndNameDetailHTML(task)
+
+  return /*html*/`
   <div class="detailtask">
     <div class="categoryAndClose">
       <div class="category ${categoryClass}">${task.category}</div>
@@ -72,10 +99,9 @@ function renderTaskDetailsNoSubtask(task, categoryClass, taskIndex) {
     <div class="descriptionDetail">${task.description}</div>
     <div>Due date: ${task.date}</div>
     <div>Priority: ${task.prioName} <img src="${task.prio}" alt="PriorityImage"></div>
-     <div> Assigned To:</div>
-    <div class="assignedTo">
-      <div>${task.assignedInitals}</div>
-      <div>${task.assignedName}</div>
+    <div class="assignedTo"> Assigned To:</div>
+      <div class="initalsAndName">
+        ${initialsAndName}
     </div>
     <div class="iconContainer">
       <div class="detailTaskIcon">
@@ -93,7 +119,9 @@ function renderTaskDetailsNoSubtask(task, categoryClass, taskIndex) {
 
 
 function renderTaskDetailsSubtask(task, categoryClass, taskIndex) {
-  return  /*html*/`
+  let initialsAndName = generateInitalsAndNameDetailHTML(task)
+
+  return /*html*/`
     <div class="detailtask">
       <div class="categoryAndClose">
         <div class="category ${categoryClass}">${task.category}</div>
@@ -105,10 +133,9 @@ function renderTaskDetailsSubtask(task, categoryClass, taskIndex) {
       <div>Priority: ${task.prioName} <img src="${task.prio}" alt="PriorityImage"></div>
       <div class="assignedTo"> Assigned To:</div>
         <div class="initalsAndName">
-          <div class="assignedInitals">${task.assignedInitals}</div>
-          <div class="assignedName">${task.assignedName}</div>
+          ${initialsAndName}
         </div>
-      <div>Subtaks:</div>
+      <div>Subtasks:</div>
       <div class="subtasksDetail" id="subtasksDetail"></div>
       <div class="iconContainer">
         <div class="detailTaskIcon">

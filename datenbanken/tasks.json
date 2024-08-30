@@ -62,16 +62,12 @@
       "Add a button that displays a contact form when clicked",
       "Implement the logic to display the form and process the contact details upon submission"
     ],
-    "subtasksCompleted": [
-      true,
-      false
-    ],
     "date": "18/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
-      "MZ",
+      "KF",
       "LB",
-      "MM"
+      "SM"
     ],
     "assignedName": [
       "Klaus Fischer",
@@ -93,14 +89,19 @@
     "date": "17/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
-      "MZ",
-      "LB",
-      "MM"
+      "KF",
+      "SB",
+      "LB"
     ],
     "assignedName": [
-      "Marie Zimmerman",
-      "Lukas Bauer",
-      "Max Muster"
+      "Klaus Fischer",
+      "Sophie Bach",
+      "Lisa Bach"
+    ],
+    "color": [
+      "#0F91AF",
+      "#16C99D",
+      "#0F91AF"
     ]
   },
   {
@@ -113,13 +114,15 @@
     "prioName": "Medium",
     "assignedInitals": [
       "MZ",
-      "LB",
-      "MM"
+      "LB"
     ],
     "assignedName": [
       "Marie Zimmerman",
-      "Lukas Bauer",
-      "Max Muster"
+      "Lukas Bauer"
+    ],
+    "color": [
+      "#CFD41D",
+      "#FB5807"
     ]
   },
   {
@@ -132,41 +135,22 @@
       "Adjust layout and styles for large screen sizes (desktops)",
       "Optimize layout and styles for medium screen sizes (tablets)"
     ],
-    "subtasksCompleted": [
-      true,
-      true
-    ],
     "date": "19/08/2024",
     "prioName": "Low",
     "assignedInitals": [
-      "MZ",
-      "LB",
+      "SM",
+      "KF",
       "MM"
     ],
     "assignedName": [
-      "Marie Zimmerman",
-      "Lukas Bauer",
+      "Sarah Mueller",
+      "Klaus Fischer",
       "Max Muster"
-    ]
-  },
-  {
-    "category": "Technical Task",
-    "date": "29/08/2024",
-    "description": "",
-    "id": 6,
-    "prio": "/assets/icons/prioMedium.png",
-    "prioName": "Medium",
-    "section": "toDo",
-    "title": "1232",
-    "assignedInitals": [
-      "MZ",
-      "LB",
-      "MM"
     ],
-    "assignedName": [
-      "Marie Zimmerman",
-      "Lukas Bauer",
-      "Max Muster"
+    "color": [
+      "#5A52B9",
+      "#D8CD92",
+      "#CA841B"
     ]
   }
 ]
