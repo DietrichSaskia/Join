@@ -120,3 +120,81 @@ function loadAddTaskComplete() {
 </section>
     `
 }
+
+
+/**
+ * Renders the dropdown button for 1 user
+ * 
+ * @param {Object} user The individual User in the Array
+ * @param {string} initials The initials of the User
+ * @param {number} i The index of the Object in the Array, used to set the ID of the Button
+ */
+function renderAssignedTo(user, initials, i) {
+  document.getElementById('dropdownUsers').innerHTML += /*html*/`
+      <div class="dropdownButton" id="user${i}" onclick="toggleAssignedUser(${i})">
+          <div class="dropdownUser">
+              <div class="userCircle" style="background-color:${user.color};">${initials}</div>
+              <div class="searchUserName" id="searchUserName${i}">${user.name}</div>
+          </div>
+          <img id="assignedCheck${i}" class="dropdownCheckMark" src="../assets/icons/checkButtonblank.png" type="checkbox">
+        </div>
+  `
+}
+
+
+/**
+* Renders the circle user icon
+* 
+* @param {*} user The individual User in the Array
+* @param {*} initials The initials of the User
+* @param {*} i The index of the Object in the Array, used to set the ID of the Button
+*/
+function renderAssignedUser(user, initials, i) {
+  document.getElementById('assignedUsers').innerHTML += /*html*/`
+      <div class="userCircle dNone" id="userCircle${i}" style="background-color:${user.color};">${initials}</div>
+  `
+}
+
+
+/**
+* renders a subtask box below the subtask input
+* 
+* @param {string} input The value of the subtask input
+* @param {number} i The number of the subtask box
+*/
+function putSubTask(input, i) {
+  document.getElementById('subTasksBox').innerHTML += /*html*/`
+  <div id="subTaskBox${i}" class="subTaskBox">
+      <ul>
+          <li id="subTask${i}">${input}</li>
+          <div class="subtaskIconsLower">
+              <img class="subtaskIcon" onclick="editSubtask(${i})" src="../assets/icons/edit.png">
+              <div class="smallSeparator"></div>
+              <img class="subtaskIcon" onclick="deleteSubtask(${i})" src="../assets/icons/delete.png">
+          </div>
+      </ul>
+  </div>
+  `
+}
+
+
+/**
+* renders a subtask box below the subtask with an input field
+* 
+* @param {string} input The value of the subtask input
+* @param {number} i The number of the subtask box
+*/
+function putSubTaskInput(input, i) {
+  document.getElementById('subTasksBox').innerHTML += /*html*/`
+  <div id="subTaskBox${i}" class="subTaskBox">
+      <div class="dFlexAlign backgroundWhite">
+          <input id="subTask${i}" value="${input}" class="editSubtaskInput">
+          <div class="subtaskIconsLower">
+              <img class="subtaskIcon" onclick="deleteSubtask(${i})" src="../assets/icons/delete.png">
+              <div class="smallSeparator"></div>
+              <img class="subtaskIcon" src="../assets/icons/check.png" onclick="changeSubtask(${i})">
+          </div>
+      </div>
+  </div>
+  `
+}

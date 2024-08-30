@@ -95,58 +95,6 @@ function activateprioButton(i) {
 
 
 /**
- * Sets the priority in the Array[task] to high and colors the button
- * 
- * @param {Array} task The array that is used to temporarily save all inputs
- */
-function setPrioHigh(task) {
-    document.getElementById('prio0').classList.add('high', 'active');
-    document.getElementById('prioHigh').src = "../assets/icons/prioHighWhite.png";
-    task['prio'] = '/assets/icons/prioHigh.png';
-    task['prioName'] = 'High';
-}
-
-
-/**
- * Sets the priority in the Array[task] to medium and colors the button
- * 
- * @param {Array} task The array that is used to temporarily save all inputs
- */
-function setPrioMedium(task) {
-    document.getElementById('prio1').classList.add('medium', 'active');
-    document.getElementById('prioMed').src = "../assets/icons/prioMediumWhite.png";
-    task['prio'] = '/assets/icons/prioMedium.png';
-    task['prioName'] = 'Medium';
-}
-
-
-/**
- * This function sets the priority in the Array[task] to low and colors the button
- * 
- * @param {Array} task The array that is used to temporarily save all inputs
- */
-function setPrioLow(task) {
-    document.getElementById('prio2').classList.add('low', 'active');
-    document.getElementById('prioLow').src = "../assets/icons/prioLowWhite.png";
-    task['prio'] = '/assets/icons/prioLow.png';
-    task['prioName'] = 'Low';
-}
-
-
-/**
- * Resets all priority buttons to normal with no colors
- */
-function resetprioButtons() {
-    document.getElementById('prio0').classList.remove('high', 'active');
-    document.getElementById('prio1').classList.remove('medium', 'active');
-    document.getElementById('prio2').classList.remove('low', 'active');
-    document.getElementById('prioHigh').src = "../assets/icons/prioHigh.png";
-    document.getElementById('prioMed').src = "../assets/icons/prioMedium.png";
-    document.getElementById('prioLow').src = "../assets/icons/prioLow.png";
-}
-
-
-/**
  * Loads the Users from the local storage
  */
 function loadMembers() {
@@ -188,56 +136,6 @@ function loadUser(user, i) {
 
 
 /**
- * Renders the dropdown button for 1 user
- * 
- * @param {Object} user The individual User in the Array
- * @param {string} initials The initials of the User
- * @param {number} i The index of the Object in the Array, used to set the ID of the Button
- */
-function renderAssignedTo(user, initials, i) {
-    document.getElementById('dropdownUsers').innerHTML += /*html*/`
-        <div class="dropdownButton" id="user${i}" onclick="toggleAssignedUser(${i})">
-            <div class="dropdownUser">
-                <div class="userCircle" style="background-color:${user.color};">${initials}</div>
-                <div class="searchUserName" id="searchUserName${i}">${user.name}</div>
-            </div>
-            <img id="assignedCheck${i}" class="dropdownCheckMark" src="../assets/icons/checkButtonblank.png" type="checkbox">
-          </div>
-    `
-}
-
-
-/**
- * Renders the circle user icon
- * 
- * @param {*} user The individual User in the Array
- * @param {*} initials The initials of the User
- * @param {*} i The index of the Object in the Array, used to set the ID of the Button
- */
-function renderAssignedUser(user, initials, i) {
-    document.getElementById('assignedUsers').innerHTML += /*html*/`
-        <div class="userCircle dNone" id="userCircle${i}" style="background-color:${user.color};">${initials}</div>
-    `
-}
-
-
-/**
- * Checks the Button of a User in the dropdown Menu
- * 
- * @param {*} i The index of the Button
- */
-function toggleAssignedUser(i) {
-    let buttonChecked = "/assets/icons/checkButtonMobile.png";
-    let buttonUnchecked = "../assets/icons/checkButtonblank.png";
-    let check = document.getElementById(`assignedCheck${i}`);
-    let currentCheck = check.src.split('/').pop();
-    document.getElementById(`user${i}`).classList.toggle('dropdownButtonSelectedUser');
-    document.getElementById(`userCircle${i}`).classList.toggle('dNone');
-    check.src = currentCheck === 'checkButtonMobile.png' ? buttonUnchecked : buttonChecked;
-}
-
-
-/**
  * Selects the Category in the dropdown Menu and resets it if the same one is clicked and sets it into the array task
  * 
  * @param {string} cat This string contains the category
@@ -260,99 +158,10 @@ function selectCategory(cat) {
 
 
 /**
- * Sets the category userstory as category
- * 
- * @param {id} userstory The button User Story
- * @param {id} techTask The button Technical Task
- */
-function selectUserStory(userstory, techTask) {
-    userstory.classList.toggle('dropdownButtonSelected');
-    techTask.classList.remove('dropdownButtonSelected');
-    document.getElementById('category').innerHTML = "User Story";
-}
-
-
-/**
- * Sets the category userstory as Technical Task
- * 
- * @param {id} userstory The button User Story
- * @param {id} techTask The button Technical Task
- */
-function selectTechTask(userstory, techTask) {
-    techTask.classList.toggle('dropdownButtonSelected');
-    userstory.classList.remove('dropdownButtonSelected');
-    document.getElementById('category').innerHTML = "Technical Task";
-}
-
-
-/**
- * Clears the category Input
- * 
- * @param {id} userstory The button User Story
- * @param {id} techTask The button Technical Task
- */
-function clearCategory() {
-    document.getElementById('userStory').classList.remove('dropdownButtonSelected');
-    document.getElementById('techTask').classList.remove('dropdownButtonSelected');
-    document.getElementById('category').innerHTML = "Select task category";
-}
-
-
-/**
- * Toggles the users dropdown menu
- */
-function toggleUserDropdown() {
-    let dropdown = document.getElementById("dropdown");
-    let dropdownUsers = document.getElementById("dropdownUsers");
-    dropdown.classList.toggle("dNone");
-    dropdownUsers.classList.toggle("dNone");
-    document.getElementById('searchUser').focus();
-}
-
-
-/**
- * Toggles the category dropdown menu
- */
-function toggleCategory() {
-    let dropdown = document.getElementById("dropdownCategory");
-    dropdown.classList.toggle("dNone");
-}
-
-
-/**
- * Activates the Buttons beside the subtask input field
- */
-function showSubtaskIcons() {
-    setTimeout(function () {
-        document.getElementById('subtaskActive').classList.toggle('dNone');
-        document.getElementById('subtaskInactive').classList.toggle('dNone');
-    }, 200);
-}
-
-
-/**
  * Sets the focus on the subtask input field
  */
 function showSubtask() {
     document.getElementById('subtasksInput').focus();
-}
-
-
-/**
- * Checks if there are already 2 subtasks and shows an error message if the user tries to create a third
- */
-function checkSubtask() {
-    let input = document.getElementById('subtasksInput').value;
-    document.getElementById('inputerrorSubTask1').style.display = 'none';
-    document.getElementById('inputerrorSubTask2').style.display = 'none';
-    document.getElementById('subtasksInput').classList.remove('redInputBorder');
-    if (input.length === 0) {
-        document.getElementById('inputerrorSubTask1').style.display = 'block';
-        document.getElementById('subtasksInput').classList.add('redInputBorder');
-    }
-    else {
-        createSubtask(input)
-    }
 }
 
 
@@ -384,100 +193,6 @@ function createSubtask(input) {
  */
 function clearSubtaskInput() {
     document.getElementById('subtasksInput').value = "";
-}
-
-
-/**
- * renders a subtask box below the subtask input
- * 
- * @param {string} input The value of the subtask input
- * @param {number} i The number of the subtask box
- */
-function putSubTask(input, i) {
-    document.getElementById('subTasksBox').innerHTML += /*html*/`
-    <div id="subTaskBox${i}" class="subTaskBox">
-        <ul>
-            <li id="subTask${i}">${input}</li>
-            <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="editSubtask(${i})" src="../assets/icons/edit.png">
-                <div class="smallSeparator"></div>
-                <img class="subtaskIcon" onclick="deleteSubtask(${i})" src="../assets/icons/delete.png">
-            </div>
-        </ul>
-    </div>
-    `
-}
-
-
-/**
- * Deletes a subtask box and removes the value from the array
- * 
- * @param {number} i The number of the subtask box
- */
-function deleteSubtask(i) {
-    task['subTasks'][i] = null;
-    document.getElementById(`subTaskBox${i}`).remove();
-}
-
-
-/**
- * Deletes a subtask box
- * 
- * @param {number} i The number of the subtask box
- */
-function clearSubtask(i) {
-    if (document.getElementById(`subTaskBox${i}`)) {
-        document.getElementById(`subTaskBox${i}`).remove();
-    }
-}
-
-
-/**
- * removes the subtaskbox and replaces it with a box with the same structure but with with an input field
- * 
- * @param {number} i The number of the subtask box
- */
-function editSubtask(i) {
-    let info = task['subTasks'][i];
-    document.getElementById(`subTaskBox${i}`).remove();
-    putSubTaskInput(info, i);
-    let input = document.getElementById(`subTask${i}`);
-    input.focus();
-    input.setSelectionRange(input.value.length, input.value.length);
-}
-
-
-/**
- * renders a subtask box below the subtask with an input field
- * 
- * @param {string} input The value of the subtask input
- * @param {number} i The number of the subtask box
- */
-function putSubTaskInput(input, i) {
-    document.getElementById('subTasksBox').innerHTML += /*html*/`
-    <div id="subTaskBox${i}" class="subTaskBox">
-        <div class="dFlexAlign backgroundWhite">
-            <input id="subTask${i}" value="${input}" class="editSubtaskInput">
-            <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="deleteSubtask(${i})" src="../assets/icons/delete.png">
-                <div class="smallSeparator"></div>
-                <img class="subtaskIcon" src="../assets/icons/check.png" onclick="changeSubtask(${i})">
-            </div>
-        </div>
-    </div>
-    `
-}
-
-
-/**
- * changes the new imput on the subtask box with input to the normal subtask box
- * 
- * @param {number} i The number of the subtask box
- */
-function changeSubtask(i) {
-    let input = document.getElementById(`subTask${i}`).value;
-    document.getElementById(`subTaskBox${i}`).remove();
-    putSubTask(input, i);
 }
 
 
@@ -525,59 +240,6 @@ function checkInputs() {
     checked = checkInput2(checked);
     checked = checkInput3(checked);
     return checked;
-}
-
-
-/**
- * validates input and shows an error message if not true
- * 
- * @returns true if input is validated / false if not 
- */
-function checkInput1() {
-    if (document.getElementById('titleInput').value === "") {
-        document.getElementById('inputerror1').style.display = 'block';
-        document.getElementById('titleInput').classList.add('redInputBorder');
-        checked = false;
-    }
-    else {
-        document.getElementById('inputerror1').style.display = 'none';
-        return true;
-    }
-}
-
-
-/**
- * validates input and shows an error message if not true
- * 
- * @returns true if input is validated / false if not 
- */
-function checkInput2() {
-    if (document.getElementById('dueDateInput').value === "") {
-        document.getElementById('inputerror2').style.display = 'block';
-        document.getElementById('dueDateInput').classList.add('redInputBorder');
-        checked = false;
-    }
-    else {
-        document.getElementById('inputerror2').style.display = 'none';
-        return true;
-    }
-}
-
-
-/**
- * validates input and shows an error message if not true
- * 
- * @returns true if input is validated / false if not 
- */
-function checkInput3() {
-    if (document.getElementById('category').innerText === 'Select task category') {
-        document.getElementById('inputerror3').style.display = 'block';
-        checked = false;
-    }
-    else {
-        document.getElementById('inputerror3').style.display = 'none';
-        return true;
-    }
 }
 
 
@@ -694,4 +356,3 @@ function goToBoard() {
         window.location.href = 'board.html';
     }, 1500);
 }
-// Füge normales Datum ins Array ein
