@@ -19,14 +19,19 @@ let tasks = [
 let task = tasks[0];
 
 /**
- * Loads the initial tasks for the addTask.html
+ * Loads the initial tasks for the addTask.html unless you are on mobile then open addTask.html
  */
 function loadFunctions() {
-    loadAddTaskComplete();
-    activateprioButton(1);
-    getusers();
-    searchUsers();
-    openAddTask();
+    if (window.innerWidth <= 1024) {
+        window.location.href = 'addTask.html';
+    }
+    else {
+        loadAddTaskComplete();
+        activateprioButton(1);
+        getusers();
+        searchUsers();
+        openAddTask();
+    }
 }
 
 

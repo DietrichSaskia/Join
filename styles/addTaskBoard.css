@@ -26,6 +26,7 @@
     padding: 0px 48px 48px 48px;
     display: flex;
     justify-content: center;
+    overflow-y: hidden;
 }
 
 .mainContent::placeholder {
@@ -530,10 +531,12 @@
 .mainContent .addTaskBottomBar {
     position: fixed;
     z-index: 3;
-    bottom: 70px;
+    bottom: 148px;
     display: flex;
-    width: -webkit-fill-available;
+    width: 70%;
     max-width: 962px;
     justify-content: space-between;
     padding-right: 96px;
 }
+
+/* Ab 1024 px muss JS responsive auf AddTask.html weiterleiten */
