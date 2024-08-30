@@ -86,6 +86,11 @@
     .required {
         padding-left: 40px;
     }
+
+    .prioButton {
+        height: 41px;
+        max-width: 121px;
+    }
 }
 
 @media (max-width:750px) {
