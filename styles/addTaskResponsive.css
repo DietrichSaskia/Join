@@ -2,11 +2,19 @@
     .prioButton {
         font-size: 16px;
     }
+
+    .dropdownButtonArea {
+        font-size: 19px;
+    }
 }
 
 @media (max-width:1100px) {
     .prioButton {
         font-size: 15px;
+    }
+
+    .mainContent {
+        margin-left: 148px;
     }
 }
 
@@ -29,6 +37,10 @@
         background-color: #f5f6f7;
         width: 100%;
         padding-bottom: 12px;
+    }
+
+    .required {
+        padding-left: 148px;
     }
 
     .mainContent form {
@@ -67,6 +79,12 @@
 
     .emptyBox {
         margin-top: 136px;
+    }
+}
+
+@media (max-width:900px) {
+    .required {
+        padding-left: 40px;
     }
 }
 

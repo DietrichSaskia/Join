@@ -324,6 +324,7 @@ input[type="search"]::-webkit-search-results-decoration {
     align-self: center;
     pointer-events: none;
     cursor: pointer;
+    margin-right: -20px;
 }
 
 .dateInput {
