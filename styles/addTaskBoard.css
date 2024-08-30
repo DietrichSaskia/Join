@@ -168,6 +168,7 @@
 
 .mainContent .description:not(:placeholder-shown) {
     border: 1px solid #29abe3;
+    color: black;
 }
 
 .mainContent .description:placeholder-shown {
