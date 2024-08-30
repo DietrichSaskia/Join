@@ -362,14 +362,14 @@ function checkSubtask() {
  * @param {string} input The value of the subtask input
  */
 function createSubtask(input) {
-    if (task['subTask'][0] === null || task['subTask'].length === 0) {
+    if (task['subTasks'][0] === null || task['subTasks'].length === 0) {
         putSubTask(input, 0);
-        task['subTask'].splice(0, 1, input);
+        task['subTasks'].splice(0, 1, input);
         clearSubtaskInput(0);
     }
-    else if (task['subTask'][1] === null || task['subTask'].length === 1) {
+    else if (task['subTasks'][1] === null || task['subTasks'].length === 1) {
         putSubTask(input, 1);
-        task['subTask'].splice(1, 1, input);
+        task['subTasks'].splice(1, 1, input);
         clearSubtaskInput(1);
     }
     else {
@@ -415,7 +415,7 @@ function putSubTask(input, i) {
  * @param {number} i The number of the subtask box
  */
 function deleteSubtask(i) {
-    task['subTask'][i] = null;
+    task['subTasks'][i] = null;
     document.getElementById(`subTaskBox${i}`).remove();
 }
 
@@ -438,7 +438,7 @@ function clearSubtask(i) {
  * @param {number} i The number of the subtask box
  */
 function editSubtask(i) {
-    let info = task['subTask'][i];
+    let info = task['subTasks'][i];
     document.getElementById(`subTaskBox${i}`).remove();
     putSubTaskInput(info, i);
     let input = document.getElementById(`subTask${i}`);
