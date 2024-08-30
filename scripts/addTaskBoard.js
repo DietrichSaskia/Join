@@ -22,7 +22,7 @@ let task = tasks[0];
  * Loads the initial tasks for the addTask.html unless you are on mobile then open addTask.html
  */
 function loadFunctions() {
-    if (window.innerWidth <= 1024) {
+    if (window.innerWidth <= 1040) {
         window.location.href = 'addTask.html';
     }
     else {
