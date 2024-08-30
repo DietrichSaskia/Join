@@ -5,6 +5,7 @@
     "prio": "/assets/icons/prioMedium.png",
     "section": "inProgress",
     "title": "implement summary",
+    "subtasks":[],
     "date": "17/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
@@ -33,17 +34,23 @@
       "Create an HTML login form with username and password input fields and a login button",
       "JavaScript code to process and authenticate login details"
     ],
+    "subtasksCompleted": [
+      "false",
+      "false"
+    ],
     "date": "17/08/2024",
     "prioName": "High",
     "assignedInitals": [
-      "MZ",
-      "LB",
-      "MM"
+      "SB",
+      "SM"
     ],
     "assignedName": [
-      "Marie Zimmerman",
-      "Lukas Bauer",
-      "Max Muster"
+      "Sophie Bach",
+      "Sarah Mueller"
+    ],
+    "color": [
+      "#16C99D",
+      "#5A52B9"
     ]
   },
   {
@@ -56,6 +63,10 @@
       "Add a button that displays a contact form when clicked",
       "Implement the logic to display the form and process the contact details upon submission"
     ],
+    "subtasksCompleted": [
+      "true",
+      "false"
+    ],
     "date": "18/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
@@ -64,9 +75,14 @@
       "MM"
     ],
     "assignedName": [
-      "Marie Zimmerman",
+      "Klaus Fischer",
       "Lukas Bauer",
-      "Max Muster"
+      "Sophie Bach"
+    ],
+    "color": [
+      "#D8CD92",
+      "#FB5807",
+      "#16C99D"
     ]
   },
   {
@@ -75,6 +91,7 @@
     "prio": "/assets/icons/prioMedium.png",
     "section": "awaitFeedback",
     "title": "HTML template header and footer",
+    "subtasks":[],
     "date": "17/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
@@ -94,6 +111,7 @@
     "prio": "/assets/icons/prioMedium.png",
     "section": "inProgress",
     "title": "CSS Architecture Planning",
+    "subtasks":[],
     "date": "19/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
@@ -116,6 +134,10 @@
     "subtasks": [
       "Adjust layout and styles for large screen sizes (desktops)",
       "Optimize layout and styles for medium screen sizes (tablets)"
+    ],
+    "subtasksCompleted": [
+      "true",
+      "true"
     ],
     "date": "19/08/2024",
     "prioName": "Low",

@@ -2,18 +2,21 @@ let taskAllArray = [];
 let contactAllArray = [];
 let currentDraggedElement;
 
+
 function loadAll() {
   loadContact();
   loadTasks();
   renderAllTasks();
 }
 
+
 function loadContact() {
   let contactAsText = localStorage.getItem('contactAllArray');
   if (contactAsText) {
-    contactAllArray = JSON.parse(contactAsText);  // Füllt das globale Array
+    contactAllArray = JSON.parse(contactAsText);
   }
 }
+
 
 function loadTasks() {
   let tasksAsText = localStorage.getItem('taskAllArray');
@@ -22,9 +25,11 @@ function loadTasks() {
   }
 }
 
+
 function saveTasksToLocalStorage() {
   localStorage.setItem('taskAllArray', JSON.stringify(taskAllArray));
 }
+
 
 function renderAllTasks() {
   renderSection('toDo', 'toDo');
@@ -34,16 +39,15 @@ function renderAllTasks() {
 }
 
 
-
-function renderSection(sectionName, containerId) {
+function renderSection(section, containerId) {
   let container = document.getElementById(containerId);
   container.innerHTML = '';
-  let formattedSectionName = sectionName.charAt(0).toUpperCase() + sectionName.slice(1).replace(/([A-Z])/g, ' $1').trim();
+  let formattedSectionName = formatSectionName(section);
   let tasksFound = false;
 
   for (let i = 0; i < taskAllArray.length; i++) {
     let task = taskAllArray[i];
-    if (task.section === sectionName) {
+    if (task && task.section === section) {
       container.innerHTML += generateTasksHTML(task, i);
       tasksFound = true;
     }
@@ -53,24 +57,13 @@ function renderSection(sectionName, containerId) {
   }
 }
 
-function startDragging(taskIndex) {
-  currentDraggedElement = taskIndex;
+
+function formatSectionName(section) {
+  let formattedName = section.charAt(0).toUpperCase() + section.slice(1);
+  formattedName = formattedName.replace(/([A-Z])/g, ' $1').trim();
+  return formattedName;
 }
 
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-
-function moveTo(section) {
-  if (typeof currentDraggedElement === 'number' && currentDraggedElement >= 0 && currentDraggedElement < taskAllArray.length) {
-    let task = taskAllArray[currentDraggedElement];
-    task.section = section;
-    renderAllTasks();
-    saveTasksToLocalStorage();
-  } else {
-    console.error('Aufgabe nicht gefunden');
-  }
-}
 
 function truncateDescription(description, wordLimit) {
   let words = (typeof description === 'string' ? description.split(' ') : []);
@@ -78,6 +71,65 @@ function truncateDescription(description, wordLimit) {
     ? words.slice(0, wordLimit).join(' ') + '...'
     : description;
 }
+
+
+function startDragging(taskIndex) {
+  currentDraggedElement = taskIndex;
+}
+
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+
+function moveTo(section) {
+  if (typeof currentDraggedElement !== 'number' || currentDraggedElement < 0 || currentDraggedElement >= taskAllArray.length) {
+    return;
+  }
+  let task = taskAllArray[currentDraggedElement];
+  task.section = section;
+  
+  renderAllTasks();
+  saveTasksToLocalStorage();
+}
+
+function updateSubtaskStatus(taskIndex, subtaskIndex) {
+  let checkbox = document.getElementById(`subtask-${taskIndex}-${subtaskIndex}`);
+  let isChecked = checkbox.checked;
+
+  let storageKey = `task-${taskIndex}-subtask-${subtaskIndex}`;
+  localStorage.setItem(storageKey, isChecked);
+
+  updateTaskProgress(taskIndex);
+  saveTasksToLocalStorage();
+}
+
+
+function calculateSubtaskProgress(subtasks, taskIndex) {
+  let completedSubtasks = subtasks.reduce((count, _, subtaskIndex) => 
+    count + (document.getElementById(`subtask-${taskIndex}-${subtaskIndex}`).checked ? 1 : 0), 0);
+  
+  let subtaskCount = subtasks.length;
+  let subtaskBarWidth = (completedSubtasks / subtaskCount) * 100;
+
+  return { completedSubtasks, subtaskCount, subtaskBarWidth };
+}
+
+
+function renderSubtaskProgress(taskIndex, progress) {
+  document.getElementById(`subtaskBar${taskIndex}`).style.width = `${progress.subtaskBarWidth}%`;
+  document.getElementById(`subtaskCount${taskIndex}`).textContent = `${progress.completedSubtasks}/${progress.subtaskCount} Unteraufgaben`;
+  saveTasksToLocalStorage();
+}
+
+
+function updateTaskProgress(taskIndex) {
+  let subtasks = taskAllArray[taskIndex].subtasks;
+  let progress = calculateSubtaskProgress(subtasks, taskIndex);
+  renderSubtaskProgress(taskIndex, progress);
+}
+
 
 function generateTasksHTML(element, i) {
   let { category, title, description, subtasks = [], prio, assignedInitals = [], color = [] } = element;
@@ -96,70 +148,44 @@ function generateTasksHTML(element, i) {
   `;
 }
 
+
 function formatCategoryClass(category) {
   return category ? category.replace(/\s+/g, '') : '';
 }
 
+
 function generateInitalsHTML(assignedInitals, colors, prio) {
   if (assignedInitals.length === 0) return '';
-  let html = ' <div class="assignedToAndPrio"><div>';
-  for (let j = 0; j < assignedInitals.length; j++) {
-    let initial = assignedInitals[j];
-    let color = colors[j];
+  
+  let html = '<div class="assignedToAndPrio"><div>';
+  
+  assignedInitals.forEach((initial, index) => {
+    let color = colors[index];
     html += `
-          <div class="assignedUser" style="background-color: ${color};">
-            <span class="userInitials">${initial}</span>
-          </div>
-        `
-  }
-  html += `</div><img src="${prio}" alt="PriorityImage" class="priority-icon"></div>`
+      <div class="assignedUser" style="background-color: ${color};">
+        <span class="userInitials">${initial}</span>
+      </div>
+    `;
+  });
+
+  html += `</div><img src="${prio}" alt="PriorityImage" class="priority-icon"></div>`;
+  
   return html;
 }
 
+
 function generateSubtaskProgressHTML(subtasks, taskIndex) {
   if (subtasks.length === 0) return '';
+  
   let subtaskCount = subtasks.length;
   let completedSubtasks = subtasks.filter(subtask => subtask.completed).length;
   let subtaskBarWidth = (completedSubtasks / subtaskCount) * 100;
+  
   return `
     <div class="subtasks">
       <div class="subtaskBarContainer">
         <div class="subtaskBar" id="subtaskBar${taskIndex}" style="width: ${subtaskBarWidth}%"></div>
       </div>
-      <span class="subtaskCount">${completedSubtasks}/${subtaskCount} Unteraufgaben</span>
+      <span class="subtaskCount" id="subtaskCount${taskIndex}">${completedSubtasks}/${subtaskCount} Unteraufgaben</span>
     </div>`;
-}
-
-function generateSubtaskItemsHTML(subtasks, taskIndex) {
-  if (subtasks.length === 0) return '';
-  let subtaskItems = '';
-
-  for (let i = 0; i < subtasks.length; i++) {
-    let subtask = subtasks[i];
-    subtaskItems += `
-      <div>
-        <input type="checkbox" id="subtask-${taskIndex}-${i}" ${subtask.completed ? 'checked' : ''} onchange="updateSubtaskStatus(${taskIndex}, ${i})">
-        <label for="subtask-${taskIndex}-${i}">Subtask ${i}</label>
-      </div>
-    `;
-  }
-  return subtaskItems;
-}
-
-function renderTaskWithSubtasks(task, taskIndex) {
-  const progressHTML = generateSubtaskProgressHTML(task.subtasks, taskIndex);
-  const itemsHTML = generateSubtaskItemsHTML(task.subtasks, taskIndex);
-  return `
-    <div class="task">
-      <div class="task-header">${task.title}</div>
-      ${progressHTML}
-      <div class="subtask-items">${itemsHTML}</div>
-    </div>`;
-}
-
-function generateAssignedMembersHTML(assignedTo) {
-  return assignedTo.map(member => `
-    <div class="assignedUser" style="background-color: ${member.bgColor};">
-      <span class="userInitials">${member.initials}</span>
-    </div>`).join('');
 }

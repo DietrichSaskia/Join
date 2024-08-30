@@ -195,29 +195,29 @@ input[type="text"] {
 
 .subtasksContainer {
   display: flex;
-  align-items: center; /* Zentriert vertikal */
-  margin-top: 5px; /* Abstand zum vorherigen Inhalt */
+  align-items: center; 
+  margin-top: 5px;
 }
 
 .subtaskBarContainer {
-  flex: 1; /* Füllt den verfügbaren Raum aus */
-  height: 10px; /* Höhe des Balkens */
-  background-color: lightgray; /* Hintergrundfarbe des Containers */
+  flex: 1; 
+  height: 10px; 
+  background-color: lightgray; 
   border-radius: 5px;
   overflow: hidden;
-  margin-right: 10px; /* Abstand zwischen Balken und Zähler */
+  margin-right: 10px;
   width: 100px;
 }
 
 .subtaskBar {
-  height: 100%; /* Höhe des Balkens füllt den Container */
-  background-color: blue; /* Farbe des Balkens */
+  height: 100%; 
+  background-color: #4589ff; 
   border-radius: 5px;
 }
 
 .subtaskCount {
   font-size: 14px;
-  color: #333; /* Farbe des Textes */
+  color: #333;
 }
 
 .assignedToAndPrio {
@@ -237,9 +237,6 @@ input[type="text"] {
   line-height: 30px;
   margin-right: -10px;
   padding: 3px;
-}
-
-.userInitials {
   font-size: 14px;
 }
 
@@ -315,21 +312,19 @@ input[type="text"] {
   font-weight: 400;
 }
 
-.assignedUserDetail {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  color: white;
-  text-align: center;
-  line-height: 30px;
-  margin-right: 15px;
-  padding: 3px;
+.initalsAndName {
+  display: flex;
+  flex-direction: column;
 }
 
-.assignedMember {
-  margin-bottom: 10px;
-  margin-left: 15px;
+.assignedInitals {
+  display: flex;
+  flex-direction: column;
+}
+
+.assignedName {
+  display: flex;
+  flex-direction: column;
 }
 
 .iconContainer {
