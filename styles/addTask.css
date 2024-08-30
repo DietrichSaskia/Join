@@ -1,5 +1,6 @@
 body {
     overflow-y: hidden;
+    max-width: 1920px;
 }
 
 .mainContent {
@@ -524,7 +525,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .addTaskBottomBar {
     position: fixed;
-    z-index: 3;
+    z-index: 2;
     bottom: 70px;
     display: flex;
     width: -webkit-fill-available;

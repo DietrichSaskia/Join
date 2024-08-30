@@ -10,21 +10,17 @@ a {
 }
 
 .boardHeadline {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 1208px;
-  height: 232px;
-  position: absolute;
-  top: 96px;
-  left: 232px;
-  margin-left: 100px;
+  min-width: calc(100% - 232px);
+  min-height: calc(100vh - 96px);
+  padding-left: 232px;
+  padding-top: 96px;
 }
 
 .headlineAndSearch {
+  margin-top: 80px;
+  margin-left: 64px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 h1 {
@@ -38,7 +34,7 @@ h1 {
 .searchContainer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  padding-right: 96px;
 }
 
 .searchWrapper {
@@ -49,30 +45,29 @@ h1 {
   margin-right: 15px;
   padding: 8px 16px 8px 16px;
   background-color: white;
+  width: 280px;
+  height: 32px;
 }
 
 input[type="text"] {
   border: none;
-  border-radius: 10px;
   outline: none;
   flex: 1;
   font-size: 20px;
   font-weight: 400;
+  width: 80%;
 }
 
 .searchButton {
+  position: relative;
   background: none;
   border: none;
   cursor: pointer;
-}
-
-.searchButton img {
   width: 32px;
   height: 32px;
 }
 
 .searchButton:hover {
-  border: none;
   border-radius: 50%;
   background-color: #D9D9D9;
 }
@@ -106,17 +101,8 @@ input[type="text"] {
   background-color: #29abe2;
 }
 
-.headlineTasksContainer {
-  width: 1208px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: absolute;
-  top: 200.5px;
-}
-
 .headlineTasks {
-  width: 244px;
+  width: 236px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -134,12 +120,13 @@ input[type="text"] {
 }
 
 .allTasks {
-  width: 1208px;
-  height: 430px;
-  position: absolute;
-  top: 30px;
+  max-width: 100%;
+  max-height: calc(100vh - 360px);
   display: flex;
   justify-content: space-between;
+  padding-top: 64px;
+  margin-left: 64px;
+  margin-right: 64px;
 }
 
 .task {
@@ -148,6 +135,7 @@ input[type="text"] {
   box-sizing: 10px;
   margin: 10px;
   width: 200px;
+  max-height: 263px;
   border-radius: 24px;
   padding: 16px;
   gap: 10px;

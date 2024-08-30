@@ -9,7 +9,11 @@
   <link rel="stylesheet" href="/styles/board.css">
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/addTaskBoard.css">
+<<<<<<< HEAD
   <link rel="stylesheet" href="/styles/addTaskBoardResponsive.css">
+=======
+  <link rel="stylesheet" href="/styles/boardresponsive.css">
+>>>>>>> c43813a9b8be0f7de0a4920c07176cba3cc7b010
   <script src="/script.js"></script>
   <script src="/templates.js"></script>
   <script src="/scripts/board.js"></script>
@@ -18,7 +22,8 @@
   <script src="/scripts/addTaskBoard.js"></script>
   <script src="/scripts/addTaskChange.js"></script>
   <title>Board</title>
-  </head>
+</head>
+
 <body onload="init('headerBoard'), loadAll()">
   <header id="headerBoard"></header>
 
@@ -27,46 +32,53 @@
   </div>
   <section class="boardHeadline">
     <div class="headlineAndSearch">
-      <div>
-        <h1>Board</h1>
-      </div>
+      <h1>Board</h1>
       <div class="searchContainer">
         <div class="searchWrapper">
           <input type="text" id="searchInput" placeholder="Find Task" oninput="searchTask()">
           <div class="verticalLine"></div>
-          <button class="searchButton" onclick="searchTask()">
-            <img src="/assets/icons/search.png" alt="Search">
-          </button>
+          <img class="searchButton" src="/assets/icons/search.png" alt="Search" onclick="searchTask()">
         </div>
         <button class="btnAddTask" id="btnAddTask" onclick="loadFunctions()">
           Add task <img src="/assets/icons/addWhiteNoBorder.png" alt="">
         </button>
       </div>
     </div>
-    </div>
-    <div class="headlineTasksContainer">
-      <div class="headlineTasks">
-        <a href="#">To do</a>
-        <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
-      </div>
-      <div class="headlineTasks">
-        <a href="#">In progress</a>
-        <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
-      </div>
-      <div class="headlineTasks">
-        <a href="#">Await feedback</a>
-        <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
-      </div>
-      <div class="headlineTasks">
-        <a href="#">Done</a>
-      </div>
-      <div class="allTasks" id="allTasks">
+
+
+    <div class="allTasks" id="allTasks">
+      <div>
+        <div class="headlineTasks">
+          <a href="#">To do</a>
+          <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
+        </div>
         <div id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
+      </div>
+
+      <div>
+        <div class="headlineTasks">
+          <a href="#">In progress</a>
+          <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
+        </div>
         <div id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)"></div>
+      </div>
+
+      <div>
+        <div class="headlineTasks">
+          <a href="#">Await feedback</a>
+          <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
+        </div>
         <div id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
+      </div>
+
+      <div>
+        <div class="headlineTasks">
+          <a href="#">Done</a>
+        </div>
         <div id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
       </div>
     </div>
+
     <div id="containerTasksDetail" class="containerTasksDetail d-none">
       <div id="taskDetailCard"></div>
     </div>
