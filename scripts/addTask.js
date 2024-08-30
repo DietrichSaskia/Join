@@ -1,6 +1,5 @@
 const taskURL = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/tasksAll/';
 const userURL = 'https://join-317-default-rtdb.europe-west1.firebasedatabase.app/contactall'
-const dateInput = document.getElementById('dueDateInput');
 
 let tasks = [
     {
@@ -43,10 +42,8 @@ document.addEventListener('focusout', (event) => {
 
 document.addEventListener('focus', (event) => {
     if (event.target && event.target.id === 'subtasksInput') {
-        console.log("keks");
         addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
-                console.log("keks");
                 checkSubtask()
             }
         })
@@ -54,15 +51,20 @@ document.addEventListener('focus', (event) => {
 });
 
 
-if (dateInput) {
-    dateInput.addEventListener('input', function () {
-        if (dateInput.value) {
-            dateInput.classList.add('has-value');
-        } else {
-            dateInput.classList.remove('has-value');
-        }
-    });
-}
+setTimeout(function () {
+    if (document.getElementById('dueDateInput')) {
+        const dateInput = document.getElementById('dueDateInput')
+        let today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute("min", today);
+        dateInput.addEventListener('input', function () {
+            if (dateInput.value) {
+                dateInput.classList.add('has-value');
+            } else {
+                dateInput.classList.remove('has-value');
+            }
+        });
+    }
+}, 100);
 
 
 document.addEventListener('dblclick', function (dblclickEvent) {

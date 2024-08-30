@@ -48,7 +48,7 @@ function loadAddTaskComplete() {
 
     <p>Due Date<span>*</span></p>
     <div class="dueDate">
-      <input id="dueDateInput" class="dateInput" type="date" required>
+      <input id="dueDateInput" class="dateInput" type="date" min="" required>
       <img class="calendar" src="../assets/icons/calendar.png">
     </div>
     <span class="inputError" id="inputerror2">This field is required</span>
