@@ -11,10 +11,11 @@ let tasks = [
         'prio': '/assets/icons/prioMedium.png',
         'prioName': 'Medium',
         'section': 'toDo',
-        'subTask': [],
+        'subTasks': [],
         'title': '',
         'assignedInitals': [],
         'assignedName': [],
+        'color': [],
     },
 ];
 let task = tasks[0];
@@ -589,6 +590,7 @@ function setArray() {
         if (users[i].classList.contains('dropdownButtonSelectedUser')) {
             task['assignedName'].push(document.getElementById(`searchUserName${i}`).innerText);
             task['assignedInitals'].push(document.getElementById(`userCircle${i}`).innerText);
+            task['color'].push(document.getElementById(`userCircle${i}`).style.backgroundColor);
         }
     }
     task['date'] = changeDateFormat();
