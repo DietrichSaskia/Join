@@ -11,7 +11,7 @@ let tasks = [
         'prio': '/assets/icons/prioMedium.png',
         'prioName': 'Medium',
         'section': 'toDo',
-        'subTasks': [],
+        'subtasks': [],
         'title': '',
         'assignedInitals': [],
         'assignedName': [],
@@ -37,6 +37,19 @@ function loadFunctions() {
 document.addEventListener('focusout', (event) => {
     if (event.target && event.target.id === 'subtasksInput') {
         showSubtaskIcons();
+    }
+});
+
+
+document.addEventListener('focus', (event) => {
+    if (event.target && event.target.id === 'subtasksInput') {
+        console.log("keks");
+        addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                console.log("keks");
+                checkSubtask()
+            }
+        })
     }
 });
 
@@ -171,14 +184,14 @@ function showSubtask() {
  * @param {string} input The value of the subtask input
  */
 function createSubtask(input) {
-    if (task['subTasks'][0] === null || task['subTasks'].length === 0) {
+    if (task['subtasks'][0] === null || task['subtasks'].length === 0) {
         putSubTask(input, 0);
-        task['subTasks'].splice(0, 1, input);
+        task['subtasks'].splice(0, 1, input);
         clearSubtaskInput(0);
     }
-    else if (task['subTasks'][1] === null || task['subTasks'].length === 1) {
+    else if (task['subtasks'][1] === null || task['subtasks'].length === 1) {
         putSubTask(input, 1);
-        task['subTasks'].splice(1, 1, input);
+        task['subtasks'].splice(1, 1, input);
         clearSubtaskInput(1);
     }
     else {
@@ -272,7 +285,7 @@ function changeDateFormat() {
     let date = document.getElementById('dueDateInput').value;
     let formattedDate = date.replace(/-/g, '/');
     let [year, month, day] = formattedDate.split('/');
-    let formattedDateStr = `${ day }/${month}/${ year }`;
+    let formattedDateStr = `${day}/${month}/${year}`;
     return formattedDateStr;
 }
 
@@ -342,7 +355,7 @@ function load() {
  */
 function showSuccessTask() {
     document.getElementById('taskSuccessAdd').classList.remove('dNone');
-    setTimeout(function() {
+    setTimeout(function () {
         document.querySelector('.taskSuccessAdd').classList.add('taskSuccessAdded');
     }, 10);
 }
@@ -352,7 +365,7 @@ function showSuccessTask() {
  * This functions sends the user to the board.html
  */
 function goToBoard() {
-    setTimeout(function() {
+    setTimeout(function () {
         window.location.href = 'board.html';
     }, 1500);
 }
