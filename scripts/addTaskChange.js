@@ -182,7 +182,7 @@ function checkInput3() {
  * @param {number} i The number of the subtask box
  */
 function deleteSubtask(i) {
-    task['subTasks'][i] = null;
+    task['subtasks'][i] = null;
     document.getElementById(`subTaskBox${i}`).remove();
 }
 
@@ -205,7 +205,7 @@ function clearSubtask(i) {
  * @param {number} i The number of the subtask box
  */
 function editSubtask(i) {
-    let info = task['subTasks'][i];
+    let info = task['subtasks'][i];
     document.getElementById(`subTaskBox${i}`).remove();
     putSubTaskInput(info, i);
     let input = document.getElementById(`subTask${i}`);
