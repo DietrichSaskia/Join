@@ -107,6 +107,7 @@
         position: fixed;
         right: 16px;
         top: 136px;
+        cursor: pointer;
     }
 
     .headlineBox {
