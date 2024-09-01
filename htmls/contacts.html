@@ -11,34 +11,31 @@
   <script src="/templates.js"></script>
 
 </head>
-<body onload="init('headerContact')">
+<body onload="init('headerContact'), contactInfoHeadlineHtml('ContactsInfoSection')">
   <div onclick="editContactCloseWindow()" class="none" id="EditContactIDWIn"></div>
   <main class="mainareasplit">
-    <section class="Contactsection">
+    <section id="ContactSectionID" class="Contactsection">
       <header id="headerContact" class="headerZIndex"></header>
-      <section class="Contactcontent">
+      <section class="none" onclick="editDeleteWindow()" id="ContactSmallSize"></section>
+      <section id="ContactContentID" class="Contactcontent">
         <section class="ContactleftSection">
           <div class="Contactleftbetween">
             <div class="contactleft">
-              <button  onclick="editContactShowWindow() ,editNewContactHtmlChange()" class="AddContactButton">
+              <button id="AddContactNormalButton" onclick="editContactShowWindow() ,editNewContactHtmlChange()" class="AddContactButton">
                 <span class="AddContactText">Add new contact</span>
                 <img class="PersonaddIcon" src="../assets/icons/person_add.png">
               </button>
             </div>
           </div>
-          <div class="EveryContactStyle" id="EveryContact">
-          </div>
+          <div class="EveryContactStyle" id="EveryContact"></div>
         </section>
-        <section>
-          <section class="Rightsectionheadline">
-            <span class="Contactheadline">Contacts</span>
-            <div class="Contactyline"></div>
-            <span class="Contactsmallheadline">Better with a team</span>
-          </section>
-          <div id="Contenttext">
-          </div>
-        </section>
-      </section>
+        <section class="ContactsInfoSectionClass" id="ContactsInfoSection"></section>
+    </section>
+    <section id="MenuEditDeleteButtonPositionID" class="MenuEditDeleteButtonPosition">
+      <button  id="AddContactNewButton" onclick="editContactShowWindow() ,editNewContactHtmlChange()" class="MenuEditDeleteButton">
+        <img class="PersonAddButton" src="/assets/icons/person_add.png">
+      </button>
+      <div id="MenuEditDeleteButtonID"></div>
     </section>
   </main>
   <script src="/Contacthtml.js"></script>

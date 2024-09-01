@@ -126,18 +126,22 @@
     background-color: #29ABE2;
 }
 .UserInforWindow{
-    position: absolute;
+    position: fixed;
+    bottom: -100%; 
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%); 
+    transition: bottom 2s ease-in-out;
     z-index: 10;
+}
+.show-popup {
+    bottom: 50%; 
 }
 .UserInformation{
     width: fit-content;
     background-color: #2A3647;
     color: white;
     border-radius: 12px;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;

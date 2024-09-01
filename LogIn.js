@@ -4,9 +4,10 @@ let matchingUser;
 window.loginUser = loginUser;
 window.addInputListeners = addInputListeners;
 window.guestLogIN = guestLogIN;
-window.loadRememberedData = loadRememberedData
-window.logInAnimation = logInAnimation
-fetchContactTask()
+window.loadRememberedData = loadRememberedData;
+window.logInAnimation = logInAnimation;
+fetchContactTask();
+
 
 /**
  * The current password and email are read out here and if the data is not found, the border of the email container changes to red.
@@ -14,55 +15,18 @@ fetchContactTask()
  * @returns 
  */
 function logInvalidateEmail() {
-    const emailInputElement = document.getElementById("emailInput");
-    const emailContainer = emailInputElement.closest(".LoginInputIcon");
+    const emailInputElement = document.getElementById("emailInputLogin");
+    const emailContainer = document.getElementById("LoginInputIconID1");
     const emailInput = emailInputElement.value;
     const usersRef = ref(database, 'users');
-    logInvalidateEmail1(emailInput, emailContainer)
+    logInvalidateEmail1(emailInput, emailContainer);
     get(usersRef).then((snapshot) => {
-        logInvalidateEmail2(snapshot, emailInput, emailContainer)
+        logInvalidateEmail2(snapshot, emailInput, emailContainer);
     }).catch(() => {
-        emailContainer.style.border = '1px solid red'; 
+        emailContainer.style.border = '1px solid red';
     });
 }
 
-
-async function fetchContactTask(){
-    // Entferne die alten Arrays aus dem localStorage
-localStorage.removeItem('taskAllArray');
-localStorage.removeItem('contactAllArray');
-
-// Initialisiere die neuen Arrays
-let taskAllArray = [];
-let contactAllArray = [];
-
-// Setze die Pfade für die Firebase-Abfragen
-const pathTasks = 'tasksAll';
-const pathContacts = 'contactall';
-
-// Lade die Daten von tasksAll
-let Summaryall = await fetch(BaseUrl + pathTasks + '.json');
-let Summaryallshow = await Summaryall.json();
-
-// Lade die Daten von contactall
-let Contactall = await fetch(BaseUrl + pathContacts + '.json');
-let Contactallshow = await Contactall.json();
-
-// Fülle taskAllArray mit den empfangenen Daten
-for (let key in Summaryallshow) {
-    taskAllArray.push(Summaryallshow[key]);
-}
-
-// Fülle contactAllArray mit den empfangenen Daten
-for (let key in Contactallshow) {
-    contactAllArray.push(Contactallshow[key]);
-}
-
-// Speichere die Arrays im localStorage
-localStorage.setItem('taskAllArray', JSON.stringify(taskAllArray));
-localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
-
-}
 
 /**
  * If the email field is empty, the border of the container will turn black.
@@ -71,7 +35,7 @@ localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
  * @param {*} emailContainer 
  * @returns 
  */
-function logInvalidateEmail1(emailInput, emailContainer){
+function logInvalidateEmail1(emailInput, emailContainer) {
     if (emailInput.trim() === '') {
         emailContainer.style.border = '1px solid black';
         matchingUser = null;
@@ -87,18 +51,37 @@ function logInvalidateEmail1(emailInput, emailContainer){
  * @param {*} emailInput 
  * @param {*} emailContainer 
  */
-function logInvalidateEmail2(snapshot, emailInput,emailContainer){
+function logInvalidateEmail2(snapshot, emailInput, emailContainer) {
     if (snapshot.exists()) {
-        const usersData = snapshot.val();
-        matchingUser = Object.values(usersData).find(user => user.email === emailInput);
-        if (matchingUser) {
-            emailContainer.style.border = '1px solid black';
-        } else {
-            emailContainer.style.border = '1px solid red'; 
-        }
+        try {
+            const usersData = snapshot.val();
+            matchingUser = Object.values(usersData).find(user => user.email === emailInput);
+            if (matchingUser) {
+                emailContainer.style.border = '1px solid black';
+            } else {
+                emailContainer.style.border = '1px solid red';
+            }
+        } catch{emailContainer.style.border = '1px solid red';}
     } else {
-        emailContainer.style.border = '1px solid red'; 
+        emailContainer.style.border = '1px solid red';
     }
+}
+
+
+/**
+ * Adds two add event listeners to the two input fields. The first is responsible for when the field is clicked to enter text and
+ * the second, when you leave the field, the original state is restored.
+ * 
+ */
+function addInputListeners() {
+    const emailInputElement = document.getElementById("emailInputLogin");
+    emailInputElement.addEventListener('input', logInvalidateEmail);
+    emailInputElement.addEventListener('change', logInvalidateEmail);
+    emailInputElement.addEventListener('blur', resetEmailBorderOnBlur);
+    const passwordInputElement = document.getElementById("passwordInput1");
+    passwordInputElement.addEventListener('input', logInvalidatePassword);
+    passwordInputElement.addEventListener('change', logInvalidatePassword);
+    passwordInputElement.addEventListener('blur', resetPasswordBorderOnBlur);
 }
 
 
@@ -125,26 +108,11 @@ function logInvalidatePassword() {
 
 
 /**
- * Adds two add event listeners to the two input fields. The first is responsible for when the field is clicked to enter text and
- * the second, when you leave the field, the original state is restored.
- * 
- */
-function addInputListeners() {
-    const emailInputElement = document.getElementById("emailInput");
-    emailInputElement.addEventListener('input', logInvalidateEmail);
-    emailInputElement.addEventListener('blur', resetEmailBorderOnBlur);
-    const passwordInputElement = document.getElementById("passwordInput1");
-    passwordInputElement.addEventListener('input', logInvalidatePassword);
-    passwordInputElement.addEventListener('blur', resetPasswordBorderOnBlur);
-}
-
-/**
  * When you leave the field, the border is set to black.
  * 
  */
 function resetEmailBorderOnBlur() {
-    const emailInputElement = document.getElementById("emailInput");
-    const emailContainer = emailInputElement.closest(".LoginInputIcon");
+    const emailContainer = document.getElementById("LoginInputIconID1");
     emailContainer.style.border = '1px solid black';
 }
 
@@ -165,7 +133,7 @@ function resetPasswordBorderOnBlur() {
  * 
  */
 function loginUser() {
-    const emailInputElement = document.getElementById("emailInput");
+    const emailInputElement = document.getElementById("emailInputLogin");
     const passwordInputElement = document.getElementById("passwordInput1");
     const rememberMeChecked = document.getElementById("rememberMe").checked;
     const emailInput = emailInputElement.value;
@@ -174,7 +142,7 @@ function loginUser() {
     const usersRef = ref(database, 'users');
     get(usersRef).then((snapshot) => {
         if (snapshot.exists()) {
-            loginUser2(emailInput, passwordInput)
+            loginUser2(emailInput, passwordInput, snapshot)
         } else {
             userInformationPopUp('Keine Benutzer gefunden.')
         }})
@@ -207,7 +175,7 @@ function loginUser1(rememberMeChecked){
  * @param {*} emailInput 
  * @param {*} passwordInput 
  */
-function loginUser2(emailInput, passwordInput){
+function loginUser2(emailInput, passwordInput, snapshot){
     const usersData = snapshot.val();
     const matchingUser = Object.values(usersData).find(user => 
         user.email === emailInput);
@@ -259,7 +227,7 @@ function loadRememberedData() {
     const rememberedPassword = localStorage.getItem('rememberedPassword');
     const rememberMeChecked = localStorage.getItem('rememberMeChecked'); 
     if (rememberedEmail) {
-        document.getElementById('emailInput').value = rememberedEmail;
+        document.getElementById('emailInputLogin').value = rememberedEmail;
     }
     if (rememberedPassword) {
         document.getElementById('passwordInput').value = decryptPassword(rememberedPassword);
@@ -299,4 +267,44 @@ export function logInAnimation(){
             body.style.overflow = 'auto'; 
         }, 1000);
     }, 400);
+}
+
+
+/**
+ * If the arrays already exist in the local storage, they will be deleted. 
+ * The arrays are recreated empty and the data from the Firebase is stored in variables in Json format.
+ * 
+ */
+async function fetchContactTask(){
+    localStorage.removeItem('taskAllArray');
+    localStorage.removeItem('contactAllArray');
+    let taskAllArray = [];
+    let contactAllArray = [];
+    const pathTasks = 'tasksAll';
+    const pathContacts = 'contactall';
+    let Summaryall = await fetch(BaseUrl + pathTasks + '.json');
+    let Summaryallshow = await Summaryall.json();
+    let Contactall = await fetch(BaseUrl + pathContacts + '.json');
+    let Contactallshow = await Contactall.json();
+    fetchContactTask2(Contactallshow, Summaryallshow, contactAllArray, taskAllArray)
+}
+
+
+/**
+ * The data from the variables is added to the array and stored in the local storage.
+ * 
+ * @param {*} Contactallshow 
+ * @param {*} Summaryallshow 
+ * @param {*} contactAllArray 
+ * @param {*} taskAllArray 
+ */
+function fetchContactTask2(Contactallshow, Summaryallshow, contactAllArray, taskAllArray){
+    for (let key in Summaryallshow) {
+        taskAllArray.push(Summaryallshow[key]);
+    }
+    for (let key in Contactallshow) {
+        contactAllArray.push(Contactallshow[key]);
+    }
+    localStorage.setItem('taskAllArray', JSON.stringify(taskAllArray));
+    localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
 }

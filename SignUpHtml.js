@@ -1,5 +1,3 @@
-
-
 function singUpWindowHtml(){
     document.getElementById('SignUpWindow').innerHTML=`
     <header class="SingUpheader">

@@ -1,6 +1,7 @@
 let contactDetails = {};
 let IMGPfadon = ['deleteBlue','editBlue']
 let IMGPfadof = ['delete',  'edit']
+let windowSize = window.innerWidth;
 
 
 /**
@@ -16,6 +17,10 @@ let IMGPfadof = ['delete',  'edit']
 function editNewContact(initials, name, email, phone, buttonColor, index) {
   document.getElementById("EditContactIDWIn").classList.remove("none");
   document.getElementById("EditContactIDWIn").classList.add("EditContactWindow");
+  if(windowSize < 900){
+    document.getElementById('MenuEditDeleteOptionsID').classList.add('hidden');
+    document.getElementById('MenuEditDeleteOptionsID').classList.remove('MenuEditDeleteOptionsSmall');
+  }
   editNewContactHtml2(initials, name, email, phone, buttonColor, index, true);
 }
 
@@ -49,15 +54,9 @@ function editNewContactSave(name, email, phone, index) {
  * @param {*} phoneelement 
  */
 function editNewContactSave1(nameelement, emailelement, phoneelement){
-    if(nameelement === ''){
-        validateName("editNameInput")
-      }
-      if(emailelement === ''){
-        validateEmail("editEmailInput")
-      }
-      if(phoneelement === ''){
-        validatePhone("editPhoneInput")
-      }
+    if(nameelement === ''){validateName("editNameInput")}
+    if(emailelement === ''){validateEmail("editEmailInput")}
+    if(phoneelement === ''){validatePhone("editPhoneInput")}
 }
 
 
@@ -76,7 +75,6 @@ function editNewContactSave2(index) {
         const phoneValue = document.getElementById("editPhoneInput").value;
         const phoneRegex = /^\+\d{2} \d{4} \d{3} \d{2} \d{1}$/;
         if (!phoneRegex.test(phoneValue)) {
-          console.log('Telefonnummer-Format ungültig');
           return;
         } else {
           editNewContactChange(nameValue, emailValue, phoneValue, index);
@@ -129,6 +127,8 @@ function editNewContactHtmlChange() {
     editNewContactHtml2(contactDetails.initials, contactDetails.name, contactDetails.email, contactDetails.phone, contactDetails.buttonColor, contactDetails.index, false);
     document.getElementById('EditWindowAddText1Change').innerHTML='Add contact';
     document.getElementById('EditWindowAddText2Change').innerHTML='Tasks are better with a team!';
+    document.getElementById('EditCircleInitialsID').innerHTML='<img src="/assets/icons/person (1).png">'
+     document.getElementById('EditCircleStyleColor').style.background='#D9D9D9'
     document.getElementById('EditWindowDeleteSaveID1').classList.remove('EditWindowDeleteSave')
     document.getElementById('EditWindowDeleteSaveID1').classList.add('none')
     document.getElementById('EditWindowDeleteSaveID2').classList.add('EditWindowDeleteSave')
@@ -141,14 +141,12 @@ function editNewContactHtmlChange() {
  * The length of the contact strip is then determined and the appropriate key identified.
  * The new object is created and the values are assigned. They are then sent to the database.
  * The main function is rendered to get the current changes and the window is closed.
- * 
  */
 function createNewContact() {
     let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
     const name = document.getElementById('editNameInput').value.trim();
     const email = document.getElementById('editEmailInput').value.trim();
     const phone = document.getElementById('editPhoneInput').value.trim();
-    let contactKey = contactAllArray.length;
     let newContact = {"name": name,"email": email,"phone": phone,"color": getRandomColor()};
     contactAllArray.push(newContact);
     localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
@@ -157,10 +155,10 @@ function createNewContact() {
 }
 
 
-
 /**
  * The data is transferred from the database in an object. The length of the array containing the objects is then determined.
  * The object with the corresponding index is deleted from the array and it is rendered. 
+ * If the px width is less than 900 px, another function is executed.
  * 
  * @param {*} index 
  * @param {*} name 
@@ -173,36 +171,42 @@ function deleteContactList(index) {
         document.getElementById('ContactfieldInfodiv').classList.remove('Slideinright');
         document.getElementById('ContactfieldInfodiv').classList.add('Slideinleft');
         contactLoad();
-    } else {
-        console.error('Ungültiger Index: Der Kontakt konnte nicht gelöscht werden.');
-    }
+        if(windowSize < 900){
+            goBackToContacts()
+        }}
 }
+
 
 /**
  * Slide out animation is started and the system waits until the animation is complete before hiding the element.
- * 
+ * If the Px width is less than 900 and a certain text element is in the Id, the corresponding classes are executed.
  */
 function editContactCloseWindow() {
     const editWindow = document.getElementById('EditContactIDWIn');
     editWindow.classList.remove('Slideinright');
     editWindow.classList.add('Slideinleft');
     setTimeout(() => {
+        if(windowSize < 900){
+            let WindowHeadline = document.getElementById('EditWindowAddText1Change').textContent
+            if(WindowHeadline !== 'Add contact'){
+                document.getElementById('editDeleteChoiceButton').classList.remove('hidden');
+                document.getElementById('editDeleteChoiceButton').classList.add('MenuEditDeleteButton');
+            }}
         editWindow.classList.add("none");
         editWindow.classList.remove("EditContactWindow");
     }, 400); 
 }
 
+
 /**
  * The element is made visible to start the slide in animation.
- * 
  */
 function editContactShowWindow() {
     const editWindow = document.getElementById('EditContactIDWIn');
-    editWindow.classList.remove("none");
-    editWindow.classList.add("EditContactWindow");
-    editWindow.classList.add('Slideinright');
-    editWindow.classList.remove('Slideinleft');
+    editWindow.classList.remove('none', 'Slideinleft');
+    editWindow.classList.add('EditContactWindow', 'Slideinright');
 }
+
 
 /**
  * Function to generate a random color in hex format.
@@ -218,6 +222,7 @@ function getRandomColor() {
     return color;
 }
 
+
 /**
  * The data is transferred from the database in an object. The system then checks whether a contact with the same values already exists. 
  * The object with the corresponding index is deleted and a new object is created. The new object is inserted where the other object was deleted.
@@ -232,13 +237,12 @@ function editNewContactChange(name, email, phone, index) {
     let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
     let duplicate = contactAllArray.some(contact => 
         contact.name === name && contact.email === email && contact.phone === phone
-);
+    );
     if (index >= 0 && index < contactAllArray.length && !duplicate) {
         editNewContactChange2(name, email, phone, index, contactAllArray)
-    } else {
-        console.error('Ungültiger Index oder doppelter Kontakt: Änderung nicht durchgeführt.');
     }
 }
+
 
 function editNewContactChange2(name, email, phone, index, contactAllArray){
     contactAllArray.splice(index, 1);
@@ -266,12 +270,12 @@ function validateName(inputFieldId, originalValue) {
     function capitalizeWords(str) {
         return str.replace(/\b\w/g, function(letter) {
             return letter.toUpperCase();
-        });
-    }
+        });}
     nameInput.value = capitalizeWords(nameInput.value);
     const nameRegex = /^[a-zA-Z]+(?:\s+[a-zA-Z]+)+$/;
     validateBorderChange(nameInput, parentDiv, nameRegex)
 }
+
 
 /**
  * The email is transferred and the conditions whether it is correct or not are transmitted.
@@ -286,6 +290,7 @@ function validateEmail(inputFieldId, originalValue) {
   validateBorderChange(emailInput, parentDiv, emailRegex)
 }
 
+
 /**
  * An event listener is added for the focus to add the + sign. The phone number is formatted before it is validated.
  * 
@@ -297,9 +302,7 @@ function validateEmail(inputFieldId, originalValue) {
     const phoneInput = document.getElementById(inputFieldId);
     const parentDiv = phoneInput.closest(".EditWindowInput");
     phoneInput.addEventListener('focus', function() {
-        if (!phoneInput.value.startsWith('+')) {
-            phoneInput.value = '+';
-        }
+        if (!phoneInput.value.startsWith('+')) {phoneInput.value = '+';}
     });
     if (phoneInput.value.startsWith('+')) {
         phoneInput.value = formatPhoneNumber(phoneInput.value);
@@ -307,6 +310,7 @@ function validateEmail(inputFieldId, originalValue) {
     const phoneRegex = /^\+\d{2} \d{4} \d{3} \d{2} \d{1}$/;
     validateBorderChange(phoneInput, parentDiv, phoneRegex)
 }
+
 
 /**
  * * The status of the input field is viewed here, whether it is empty, an invalid entry has been made or whether it has been entered correctly.
@@ -329,6 +333,7 @@ function validateBorderChange(NameInput, parentDiv, NameRegex){
     }
 }
 
+
 /**
  * A function is called here depending on which value is passed. If the clicked field is empty, the old value is restored.
  * 
@@ -350,6 +355,7 @@ function applyFocusAndValidation(inputFieldId,originalValue,validationFunction) 
   });
 }
 
+
 /**
  * If the field also has a focus, the border and the outline are removed. If the current value corresponds to the original value, the field is empty.
  * 
@@ -367,6 +373,7 @@ function applyFocusAndValidation2(inputField, originalValue){
         }
       });
 }
+
 
 /**
  * When formatting the telephone number, all digits and the plus sign are removed. In addition, the format of a cell phone number is implemented.
@@ -390,65 +397,5 @@ function formatPhoneNumber(value) {
     return value.trim();
 }
 
-/**
- * A different path is used depending on which ID is transferred. This is used to exchange icons.
- * 
- * @param {*} id 
- */
-function onmouse(id){
-        let pfadextra;
-        if(id == 'ContactEditChange'){
-            pfadextra = IMGPfadon[1]
-        }
-        else{
-            pfadextra = IMGPfadon[0]
-        }
-        document.getElementById(id).innerHTML=`<img class="ContactDeleteEdit" src="/assets/icons/${pfadextra}.png"></img>`;
-}
 
-/**
- * A different path is used depending on which ID is transferred. This is used to exchange icons.
- * 
- * @param {*} id 
- */
-function outmouse(id){
-    let pfadextra;
-        if(id == 'ContactEditChange'){
-            pfadextra = IMGPfadof[1]
-        }
-        else{
-            pfadextra = IMGPfadof[0]
-        }
-        document.getElementById(id).innerHTML=`<img class="ContactDeleteEdit" src="/assets/icons/${pfadextra}.png"></img>`;
-}
 
-/**
- * A different path is used depending on which ID is transferred. This is used to exchange icons.
- * 
- * @param {*} id 
- */
-function onmouseClose(id){
-    if(id == 'XCloseID'){
-        document.getElementById(id).innerHTML=`<img id="XCloseother" class="ImgCloseStyle2" src="/assets/icons/closeBlue.png">`;
-    }
-}
-
-/**
- * A different path is used depending on which ID is transferred. This is used to exchange icons.
- * 
- * @param {*} id 
- */
-function outmouseClose(id){
-    if(id == 'XCloseID'){
-        document.getElementById(id).innerHTML=`<img id="XClose" class="ImgCloseStyle2" src="/assets/icons/close.png">`;
-    }
-}  
-
-/**
- *An element that is equipped with this function is not considered by an eventListener. 
- * 
- * @param {*} event 
- */
-function protect(event){
-    event.stopPropagation();
-}

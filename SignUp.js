@@ -24,6 +24,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 export { app, database, ref, get, child, set };
 
+
 /**
  * Opens the SignUp window and the login window is hidden.
  */
@@ -151,17 +152,14 @@ function submitToFirebase1(snapshot, newUser, emailInput, usersRef) {
     const emailExists = Object.values(usersData).some(user => user.email === emailInput);
     if (emailExists) {
         userInformationPopUp('Diese Email wird bereits verwendet!');
-        signUpButton.disabled = true;
-        return;}
+        signUpButton.disabled = true; return;}
     const existingKeys = Object.keys(usersData).map(key => parseInt(key, 10));
     const nextIndex = existingKeys.length > 0 ? Math.max(...existingKeys) + 1 : 0;
     const newUserRef = child(usersRef, nextIndex.toString());
     set(newUserRef, newUser).then(() => {
         userInformationPopUp('Benutzer erfolgreich registriert!');
         backToLogin();})
-    .catch(() => {
-        userInformationPopUp('Benutzer konnte nicht registriert werden!');
-        signUpButton.disabled = true;});
+    .catch(() => {userInformationPopUp('Benutzer konnte nicht registriert werden!'); signUpButton.disabled = true;});
 }
 
 
@@ -170,15 +168,19 @@ function submitToFirebase1(snapshot, newUser, emailInput, usersRef) {
  * 
  * @param {*} text 
  */
-function userInformationPopUp(text){
-    document.getElementById('UserInfoPopUp').classList.remove('none')
-    document.getElementById('UserInfoPopUp').classList.add('UserInforWindow')
-    userInformationPopUpHTML(text)
+function userInformationPopUp(text) {
+    const popupElement = document.getElementById('UserInfoPopUp');
+    popupElement.classList.remove('none');
+    popupElement.classList.add('UserInforWindow');
+    userInformationPopUpHTML(text);
     setTimeout(() => {
-        document.getElementById('UserInfoPopUp').classList.add('none')
-        document.getElementById('UserInfoPopUp').classList.remove('UserInforWindow')
+        popupElement.classList.add('show-popup');
+    }, 10);
+    setTimeout(() => {
+        popupElement.classList.add('none');
+        popupElement.classList.remove('UserInforWindow');
+        popupElement.classList.remove('show-popup');
     }, 3000);
-   
 }
 
 
@@ -236,6 +238,7 @@ function validateValue(input, container, pattern) {
         return true;
     }
 }
+
 
 /**
  * This function checks the value of the input field if it is empty, 
