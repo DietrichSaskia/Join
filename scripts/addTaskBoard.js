@@ -215,6 +215,7 @@ function clearSubtaskInput() {
  * clears all Input Fields and buttons and puts them into their default state
  */
 function clearAddTask() {
+    getusers();
     document.getElementById('titleInput').value = "";
     document.getElementById('descriptionInput').value = "";
     document.getElementById('dueDateInput').value = "";
