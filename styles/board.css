@@ -75,13 +75,41 @@ h1 {
   height: 32px;
 }
 
-input[type="text"] {
+.searchTaskInput {
   border: none;
   outline: none;
   flex: 1;
   font-size: 20px;
   font-weight: 400;
   width: 80%;
+}
+
+.descriptionEdit {
+  color: black;
+  width: 100%;
+  max-width: 440px;
+  height: 120px;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  padding-left: 20px;
+  padding-top: 20px;
+  font-size: 20px;
+}
+
+.prioButtonEdit {
+  font-size: 20px;
+  width: 33%;
+  max-width: 136px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  gap: 8px;
 }
 
 .searchButton {
@@ -157,6 +185,14 @@ input[type="text"] {
 
 .moveBox {
   height: 100%;
+}
+
+.task {
+  transition: transform 0.2s ease;
+}
+
+.task.dragging {
+  transform: rotate(5deg) translateX(-10px);
 }
 
 .task {
@@ -304,6 +340,26 @@ input[type="text"] {
   gap: 15px;
 }
 
+.detailtaskinfos {
+  max-height: 600px; /* Passe die Höhe an deine Bedürfnisse an */
+  overflow-y: auto; /* Scrollbar bei vertikalem Überlauf */
+  overflow-x: hidden; /* Verhindert horizontale Scrollbar */
+  padding-right: 15px; /* Platz für Scrollbar */
+}
+
+.detailtaskinfos::-webkit-scrollbar {
+  width: 10px; /* Breite der Scrollbar */
+}
+
+.detailtaskinfos::-webkit-scrollbar-thumb {
+  background-color: #888; /* Farbe des Scrollbalkens */
+  border-radius: 10px; /* Rundung des Scrollbalkens */
+}
+
+.detailtaskinfos::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Farbe des Scrollbalkens beim Hover */
+}
+
 .categoryAndClose {
   display: flex;
   justify-content: space-between;
@@ -368,6 +424,12 @@ input[type="text"] {
   margin-bottom: 8px;
 }
 
+.subtask:hover {
+  background-color:#D9D9D9;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
 .custom-checkbox {
   cursor: pointer;
   margin-left: 10px; 
@@ -402,4 +464,41 @@ input[type="text"] {
 
  .detailTaskIcon:hover img {
   filter: invert(53%) sepia(94%) saturate(417%) hue-rotate(158deg) brightness(93%) contrast(94%);
+}
+
+.detailtaskEdit {
+  display: flex;
+  flex-direction: column;
+  top: 50px;
+  border-radius: 30px;
+  padding: 48px 40px 48px 40px;
+  width: 400px;
+  background-color: white;
+  gap: 15px;
+}
+
+
+.detailtaskEdit {
+  max-height: 500px; /* Passe die Höhe an deine Bedürfnisse an */
+  overflow-y: auto; /* Scrollbar bei vertikalem Überlauf */
+  overflow-x: hidden; /* Verhindert horizontale Scrollbar */
+  padding-right: 15px; /* Platz für Scrollbar */
+}
+
+.detailtaskEdit::-webkit-scrollbar {
+  width: 10px; /* Breite der Scrollbar */
+}
+
+.detailtaskEdit::-webkit-scrollbar-thumb {
+  background-color: #888; /* Farbe des Scrollbalkens */
+  border-radius: 10px; /* Rundung des Scrollbalkens */
+}
+
+.detailtaskEdit::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Farbe des Scrollbalkens beim Hover */
+}
+
+::-webkit-scrollbar-track{
+  margin-top: 14px;
+  margin-bottom: 14px;
 }

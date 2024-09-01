@@ -71,6 +71,12 @@
     padding-right: 6px;
 }
 
+.xButton {
+    align-self: flex-end;
+    width: 20px;
+    height: 20px;
+}
+
 .mainContent .xButton {
     top: 64px;
     right: 72px;
@@ -166,6 +172,20 @@
     font-size: 20px;
 }
 
+.detailtask.description {
+    width: 100%;
+    max-width: 440px;
+    height: 120px;
+    resize: none;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 20px;
+}
+
 .mainContent .description:not(:placeholder-shown) {
     border: 1px solid #29abe3;
     color: black;
@@ -202,7 +222,7 @@
     outline: 1px #29abe3;
 }
 
-.mainContent .dropdownButtonArea {
+.dropdownButtonArea {
     background-color: white;
     display: flex;
     align-items: center;
@@ -218,26 +238,26 @@
     cursor: pointer;
 }
 
-.mainContent .arrow {
+.arrow {
     rotate: 180deg;
     margin-right: 10px;
 }
 
-.mainContent .upArrow {
+.upArrow {
     position: absolute;
     top: 13px;
     right: 16px;
     cursor: pointer;
 }
 
-.mainContent .dropdownWrapper {
+.dropdownWrapper {
     position: relative;
     height: 1px;
     width: 100%;
     max-width: 440px;
 }
 
-.mainContent .dropdown {
+.dropdown {
     background-color: white;
     width: 100%;
     max-width: 440px;
@@ -247,7 +267,7 @@
     border-radius: 10px;
 }
 
-.mainContent .dropdownUsers {
+.dropdownUsers {
     background-color: white;
     width: 100%;
     max-width: 440px;
@@ -257,17 +277,17 @@
     top: 1px;
 }
 
-.mainContent .dropdownUsers::-webkit-scrollbar {
+.dropdownUsers::-webkit-scrollbar {
     width: 12px;
     height: 20px;
 }
 
-.mainContent .dropdownUsers::-webkit-scrollbar-track {
+.dropdownUsers::-webkit-scrollbar-track {
     background-color: #fff;
     border-radius: 8px;
 }
 
-.mainContent .dropdownUsers::-webkit-scrollbar-thumb {
+.dropdownUsers::-webkit-scrollbar-thumb {
     background: rgb(168, 168, 168);
     border-radius: 8px;
 }
@@ -282,7 +302,7 @@
     border-radius: 10px;
 }
 
-.mainContent .dropdownButton {
+.dropdownButton {
     height: 48px;
     border-radius: 10px;
     padding-left: 20px;
@@ -293,7 +313,7 @@
     justify-content: space-between;
 }
 
-.mainContent .dropdownButton:hover {
+.dropdownButton:hover {
     filter: brightness(0.9);
 }
 
@@ -302,12 +322,12 @@
     color: white;
 }
 
-.mainContent .dropdownButtonSelectedUser {
+.dropdownButtonSelectedUser {
     background-color: #2A3647;
     color: white;
 }
 
-.mainContent .userCircle {
+.userCircle {
     height: 40px;
     width: 40px;
     border: 1px solid white;
@@ -320,17 +340,17 @@
     align-items: center;
 }
 
-.mainContent .dropdownUser {
+.dropdownUser {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.mainContent .dropdownCheckMark {
+.dropdownCheckMark {
     margin-right: 20px;
 }
 
-.mainContent .assignedUsers {
+.assignedUsers {
     height: 48px;
     width: 100%;
     max-width: 440px;
@@ -340,11 +360,11 @@
     padding-top: 10px;
 }
 
-.mainContent .dueDate {
+.dueDate {
     display: flex;
 }
 
-.mainContent .calendar {
+.calendar {
     height: 20px;
     position: relative;
     right: 43px;
@@ -353,26 +373,26 @@
     cursor: pointer;
 }
 
-.mainContent .dateInput {
+.dateInput {
     color: #D1D1D1;
 }
 
-.mainContent .dateInput:valid {
+.dateInput:valid {
     color: #000000;
 }
 
-.mainContent ::-webkit-calendar-picker-indicator {
+::-webkit-calendar-picker-indicator {
     opacity: 0;
 }
 
-.mainContent .prio {
+.prio {
     display: flex;
     justify-content: space-between;
     width: 100%;
     max-width: 440px;
 }
 
-.mainContent .prioButton {
+.prioButton {
     font-size: 20px;
     width: 33%;
     max-width: 136px;
@@ -385,25 +405,25 @@
     gap: 8px;
 }
 
-.mainContent .prioButton:hover {
+.prioButton:hover {
     box-shadow: 0px 4px 2px 2px #D1D1D1;
 }
 
-.mainContent .prioButton.active:hover {
+.prioButton.active:hover {
     box-shadow: none;
 }
 
-.mainContent .high {
+.high {
     background-color: #ff3c00;
     color: white;
 }
 
-.mainContent .medium {
+.medium {
     background-color: #ffaa00;
     color: white;
 }
 
-.mainContent .low {
+.low {
     background-color: #79e329;
     color: white;
 }

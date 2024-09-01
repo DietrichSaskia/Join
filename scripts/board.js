@@ -114,6 +114,8 @@ function truncateDescription(description, wordLimit) {
  */
 function startDragging(taskIndex) {
   currentDraggedElement = taskIndex;
+  let taskElement = document.querySelector(`[data-task="${taskAllArray[taskIndex].title}"]`);
+  taskElement.classList.add('dragging');
 }
 
 
@@ -134,10 +136,14 @@ function allowDrop(ev) {
  */
 function moveTo(section) {
   if (typeof currentDraggedElement !== 'number' || currentDraggedElement < 0 || currentDraggedElement >= taskAllArray.length) {
-    return;
+      return;
   }
   let task = taskAllArray[currentDraggedElement];
   task.section = section;
+
+  let taskElement = document.querySelector(`[data-task="${taskAllArray[currentDraggedElement].title}"]`);
+  taskElement.classList.remove('dragging');
+
   renderAllTasks();
   saveTasksToLocalStorage();
 }

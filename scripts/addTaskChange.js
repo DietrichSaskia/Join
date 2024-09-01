@@ -59,10 +59,12 @@ function toggleAssignedUser(i) {
     let buttonChecked = "/assets/icons/checkButtonMobile.png";
     let buttonUnchecked = "../assets/icons/checkButtonblank.png";
     let check = document.getElementById(`assignedCheck${i}`);
-    let currentCheck = check.src.split('/').pop();
-    document.getElementById(`user${i}`).classList.toggle('dropdownButtonSelectedUser');
-    document.getElementById(`userCircle${i}`).classList.toggle('dNone');
-    check.src = currentCheck === 'checkButtonMobile.png' ? buttonUnchecked : buttonChecked;
+    if (check) {
+        let currentCheck = check.src.split('/').pop();
+        document.getElementById(`user${i}`).classList.toggle('dropdownButtonSelectedUser');
+        document.getElementById(`userCircle${i}`).classList.toggle('dNone');
+        check.src = currentCheck === 'checkButtonMobile.png' ? buttonUnchecked : buttonChecked;
+    }
 }
 
 

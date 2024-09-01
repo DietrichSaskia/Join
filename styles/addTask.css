@@ -497,6 +497,11 @@ input[type="search"]::-webkit-search-results-decoration {
     font-size: 21px;
 }
 
+.clearButton:hover {
+    color: #29ABE2;
+    border: 1px solid #29ABE2;
+}
+
 .clearButton:active {
     color: #29ABE2;
     border: 1px solid #29ABE2;
