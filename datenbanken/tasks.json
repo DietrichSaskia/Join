@@ -33,10 +33,6 @@
       "Create an HTML login form with username and password input fields and a login button",
       "JavaScript code to process and authenticate login details"
     ],
-    "subtasksCompleted": [
-      false,
-      false
-    ],
     "date": "17/08/2024",
     "prioName": "High",
     "assignedInitals": [
