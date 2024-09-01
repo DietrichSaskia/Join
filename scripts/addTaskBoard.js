@@ -339,5 +339,3 @@ function save() {
     let tasksAsText = JSON.stringify(taskAllArray);
     localStorage.setItem('taskAllArray', tasksAsText);
 }
-
-// Füge normales Datum ins Array ein
