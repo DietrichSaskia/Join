@@ -103,6 +103,17 @@
         padding-right: 0;
         left: 0px;
     }
+
+    h1 {
+        max-width: 440px;
+        width: 100%;
+    }
+}
+
+@media (max-width:500px) {
+    h1 {
+        width: calc(100% - 26px);
+    }
 }
 
 @media (max-width:460px) {
