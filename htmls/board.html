@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="/styles/board.css">
   <link rel="stylesheet" href="/styles/header.css">
   <link rel="stylesheet" href="/styles/addTaskBoard.css">
-  <link rel="stylesheet" href="/styles/addTaskBoardResponsive.css">
+  <link rel="stylesheet" href="/styles/boardresponsive.css">
   <script src="/script.js"></script>
   <script src="/templates.js"></script>
   <script src="/scripts/board.js"></script>
@@ -28,7 +28,11 @@
   </div>
   <section class="boardHeadline">
     <div class="headlineAndSearch">
-      <h1>Board</h1>
+      <div class="headlineBox">
+        <h1>Board</h1>
+        <button class="plusButton"><img class="plus" src="/assets/icons/addWhiteNoBorder.png"  alt="" onclick="loadFunctions()"></button>
+      </div>
+
       <div class="searchContainer">
         <div class="searchWrapper">
           <input type="text" id="searchInput" placeholder="Find Task" oninput="searchTask()">
@@ -46,7 +50,7 @@
       <div>
         <div class="headlineTasks">
           <a href="#">To do</a>
-          <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
+          <img onclick="loadFunctions()" src="/assets/icons/add.png" alt="">
         </div>
         <div id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
       </div>
@@ -54,7 +58,7 @@
       <div>
         <div class="headlineTasks">
           <a href="#">In progress</a>
-          <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
+          <img onclick="loadFunctions()" src="/assets/icons/add.png" alt="">
         </div>
         <div id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)"></div>
       </div>
@@ -62,7 +66,7 @@
       <div>
         <div class="headlineTasks">
           <a href="#">Await feedback</a>
-          <img onclick="loadAddTaskComplete()" src="/assets/icons/add.png" alt="">
+          <img onclick="loadFunctions()" src="/assets/icons/add.png" alt="">
         </div>
         <div id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
       </div>
