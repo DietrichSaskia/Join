@@ -3,6 +3,23 @@ body {
     max-width: 1920px;
 }
 
+body::-webkit-scrollbar{
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track{
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px; 
+}
+
+body::-webkit-scrollbar-thumb{
+    background: #2A3647;
+    border-radius: 8px;
+    max-height: 80px;
+}
+
 .mainContent {
     margin-left: 232px;
     padding: 96px 96px 0 96px;
