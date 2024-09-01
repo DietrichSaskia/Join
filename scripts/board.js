@@ -93,16 +93,17 @@ function moveTo(section) {
   saveTasksToLocalStorage();
 }
 
-function updateSubtaskStatus(taskIndex, subtaskIndex) {
-  let checkbox = document.getElementById(`subtask-${taskIndex}-${subtaskIndex}`);
-  let isChecked = checkbox.checked;
-  taskAllArray[taskIndex].subtasks[subtaskIndex].completed = isChecked;
 
-  let storageKey = `task-${taskIndex}-subtask-${subtaskIndex}`;
-  localStorage.setItem(storageKey, isChecked);
-
-  updateTaskProgress(taskIndex);
-  saveTasksToLocalStorage();
+function updateTaskProgress(taskIndex) {
+  if (taskIndex < 0 || taskIndex >= taskAllArray.length) {
+    return;
+  }
+  let task = taskAllArray[taskIndex];
+  if (!task || !task.subtasks || task.subtasks.length === 0) {
+    return;
+  }
+  let progress = calculateSubtaskProgress(task.subtasks, taskIndex);
+  renderSubtaskProgress(taskIndex, progress);
 }
 
 
@@ -130,17 +131,20 @@ function renderSubtaskProgress(taskIndex, progress) {
 }
 
 
-function updateTaskProgress(taskIndex) {
-  if (taskIndex < 0 || taskIndex >= taskAllArray.length) {
-    return;
-  }
+function loadTaskProgress(taskIndex) {
   let task = taskAllArray[taskIndex];
   if (!task || !task.subtasks || task.subtasks.length === 0) {
     return;
   }
-  let progress = calculateSubtaskProgress(task.subtasks);
-  renderSubtaskProgress(taskIndex, progress);
-  saveTasksToLocalStorage();
+  task.subtasks.forEach((subtask, subtaskIndex) => {
+    let storageKey = `task-${taskIndex}-subtask-${subtaskIndex}`;
+    let isChecked = localStorage.getItem(storageKey) === 'true';
+    let checkbox = document.getElementById(`subtask-image-${taskIndex}-${subtaskIndex}`);
+    if (checkbox) {
+      checkbox.src = isChecked ? '/assets/icons/checkButtonChecked.png' : '/assets/icons/checkButtonblank.png';
+    }
+  });
+  updateTaskProgress(taskIndex);
 }
 
 
@@ -149,7 +153,7 @@ function generateTasksHTML(element, i) {
   let categoryClass = formatCategoryClass(category);
   let truncatedDescription = truncateDescription(description, 7);
   let subtaskHTML = generateSubtaskProgressHTML(subtasks, i);
-  let initials = generateInitalsHTML(assignedInitals, color, prio)
+  let initials = generateInitalsHTML(assignedInitals, color, prio);
   return `
    <div class="task" draggable="true" data-task="${title}" ondragstart="startDragging(${i})" ondragover="allowDrop(event)" ondrop="moveTo('${element.section}')" onclick="showTaskDetail(${i})">
       <div class="category ${categoryClass}">${category}</div>
@@ -167,30 +171,38 @@ function formatCategoryClass(category) {
 }
 
 
-function generateInitalsHTML(assignedInitals, colors, prio) {
-  const maxInitialsToShow = 3;
-  let initialsToShow = assignedInitals.slice(0, maxInitialsToShow); // Zeige nur die ersten 3 Initialen
+function getInitialsToShow(assignedInitals, maxInitialsToShow) {
+  let initialsToShow = assignedInitals.slice(0, maxInitialsToShow);
   let remainingInitialsCount = assignedInitals.length - maxInitialsToShow;
-  let html = '<div class="assignedToAndPrio"><div>';
+  return { initialsToShow, remainingInitialsCount };
+}
+
+
+function generateInitialsHTML(initialElements, remainingElement, prio) {
+  return `
+    <div class="assignedToAndPrio">
+      <div>${initialElements}${remainingElement}</div>
+      <img src="${prio}" alt="PriorityImage" class="priority-icon">
+    </div>
+  `;
+}
+
+
+function generateInitalsHTML(assignedInitals, colors, prio) {
+  let maxInitialsToShow = 3;
+  let { initialsToShow, remainingInitialsCount } = getInitialsToShow(assignedInitals, maxInitialsToShow);
   
-  initialsToShow.forEach((initial, index) => {
-    let color = colors[index];
-    html += `
-      <div class="assignedUser" style="background-color: ${color};">
-        <span class="userInitials">${initial}</span>
-      </div>
-    `;
-  });
-  if (remainingInitialsCount > 0) {
-    html += `
-      <div class="assignedUser remainingUsers">
-        <span class="userInitials">+${remainingInitialsCount}</span>
-      </div>
-    `;
-  }
-  html += `</div><img src="${prio}" alt="PriorityImage" class="priority-icon"></div>`;
-  
-  return html;
+  let initialElements = initialsToShow.map((initial, index) => `
+    <div class="assignedUser" style="background-color: ${colors[index]};">
+      <span class="userInitials">${initial}</span>
+    </div>
+  `).join('');
+
+  let remainingElement = remainingInitialsCount > 0 
+    ? `<div class="assignedUser remainingUsers"><span class="userInitials">+${remainingInitialsCount}</span></div>` 
+    : '';
+
+  return generateInitialsHTML(initialElements, remainingElement, prio);
 }
 
 
@@ -198,7 +210,11 @@ function generateSubtaskProgressHTML(subtasks, taskIndex) {
   if (subtasks.length === 0) return '';
   
   let subtaskCount = subtasks.length;
-  let completedSubtasks = subtasks.filter(subtask => subtask.completed).length;
+  let completedSubtasks = subtasks.reduce((count, subtask, subtaskIndex) => {
+    let storageKey = `task-${taskIndex}-subtask-${subtaskIndex}`;
+    return count + (localStorage.getItem(storageKey) === 'true' ? 1 : 0);
+  }, 0);
+  
   let subtaskBarWidth = (completedSubtasks / subtaskCount) * 100;
   
   return `
@@ -206,6 +222,14 @@ function generateSubtaskProgressHTML(subtasks, taskIndex) {
       <div class="subtaskBarContainer">
         <div class="subtaskBar" id="subtaskBar${taskIndex}" style="width: ${subtaskBarWidth}%"></div>
       </div>
-      <span class="subtaskCount" id="subtaskCount${taskIndex}">${completedSubtasks}/${subtaskCount} Unteraufgaben</span>
+      <span class="subtaskCount" id="subtaskCount${taskIndex}">${completedSubtasks}/${subtaskCount} Subtasks</span>
     </div>`;
 }
+
+
+window.onload = function() {
+  loadAll(); 
+  for (let i = 0; i < taskAllArray.length; i++) {
+    loadTaskProgress(i);
+  }
+};

@@ -55,6 +55,7 @@ function toggleSubtaskImage(taskIndex, subtaskIndex) {
     image.src = '/assets/icons/checkButtonChecked.png';
     localStorage.setItem(storageKey, 'true');
   }
+
   updateTaskProgress(taskIndex);
 }
 
