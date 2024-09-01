@@ -4,6 +4,7 @@ let emailsArray = [];
 let contactNameArray = [];
 let PhonenumberArray = [];
 let colorPalette = [];
+let currentWindowWidth = window.innerWidth;
 let GoBackContactsIDs = ['AddContactNewButton','MenuEditDeleteOptionsID', 'editDeleteChoiceButton', 'ContactSmallSize']
 let GoBackContactsAdd = ['MenuEditDeleteButton', 'hidden', 'hidden', 'none']
 let GoBackContactsRemove = ['none', 'MenuEditDeleteOptionsSmall', 'MenuEditDeleteButton', 'ContactsmallSizeStyle']
@@ -202,13 +203,12 @@ function contactloadcontainer5(container, button){
  * @param {*} clickedButtonId 
  */
 function contactloadcontainer6(buttonColor, clickedButtonId){
-    let currentWindowWidth = window.innerWidth;
     if(currentWindowWidth < 900){
         contactWindowSmallSize()
         contactInfo(clickedButtonId, buttonColor, true);
     }
     else{
-        contactInfo(clickedButtonId, buttonColor, false);
+        contactInfo(clickedButtonId, buttonColor, false); 
     }
 }
 
@@ -289,11 +289,12 @@ function contactInfo(clickedButtonId, buttonColor, boolean){
     let contact = charContactArray.find(obj => obj.key === key);
     if (contact) {
         let { initials, name, email, phone } = contact;
-        let WindowSize = window.innerWidth
         contactInfoHtml(initials, name, email, phone, buttonColor, key, boolean);
-        if(WindowSize > 900){
+        if(currentWindowWidth > 900){
             document.getElementById('ContactfieldInfodiv').classList.add('Slideinright');
             document.getElementById('ContactfieldInfodiv').classList.remove('Slideinleft');
+            document.getElementById('MenuEditDeleteOptionsID').classList.add('hidden')
+            document.getElementById('MenuEditDeleteOptionsID').classList.remove('MenuEditDeleteOptionsSmall')
         }
         booleanForContact(boolean)
     }

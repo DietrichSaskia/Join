@@ -1,4 +1,3 @@
-
 function  contactInfoHtml(initials, name, email, phone, buttonColor, index){
     document.getElementById('Contenttext').innerHTML= `
       <div id="ContactfieldInfodiv" class="ContactfieldInfo">
@@ -59,6 +58,7 @@ function  contactInfoHtml(initials, name, email, phone, buttonColor, index){
     `;
 }
 
+
 function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
     document.getElementById('EditContactIDWIn').innerHTML = `
     <div class="EditWindowNew" onclick="protect(event)">
@@ -116,6 +116,7 @@ function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
     editNewContactSave(name, email, phone, index);
 }
  
+
 function editNewContactChangeHTML(){
     document.getElementById('EditWindowDeleteSaveID2').innerHTML=`
     <button onclick="editContactCloseWindow()" onmouseover="onmouseClose('XCloseID')" onmouseout="outmouseClose('XCloseID')" id="CloseButtonID" type="button" class="EditWindowDeleteButton2">Cancel 
@@ -125,8 +126,8 @@ function editNewContactChangeHTML(){
     </button>
     <button  onclick="createNewContact()" class="EditWindowSaveButton">Create contact <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
     `;
-    
 }
+
 
 function contactInfoHeadlineHtml(id){
     document.getElementById(id).innerHTML=`
@@ -144,6 +145,7 @@ function contactInfoHeadlineHtml(id){
     </div>
     `;
 }
+
 
 function editAndDeleteContact(){
     document.getElementById('MenuEditDeleteButtonID').innerHTML=`

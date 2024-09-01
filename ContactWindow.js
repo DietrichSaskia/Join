@@ -284,10 +284,10 @@ function validateName(inputFieldId, originalValue) {
  * @param {*} originalValue 
  */
 function validateEmail(inputFieldId, originalValue) {
-  const emailInput = document.getElementById(inputFieldId);
-  const parentDiv = emailInput.closest(".EditWindowInput");
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  validateBorderChange(emailInput, parentDiv, emailRegex)
+    const emailInput = document.getElementById(inputFieldId);
+    const parentDiv = emailInput.closest(".EditWindowInput");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    validateBorderChange(emailInput, parentDiv, emailRegex)
 }
 
 
