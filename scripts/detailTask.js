@@ -7,8 +7,9 @@ function showTaskDetail(taskIndex) {
 function renderTaskDetails(task, taskIndex) {
   let taskContent = document.getElementById('taskDetailCard');
   taskContent.innerHTML = generateTaskDetailHTML(taskIndex);
-  if(document.getElementById('subtasksDetail')) {
-  document.getElementById('subtasksDetail').innerHTML = renderSubtasks(taskIndex, task);
+  if (document.getElementById('subtasksDetail')) {
+    document.getElementById('subtasksDetail').innerHTML = renderSubtasks(taskIndex, task);
+    updateTaskProgress(taskIndex); // Fortschritt aktualisieren, nachdem Subtasks gerendert wurden
   }
 }
 
@@ -30,15 +31,33 @@ function renderSubtasks(taskIndex, task) {
   let subtasksHTML = subtasks.map((subtask, subtaskIndex) => {
     let storageKey = `task-${taskIndex}-subtask-${subtaskIndex}`;
     let isChecked = localStorage.getItem(storageKey) === 'true';
+    let imageSrc = isChecked ? '/assets/icons/checkButtonChecked.png' : '/assets/icons/checkButtonblank.png';
+    
     return `
       <div class="subtask">
-        <input type="checkbox" id="subtask-${taskIndex}-${subtaskIndex}" onchange="updateSubtaskStatus(${taskIndex}, ${subtaskIndex})" ${isChecked ? 'checked' : ''}/>
-        <label for="subtask-${taskIndex}-${subtaskIndex}">${subtask}</label>
+        <img src="${imageSrc}" id="subtask-image-${taskIndex}-${subtaskIndex}" class="custom-checkbox" onclick="toggleSubtaskImage(${taskIndex}, ${subtaskIndex})" alt="Subtask Status">
+        <span>${subtask}</span>
       </div>`;
   }).join('');
 
   return subtasksHTML;
 }
+
+function toggleSubtaskImage(taskIndex, subtaskIndex) {
+  let storageKey = `task-${taskIndex}-subtask-${subtaskIndex}`;
+  let image = document.getElementById(`subtask-image-${taskIndex}-${subtaskIndex}`);
+  let isChecked = localStorage.getItem(storageKey) === 'true';
+
+  if (isChecked) {
+    image.src = '/assets/icons/checkButtonblank.png';
+    localStorage.setItem(storageKey, 'false');
+  } else {
+    image.src = '/assets/icons/checkButtonChecked.png';
+    localStorage.setItem(storageKey, 'true');
+  }
+  updateTaskProgress(taskIndex);
+}
+
 
 
 function deleteTask(taskIndex) {

@@ -228,6 +228,10 @@ input[type="text"] {
   font-size: 14px;
 }
 
+.remainingUsers {
+  background-color: #2a3647;
+}
+
 .noTasks {
   border: 2px dashed #acacac;
   background-color: #e7e7e7;
@@ -321,11 +325,25 @@ input[type="text"] {
   width: 20px;
   height: 20px;
   color: white;
+  margin-left: 10px;
 }
 
 .assignedName {
   display: flex;
 }
+
+.subtask {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.custom-checkbox {
+  cursor: pointer;
+  margin-left: 10px; 
+  margin-right: 10px; 
+}
+
 
 .iconContainer {
   display: flex;
