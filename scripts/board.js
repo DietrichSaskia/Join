@@ -74,7 +74,7 @@ function renderSection(section, containerId) {
     }
   }
   if (!tasksFound) {
-    container.innerHTML = `<div class="noTasks">Keine Aufgaben in ${formattedSectionName}</div>`;
+    container.innerHTML = `<div class="noTasks">No Tasks in ${formattedSectionName}</div>`;
   }
 }
 
