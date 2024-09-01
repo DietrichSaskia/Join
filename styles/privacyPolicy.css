@@ -2,7 +2,8 @@
     margin-left: 232px;
     padding: 96px 96px 0 96px;
     background-color: #f5f6f7;
-    min-height: calc(100vh - 96px);
+    height: calc(100vh - 96px);
+    overflow-y: scroll;
 }
 
 h1 {
@@ -48,4 +49,103 @@ span {
 ol li {
     font-weight: 800;
     font-size: 21px;
+}
+.SecondP{
+    margin-bottom: 48px;
+}
+.mainContent::-webkit-scrollbar{
+    width: 10px;
+}
+.mainContent::-webkit-scrollbar-track{
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 140px;
+    margin-bottom: 48px; 
+}
+.mainContent::-webkit-scrollbar-thumb{
+    background-color:  #A8A8A8;
+    border-radius: 8px;
+    max-height: 80px;
+}
+
+@media(max-width: 1100px){
+    .mainContent{
+        margin-left: 148px;
+    }
+}
+@media(max-width: 900px){
+    .mainContent{
+        margin-left: 0px;
+        padding: 64px 40px 0px 40px;
+    }
+    
+    h1{
+        padding-top: 64px;
+    }
+    .backButton{
+        right: 48px;
+        top: 148px;
+    } 
+    .mainContent::-webkit-scrollbar{
+        width: 8px;
+    }
+    .mainContent::-webkit-scrollbar-track{
+        margin-bottom: 100px; 
+    }
+}
+@media(max-width: 700px){
+    .mainContent{
+        margin-left: 0px;
+        padding: 64px 40px 0 40px;
+    }
+    h1 {
+        font-size: 47px;
+    }
+    p {
+        font-size: 16px;
+        padding-bottom: 8px;
+    }
+    h2{
+        margin-top: 0;
+    }
+}
+@media(max-width: 600px){
+    h1 {
+        padding-left: 0px;
+        margin-bottom: 24px;
+    }
+    .mainContent{
+        padding: 48px 24px 0 24px;
+    }
+    .backButton{
+        right: 40px;
+        top: 128px;
+    } 
+    .mainContent::-webkit-scrollbar-track{
+        margin-bottom: 88px; 
+    }
+}
+@media(max-width: 500px){
+    h1 {
+        padding-left: 0px;
+    }
+    .mainContent{
+        padding: 40px 8px 0 8px;
+    }
+    .backButton{
+        right: 16px;
+        top: 120px;
+    } 
+}
+@media(max-width: 400px){
+    h1 {
+        font-size: 38px;
+    }
+    .backButton{
+        right: 8px;
+        top: 116px;
+    } 
+    h2{
+        font-size: 20px;
+    }
 }
