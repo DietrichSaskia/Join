@@ -74,20 +74,39 @@ function editNewContactSave1(nameelement, emailelement, phoneelement){
  * @param {*} index 
  */
 function editNewContactSave2(index) {
-        let WindowSize = window.innerWidth;
-        console.log('trest', WindowSize)
-        if(WindowSize < 900){
-           document.getElementById('ChangeClosebutton').innerHTML=`<img class="ImgCloseStyle" src="/assets/icons/closeWhite.png">`
-        }
-        const nameValue = document.getElementById("editNameInput").value;
-        const emailValue = document.getElementById("editEmailInput").value;
-        const phoneValue = document.getElementById("editPhoneInput").value;
-        const phoneRegex = /^\+\d{2} \d{4} \d{3} \d{2} \d{1}$/;
-        if (!phoneRegex.test(phoneValue)) {
-          return;
-        } else {
-          editNewContactChange(nameValue, emailValue, phoneValue, index);
-        }
+    let WindowSize = window.innerWidth;
+    
+    if (WindowSize < 900) {
+        document.getElementById('ChangeClosebutton').innerHTML = `<img class="ImgCloseStyle" src="/assets/icons/closeWhite.png">`;
+    }
+    
+    const nameValue = document.getElementById("editNameInput").value;
+    const emailValue = document.getElementById("editEmailInput").value;
+    const phoneValue = document.getElementById("editPhoneInput").value;
+    const phoneRegex = /^\+\d{2} \d{4} \d{3} \d{2} \d{1}$/;
+
+
+    if (!phoneRegex.test(phoneValue)) {
+        return; 
+    } else {
+        editNewContactChange(nameValue, emailValue, phoneValue, index);
+    }
+}
+
+
+
+
+function editNewContactSave3(){
+    let WindowSize = window.innerWidth;
+    if(WindowSize < 900){
+        document.getElementById('MenuEditDeleteOptionsID').classList.remove('SlideinWindowDW1');
+        document.getElementById('MenuEditDeleteOptionsID').classList.add('SlideinWindowDW2');
+     }
+     else{
+        document.getElementById('ContactfieldInfodiv').classList.remove('Slideinright');
+        document.getElementById('ContactfieldInfodiv').classList.add('Slideinleft');
+        
+     }
 }
 
 
@@ -277,11 +296,11 @@ function editNewContactChange2(name, email, phone, index, contactAllArray){
     let WindowSize = window.innerWidth;
     if(WindowSize < 900){
         contactWindowSmallSize()
-    }else{
-
+      
     }
     contactLoad();
-    document.getElementById('EditContactIDWIn').classList.add('none');
+    document.getElementById('EditContactIDWIn').classList.remove('Slideinright');
+    document.getElementById('EditContactIDWIn').classList.add('Slideinleft');
 }
 
 
