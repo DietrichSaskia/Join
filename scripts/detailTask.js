@@ -1,17 +1,17 @@
 let editedTaskArrays = [
   {
-      'category': '',
-      'date': '',
-      'description': '',
-      'id': '',
-      'prio': '/assets/icons/prioMedium.png',
-      'prioName': 'Medium',
-      'section': 'toDo',
-      'subtasks': [],
-      'title': '',
-      'assignedInitals': [],
-      'assignedName': [],
-      'color': [],
+    'category': '',
+    'date': '',
+    'description': '',
+    'id': '',
+    'prio': '/assets/icons/prioMedium.png',
+    'prioName': 'Medium',
+    'section': 'toDo',
+    'subtasks': [],
+    'title': '',
+    'assignedInitals': [],
+    'assignedName': [],
+    'color': [],
   },
 ];
 let editedTaskArray = editedTaskArrays[0];
@@ -382,14 +382,14 @@ function editTaskTemplate(task, date, taskIndex) {
 }
 
 
-  /**
-  * renders a subtask box below the subtask with an input field
-  * 
-  * @param {string} subtask The value of the subtask input
-  * @param {number} i The number of the subtask box
-  */
-  function subtaskEditInput(subtask, i, taskIndex) {
-    document.getElementById('subtasksBox').innerHTML += /*html*/`
+/**
+* renders a subtask box below the subtask with an input field
+* 
+* @param {string} subtask The value of the subtask input
+* @param {number} i The number of the subtask box
+*/
+function subtaskEditInput(subtask, i, taskIndex) {
+  document.getElementById('subtasksBox').innerHTML += /*html*/`
     <div id="subtaskBox${i}" class="subtaskBox">
         <div class="dFlexAlign backgroundWhite">
             <input id="subtask${i}" value="${subtask}" class="editSubtaskInput">
@@ -401,7 +401,7 @@ function editTaskTemplate(task, date, taskIndex) {
         </div>
     </div>
     `
-  }
+}
 
 
 function subtaskChange(i, taskIndex) {
@@ -449,18 +449,20 @@ function subTaskEdited(input, i, taskIndex) {
 
 function saveEditedTasktoLocalStorage(taskIndex) {
   setEditedArray(taskIndex);
-    if (!checkInputs()) {
-        return;
-    }
-    saveToCurrentTask(taskIndex);
-    toggleTask();
-    renderAllTasks();
-    showTaskDetail(taskIndex);
+  if (!checkInputs()) {
+    return;
+  }
+  saveToCurrentTask(taskIndex);
+  toggleTask();
+  renderAllTasks();
+  showTaskDetail(taskIndex);
 }
 
 function saveToCurrentTask(taskIndex) {
-taskAllArray.splice(taskIndex, 1);
-taskAllArray.splice(taskIndex, 0, editedTaskArray);
+  taskAllArray.splice(taskIndex, 1);
+  taskAllArray.splice(taskIndex, 0, editedTaskArray);
+  let tasksAsText = JSON.stringify(taskAllArray);
+  localStorage.setItem('taskAllArray', tasksAsText);
 }
 
 
@@ -471,10 +473,10 @@ function setEditedArray(taskIndex) {
     let check = document.getElementById(`assignedCheck${i}`);
     let currentCheck = check.src.split('/').pop();
     if (users[i].classList.contains('dropdownButtonSelectedUser') && currentCheck !== "checkButtonBlank.png") {
-        editedTaskArray['assignedName'].push(document.getElementById(`searchUserName${i}`).innerText);
-        editedTaskArray['assignedInitals'].push(document.getElementById(`userCircle${i}`).innerText);
-        editedTaskArray['color'].push(document.getElementById(`userCircle${i}`).style.backgroundColor);
-      }
+      editedTaskArray['assignedName'].push(document.getElementById(`searchUserName${i}`).innerText);
+      editedTaskArray['assignedInitals'].push(document.getElementById(`userCircle${i}`).innerText);
+      editedTaskArray['color'].push(document.getElementById(`userCircle${i}`).style.backgroundColor);
+    }
   }
   editedTaskArray['section'] = taskAllArray[taskIndex].section;
   editedTaskArray['category'] = taskAllArray[taskIndex].category;
@@ -486,7 +488,7 @@ function setEditedArray(taskIndex) {
   editedTaskArray['subtasks'][1] = (document.getElementById('subtask1').innerText);
   let prioButtons = document.getElementsByClassName('prioButtonEdit');
   for (let j = 0; j < prioButtons.length; j++) {
-    let prioButton  = prioButtons[j];
+    let prioButton = prioButtons[j];
     if (prioButton.classList.contains('active')) {
       editedTaskArray['prioName'] = prioButton.innerText;
       editedTaskArray['prio'] = `/assets/icons/prio${prioButton.innerText}.png`;
