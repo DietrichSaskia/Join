@@ -73,7 +73,7 @@ function editNewContactSave1(nameelement, emailelement, phoneelement){
  * 
  * @param {*} index 
  */
-function editNewContactSave2(initials, name, email, phone, buttonColor, index) {
+function editNewContactSave2(index) {
         let WindowSize = window.innerWidth;
         console.log('trest', WindowSize)
         if(WindowSize < 900){
@@ -280,6 +280,7 @@ function editNewContactChange2(name, email, phone, index, contactAllArray){
     }else{
 
     }
+    contactLoad();
     document.getElementById('EditContactIDWIn').classList.add('none');
 }
 
