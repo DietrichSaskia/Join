@@ -7,7 +7,7 @@ function searchTask() {
   let searchQuery = document.getElementById('searchInput').value.toLowerCase();
   
   if (searchQuery.length >= 3) {
-    let filteredTasks = allTasks.filter(task => {
+    let filteredTasks = taskAllArray.filter(task => {
       let titleMatch = task.title.toLowerCase().includes(searchQuery);
       let descriptionMatch = task.description.toLowerCase().includes(searchQuery);
       return titleMatch || descriptionMatch;
