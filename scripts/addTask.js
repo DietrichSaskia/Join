@@ -21,6 +21,11 @@ let task = tasks[0];
 let taskAllArray = [];
 
 
+addEventListener('submit', function(event) {
+    event.preventDefault();
+});
+
+
 /**
  * Loads the initial tasks for the addTask.html
  */
