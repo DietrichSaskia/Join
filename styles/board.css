@@ -84,34 +84,6 @@ h1 {
   width: 80%;
 }
 
-.descriptionEdit {
-  color: black;
-  width: 100%;
-  max-width: 440px;
-  height: 120px;
-  resize: none;
-  border-radius: 8px;
-  border: 1px solid #D1D1D1;
-  box-sizing: border-box;
-  margin-bottom: 12px;
-  padding-left: 20px;
-  padding-top: 20px;
-  font-size: 20px;
-}
-
-.prioButtonEdit {
-  font-size: 20px;
-  width: 33%;
-  max-width: 136px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  border-radius: 8px;
-  gap: 8px;
-}
-
 .searchButton {
   position: relative;
   background: none;
@@ -211,6 +183,7 @@ h1 {
   align-items: flex-start;
   cursor: pointer;
   flex-wrap: wrap;
+  
 }
 
 .TechnicalTask {
@@ -238,6 +211,13 @@ h1 {
   font-size: 16px;
   font-weight: 400;
   color:  #A8A8A8;
+  word-break: break-word;
+  hyphens: auto;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .subtasks {
@@ -310,195 +290,4 @@ h1 {
   color: #acacac;
   font-size: 16px;
   font-weight: 400;
-}
-
-.d-none {
-  display: none !important;
-}
-
-.containerTasksDetail {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 2;
-}
-
-.detailtask {
-  display: flex;
-  flex-direction: column;
-  top: 50px;
-  border-radius: 30px;
-  padding: 48px 40px 48px 40px;
-  width: 400px;
-  background-color: white;
-  gap: 15px;
-}
-
-.detailtaskinfos {
-  max-height: 600px; /* Passe die Höhe an deine Bedürfnisse an */
-  overflow-y: auto; /* Scrollbar bei vertikalem Überlauf */
-  overflow-x: hidden; /* Verhindert horizontale Scrollbar */
-  padding-right: 15px; /* Platz für Scrollbar */
-}
-
-.detailtaskinfos::-webkit-scrollbar {
-  width: 10px; /* Breite der Scrollbar */
-}
-
-.detailtaskinfos::-webkit-scrollbar-thumb {
-  background-color: #888; /* Farbe des Scrollbalkens */
-  border-radius: 10px; /* Rundung des Scrollbalkens */
-}
-
-.detailtaskinfos::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Farbe des Scrollbalkens beim Hover */
-}
-
-.categoryAndClose {
-  display: flex;
-  justify-content: space-between;
-}
-
-.categoryAndClose img {
-  object-fit: cover;
-  cursor: pointer;
-  padding: 2px;
-}
-
-.categoryAndClose img:hover {
-  border: none;
-  border-radius: 50%;
-  background-color: #D9D9D9;
-  padding: 2px;
-}
-
-.titleDetail {
-  font-size: 40px;
-  font-weight: 700;
-  margin: 0;
-}
-
-.descriptionDetail {
-  margin-top: 15px;
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.assignedTo {
-  display: flex;
-  flex-direction: column;
-}
-
-.intalsAndName{
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 10px;
-}
-
-.assignedInitals {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  padding: 10px;
-  width: 20px;
-  height: 20px;
-  color: white;
-  margin-left: 10px;
-}
-
-.assignedName {
-  display: flex;
-}
-
-.subtask {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-}
-
-.subtask:hover {
-  background-color:#D9D9D9;
-  border-radius: 30px;
-  cursor: pointer;
-}
-
-.custom-checkbox {
-  cursor: pointer;
-  margin-left: 10px; 
-  margin-right: 15px;
-  width: 24px;
-}
-
-
-.iconContainer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.detailTaskIcon {
-  display: flex;
-  cursor: pointer;
-  text-align: center;
-  transition: color 0.3s ease, filter 0.3s ease;
-}
-
-.verticalLine {
-  width: 1px;
-  background-color: #d1d1d1;
-  height: 20px; 
-  margin: 0 10px;
-}
-
- .detailTaskIcon:hover p {
-  color: #29abe2;
-}
-
- .detailTaskIcon:hover img {
-  filter: invert(53%) sepia(94%) saturate(417%) hue-rotate(158deg) brightness(93%) contrast(94%);
-}
-
-.detailtaskEdit {
-  display: flex;
-  flex-direction: column;
-  top: 50px;
-  border-radius: 30px;
-  padding: 48px 40px 48px 40px;
-  width: 400px;
-  background-color: white;
-  gap: 15px;
-}
-
-
-.detailtaskEdit {
-  max-height: 500px; /* Passe die Höhe an deine Bedürfnisse an */
-  overflow-y: auto; /* Scrollbar bei vertikalem Überlauf */
-  overflow-x: hidden; /* Verhindert horizontale Scrollbar */
-  padding-right: 15px; /* Platz für Scrollbar */
-}
-
-.detailtaskEdit::-webkit-scrollbar {
-  width: 10px; /* Breite der Scrollbar */
-}
-
-.detailtaskEdit::-webkit-scrollbar-thumb {
-  background-color: #888; /* Farbe des Scrollbalkens */
-  border-radius: 10px; /* Rundung des Scrollbalkens */
-}
-
-.detailtaskEdit::-webkit-scrollbar-thumb:hover {
-  background-color: #555; /* Farbe des Scrollbalkens beim Hover */
-}
-
-::-webkit-scrollbar-track{
-  margin-top: 14px;
-  margin-bottom: 14px;
 }

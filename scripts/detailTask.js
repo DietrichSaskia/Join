@@ -111,6 +111,8 @@ function generateInitalsAndNameDetailHTML(task) {
 
 function renderTaskDetailsNoSubtask(task, categoryClass, taskIndex) {
   let initialsAndName = generateInitalsAndNameDetailHTML(task);
+  let capitalizedTitle = capitalizeFirstLetter(task.title);
+  let capitalizedDescription = capitalizeFirstLetter(task.description);
 
   return /*html*/ `
   <div class="detailtask">
@@ -119,8 +121,8 @@ function renderTaskDetailsNoSubtask(task, categoryClass, taskIndex) {
       <img onclick="closeTask()" src="/assets/icons/close.png" alt="Close">
     </div>
     <div class="detailtaskinfos">
-      <div class="titleDetail">${task.title}</div>
-      <div class="descriptionDetail">${task.description}</div>
+      <div class="titleDetail">${capitalizedTitle}</div>
+      <div class="descriptionDetail">${capitalizedDescription}</div>
       <div>Due date: ${task.date}</div>
       <div>Priority: ${task.prioName} <img src="${task.prio}" alt="PriorityImage"></div>
       <div class="assignedTo"> Assigned To:</div>
@@ -145,6 +147,8 @@ function renderTaskDetailsNoSubtask(task, categoryClass, taskIndex) {
 
 function renderTaskDetailsSubtask(task, categoryClass, taskIndex) {
   let initialsAndName = generateInitalsAndNameDetailHTML(task);
+  let capitalizedTitle = capitalizeFirstLetter(task.title);
+  let capitalizedDescription = capitalizeFirstLetter(task.description);
 
   return /*html*/ `
     <div class="detailtask">
@@ -153,8 +157,8 @@ function renderTaskDetailsSubtask(task, categoryClass, taskIndex) {
         <img onclick="closeTask()" src="/assets/icons/close.png" alt="Close">
       </div>
       <div class="detailtaskinfos">
-      <div class="titleDetail">${task.title}</div>
-      <div class="descriptionDetail">${task.description}</div>
+      <div class="titleDetail">${capitalizedTitle}</div>
+      <div class="descriptionDetail">${capitalizedDescription}</div>
       <div>Due date: ${task.date}</div>
       <div>Priority: ${task.prioName} <img src="${task.prio}" alt="PriorityImage"></div>
       <div class="assignedTo"> Assigned To:</div>
@@ -243,19 +247,19 @@ function editTaskTemplate(task, date) {
     <div class="detailtaskEdit">
         <img class="xButton" onclick="closeTask()" src="/assets/icons/close.png" alt="Close">
       
-      <p>Title</p>
-      <input id="titleInput" value="${task.title}" type="text" required>
+      <p class="titleEdit">Title</p>
+      <input id="titleInput"  class="titleInput" placeholder="Enter a Title" value="${task.title}" type="text" required>
       
-      <p>Description</p>
-      <textarea class="descriptionEdit" id="descriptionInput" >${task.description}</textarea>
+      <p class="descriptionEdit">Description</p>
+      <textarea class="descriptionInput" id="descriptionInput" placeholder="Enter a Description" >${task.description}</textarea>
 
       <p>Due Date</p>
       <div class="dueDate">
-        <input id="dueDateInput" class="dateInput" type="date" min="" value="${date}" required>
+        <input id="dueDateInput" class="dateInput" type="date" min="" placeholder="dd/mm/yyyy" value="${date}" required>
         <img class="calendar" src="../assets/icons/calendar.png">
       </div>
 
-      <p>Prio</p>
+      <p class="priorityEdit"><b>Priority</b></p>
   
       <div class="prio">
   

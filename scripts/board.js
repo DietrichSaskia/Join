@@ -108,6 +108,18 @@ function truncateDescription(description, wordLimit) {
 
 
 /**
+ * Capitalizes the first letter of the given text, ensuring the rest of the string remains unchanged.
+ * 
+ * @param {string} text - The input string to capitalize.
+ * @returns {string} - The modified string with only the first letter capitalized.
+ */
+function capitalizeFirstLetter(text) {
+  if (!text) return text;
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+
+/**
  * Initiates the dragging process for a task.
  * 
  * @param {number} taskIndex - The index of the task being dragged.
@@ -236,13 +248,18 @@ function loadTaskProgress(taskIndex) {
 function generateTasksHTML(element, i) {
   let { category, title, description, subtasks = [], prio, assignedInitals = [], color = [] } = element;
   let categoryClass = formatCategoryClass(category);
-  let truncatedDescription = truncateDescription(description, 7);
+  
+  let capitalizedTitle = capitalizeFirstLetter(title);
+  let capitalizedDescription = capitalizeFirstLetter(description);
+  
+  let truncatedDescription = truncateDescription(capitalizedDescription, 7);
   let subtaskHTML = generateSubtaskProgressHTML(subtasks, i);
   let initials = generateInitalsHTML(assignedInitals, color, prio);
+  
   return `
    <div class="task" draggable="true" data-task="${title}" ondragstart="startDragging(${i})" ondragover="allowDrop(event)" ondrop="moveTo('${element.section}')" onclick="showTaskDetail(${i})">
       <div class="category ${categoryClass}">${category}</div>
-      <div class="title">${title}</div>
+      <div class="title">${capitalizedTitle}</div>
       <div class="description">${truncatedDescription}</div>
       ${subtaskHTML}
       ${initials}
@@ -284,7 +301,7 @@ function getInitialsToShow(assignedInitals, maxInitialsToShow) {
  * @param {string} prio - The path to the priority image.
  * @returns {string} - The HTML string for the initials and priority display.
  */
-function generateInitialsHTML(initialElements, remainingElement, prio) {
+function generateInitialsAndPriorityHTML(initialElements, remainingElement, prio) {
   return `
     <div class="assignedToAndPrio">
       <div>${initialElements}${remainingElement}</div>
@@ -316,7 +333,7 @@ function generateInitalsHTML(assignedInitals, colors, prio) {
     ? `<div class="assignedUser remainingUsers"><span class="userInitials">+${remainingInitialsCount}</span></div>` 
     : '';
 
-  return generateInitialsHTML(initialElements, remainingElement, prio);
+  return generateInitialsAndPriorityHTML(initialElements, remainingElement, prio);
 }
 
 
