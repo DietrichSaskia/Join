@@ -73,7 +73,7 @@ function editNewContactSave1(nameelement, emailelement, phoneelement){
  * 
  * @param {*} index 
  */
-function editNewContactSave2(index) {
+function editNewContactSave2(initials, name, email, phone, buttonColor, index) {
     let WindowSize = window.innerWidth;
     
     if (WindowSize < 900) {
@@ -89,7 +89,7 @@ function editNewContactSave2(index) {
     if (!phoneRegex.test(phoneValue)) {
         return; 
     } else {
-        editNewContactChange(nameValue, emailValue, phoneValue, index);
+        editNewContactChange(initials, nameValue, emailValue, phoneValue,buttonColor ,index);
     }
 }
 
@@ -277,31 +277,35 @@ function getRandomColor() {
  * @param {*} phone 
  * @param {*} index 
  */
-function editNewContactChange(name, email, phone, index) {
+function editNewContactChange(initial,name, email, phone,buttonColor ,index) {
     let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
     let duplicate = contactAllArray.some(contact => 
         contact.name === name && contact.email === email && contact.phone === phone
     );
     if (index >= 0 && index < contactAllArray.length && !duplicate) {
-        editNewContactChange2(name, email, phone, index, contactAllArray)
+        editNewContactChange2(initial,name, email, phone,buttonColor ,index, contactAllArray)
     }
 }
 
 
-function editNewContactChange2(name, email, phone, index, contactAllArray){
-    contactAllArray.splice(index, 1);
-    let newContact = {"email": email,"name": name,"phone": phone,"color": getRandomColor()};
-    contactAllArray.splice(index, 0, newContact);
-    localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
-    let WindowSize = window.innerWidth;
-    if(WindowSize < 900){
-        contactWindowSmallSize()
-      
-    }
+function editNewContactChange2(initial,name, email, phone,buttonColor ,index, contactAllArray){
+    document.getElementById('editContactForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        contactAllArray.splice(index, 1);
+        let newContact = {"email": email,"name": name,"phone": phone,"color": getRandomColor()};
+        contactAllArray.splice(index, 0, newContact);
+        localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
+        let WindowSize = window.innerWidth;
+        if(WindowSize < 900){
+            contactWindowSmallSize()
+          
+        }
+        document.getElementById('EditContactIDWIn').classList.remove('Slideinright');
+        document.getElementById('EditContactIDWIn').classList.add('Slideinleft');
+        contactLoad();
+        contactInfoHtml(initial, name, email, phone, buttonColor, index)
+    });
     
-    document.getElementById('EditContactIDWIn').classList.remove('Slideinright');
-    document.getElementById('EditContactIDWIn').classList.add('Slideinleft');
-    contactLoad();
 }
 
 

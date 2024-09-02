@@ -467,6 +467,9 @@ function saveToCurrentTask(taskIndex) {
 
 
 function setEditedArray(taskIndex) {
+  editedTaskArray['assignedName'] = [];
+  editedTaskArray['assignedInitals'] = [];
+  editedTaskArray['color'] = [];
   let users = document.getElementsByClassName('dropdownButton');
   document.getElementById('taskDetailCard').classList.remove('initalsAndName');
   for (let i = 0; i < users.length; i++) {
