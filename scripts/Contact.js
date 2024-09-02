@@ -257,7 +257,6 @@ function contactInfo(clickedButtonId, buttonColor, boolean){
  */
 function contactWindowSmallSize(){
     contactInfoHeadlineHtml('ContactSmallSize')
-    editAndDeleteContact()
     document.getElementById('ArrowBackClick').classList.add('StyleBackarrowClick')
     document.getElementById('ContactContentID').classList.add('none')
     for(let i = 0; i < contactWindowSmallSizeID.length;i++){
