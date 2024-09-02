@@ -5,12 +5,10 @@ body {
 }
 
 .mainContent::-webkit-scrollbar{
-    z-index: 10;
     width: 10px;
 }
 
 .mainContent::-webkit-scrollbar-track{
-    z-index: 10;
     background-color: #f5f6f7;
     border-radius: 8px;
     margin-top: 180px;
@@ -18,7 +16,6 @@ body {
 }
 
 .mainContent::-webkit-scrollbar-thumb{
-    z-index: 10;
     background: #A8A8A8;
     border-radius: 8px;
 }
