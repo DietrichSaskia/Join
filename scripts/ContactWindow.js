@@ -298,9 +298,10 @@ function editNewContactChange2(name, email, phone, index, contactAllArray){
         contactWindowSmallSize()
       
     }
-    contactLoad();
+    
     document.getElementById('EditContactIDWIn').classList.remove('Slideinright');
     document.getElementById('EditContactIDWIn').classList.add('Slideinleft');
+    contactLoad();
 }
 
 
