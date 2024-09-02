@@ -5,9 +5,9 @@
  */
 function setPrioHigh(task) {
     document.getElementById('prio0').classList.add('high', 'active');
-    document.getElementById('prioHigh').src = "../assets/icons/prioHighWhite.png";
-    task['prio'] = '/assets/icons/prioHigh.png';
-    task['prioName'] = 'High';
+    document.getElementById('prioHigh').src = "../assets/icons/prioUrgentWhite.png";
+    task['prio'] = '/assets/icons/prioUrgent.png';
+    task['prioName'] = 'Urgent';
 }
 
 
@@ -44,7 +44,7 @@ function resetprioButtons() {
     document.getElementById('prio0').classList.remove('high', 'active');
     document.getElementById('prio1').classList.remove('medium', 'active');
     document.getElementById('prio2').classList.remove('low', 'active');
-    document.getElementById('prioHigh').src = "../assets/icons/prioHigh.png";
+    document.getElementById('prioHigh').src = "../assets/icons/prioUrgent.png";
     document.getElementById('prioMed').src = "../assets/icons/prioMedium.png";
     document.getElementById('prioLow').src = "../assets/icons/prioLow.png";
 }
@@ -112,11 +112,11 @@ function clearCategory() {
  */
 function checkSubtask() {
     let input = document.getElementById('subtasksInput').value;
-    document.getElementById('inputerrorSubTask1').style.display = 'none';
-    document.getElementById('inputerrorSubTask2').style.display = 'none';
+    document.getElementById('inputerrorSubtask1').style.display = 'none';
+    document.getElementById('inputerrorSubtask2').style.display = 'none';
     document.getElementById('subtasksInput').classList.remove('redInputBorder');
     if (input.length === 0) {
-        document.getElementById('inputerrorSubTask1').style.display = 'block';
+        document.getElementById('inputerrorSubtask1').style.display = 'block';
         document.getElementById('subtasksInput').classList.add('redInputBorder');
     }
     else {
@@ -167,6 +167,9 @@ function checkInput2() {
  * @returns true if input is validated / false if not 
  */
 function checkInput3() {
+    if(!document.getElementById('category')) {
+        return true
+    }
     if (document.getElementById('category').innerText === 'Select task category') {
         document.getElementById('inputerror3').style.display = 'block';
         checked = false;
@@ -185,7 +188,7 @@ function checkInput3() {
  */
 function deleteSubtask(i) {
     task['subtasks'][i] = null;
-    document.getElementById(`subTaskBox${i}`).remove();
+    document.getElementById(`subtaskBox${i}`).remove();
 }
 
 
@@ -195,8 +198,8 @@ function deleteSubtask(i) {
  * @param {number} i The number of the subtask box
  */
 function clearSubtask(i) {
-    if (document.getElementById(`subTaskBox${i}`)) {
-        document.getElementById(`subTaskBox${i}`).remove();
+    if (document.getElementById(`subtaskBox${i}`)) {
+        document.getElementById(`subtaskBox${i}`).remove();
     }
 }
 
@@ -208,7 +211,7 @@ function clearSubtask(i) {
  */
 function editSubtask(i) {
     let info = task['subtasks'][i];
-    document.getElementById(`subTaskBox${i}`).remove();
+    document.getElementById(`subtaskBox${i}`).remove();
     putSubTaskInput(info, i);
     let input = document.getElementById(`subTask${i}`);
     input.focus();
@@ -222,8 +225,8 @@ function editSubtask(i) {
  * @param {number} i The number of the subtask box
  */
 function changeSubtask(i) {
-    let input = document.getElementById(`subTask${i}`).value;
-    document.getElementById(`subTaskBox${i}`).remove();
+    let input = document.getElementById(`subtask${i}`).value;
+    document.getElementById(`subtaskBox${i}`).remove();
     putSubTask(input, i);
 }
 

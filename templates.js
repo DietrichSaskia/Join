@@ -98,7 +98,7 @@ function loadAddTaskComplete() {
       <div class="prio">
   
         <div id="prio0" class="prioButton" onclick="activateprioButton(0)">Urgent
-          <img id="prioHigh" src="../assets/icons/prioHigh.png">
+          <img id="prioHigh" src="../assets/icons/prioUrgent.png">
         </div>
   
         <div id="prio1" class="prioButton" onclick="activateprioButton(1)">Medium
@@ -139,9 +139,9 @@ function loadAddTaskComplete() {
   
       </div>
   
-      <span class="inputError" id="inputerrorSubTask1">Subtask needs Description</span>
-      <span class="inputError" id="inputerrorSubTask2">Max 2 Subtasks allowed</span>
-      <div class="subTasksBox" id="subTasksBox"></div>
+      <span class="inputError" id="inputerrorSubtask1">Subtask needs Description</span>
+      <span class="inputError" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
+      <div class="subtasksBox" id="subtasksBox"></div>
   
       <div class="emptyBox"></div>
   
@@ -202,10 +202,10 @@ function loadAddTaskComplete() {
   * @param {number} i The number of the subtask box
   */
   function putSubTask(input, i) {
-    document.getElementById('subTasksBox').innerHTML += /*html*/`
-    <div id="subTaskBox${i}" class="subTaskBox">
+    document.getElementById('subtasksBox').innerHTML += /*html*/`
+    <div id="subtaskBox${i}" class="subtaskBox">
         <ul>
-            <li id="subTask${i}">${input}</li>
+            <li id="subtask${i}">${input}</li>
             <div class="subtaskIconsLower">
                 <img class="subtaskIcon" onclick="editSubtask(${i})" src="../assets/icons/edit.png">
                 <div class="smallSeparator"></div>
@@ -224,10 +224,10 @@ function loadAddTaskComplete() {
   * @param {number} i The number of the subtask box
   */
   function putSubTaskInput(input, i) {
-    document.getElementById('subTasksBox').innerHTML += /*html*/`
-    <div id="subTaskBox${i}" class="subTaskBox">
+    document.getElementById('subtasksBox').innerHTML += /*html*/`
+    <div id="subtaskBox${i}" class="subtaskBox">
         <div class="dFlexAlign backgroundWhite">
-            <input id="subTask${i}" value="${input}" class="editSubtaskInput">
+            <input id="subtask${i}" value="${input}" class="editSubtaskInput">
             <div class="subtaskIconsLower">
                 <img class="subtaskIcon" onclick="deleteSubtask(${i})" src="../assets/icons/delete.png">
                 <div class="smallSeparator"></div>

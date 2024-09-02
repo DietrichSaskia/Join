@@ -68,8 +68,8 @@ setTimeout(function () {
 
 
 document.addEventListener('dblclick', function (dblclickEvent) {
-    let subTaskInput0 = document.getElementById("subTaskBox0");
-    let subTaskInput1 = document.getElementById("subTaskBox1");
+    let subTaskInput0 = document.getElementById("subtaskBox0");
+    let subTaskInput1 = document.getElementById("subtaskBox1");
     if (subTaskInput0 && subTaskInput0.contains(dblclickEvent.target)) {
         editSubtask(0);
     }
@@ -197,7 +197,7 @@ function createSubtask(input) {
         clearSubtaskInput(1);
     }
     else {
-        document.getElementById('inputerrorSubTask2').style.display = 'block';
+        document.getElementById('inputerrorSubtask2').style.display = 'block';
         document.getElementById('subtasksInput').classList.add('redInputBorder');
     }
 }

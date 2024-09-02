@@ -197,7 +197,7 @@ function createSubtask(input) {
         clearSubtaskInput(1);
     }
     else {
-        document.getElementById('inputerrorSubTask2').style.display = 'block';
+        document.getElementById('inputerrorSubtask2').style.display = 'block';
         document.getElementById('subtasksInput').classList.add('redInputBorder');
     }
 }

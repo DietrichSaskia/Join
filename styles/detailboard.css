@@ -164,6 +164,41 @@
   width: 400px;
   background-color: white;
   gap: 8px;
+  max-height: 600px; 
+  overflow-y: auto; 
+  overflow-x: hidden;
+}
+
+.detailtaskEdit::-webkit-scrollbar {
+  width: 10px; 
+}
+
+.detailtaskEdit::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 10px; 
+}
+
+.detailtaskEdit::-webkit-scrollbar-thumb:hover {
+  background-color: #555; 
+}
+
+.closeTaskContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeTask {
+  object-fit: cover;
+  cursor: pointer;
+  padding: 2px;
+  width: 20px;
+}
+
+.closeTask:hover {
+  border: none;
+  border-radius: 50%;
+  background-color: #D9D9D9;
+  padding: 2px;
 }
 
 .titleInput {
@@ -235,4 +270,8 @@
   border-radius: 8px;
   border: 1px solid #D1D1D1;
   box-sizing: border-box;
+}
+
+.okButton {
+  background-color: blue;
 }
