@@ -5,17 +5,20 @@ body {
 }
 
 .mainContent::-webkit-scrollbar{
+    z-index: 10;
     width: 10px;
 }
 
 .mainContent::-webkit-scrollbar-track{
+    z-index: 10;
     background-color: #f5f6f7;
     border-radius: 8px;
     margin-top: 180px;
-    margin-bottom: 155px; 
+    margin-bottom: 173px; 
 }
 
 .mainContent::-webkit-scrollbar-thumb{
+    z-index: 10;
     background: #A8A8A8;
     border-radius: 8px;
 }
@@ -91,6 +94,8 @@ span {
 
 .required {
     font-size: 16px;
+    margin-bottom: 20px;
+    align-self: flex-end;
 }
 
 input {
@@ -473,11 +478,6 @@ input[type="search"]::-webkit-search-results-decoration {
     padding-top: 6px;
 }
 
-.taskButtons {
-    margin: auto 0;
-    margin-top: -18px;
-}
-
 .smallSeparator {
     width: 2px;
     height: 24px;
@@ -552,10 +552,16 @@ input[type="search"]::-webkit-search-results-decoration {
 .addTaskBottomBar {
     position: fixed;
     z-index: 2;
-    bottom: 70px;
+    bottom: 0;
     display: flex;
-    width: -webkit-fill-available;
-    max-width: 962px;
+    width: 962px;
+    max-width: calc(100% - 434px);
     justify-content: space-between;
-    padding-right: 96px;
+    margin: 0;
+    background-color: #f5f6f7;
+    height: 88px;
+}
+
+.emptyBox {
+    height: 60px;
 }
