@@ -8,12 +8,15 @@ let currentWindowWidth = window.innerWidth;
 let GoBackContactsIDs = ['AddContactNewButton','MenuEditDeleteOptionsID', 'editDeleteChoiceButton', 'ContactSmallSize']
 let GoBackContactsAdd = ['MenuEditDeleteButton', 'hidden', 'hidden', 'none']
 let GoBackContactsRemove = ['none', 'MenuEditDeleteOptionsSmall', 'MenuEditDeleteButton', 'ContactsmallSizeStyle']
+
 let editDeleteChoiceID = ['MenuEditDeleteOptionsID', 'MenuEditDeleteOptionsID', 'editDeleteChoiceButton']
 let editDeleteChoiceAdd = ['SlideinWindowDW1', 'MenuEditDeleteOptionsSmall', 'hidden']
 let editDeleteChoiceRemove = ['SlideinWindowDW2', 'hidden', 'MenuEditDeleteButton']
+
 let contactWindowSmallSizeID = ['editDeleteChoiceButton', 'ContactSmallSize', 'AddContactNewButton']
 let contactWindowSmallSizeAdd = ['MenuEditDeleteButton', 'ContactsmallSizeStyle','none']
 let contactWindowSmallSizeRemove = ['hidden', 'none', 'MenuEditDeleteButton']
+
 let editDeleteWindowID = ['ContactfieldInfodiv', 'ContactfieldInfodiv', 'ContactfieldInfodiv', 'MenuEditDeleteOptionsID']
 let editDeleteWindowRemove = ['Slideinright', 'Slideinleft', 'SlideinBottomNew', 'SlideinWindowDW1']
 contactLoad();
@@ -40,6 +43,7 @@ function contactLoad() {
 
 /**
  * Several arrays are emptied.
+ * 
  */
 function cleanarray(){
     contactNameArray = [];
@@ -76,6 +80,7 @@ function contactloadchar(contactNameArray){
 
 /**
  * A div container is created here and extensive functions are called up.
+ * 
  */
 function contactloadcontainer(){
     let container = document.createElement('div');
@@ -107,7 +112,9 @@ function contactloadcontainer1(obj, currentInitial, container){
             container.appendChild(span);
             let lineDiv = document.createElement('div');
             lineDiv.classList.add('gray-line');
-            container.appendChild(lineDiv);}}
+            container.appendChild(lineDiv);
+        }
+    }
     contactloadcontainer2(container, obj);
 }
 
@@ -192,7 +199,8 @@ function contactloadcontainer5(container, button){
         let clickedButtonId = event.currentTarget.id;
         let buttonColor = event.currentTarget.querySelector('.initial-circle').style.backgroundColor;
         contactloadcontainer6(buttonColor, clickedButtonId)
-    });container.appendChild(button);
+    });
+    container.appendChild(button);
 }
 
 
@@ -203,76 +211,19 @@ function contactloadcontainer5(container, button){
  * @param {*} clickedButtonId 
  */
 function contactloadcontainer6(buttonColor, clickedButtonId){
+    let currentWindowWidth = window.innerWidth;
     if(currentWindowWidth < 900){
+        document.getElementById('AddContactNewButton').classList.add('none');
+        document.getElementById('AddContactNewButton').classList.remove('MenuEditDeleteButton');
+        document.getElementById('MenuEditDeleteButtonID').classList.remove('hidden');
         contactWindowSmallSize()
         contactInfo(clickedButtonId, buttonColor, true);
+    }else{
+        contactInfoHeadlineHtml('ContactsInfoSection')
+        contactInfo(clickedButtonId, buttonColor, false);
+        document.getElementById('ContactfieldInfodiv').classList.add('Slideinright');
+        document.getElementById('ContactfieldInfodiv').classList.remove('Slideinleft');
     }
-    else{
-        contactInfo(clickedButtonId, buttonColor, false); 
-    }
-}
-
-
-/**
- * Classes are added and removed and classes are also executed with a delay due to the setTimeout function.
- */
-function editDeleteWindow(){
-    for(let i = 0; i < editDeleteWindowID.length;i++){
-        document.getElementById(`${editDeleteWindowID[i]}`).classList.remove(`${editDeleteWindowRemove[i]}`)
-    }
-    document.getElementById('MenuEditDeleteOptionsID').classList.add('SlideinWindowDW2');
-    document.getElementById('ContactfieldInfodiv').classList.add('SlideinTopNew');
-    setTimeout(() => {
-        document.getElementById('MenuEditDeleteOptionsID').classList.add('hidden')
-        document.getElementById('MenuEditDeleteOptionsID').classList.remove('MenuEditDeleteOptionsSmall')
-        document.getElementById('editDeleteChoiceButton').classList.remove('hidden')
-        document.getElementById('editDeleteChoiceButton').classList.add('MenuEditDeleteButton')
-    }, 200);
-}
-
-
-/**
- * Functions are called and classes are added and removed.
- */
-function contactWindowSmallSize(){
-    contactInfoHeadlineHtml('ContactSmallSize')
-    editAndDeleteContact()
-    document.getElementById('ArrowBackClick').classList.add('StyleBackarrowClick')
-    document.getElementById('ContactContentID').classList.add('none')
-    for(let i = 0; i < contactWindowSmallSizeID.length;i++){
-        document.getElementById(`${contactWindowSmallSizeID[i]}`).classList.add(`${contactWindowSmallSizeAdd[i]}`)
-    }
-    for(let i = 0; i < contactWindowSmallSizeID.length;i++){
-        document.getElementById(`${contactWindowSmallSizeID[i]}`).classList.remove(`${contactWindowSmallSizeRemove[i]}`)
-    }
-}
-
-
-/**
- * Classes are added and removed.
- */
-function goBackToContacts(){
-    for(let i = 0; i < GoBackContactsAdd.length;i++){
-        document.getElementById(`${GoBackContactsIDs[i]}`).classList.add(`${GoBackContactsAdd[i]}`)
-    }
-    for(let i = 0; i < GoBackContactsAdd.length;i++){
-        document.getElementById(`${GoBackContactsIDs[i]}`).classList.remove(`${GoBackContactsRemove[i]}`)
-    }
-    document.getElementById('ContactContentID').classList.remove('none')
-    document.getElementById('ArrowBackClick').classList.remove('StyleBackarrowClick')
-}
-
-
-/**
- * Classes are added and removed.
- */
-function editDeleteChoice(){
-    for(let i = 0; i < editDeleteChoiceID.length;i++){
-        document.getElementById(`${editDeleteChoiceID[i]}`).classList.add(`${editDeleteChoiceAdd[i]}`)
-    }
-    for(let i = 0; i < editDeleteChoiceID.length;i++){
-        document.getElementById(`${editDeleteChoiceID[i]}`).classList.remove(`${editDeleteChoiceRemove[i]}`)
-    }    
 }
 
 
@@ -290,14 +241,93 @@ function contactInfo(clickedButtonId, buttonColor, boolean){
     if (contact) {
         let { initials, name, email, phone } = contact;
         contactInfoHtml(initials, name, email, phone, buttonColor, key, boolean);
-        if(currentWindowWidth > 900){
-            document.getElementById('ContactfieldInfodiv').classList.add('Slideinright');
-            document.getElementById('ContactfieldInfodiv').classList.remove('Slideinleft');
+        let windowSize = window.innerWidth
+        if(windowSize > 900){
             document.getElementById('MenuEditDeleteOptionsID').classList.add('hidden')
             document.getElementById('MenuEditDeleteOptionsID').classList.remove('MenuEditDeleteOptionsSmall')
         }
         booleanForContact(boolean)
     }
+}
+
+
+/**
+ * Functions are called and classes are added and removed.
+ * 
+ */
+function contactWindowSmallSize(){
+    contactInfoHeadlineHtml('ContactSmallSize')
+    editAndDeleteContact()
+    document.getElementById('ArrowBackClick').classList.add('StyleBackarrowClick')
+    document.getElementById('ContactContentID').classList.add('none')
+    for(let i = 0; i < contactWindowSmallSizeID.length;i++){
+        document.getElementById(`${contactWindowSmallSizeID[i]}`).classList.add(`${contactWindowSmallSizeAdd[i]}`)
+    }
+    for(let i = 0; i < contactWindowSmallSizeID.length;i++){
+        document.getElementById(`${contactWindowSmallSizeID[i]}`).classList.remove(`${contactWindowSmallSizeRemove[i]}`)
+    }
+}
+
+window.addEventListener('resize', reportWindowSize);
+function reportWindowSize(){
+    let currentWindowWidth = window.innerWidth;
+    if(currentWindowWidth > 900){
+        document.getElementById('ContactsInfoSection').classList.remove('none')
+        document.getElementById('ContactsInfoSection').classList.add('ContactsInfoSectionClass')
+    }
+    if(currentWindowWidth < 900){
+        document.getElementById('ContactsInfoSection').classList.add('none')
+        document.getElementById('ContactsInfoSection').classList.remove('ContactsInfoSectionClass')
+    }
+}
+
+
+/**
+ * Classes are added and removed and classes are also executed with a delay due to the setTimeout function.
+ * 
+ */
+function editDeleteWindow(){
+    for(let i = 0; i < editDeleteWindowID.length;i++){
+        document.getElementById(`${editDeleteWindowID[i]}`).classList.remove(`${editDeleteWindowRemove[i]}`)
+    }
+    document.getElementById('MenuEditDeleteOptionsID').classList.add('SlideinWindowDW2');
+    document.getElementById('ContactfieldInfodiv').classList.add('SlideinTopNew');
+    setTimeout(() => {
+        document.getElementById('MenuEditDeleteOptionsID').classList.add('hidden')
+        document.getElementById('MenuEditDeleteOptionsID').classList.remove('MenuEditDeleteOptionsSmall')
+        document.getElementById('editDeleteChoiceButton').classList.remove('hidden')
+        document.getElementById('editDeleteChoiceButton').classList.add('MenuEditDeleteButton')
+    }, 200);
+}
+
+
+/**
+ * Classes are added and removed.
+ * 
+ */
+function goBackToContacts(){
+    for(let i = 0; i < GoBackContactsAdd.length;i++){
+        document.getElementById(`${GoBackContactsIDs[i]}`).classList.add(`${GoBackContactsAdd[i]}`)
+    }
+    for(let i = 0; i < GoBackContactsAdd.length;i++){
+        document.getElementById(`${GoBackContactsIDs[i]}`).classList.remove(`${GoBackContactsRemove[i]}`)
+    }
+    document.getElementById('ContactContentID').classList.remove('none')
+    document.getElementById('ArrowBackClick').classList.remove('StyleBackarrowClick')
+}
+
+
+/**
+ * Classes are added and removed.
+ * 
+ */
+function editDeleteChoice(){
+    for(let i = 0; i < editDeleteChoiceID.length;i++){
+        document.getElementById(`${editDeleteChoiceID[i]}`).classList.add(`${editDeleteChoiceAdd[i]}`)
+    }
+    for(let i = 0; i < editDeleteChoiceID.length;i++){
+        document.getElementById(`${editDeleteChoiceID[i]}`).classList.remove(`${editDeleteChoiceRemove[i]}`)
+    }    
 }
 
 
@@ -333,69 +363,4 @@ function booleanForContact(boolean){
 }
 
 
-/**
- * A different path is used depending on which ID is transferred. This is used to exchange icons.
- * 
- * @param {*} id 
- */
-function onmouse(id){
-    let pfadextra;
-    if((id == 'ContactEditChange') || (id == 'ContactEditChange2')){
-        pfadextra = IMGPfadon[1]
-    }
-    else{
-        pfadextra = IMGPfadon[0]
-    }
-    document.getElementById(id).innerHTML=`<img class="ContactDeleteEdit" src="/assets/icons/${pfadextra}.png"></img>`;
-}
 
-
-/**
-* A different path is used depending on which ID is transferred. This is used to exchange icons.
-* 
-* @param {*} id 
-*/
-function outmouse(id){
-let pfadextra;
-    if((id == 'ContactEditChange') || (id == 'ContactEditChange2')){
-        pfadextra = IMGPfadof[1]
-    }
-    else{
-        pfadextra = IMGPfadof[0]
-    }
-    document.getElementById(id).innerHTML=`<img class="ContactDeleteEdit" src="/assets/icons/${pfadextra}.png"></img>`;
-}
-
-
-/**
-* A different path is used depending on which ID is transferred. This is used to exchange icons.
-* 
-* @param {*} id 
-*/
-function onmouseClose(id){
-if(id == 'XCloseID'){
-    document.getElementById(id).innerHTML=`<img id="XCloseother" class="ImgCloseStyle2" src="/assets/icons/closeBlue.png">`;
-}
-}
-
-
-/**
-* A different path is used depending on which ID is transferred. This is used to exchange icons.
-* 
-* @param {*} id 
-*/
-function outmouseClose(id){
-if(id == 'XCloseID'){
-    document.getElementById(id).innerHTML=`<img id="XClose" class="ImgCloseStyle2" src="/assets/icons/close.png">`;
-}
-}  
-
-
-/**
-*An element that is equipped with this function is not considered by an eventListener. 
-* 
-* @param {*} event 
-*/
-function protect(event){
-event.stopPropagation();
-}

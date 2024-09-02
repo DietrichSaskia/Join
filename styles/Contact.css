@@ -311,6 +311,7 @@ body{
 .EditJoinLogo{
     height: 66px;
     width: 55px;
+    margin-left: 16px;
 }
 .EditLeftTopStyle{
     margin-top: 154px;
@@ -337,7 +338,7 @@ body{
     width: 100%;
 }
 .EditwindowInputfield{
-    margin-top: 57px;
+    margin-top: 137px;
     width: 422px;
     height: 215px;
     display: flex;
@@ -437,6 +438,7 @@ body{
     font-weight: 700;
     color: white;
     height: 73px;
+    margin-left: 16px;
 }
 .EditWindowDeleteSave{
     margin-top: 48px;
@@ -455,14 +457,11 @@ body{
     display: flex;
     align-items: center;
 }
-.EditWindowAddText2{
-    font-size: 27px;
-    font-weight: 400;
-}
 .EditWindowAddxline{
     width: 90px;
     height: 3px;
     background-color: #29ABE2;
+    margin-left: 16px;
 }
 .EditContactmainWindow{
     display: flex;
@@ -475,7 +474,7 @@ body{
 .EditCircleStyle{
     height: 120px;
     width: 120px;
-    margin-top: 124px;
+    margin-top: 204px;
     margin-left: 97px;
     border-radius: 50%;
     display: flex;
@@ -490,7 +489,7 @@ body{
     font-weight: 400;
     color: white;
     margin-bottom: 12px;
-    margin-top: -8px;
+    margin-left: 16px;
 }
 @keyframes slideInRight {
     from {
@@ -572,6 +571,23 @@ body{
     font-size: 20px;
     color: #007CEE; 
 }
+.EditCloseHeaderSmall{
+    border-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    position: fixed;
+    top: 48px;
+    right: 48px;
+}
+.EditCloseHeaderSmall:hover{
+    background-color:  rgb(241, 243, 244);
+    cursor: pointer;
+}
 
 @media(max-width: 1400px){
     .ContactfieldInfo{
@@ -625,9 +641,6 @@ body{
         height: fit-content;
         margin-top: 24px;
     }
-    .EditWindowAddxline{
-        margin-top: 16px;
-    }
     .EditLeftTopStyle{
         margin-top: 140px;
         width: 100%;
@@ -635,7 +648,6 @@ body{
         justify-content: start;
         margin-left: 0;
         align-items: start;
-        margin-left: 16px;
     }
     .EditCircleStyle{
         height: 100px;
@@ -647,11 +659,11 @@ body{
     .ContactleftSection{
         margin-left: 150px;
     }
-    .EditWindowAddxline{
-        margin-top: 72px;
-    }
     .EditLeftTopStyle{
         margin-top: 88px;
+    }
+    .EditWindowAddText2{
+        margin-top: 72px;
     }
     .EditWindowNew{
         width: 850px;
@@ -740,8 +752,10 @@ body{
     }
     .EditWindowAddText2{
         font-size: 20px;
-        margin-top: 8px;
+        margin-top: 4px;
+        margin-left: 0;
         width: 300px;
+        margin-bottom: 8px;
     }
     .Slideinleft{
         animation: slideInLeft 0.4s ease-out forwards;
@@ -774,6 +788,9 @@ body{
     }
     .EditWindowAddText1Con{
         width: 300px;
+    }
+    .EditWindowAddText1{
+        margin-left: 0px;
     }
     .EditCloseHeaderSmall:hover{
         cursor: pointer;
@@ -811,7 +828,9 @@ body{
         flex-direction: column;
     }
     .EditWindowAddxline{
-        margin-top: 6px;
+        margin-top: 0px;
+        margin-left: 0;
+
     }
     .EditJoinLogo{
         display: none;
@@ -1178,6 +1197,8 @@ body{
     }
     .EditWindowAddText2{
         width: 280px;
+        margin-bottom: 0;
+        margin-top: 0;
     }
 }
 @media(max-width: 400px){

@@ -70,8 +70,8 @@ function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
                 </div>
                 <span id="EditWindowAddText2Change" class="EditWindowAddText2"></span>
                 <div class="EditWindowAddxlineOutStyle"><div class="EditWindowAddxline"></div></div>
-                <button onclick="editContactCloseWindow()" class="EditCloseHeaderSmall">
-                    <img class="ImgCloseStyle" src="/assets/icons/closeWhite.png">
+                <button id="ChangeClosebutton"  onclick="editContactCloseWindow()" class="EditCloseHeaderSmall">
+                    <img class="ImgCloseStyle" src="/assets/icons/close.png">
                 </button>
             </div>
         </section>
@@ -104,7 +104,7 @@ function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
                         </div>
                         <div class="EditWindowDeleteSave" id="EditWindowDeleteSaveID1">
                             <button id="EditWindowDeleteButtonID" onclick="deleteContactList(${index}); editContactCloseWindow();" type="button" class="EditWindowDeleteButton">Delete</button>
-                            <button type="submit" class="EditWindowSaveButton">Save <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
+                            <button onclick="editNewContactSave2(${initials}, ${name}, ${email}, ${ phone}, ${buttonColor} ,${index})" class="EditWindowSaveButton">Save <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
                         </div>
                         <div id="EditWindowDeleteSaveID2"></div>
                     </div>
@@ -130,6 +130,7 @@ function editNewContactChangeHTML(){
 
 
 function contactInfoHeadlineHtml(id){
+    console.log(id)
     document.getElementById(id).innerHTML=`
     <section class="Rightsectionheadline">
         <span class="Contactheadline">Contacts</span>

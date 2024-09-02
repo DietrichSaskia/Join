@@ -1,7 +1,6 @@
 let contactDetails = {};
 let IMGPfadon = ['deleteBlue','editBlue']
 let IMGPfadof = ['delete',  'edit']
-let windowSize = window.innerWidth;
 
 
 /**
@@ -17,9 +16,10 @@ let windowSize = window.innerWidth;
 function editNewContact(initials, name, email, phone, buttonColor, index) {
   document.getElementById("EditContactIDWIn").classList.remove("none");
   document.getElementById("EditContactIDWIn").classList.add("EditContactWindow");
+  let windowSize = window.innerWidth
   if(windowSize < 900){
     document.getElementById('MenuEditDeleteOptionsID').classList.add('hidden');
-    document.getElementById('MenuEditDeleteOptionsID').classList.remove('MenuEditDeleteOptionsSmall');
+    document.getElementById('MenuEditDeleteOptionsID').classList.remove('MenuEditDeleteOptionsSmall');    
   }
   editNewContactHtml2(initials, name, email, phone, buttonColor, index, true);
 }
@@ -54,9 +54,15 @@ function editNewContactSave(name, email, phone, index) {
  * @param {*} phoneelement 
  */
 function editNewContactSave1(nameelement, emailelement, phoneelement){
-    if(nameelement === ''){validateName("editNameInput")}
-    if(emailelement === ''){validateEmail("editEmailInput")}
-    if(phoneelement === ''){validatePhone("editPhoneInput")}
+    if(nameelement === '')
+        {validateName("editNameInput")
+    }
+    if(emailelement === ''){
+        validateEmail("editEmailInput")
+    }
+    if(phoneelement === ''){
+        validatePhone("editPhoneInput")
+    }
 }
 
 
@@ -67,9 +73,12 @@ function editNewContactSave1(nameelement, emailelement, phoneelement){
  * 
  * @param {*} index 
  */
-function editNewContactSave2(index) {
-    document.getElementById("editContactForm").addEventListener("submit", function (event) {
-        event.preventDefault(); 
+function editNewContactSave2(initials, name, email, phone, buttonColor, index) {
+        let WindowSize = window.innerWidth;
+        console.log('trest', WindowSize)
+        if(WindowSize < 900){
+           document.getElementById('ChangeClosebutton').innerHTML=`<img class="ImgCloseStyle" src="/assets/icons/closeWhite.png">`
+        }
         const nameValue = document.getElementById("editNameInput").value;
         const emailValue = document.getElementById("editEmailInput").value;
         const phoneValue = document.getElementById("editPhoneInput").value;
@@ -79,7 +88,6 @@ function editNewContactSave2(index) {
         } else {
           editNewContactChange(nameValue, emailValue, phoneValue, index);
         }
-    });
 }
 
 
@@ -121,6 +129,7 @@ function setContactDetails(initials, name, email, phone, buttonColor, index) {
 
 /**
  * In the Add new contact window, text and buttons are changed using functions and class.
+ * 
  */
 function editNewContactHtmlChange() {
     editContactShowWindow();
@@ -137,6 +146,7 @@ function editNewContactHtmlChange() {
 
 
 /**
+ * 
  * First of all I get the formatted json and then the values from the input fields are assigned to the variables name, email and phone.
  * The length of the contact strip is then determined and the appropriate key identified.
  * The new object is created and the values are assigned. They are then sent to the database.
@@ -171,27 +181,41 @@ function deleteContactList(index) {
         document.getElementById('ContactfieldInfodiv').classList.remove('Slideinright');
         document.getElementById('ContactfieldInfodiv').classList.add('Slideinleft');
         contactLoad();
+        let windowSize = window.innerWidth;
         if(windowSize < 900){
-            goBackToContacts()
-        }}
+            document.getElementById('MenuEditDeleteOptionsID').classList.add('hidden');
+            document.getElementById('MenuEditDeleteOptionsID').classList.remove('MenuEditDeleteOptionsSmall');
+            document.getElementById('ContactSmallSize').classList.add('none');
+            document.getElementById('ContactSmallSize').classList.remove('ContactsmallSizeStyle');
+            document.getElementById('ContactContentID').classList.remove('none');
+            document.getElementById('ContactContentID').classList.add('Contactcontent');
+            document.getElementById('AddContactNewButton').classList.remove('none');
+            document.getElementById('AddContactNewButton').classList.add('MenuEditDeleteButton');
+            document.getElementById('MenuEditDeleteButtonID').classList.add('hidden');
+            
+        }
+    }
 }
 
 
 /**
  * Slide out animation is started and the system waits until the animation is complete before hiding the element.
  * If the Px width is less than 900 and a certain text element is in the Id, the corresponding classes are executed.
+ * 
  */
 function editContactCloseWindow() {
     const editWindow = document.getElementById('EditContactIDWIn');
     editWindow.classList.remove('Slideinright');
     editWindow.classList.add('Slideinleft');
     setTimeout(() => {
+        let windowSize = window.innerWidth
         if(windowSize < 900){
             let WindowHeadline = document.getElementById('EditWindowAddText1Change').textContent
             if(WindowHeadline !== 'Add contact'){
                 document.getElementById('editDeleteChoiceButton').classList.remove('hidden');
                 document.getElementById('editDeleteChoiceButton').classList.add('MenuEditDeleteButton');
-            }}
+            }
+        }
         editWindow.classList.add("none");
         editWindow.classList.remove("EditContactWindow");
     }, 400); 
@@ -200,6 +224,7 @@ function editContactCloseWindow() {
 
 /**
  * The element is made visible to start the slide in animation.
+ * 
  */
 function editContactShowWindow() {
     const editWindow = document.getElementById('EditContactIDWIn');
@@ -249,9 +274,12 @@ function editNewContactChange2(name, email, phone, index, contactAllArray){
     let newContact = {"email": email,"name": name,"phone": phone,"color": getRandomColor()};
     contactAllArray.splice(index, 0, newContact);
     localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
-    document.getElementById('ContactfieldInfodiv').classList.remove('Slideinright');
-    document.getElementById('ContactfieldInfodiv').classList.add('Slideinleft');
-    contactLoad();
+    let WindowSize = window.innerWidth;
+    if(WindowSize < 900){
+        contactWindowSmallSize()
+    }else{
+
+    }
     document.getElementById('EditContactIDWIn').classList.add('none');
 }
 
@@ -270,7 +298,8 @@ function validateName(inputFieldId, originalValue) {
     function capitalizeWords(str) {
         return str.replace(/\b\w/g, function(letter) {
             return letter.toUpperCase();
-        });}
+        });
+    }
     nameInput.value = capitalizeWords(nameInput.value);
     const nameRegex = /^[a-zA-Z]+(?:\s+[a-zA-Z]+)+$/;
     validateBorderChange(nameInput, parentDiv, nameRegex)
@@ -398,4 +427,69 @@ function formatPhoneNumber(value) {
 }
 
 
+/**
+ * A different path is used depending on which ID is transferred. This is used to exchange icons.
+ * 
+ * @param {*} id 
+ */
+function onmouse(id){
+    let pfadextra;
+    if((id == 'ContactEditChange') || (id == 'ContactEditChange2')){
+        pfadextra = IMGPfadon[1]
+    }
+    else{
+        pfadextra = IMGPfadon[0]
+    }
+    document.getElementById(id).innerHTML=`<img class="ContactDeleteEdit" src="/assets/icons/${pfadextra}.png"></img>`;
+}
 
+
+/**
+* A different path is used depending on which ID is transferred. This is used to exchange icons.
+* 
+* @param {*} id 
+*/
+function outmouse(id){
+let pfadextra;
+    if((id == 'ContactEditChange') || (id == 'ContactEditChange2')){
+        pfadextra = IMGPfadof[1]
+    }
+    else{
+        pfadextra = IMGPfadof[0]
+    }
+    document.getElementById(id).innerHTML=`<img class="ContactDeleteEdit" src="/assets/icons/${pfadextra}.png"></img>`;
+}
+
+
+/**
+* A different path is used depending on which ID is transferred. This is used to exchange icons.
+* 
+* @param {*} id 
+*/
+function onmouseClose(id){
+if(id == 'XCloseID'){
+    document.getElementById(id).innerHTML=`<img id="XCloseother" class="ImgCloseStyle2" src="/assets/icons/closeBlue.png">`;
+}
+}
+
+
+/**
+* A different path is used depending on which ID is transferred. This is used to exchange icons.
+* 
+* @param {*} id 
+*/
+function outmouseClose(id){
+if(id == 'XCloseID'){
+    document.getElementById(id).innerHTML=`<img id="XClose" class="ImgCloseStyle2" src="/assets/icons/close.png">`;
+}
+}  
+
+
+/**
+*An element that is equipped with this function is not considered by an eventListener. 
+* 
+* @param {*} event 
+*/
+function protect(event){
+event.stopPropagation();
+}
