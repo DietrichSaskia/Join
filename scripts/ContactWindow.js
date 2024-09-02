@@ -73,7 +73,7 @@ function editNewContactSave1(nameelement, emailelement, phoneelement){
  * 
  * @param {*} index 
  */
-function editNewContactSave2(initials, name, email, phone, buttonColor, index) {
+function editNewContactSave2(index) {
     let WindowSize = window.innerWidth;
     
     if (WindowSize < 900) {
@@ -89,7 +89,7 @@ function editNewContactSave2(initials, name, email, phone, buttonColor, index) {
     if (!phoneRegex.test(phoneValue)) {
         return; 
     } else {
-        editNewContactChange(initials, nameValue, emailValue, phoneValue,buttonColor ,index);
+        editNewContactChange(nameValue, emailValue, phoneValue,index);
     }
 }
 
@@ -277,35 +277,41 @@ function getRandomColor() {
  * @param {*} phone 
  * @param {*} index 
  */
-function editNewContactChange(initial,name, email, phone,buttonColor ,index) {
+function editNewContactChange(name, email, phone ,index) {
     let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
     let duplicate = contactAllArray.some(contact => 
         contact.name === name && contact.email === email && contact.phone === phone
     );
     if (index >= 0 && index < contactAllArray.length && !duplicate) {
-        editNewContactChange2(initial,name, email, phone,buttonColor ,index, contactAllArray)
+        editNewContactChange2(name, email, phone,index, contactAllArray)
     }
 }
 
 
-function editNewContactChange2(initial,name, email, phone,buttonColor ,index, contactAllArray){
+function editNewContactChange2(name, email, phone, index, contactAllArray){
     document.getElementById('editContactForm').addEventListener('submit', function(event) {
         event.preventDefault();
         contactAllArray.splice(index, 1);
-        let newContact = {"email": email,"name": name,"phone": phone,"color": getRandomColor()};
+        let NewColorBackground = getRandomColor()
+        let newContact = {"email": email,"name": name,"phone": phone,"color": NewColorBackground};
         contactAllArray.splice(index, 0, newContact);
         localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
         let WindowSize = window.innerWidth;
-        if(WindowSize < 900){
-            contactWindowSmallSize()
-          
-        }
+        if(WindowSize < 900){contactWindowSmallSize()}
         document.getElementById('EditContactIDWIn').classList.remove('Slideinright');
         document.getElementById('EditContactIDWIn').classList.add('Slideinleft');
-        contactLoad();
-        contactInfoHtml(initial, name, email, phone, buttonColor, index)
-    });
-    
+        let initial = getInitials(name)
+        contactInfoHtml(initial, name, email, phone, NewColorBackground, index)
+        contactLoad() 
+    });   
+}
+
+
+function getInitials(name) {
+    let nameParts = name.split(' ');
+    let firstNameInitial = nameParts[0] ? nameParts[0][0].toUpperCase() : '';
+    let lastNameInitial = nameParts[1] ? nameParts[1][0].toUpperCase() : '';
+    return firstNameInitial + lastNameInitial;
 }
 
 

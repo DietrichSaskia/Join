@@ -104,7 +104,7 @@ function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
                         </div>
                         <div class="EditWindowDeleteSave" id="EditWindowDeleteSaveID1">
                             <button id="EditWindowDeleteButtonID" onclick="deleteContactList(${index}); editContactCloseWindow();" type="button" class="EditWindowDeleteButton">Delete</button>
-                            <button typ="submit id="EditNewContactButtonID" onclick="editNewContactSave2('${initials}', '${name}', '${email}', '${phone}', '${buttonColor}', '${index}')" class="EditWindowSaveButton">Save <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
+                            <button typ="submit id="EditNewContactButtonID" onclick="editNewContactSave2(${index})" class="EditWindowSaveButton">Save <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
                         </div>
                         <div id="EditWindowDeleteSaveID2"></div>
                     </div>

@@ -13,9 +13,12 @@ let editDeleteChoiceID = ['MenuEditDeleteOptionsID', 'MenuEditDeleteOptionsID', 
 let editDeleteChoiceAdd = ['SlideinWindowDW1', 'MenuEditDeleteOptionsSmall', 'hidden']
 let editDeleteChoiceRemove = ['SlideinWindowDW2', 'hidden', 'MenuEditDeleteButton']
 
-let contactWindowSmallSizeID = ['editDeleteChoiceButton', 'ContactSmallSize', 'AddContactNewButton']
-let contactWindowSmallSizeAdd = ['MenuEditDeleteButton', 'ContactsmallSizeStyle','none']
-let contactWindowSmallSizeRemove = ['hidden', 'none', 'MenuEditDeleteButton']
+let contactWindowSmallSizeID = ['editDeleteChoiceButton','ContactSmallSize', 'AddContactNewButton']
+
+let contactWindowSmallSizeAdd = ['MenuEditDeleteButton','ContactsmallSizeStyle','none']
+
+let contactWindowSmallSizeRemove = ['hidden', 'none' ,'MenuEditDeleteButton']
+
 
 let editDeleteWindowID = ['ContactfieldInfodiv', 'ContactfieldInfodiv', 'ContactfieldInfodiv', 'MenuEditDeleteOptionsID']
 let editDeleteWindowRemove = ['Slideinright', 'Slideinleft', 'SlideinBottomNew', 'SlideinWindowDW1']
@@ -257,6 +260,7 @@ function contactInfo(clickedButtonId, buttonColor, boolean){
  */
 function contactWindowSmallSize(){
     contactInfoHeadlineHtml('ContactSmallSize')
+    editAndDeleteContact()
     document.getElementById('ArrowBackClick').classList.add('StyleBackarrowClick')
     document.getElementById('ContactContentID').classList.add('none')
     for(let i = 0; i < contactWindowSmallSizeID.length;i++){
