@@ -1,12 +1,12 @@
 function showTaskDetail(taskIndex) {
   let task = taskAllArray[taskIndex];
   renderTaskDetails(task, taskIndex);
-  openTask();
+  toggleTask();
 }
 
 function renderTaskDetails(task, taskIndex) {
   let taskContent = document.getElementById("taskDetailCard");
-  taskContent.innerHTML = generateTaskDetailHTML(taskIndex);
+  taskContent.innerHTML = generateTaskDetails(taskIndex);
   if (document.getElementById("subtasksDetail")) {
     document.getElementById("subtasksDetail").innerHTML = renderSubtasks(
       taskIndex,
@@ -16,13 +16,12 @@ function renderTaskDetails(task, taskIndex) {
   }
 }
 
-function openTask() {
-  document.getElementById("containerTasksDetail").classList.remove("d-none");
+function toggleTask() {
+  let taskDetailContainer = document.getElementById("containerTasksDetail");
+  taskDetailContainer.classList.toggle("d-none");
 }
 
-function closeTask() {
-  document.getElementById("containerTasksDetail").classList.add("d-none");
-}
+
 
 function renderSubtasks(taskIndex, task) {
   let subtasks = task.subtasks;
@@ -72,15 +71,15 @@ function deleteTask(taskIndex) {
   renderAllTasks();
 }
 
-function generateTaskDetailHTML(taskIndex) {
+function generateTaskDetails(taskIndex) {
   let task = taskAllArray[taskIndex];
   let categoryClass = task.category
     ? task.category.replace(/\s+/g, "")
     : "default-category";
   if (!task.subtasks || task.subtasks === null) {
-    return renderTaskDetailsNoSubtask(task, categoryClass, taskIndex);
+    return generateTaskDetailsNoSubtask(task, categoryClass, taskIndex);
   } else {
-    return renderTaskDetailsSubtask(task, categoryClass, taskIndex);
+    return generateTaskDetailsSubtask(task, categoryClass, taskIndex);
   }
 }
 
@@ -109,7 +108,7 @@ function generateInitalsAndNameDetailHTML(task) {
   return detailHtml;
 }
 
-function renderTaskDetailsNoSubtask(task, categoryClass, taskIndex) {
+function generateTaskDetailsNoSubtask(task, categoryClass, taskIndex) {
   let initialsAndName = generateInitalsAndNameDetailHTML(task);
   let capitalizedTitle = capitalizeFirstLetter(task.title);
   let capitalizedDescription = capitalizeFirstLetter(task.description);
@@ -118,7 +117,7 @@ function renderTaskDetailsNoSubtask(task, categoryClass, taskIndex) {
   <div class="detailtask">
     <div class="categoryAndClose">
       <div class="category ${categoryClass}">${task.category}</div>
-      <img onclick="closeTask()" src="/assets/icons/close.png" alt="Close">
+      <img onclick="toggleTask()" src="/assets/icons/close.png" alt="Close">
     </div>
     <div class="detailtaskinfos">
       <div class="titleDetail">${capitalizedTitle}</div>
@@ -145,7 +144,7 @@ function renderTaskDetailsNoSubtask(task, categoryClass, taskIndex) {
   `;
 }
 
-function renderTaskDetailsSubtask(task, categoryClass, taskIndex) {
+function generateTaskDetailsSubtask(task, categoryClass, taskIndex) {
   let initialsAndName = generateInitalsAndNameDetailHTML(task);
   let capitalizedTitle = capitalizeFirstLetter(task.title);
   let capitalizedDescription = capitalizeFirstLetter(task.description);
@@ -154,7 +153,7 @@ function renderTaskDetailsSubtask(task, categoryClass, taskIndex) {
     <div class="detailtask">
       <div class="categoryAndClose">
         <div class="category ${categoryClass}">${task.category}</div>
-        <img onclick="closeTask()" src="/assets/icons/close.png" alt="Close">
+        <img onclick="toggleTask()" src="/assets/icons/close.png" alt="Close">
       </div>
       <div class="detailtaskinfos">
       <div class="titleDetail">${capitalizedTitle}</div>
@@ -245,7 +244,7 @@ function editTask(taskIndex) {
 function editTaskTemplate(task, date) {
   document.getElementById("taskDetailCard").innerHTML = /*html*/ `
     <div class="detailtaskEdit">
-        <img class="xButton" onclick="closeTask()" src="/assets/icons/close.png" alt="Close">
+        <img class="xButton" onclick="toggleTask()" src="/assets/icons/close.png" alt="Close">
       
       <p class="titleEdit">Title</p>
       <input id="titleInput"  class="titleInput" placeholder="Enter a Title" value="${task.title}" type="text" required>
@@ -289,12 +288,12 @@ function editTaskTemplate(task, date) {
           <div class="dropdownUsers dNone" id="dropdownUsers"></div>
         </div>
       </div>
-  
+
       <div id="assignedUsers" class="assignedUsers"></div>
   
-    </div>
+      </div>
 
-      <div>Subtasks:</div>
+      <div>Subtasks</div>
       <div class="subtasksDetail" id="subtasksDetail"></div>
       <div class="iconContainer">
 
