@@ -244,10 +244,18 @@ function setAssignedUsers(task) {
 function editTask(taskIndex) {
   let task = taskAllArray[taskIndex];
   let date = changeDateFormatEdit(task.date);
-  editTaskTemplate(task, date, taskIndex);
+  setTimeout(() => {
+    editTaskTemplate(task, date, taskIndex);
+  }, 200);
+  if (task.subtasks) {
+    editTaskTemplateSubTasks(0, taskIndex);
+  }
+  if (task.subtasks[1]) {
+    editTaskTemplateSubTasks(1, taskIndex);
+  }
   setpriorityButton(task);
-  timeout = setTimeout(() => {
-    getusers(this.value);
+  setTimeout(() => {
+    getusers();
     setAssignedUsers(task);
   }, 200);
 }
@@ -269,7 +277,7 @@ function subtaskEdit(taskIndex, i) {
 }
 
 
-function editTaskTemplate(task, date, taskIndex) {
+async function editTaskTemplate(task, date, taskIndex) {
   document.getElementById("taskDetailCard").innerHTML = /*html*/ `
     <div class="detailtaskEdit">
       <div class="closeTaskContainer">
@@ -346,27 +354,7 @@ function editTaskTemplate(task, date, taskIndex) {
       <span class="inputError dNone" id="inputerrorSubtask1">Subtask needs Description</span>
       <span class="inputError dNone" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
       <div class="subtasksBox" id="subtasksBox">
-      <div id="subtaskBox0" class="subtaskBox">
-        <ul>
-            <li id="subtask0">${task.subtasks[taskIndex, 0]}</li>
-            <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="subtaskEdit(${taskIndex}, 0)" src="../assets/icons/edit.png">
-                <div class="smallSeparator"></div>
-                <img class="subtaskIcon" onclick="deleteSubtask(${taskIndex}, 0)" src="../assets/icons/delete.png">
-            </div>
-        </ul>
-    </div>
-
-    <div id="subtaskBox1" class="subtaskBox">
-        <ul>
-            <li id="subtask1">${task.subtasks[taskIndex, 1]}</li>
-            <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="subtaskEdit(${taskIndex}, 1)" src="../assets/icons/edit.png">
-                <div class="smallSeparator"></div>
-                <img class="subtaskIcon" onclick="deleteSubtask(${taskIndex}, 1)" src="../assets/icons/delete.png">
-            </div>
-        </ul>
-    </div>
+      
       <div class="emptyBox"></div></div>
   
       
@@ -379,6 +367,21 @@ function editTaskTemplate(task, date, taskIndex) {
     </div>
     </div>
     `;
+}
+
+function editTaskTemplateSubTasks(i, taskIndex) {
+  document.getElementById('subtasksBox').innerHTML += /*html*/`
+  <div id="subtaskBox${i}" class="subtaskBox">
+        <ul>
+            <li id="subtask${i}">${task.subtasks[taskIndex, [i]]}</li>
+            <div class="subtaskIconsLower">
+                <img class="subtaskIcon" onclick="subtaskEdit(${taskIndex}, ${i})" src="../assets/icons/edit.png">
+                <div class="smallSeparator"></div>
+                <img class="subtaskIcon" onclick="deleteSubtask(${taskIndex}, ${i})" src="../assets/icons/delete.png">
+            </div>
+        </ul>
+    </div>
+    `
 }
 
 
