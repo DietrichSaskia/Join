@@ -40,7 +40,7 @@
         position: fixed;
         top: 30px;
         background-color: #f5f6f7;
-        width: 100%;
+        width: 70%;
         padding-bottom: 12px;
     }
 
@@ -123,7 +123,7 @@
 
 @media (max-width:500px) {
     h1 {
-        width: calc(100% - 26px);
+        width: calc(100% - 39px);
     }
 }
 
