@@ -11,12 +11,11 @@
   <script src="/templates.js"></script>
 
 </head>
-<body onload="init('headerContact'), contactInfoHeadlineHtml('ContactsInfoSection')">
-  <div onclick="editContactCloseWindow()" class="none" id="EditContactIDWIn"></div>
+<body onload="init('headerContact'), contactInfoHeadlineHtml()">
+  <div onclick="clickContactBack()" class="none" id="EditContactIDWIn"></div>
   <main class="mainareasplit">
     <section id="ContactSectionID2" class="Contactsection">
       <header id="headerContact" class="headerZIndex"></header>
-      <section class="none" onclick="editDeleteWindow()" id="ContactSmallSize"></section>
       <section id="ContactContentID" class="Contactcontent">
         <section class="ContactleftSection">
           <div class="Contactleftbetween">
@@ -35,7 +34,12 @@
       <button  id="AddContactNewButton" onclick="editContactShowWindow() ,editNewContactHtmlChange()" class="MenuEditDeleteButton">
         <img class="PersonAddButton" src="/assets/icons/person_add.png">
       </button>
-      <div id="MenuEditDeleteButtonID"></div>
+      <div id="MenuEditDeleteButtonID" class="none">
+        <button  id="editDeleteChoiceButton" onclick="editDeleteWindow()" class="MenuEditDeleteButton">
+          <img class="PersonAddButton" src="/assets/icons/more_vert.png">
+        </button>
+      </div>
+      <div id="WindowEditDeleteID" class="none"></div>
     </section>
   </main>
   <script src="/scripts/Contacthtml.js"></script>

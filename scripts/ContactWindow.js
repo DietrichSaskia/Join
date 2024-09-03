@@ -14,13 +14,13 @@ let IMGPfadof = ['delete',  'edit']
  * @param {*} index 
  */
 function editNewContact(initials, name, email, phone, buttonColor, index) {
+    document.getElementById("MenuEditDeleteOptionsID").classList.add("none");
+    document.getElementById("MenuEditDeleteOptionsID").classList.remove("MenuEditDeleteOptionsSmall");
+    document.getElementById("MenuEditDeleteOptionsID").classList.remove("SlideinWindowDW1");
+    document.getElementById("MenuEditDeleteOptionsID").classList.add("SlideinWindowDW2");
+    document.getElementById("MenuEditDeleteButtonID").classList.add("none");
   document.getElementById("EditContactIDWIn").classList.remove("none");
   document.getElementById("EditContactIDWIn").classList.add("EditContactWindow");
-  let windowSize = window.innerWidth
-  if(windowSize < 900){
-    document.getElementById('MenuEditDeleteOptionsID').classList.add('hidden');
-    document.getElementById('MenuEditDeleteOptionsID').classList.remove('MenuEditDeleteOptionsSmall');    
-  }
   editNewContactHtml2(initials, name, email, phone, buttonColor, index, true);
 }
 
@@ -199,20 +199,15 @@ function deleteContactList(index) {
         localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
         document.getElementById('ContactfieldInfodiv').classList.remove('Slideinright');
         document.getElementById('ContactfieldInfodiv').classList.add('Slideinleft');
-        contactLoad();
-        let windowSize = window.innerWidth;
+        let windowSize = window.innerWidth
         if(windowSize < 900){
-            document.getElementById('MenuEditDeleteOptionsID').classList.add('hidden');
-            document.getElementById('MenuEditDeleteOptionsID').classList.remove('MenuEditDeleteOptionsSmall');
-            document.getElementById('ContactSmallSize').classList.add('none');
-            document.getElementById('ContactSmallSize').classList.remove('ContactsmallSizeStyle');
-            document.getElementById('ContactContentID').classList.remove('none');
-            document.getElementById('ContactContentID').classList.add('Contactcontent');
-            document.getElementById('AddContactNewButton').classList.remove('none');
-            document.getElementById('AddContactNewButton').classList.add('MenuEditDeleteButton');
-            document.getElementById('MenuEditDeleteButtonID').classList.add('hidden');
-            
+            goBackToContacts()
         }
+        else{
+            document.getElementById('Contenttext').innerHTML='';
+        }
+        contactLoad();
+        
     }
 }
 
@@ -227,14 +222,6 @@ function editContactCloseWindow() {
     editWindow.classList.remove('Slideinright');
     editWindow.classList.add('Slideinleft');
     setTimeout(() => {
-        let windowSize = window.innerWidth
-        if(windowSize < 900){
-            let WindowHeadline = document.getElementById('EditWindowAddText1Change').textContent
-            if(WindowHeadline !== 'Add contact'){
-                document.getElementById('editDeleteChoiceButton').classList.remove('hidden');
-                document.getElementById('editDeleteChoiceButton').classList.add('MenuEditDeleteButton');
-            }
-        }
         editWindow.classList.add("none");
         editWindow.classList.remove("EditContactWindow");
     }, 400); 
@@ -296,8 +283,6 @@ function editNewContactChange2(name, email, phone, index, contactAllArray){
         let newContact = {"email": email,"name": name,"phone": phone,"color": NewColorBackground};
         contactAllArray.splice(index, 0, newContact);
         localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
-        let WindowSize = window.innerWidth;
-        if(WindowSize < 900){contactWindowSmallSize()}
         document.getElementById('EditContactIDWIn').classList.remove('Slideinright');
         document.getElementById('EditContactIDWIn').classList.add('Slideinleft');
         let initial = getInitials(name)

@@ -41,7 +41,7 @@ function  contactInfoHtml(initials, name, email, phone, buttonColor, index){
                 </div>
             </div>
         </div>
-         <div onclick="protect(event)" id="MenuEditDeleteOptionsID" class="hidden">
+         <div onclick="protect(event)" id="MenuEditDeleteOptionsID" class="none">
             <button onclick="editNewContact('${initials}', '${name}', '${email}', '${phone}', '${buttonColor}', '${index}'), editContactShowWindow()" class="ContactEditButton" onmouseover="onmouse('ContactEditChange2')" onmouseout="outmouse('ContactEditChange2')"> 
                 <div id="ContactEditChange2">
                     <img class="ContactDeleteEdit" src="/assets/icons/edit.png">
@@ -70,7 +70,7 @@ function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
                 </div>
                 <span id="EditWindowAddText2Change" class="EditWindowAddText2"></span>
                 <div class="EditWindowAddxlineOutStyle"><div class="EditWindowAddxline"></div></div>
-                <button id="ChangeClosebutton"  onclick="editContactCloseWindow()" class="EditCloseHeaderSmall">
+                <button id="ChangeClosebutton"  onclick="clickContactBack()" class="EditCloseHeaderSmall">
                     <img class="ImgCloseStyle" src="/assets/icons/close.png">
                 </button>
             </div>
@@ -104,7 +104,7 @@ function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
                         </div>
                         <div class="EditWindowDeleteSave" id="EditWindowDeleteSaveID1">
                             <button id="EditWindowDeleteButtonID" onclick="deleteContactList(${index}); editContactCloseWindow();" type="button" class="EditWindowDeleteButton">Delete</button>
-                            <button typ="submit id="EditNewContactButtonID" onclick="editNewContactSave2(${index})" class="EditWindowSaveButton">Save <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
+                            <button typ="submit id="EditNewContactButtonID" onclick="editNewContactSave2(${index}), clickContactBack()" class="EditWindowSaveButton">Save <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
                         </div>
                         <div id="EditWindowDeleteSaveID2"></div>
                     </div>
@@ -124,15 +124,14 @@ function editNewContactChangeHTML(){
             <img  class="ImgCloseStyle2" src="/assets/icons/close.png">
         </div>
     </button>
-    <button  onclick="createNewContact()" class="EditWindowSaveButton">Create contact <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
+    <button  onclick="createNewContact(), editContactCloseWindow()" class="EditWindowSaveButton">Create contact <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
     `;
 }
 
 
-function contactInfoHeadlineHtml(id){
-    console.log(id)
-    document.getElementById(id).innerHTML=`
-    <section class="Rightsectionheadline">
+function contactInfoHeadlineHtml(){
+    document.getElementById('ContactsInfoSection').innerHTML=`
+    <section id="RightsectionheadlineID" class="Rightsectionheadline">
         <span class="Contactheadline">Contacts</span>
         <div class="Contactyline"></div>
         <span class="Contactsmallheadline">Better with a team</span>
@@ -147,11 +146,3 @@ function contactInfoHeadlineHtml(id){
     `;
 }
 
-
-function editAndDeleteContact(){
-    document.getElementById('MenuEditDeleteButtonID').innerHTML=`
-    <button  id="editDeleteChoiceButton" onclick="editDeleteChoice()" class="MenuEditDeleteButton">
-        <img class="PersonAddButton" src="/assets/icons/more_vert.png">
-    </button>
-    `;
-}

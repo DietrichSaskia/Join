@@ -55,6 +55,7 @@ body{
     border-radius: 10px;
     height: 56px;
     font-size: 21px;
+    border-style: none;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,6 +63,7 @@ body{
 }
 .AddContactButton:hover{
     cursor: pointer;
+    background-color: #29ABE2;
 }
 .Contactcontent{
     display: flex;
@@ -471,6 +473,7 @@ body{
 .EditCloseHeaderSmall{
     display: none;
 }
+
 .EditCircleStyle{
     height: 120px;
     width: 120px;
@@ -545,6 +548,9 @@ body{
     background-color: #2A3647; 
     color: white;
 }
+.ArrowstylePosition{
+    display: none;
+}
 .initial-circle {
     width: 40px;
     height: 40px;
@@ -565,6 +571,10 @@ body{
 .person-name {
     font-size: 20px;
     font-weight: 400;
+}
+.ContactsInfoSectionClass{
+    position: relative;
+    z-index: 20;
 }
 .person-email {
     margin-top: 4px;
@@ -608,11 +618,9 @@ body{
     }
     .Rightsectionheadline{
         gap: 16px;
-    }
-    .ContactfieldInfo{
         margin-left: 32px;
     }
-    .Rightsectionheadline{
+    .ContactfieldInfo{
         margin-left: 32px;
     }
     .Contactsmallheadline{
@@ -692,7 +700,7 @@ body{
         margin-left: 16px;
     }
     .ContactfieldInfo{
-        margin-left: 16px;
+        margin-left: 100px;
     }
     .Rightsectionheadline{
         margin-left: 16px;
@@ -750,6 +758,16 @@ body{
         top: 24px;
         right: 24px;
     }
+    .ContactsInfoSectionClass{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 96px;
+        bottom: 80px;
+        z-index: -1;
+        height: calc(100vh - 160px);
+    }
     .EditWindowAddText2{
         font-size: 20px;
         margin-top: 4px;
@@ -797,9 +815,11 @@ body{
         background-color:#29ABE2;
     }
     .Rightsectionheadline{
-        margin-top: 64px;
+        margin-top: 24px;
         width: fit-content;
         margin-right: 8px;
+        display: none;
+        margin-left: 100px;
     }
     .CircleInputstyle{
         justify-content: center;
@@ -818,9 +838,7 @@ body{
     .InputfieldEditStyle{
         height: 38px;
     }
-    .ContactsInfoSectionClass{
-        display: none;
-    }
+    
     .EditWindowNew{
         width: 650px;
         height: 570px;
@@ -887,10 +905,6 @@ body{
         flex-direction: column;
         height: -webkit-fill-available;
     }
-    .Rightsectionheadline{
-        margin-left: 0;
-        margin-top: 104px;
-    }
     .ContactEditButton{
         width: 88px;
         justify-content: start;
@@ -939,7 +953,6 @@ body{
         align-items: center;
         z-index: 100;
         position: relative;
-        opacity: 1;
     }
     .MenuEditDeleteButton:hover{
         cursor: pointer;
@@ -951,6 +964,7 @@ body{
        position: fixed;
        bottom: 100px;
        right: 100px;
+       z-index: 10;
     }
     .MenuEditDeleteOptionsSmall{
         display: flex;
@@ -968,9 +982,10 @@ body{
         z-index: 200;
     }
     .ArrowstylePosition{
+        display: flex;
         position: fixed;
-        top: 120px;
-        right: 100px;
+        top: 136px;
+        right: 114px;
      }
     .CircleInitial{
         height: 120px;
@@ -1020,29 +1035,29 @@ body{
 }
 @media(max-width: 800px){
     .MenuEditDeleteButtonPosition{
-        position: fixed;
-        bottom: 100px;
         right: 48px;
      }
      .ArrowstylePosition{
-        position: fixed;
-        top: 120px;
-        right: 48px;
+        top: 136px;
+        right: 56px;
      }
      .MenuEditDeleteOptionsSmall{
         right: 48px;
      }
+     .ContactfieldInfo{
+        margin-left: 40px;
+     }
+     .Rightsectionheadline{
+        margin-left: 40px;
+     }
 }
 @media(max-width: 700px){
     .MenuEditDeleteButtonPosition{
-        position: fixed;
-        bottom: 100px;
         right: 40px;
      }
      .ArrowstylePosition{
-        position: fixed;
-        top: 120px;
-        right: 40px;
+        top: 136px;
+        right: 46px;
      }
      .MenuEditDeleteOptionsSmall{
         right: 40px;
@@ -1088,14 +1103,17 @@ body{
 }
 @media(max-width: 600px){
     .MenuEditDeleteButtonPosition{
-        position: fixed;
-        bottom: 100px;
         right: 16px;
      }
      .ArrowstylePosition{
-        position: fixed;
-        top: 120px;
-        right: 16px;
+        top: 128px;
+        right: 20px;
+     } 
+     .ContactfieldInfo{
+        margin-left: 24px;
+     }
+     .Rightsectionheadline{
+        margin-left: 24px;
      }
      .MenuEditDeleteOptionsSmall{
         right: 16px;
@@ -1104,11 +1122,9 @@ body{
         display: flex;
         flex-direction: column;
         align-items: start;
-        margin-top: 112px;
         gap: 0;
         height: auto;
         gap: 8px;
-        margin-left: 16px;
      }
      .Contactyline{
        display: none;
@@ -1135,7 +1151,7 @@ body{
 }
 @media(max-width: 500px){
     .Rightsectionheadline{
-        margin-left: 0;
+        margin-left: 24px;
     }
     .EditWindowAddxline{
         margin-top: 0;
@@ -1166,7 +1182,7 @@ body{
         width: 350px;
      }
     .ContactfieldInfo{
-        margin-left: 0;
+        margin-left: 24px;
         height: 300px;
     }
     .CircleInitial{
@@ -1187,9 +1203,6 @@ body{
     .ContactSection{
         height: 64px;
     }
-    .Rightsectionheadline{
-        margin-top: 116px;
-    }
     .EditCircleStyle{
         height: 100px;
         width: 100px;
@@ -1200,11 +1213,16 @@ body{
         margin-bottom: 0;
         margin-top: 0;
     }
+    .MenuEditDeleteButtonPosition{
+        right: 32px;
+     }
+     .ArrowstylePosition{
+        right: 32px;
+        top: 112px;
+    }
 }
 @media(max-width: 400px){
     .MenuEditDeleteButtonPosition{
-        position: fixed;
-        bottom: 100px;
         right: 24px;
      }
      .EveryContactStyle{
@@ -1228,12 +1246,16 @@ body{
         font-size: 16px;
      }
      .ArrowstylePosition{
-        position: fixed;
-        top: 120px;
-        right: 8px;
+        right: 24px;
      }
      .MenuEditDeleteOptionsSmall{
         right: 16px;
+     }
+     .Rightsectionheadline{
+        margin-left: 8px;
+     }
+     .ContactfieldInfo{
+        margin-left: 8px;
      }
     .CircleInitial{
         height: 56px;
@@ -1252,9 +1274,6 @@ body{
     }
     .ContactSection{
         height: 56px;
-    }
-    .Rightsectionheadline{
-        margin-top: 120px;
     }
     .ContactsmallSizeStyle{
         margin-left: 8px;
