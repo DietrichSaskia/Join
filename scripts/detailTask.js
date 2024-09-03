@@ -30,7 +30,7 @@ function renderTaskDetails(task, taskIndex) {
       taskIndex,
       task
     );
-    updateTaskProgress(taskIndex); // Fortschritt aktualisieren, nachdem Subtasks gerendert wurden
+    updateTaskProgress(taskIndex);
   }
 }
 
@@ -197,20 +197,14 @@ function generateTaskDetailsSubtask(task, categoryClass, taskIndex) {
     `;
 }
 
-/**
- * Changes Date format from Input to English format
- *
- * @returns formatted Date in English
- */
+
 function changeDateFormatEdit(dateGerman) {
   let [year, month, day] = dateGerman.split("/");
   let formattedDateStr = `${day}-${month}-${year}`;
   return formattedDateStr;
 }
 
-/**
- * Toggles the users dropdown menu
- */
+
 function toggleUserDropdownEdit() {
   let dropdown = document.getElementById("dropdown");
   let dropdownUsers = document.getElementById("dropdownUsers");
@@ -278,11 +272,6 @@ function editTask(taskIndex) {
 }
 
 
-/**
- * removes the subtaskbox and replaces it with a box with the same structure but with with an input field
- * 
- * @param {number} i The number of the subtask box
- */
 function subtaskEdit(taskIndex, i) {
   let task = taskAllArray[taskIndex];
   let subtask = task.subtasks[i];
@@ -349,7 +338,6 @@ async function editTaskTemplate(task, date, taskIndex) {
   
       
 
-      <div>Subtasks</div>
       <div class="subtasksDetail" id="subtasksDetail"></div>
       <div class="iconContainer">
 
@@ -383,7 +371,7 @@ function editTaskTemplateSubTasks(i, taskIndex, task) {
             <div class="subtaskIconsLower">
                 <img class="subtaskIcon" onclick="subtaskEdit(${taskIndex}, ${i})" src="../assets/icons/edit.png">
                 <div class="smallSeparator"></div>
-                <img class="subtaskIcon" onclick="deleteSubtask(${i})" src="../assets/icons/delete.png">
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${i})" src="../assets/icons/delete.png">
             </div>
         </ul>
     </div>
@@ -391,19 +379,13 @@ function editTaskTemplateSubTasks(i, taskIndex, task) {
 }
 
 
-/**
-* renders a subtask box below the subtask with an input field
-* 
-* @param {string} subtask The value of the subtask input
-* @param {number} i The number of the subtask box
-*/
 function subtaskEditInput(subtask, i, taskIndex) {
   document.getElementById('subtasksBox').innerHTML += /*html*/`
     <div id="subtaskBox${i}" class="subtaskBox">
         <div class="dFlexAlign backgroundWhite">
             <input id="subtask${i}" value="${subtask}" class="editSubtaskInput">
             <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="deleteSubtask(${i})" src="../assets/icons/delete.png">
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${i})" src="../assets/icons/delete.png">
                 <div class="smallSeparator"></div>
                 <img class="subtaskIcon" src="../assets/icons/check.png" onclick="subtaskChange(${i}, ${taskIndex})">
             </div>
@@ -432,7 +414,7 @@ function subtaskEditedTwice(input, i, taskIndex) {
         <div class="dFlexAlign backgroundWhite">
             <input id="subtask${i}" value="${input}" class="editSubtaskInput">
             <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="deleteSubtask(${i})" src="../assets/icons/delete.png">
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${i})" src="../assets/icons/delete.png">
                 <div class="smallSeparator"></div>
                 <img class="subtaskIcon" src="../assets/icons/check.png" onclick="subtaskChange(${i}, ${taskIndex})">
             </div>
@@ -449,7 +431,7 @@ function subTaskEdited(input, i, taskIndex) {
             <div class="subtaskIconsLower">
                 <img class="subtaskIcon" onclick="subtaskEditTwice(${i}, ${taskIndex})" src="../assets/icons/edit.png">
                 <div class="smallSeparator"></div>
-                <img class="subtaskIcon" onclick="deleteSubtask(${i})" src="../assets/icons/delete.png">
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${i})" src="../assets/icons/delete.png">
             </div>
         </ul>
     </div>
@@ -476,11 +458,22 @@ function saveToCurrentTask(taskIndex) {
 
 
 function setEditedArray(taskIndex) {
+  initializeEditedTaskArray();
+  updateAssignedUsers();
+  updateTaskDetails(taskIndex);
+  updateSubtasks();
+  updateTaskPriority();
+}
+
+function initializeEditedTaskArray() {
   editedTaskArray['assignedName'] = [];
   editedTaskArray['assignedInitals'] = [];
   editedTaskArray['color'] = [];
-  let users = document.getElementsByClassName('dropdownButton');
   document.getElementById('taskDetailCard').classList.remove('initalsAndName');
+}
+
+function updateAssignedUsers() {
+  let users = document.getElementsByClassName('dropdownButton');
   for (let i = 0; i < users.length; i++) {
     let check = document.getElementById(`assignedCheck${i}`);
     let currentCheck = check.src.split('/').pop();
@@ -490,24 +483,48 @@ function setEditedArray(taskIndex) {
       editedTaskArray['color'].push(document.getElementById(`userCircle${i}`).style.backgroundColor);
     }
   }
+}
+
+function updateTaskDetails(taskIndex) {
   editedTaskArray['section'] = taskAllArray[taskIndex].section;
   editedTaskArray['category'] = taskAllArray[taskIndex].category;
   editedTaskArray['date'] = changeDateFormat();
   editedTaskArray['description'] = document.getElementById('descriptionInput').value;
   editedTaskArray['id'] = `${taskIndex}`;
   editedTaskArray['title'] = document.getElementById('titleInput').value;
+}
+
+function updateSubtasks() {
   if (document.getElementById('subtask0')) {
     editedTaskArray['subtasks'][0] = (document.getElementById('subtask0').innerText);
   }
   if (document.getElementById('subtask1')) {
     editedTaskArray['subtasks'][1] = (document.getElementById('subtask1').innerText);  
   }
+}
+
+function updateTaskPriority() {
   let prioButtons = document.getElementsByClassName('prioButtonEdit');
   for (let j = 0; j < prioButtons.length; j++) {
     let prioButton = prioButtons[j];
     if (prioButton.classList.contains('active')) {
       editedTaskArray['prioName'] = prioButton.innerText;
       editedTaskArray['prio'] = `/assets/icons/prio${prioButton.innerText}.png`;
+    }
+  }
+}
+
+
+
+function deleteSubtaskEdit(taskIndex, subtaskIndex) {
+  if (taskIndex >= 0 && taskIndex < taskAllArray.length) {
+    let task = taskAllArray[taskIndex];
+    if (task.subtasks && Array.isArray(task.subtasks)) {
+      task.subtasks.splice(subtaskIndex, 1);
+
+      saveEditedTasktoLocalStorage(taskIndex);
+      updateTaskProgress(taskIndex);
+      renderTaskDetails(task, taskIndex);
     }
   }
 }
