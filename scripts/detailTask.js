@@ -221,12 +221,12 @@ function toggleUserDropdownEdit() {
 
 function setpriorityButton(task) {
   if (task.prioName === "Low") {
-    activateprioButton(2);
+    activateprioButtonEdit(2);
   }
   if (task.prioName === "Urgent") {
-    activateprioButton(0);
+    activateprioButtonEdit(0);
   } else {
-    activateprioButton(1);
+    activateprioButtonEdit(1);
   }
 }
 
@@ -301,15 +301,15 @@ async function editTaskTemplate(task, date, taskIndex) {
   
       <div class="prio">
   
-        <div id="prio0" class="prioButton" onclick="activateprioButton(0)">Urgent
+        <div id="prio0" class="prioButtonEdit" onclick="activateprioButton(0)">Urgent
           <img id="prioHigh" src="../assets/icons/prioUrgent.png">
         </div>
   
-        <div id="prio1" class="prioButton" onclick="activateprioButton(1)">Medium
+        <div id="prio1" class="prioButtonEdit" onclick="activateprioButton(1)">Medium
           <img id="prioMed" src="../assets/icons/prioMedium.png">
         </div>
   
-        <div id="prio2" class="prioButton" onclick="activateprioButton(2)">Low
+        <div id="prio2" class="prioButtonEdit" onclick="activateprioButton(2)">Low
           <img id="prioLow" src="../assets/icons/prioLow.png">
         </div>
   
