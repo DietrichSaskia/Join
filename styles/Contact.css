@@ -539,11 +539,6 @@ body{
     transition: background-color 0.3s ease;
     gap: 35px;
 }
-.hidden {
-    display: none ; 
-    opacity: 0;
-    visibility: hidden;
-}
 .person-button.button-active {
     background-color: #2A3647; 
     color: white;
@@ -700,7 +695,7 @@ body{
         margin-left: 16px;
     }
     .ContactfieldInfo{
-        margin-left: 100px;
+        margin-left: 16px;
     }
     .Rightsectionheadline{
         margin-left: 16px;
@@ -739,6 +734,9 @@ body{
     .ContactleftSection{
         margin-left: 8px;
     }
+    .ContactfieldInfo{
+        margin-left: 100px;
+     }
     .EditWindowDeleteButton2{
         display: none;
     }

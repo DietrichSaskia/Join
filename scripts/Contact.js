@@ -4,15 +4,20 @@ let emailsArray = [];
 let contactNameArray = [];
 let PhonenumberArray = [];
 let colorPalette = [];
-let currentWindowWidth = window.innerWidth;
-
+let isButtonClicked = false;
 let editDeleteChoiceID = ['MenuEditDeleteOptionsID', 'MenuEditDeleteOptionsID', 'editDeleteChoiceButton']
 let editDeleteChoiceAdd = ['SlideinWindowDW1', 'MenuEditDeleteOptionsSmall', 'none']
 let editDeleteChoiceRemove = ['SlideinWindowDW2', 'none', 'MenuEditDeleteButton']
-
 let editDeleteWindowID = ['ContactfieldInfodiv', 'ContactfieldInfodiv', 'ContactfieldInfodiv', 'MenuEditDeleteOptionsID']
 let editDeleteWindowRemove = ['Slideinright', 'Slideinleft', 'SlideinBottomNew', 'SlideinWindowDW1']
-
+let showContactWindowIDAdd = ['EveryContact', 'AddContactNewButton', 'ArrowBackClick', 'editDeleteChoiceButton']
+let showContactWindowAddClass= ['none', 'none', 'StyleBackarrowClick', 'MenuEditDeleteButton']
+let showContactWindowIDRemove = ['AddContactNewButton', 'MenuEditDeleteButtonID', 'editDeleteChoiceButton']
+let showContactWindowRemoveClass = ['MenuEditDeleteButton', 'none', 'none']
+let goBackToContactsremoveID = ['EveryContact', 'AddContactNewButton', 'ArrowBackClick', 'editDeleteChoiceButton']
+let goBackToContactsremove = ['none', 'none', 'StyleBackarrowClick', 'MenuEditDeleteButton']
+let goBackToContactsAddID = ['AddContactNewButton', 'editDeleteChoiceButton', 'MenuEditDeleteButtonID']
+let goBackToContactsAdd = ['MenuEditDeleteButton', 'none', 'none']
 contactLoad();
 
 /**
@@ -218,7 +223,6 @@ function contactloadcontainer5(container, button){
 function contactloadcontainer6(buttonColor, clickedButtonId){
     let currentWindowWidth = window.innerWidth;
     if(currentWindowWidth < 900){
-        
         showContactWindow()
         contactInfo(clickedButtonId, buttonColor, true);
 
@@ -228,11 +232,15 @@ function contactloadcontainer6(buttonColor, clickedButtonId){
         ChangeZIndex.style.zIndex = '5'
         document.getElementById('ContactfieldInfodiv').classList.add('Slideinright')
         document.getElementById('ContactfieldInfodiv').classList.remove('Slideinleft')
-        
     }
 }
 
 
+/**
+ * Mit einer for schleife werden mehrere class entfernt und anschließend werden welche hinzugefügt. 
+ * Dannach wird eine setTimeout funktion ausgeführt die verzögert klassen entfernt und hinzufügt.
+ * 
+ */
 function editDeleteWindowBack(){
     for(let i = 0; i < editDeleteWindowID.length;i++){
         document.getElementById(`${editDeleteWindowID[i]}`).classList.remove(`${editDeleteWindowRemove[i]}`)
@@ -245,17 +253,17 @@ function editDeleteWindowBack(){
         document.getElementById('editDeleteChoiceButton').classList.remove('none')
         document.getElementById('editDeleteChoiceButton').classList.add('MenuEditDeleteButton')
     }, 200);
-    
 }
 
+
+
 function showContactWindow(){
-    document.getElementById('EveryContact').classList.add('none')
-    document.getElementById('AddContactNewButton').classList.add('none')
-    document.getElementById('AddContactNewButton').classList.remove('MenuEditDeleteButton')
-    document.getElementById('ArrowBackClick').classList.add('StyleBackarrowClick')
-    document.getElementById('MenuEditDeleteButtonID').classList.remove('none')
-    document.getElementById('editDeleteChoiceButton').classList.remove('none')
-    document.getElementById('editDeleteChoiceButton').classList.add('MenuEditDeleteButton')
+    for(let i = 0; i < showContactWindowIDAdd.length;i++){
+        document.getElementById(`${showContactWindowIDAdd[i]}`).classList.add(`${showContactWindowAddClass[i]}`)
+    }
+    for(let i = 0; i < showContactWindowIDRemove.length;i++){
+        document.getElementById(`${showContactWindowIDRemove[i]}`).classList.remove(`${showContactWindowRemoveClass[i]}`)
+    }
     let ChangeRightSection = document.getElementById('RightsectionheadlineID')
     ChangeRightSection.style.display = 'flex'
     let ChangeZIndex =document.getElementById('ContactsInfoSection')
@@ -267,13 +275,12 @@ function showContactWindow(){
 
 
 function goBackToContacts(){
-    document.getElementById('EveryContact').classList.remove('none')
-    document.getElementById('AddContactNewButton').classList.remove('none')
-    document.getElementById('AddContactNewButton').classList.add('MenuEditDeleteButton')
-    document.getElementById('ArrowBackClick').classList.remove('StyleBackarrowClick')
-    document.getElementById('editDeleteChoiceButton').classList.add('none')
-    document.getElementById('editDeleteChoiceButton').classList.remove('MenuEditDeleteButton')
-    document.getElementById('MenuEditDeleteButtonID').classList.add('none')
+    for(let i = 0; i < goBackToContactsAddID.length;i++){
+        document.getElementById(`${goBackToContactsAddID[i]}`).classList.add(`${goBackToContactsAdd[i]}`)
+    }
+    for(let i = 0; i < goBackToContactsremoveID.length;i++){
+        document.getElementById(`${goBackToContactsremoveID[i]}`).classList.remove(`${goBackToContactsremove[i]}`)
+    }
     let windowsize = window.innerWidth;
     if(windowsize < 900){
         let ChangeZIndex =document.getElementById('ContactsInfoSection')
@@ -290,7 +297,7 @@ function editDeleteWindow(){
         document.getElementById(`${editDeleteChoiceID[i]}`).classList.remove(`${editDeleteChoiceRemove[i]}`)
     }    
 }
-let isButtonClicked = false;
+
 
 function clickContactBack(){
     const editWindow = document.getElementById('EditContactIDWIn');
@@ -300,10 +307,22 @@ function clickContactBack(){
         editWindow.classList.add("none");
         editWindow.classList.remove("EditContactWindow");
     }, 400); 
-    document.getElementById('editDeleteChoiceButton').classList.remove('none');
-    document.getElementById('editDeleteChoiceButton').classList.add('MenuEditDeleteButton');
-    document.getElementById("MenuEditDeleteButtonID").classList.remove("none");
+    clickContactBack2()
 }
+
+function clickContactBack2(){
+    const element = document.getElementById('EditWindowAddText1Change');
+    if (element.textContent.trim() === 'Add contact') {
+        document.getElementById('editDeleteChoiceButton').classList.add('none');
+        document.getElementById('editDeleteChoiceButton').classList.remove('MenuEditDeleteButton');
+        document.getElementById("MenuEditDeleteButtonID").classList.add("none");
+    } else {
+        document.getElementById('editDeleteChoiceButton').classList.remove('none');
+        document.getElementById('editDeleteChoiceButton').classList.add('MenuEditDeleteButton');
+        document.getElementById("MenuEditDeleteButtonID").classList.remove("none");
+    }
+}
+
 
 window.addEventListener('resize', function() {
     const windowWidth = window.innerWidth;
@@ -317,8 +336,6 @@ window.addEventListener('resize', function() {
         else {ChangeZIndex.style.zIndex = '10'}
     }
 });
-
-
 
 
 /**
@@ -337,7 +354,7 @@ function contactInfo(clickedButtonId, buttonColor, boolean){
         contactInfoHtml(initials, name, email, phone, buttonColor, key, boolean);
         let windowSize = window.innerWidth
         if(windowSize > 900){
-            document.getElementById('MenuEditDeleteOptionsID').classList.add('hidden')
+            document.getElementById('MenuEditDeleteOptionsID').classList.add('none')
             document.getElementById('MenuEditDeleteOptionsID').classList.remove('MenuEditDeleteOptionsSmall')
         }
         booleanForContact(boolean)
