@@ -249,9 +249,9 @@ function editTask(taskIndex) {
   }, 200);
   if (task.subtasks) {
     editTaskTemplateSubTasks(0, taskIndex);
-  }
-  if (task.subtasks[1]) {
-    editTaskTemplateSubTasks(1, taskIndex);
+    if (task.subtasks.length === 2) {
+      editTaskTemplateSubTasks(1, taskIndex);
+    }
   }
   setpriorityButton(task);
   setTimeout(() => {
@@ -301,17 +301,18 @@ async function editTaskTemplate(task, date, taskIndex) {
   
       <div class="prio">
   
-        <div id="prio0" class="prioButtonEdit" onclick="activateprioButton(0)">Urgent
+        <div id="prio0" class="prioButton" onclick="activateprioButton(0)">Urgent
           <img id="prioHigh" src="../assets/icons/prioUrgent.png">
         </div>
   
-        <div id="prio1" class="prioButtonEdit" onclick="activateprioButton(1)">Medium
+        <div id="prio1" class="prioButton" onclick="activateprioButton(1)">Medium
           <img id="prioMed" src="../assets/icons/prioMedium.png">
         </div>
   
-        <div id="prio2" class="prioButtonEdit" onclick="activateprioButton(2)">Low
+        <div id="prio2" class="prioButton" onclick="activateprioButton(2)">Low
           <img id="prioLow" src="../assets/icons/prioLow.png">
         </div>
+  
       </div>
       
       <p>Assigned to</p>
@@ -349,14 +350,7 @@ async function editTaskTemplate(task, date, taskIndex) {
           <img class="subtaskIcon" src="../assets/icons/check.png" onclick="checkSubtask()">
         </div>
   
-      </div>
-  
-      <span class="inputError dNone" id="inputerrorSubtask1">Subtask needs Description</span>
-      <span class="inputError dNone" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
-      <div class="subtasksBox" id="subtasksBox">
-      
-      <div class="emptyBox"></div></div>
-  
+      </div>  
       
       </div>
       <button onclick="saveEditedTasktoLocalStorage(${taskIndex})" class="okButton"><img src="/assets/icons/checkWhite.png"></button>
@@ -370,7 +364,7 @@ async function editTaskTemplate(task, date, taskIndex) {
 }
 
 function editTaskTemplateSubTasks(i, taskIndex) {
-  document.getElementById('subtasksBox').innerHTML += /*html*/`
+  document.getElementById('taskDetailCard').innerHTML += /*html*/`
   <div id="subtaskBox${i}" class="subtaskBox">
         <ul>
             <li id="subtask${i}">${task.subtasks[taskIndex, [i]]}</li>
