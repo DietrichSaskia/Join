@@ -94,7 +94,7 @@ document.addEventListener('click', function (clickEvent) {
  * @param {number} i This is the number of the priority Button
  */
 function activateprioButton(i) {
-    resetprioButtons()
+    resetprioButtons
     switch (i) {
         case 0:
             setPrioHigh(task);
