@@ -5,6 +5,14 @@
     "prio": "/assets/icons/prioMedium.png",
     "section": "inProgress",
     "title": "implement summary",
+    "subtasks": [
+      "",
+      ""
+    ],
+    "subtasksCheck": [
+      true, 
+      false
+    ],
     "date": "17/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
@@ -33,6 +41,10 @@
       "Create an HTML login form with username and password input fields and a login button",
       "JavaScript code to process and authenticate login details"
     ],
+    "subtasksCheck": [
+      true, 
+      false
+    ],
     "date": "17/08/2024",
     "prioName": "High",
     "assignedInitals": [
@@ -58,6 +70,10 @@
       "Add a button that displays a contact form when clicked",
       "Implement the logic to display the form and process the contact details upon submission"
     ],
+    "subtasksCheck": [
+      true, 
+      false
+    ],
     "date": "18/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
@@ -82,6 +98,14 @@
     "prio": "/assets/icons/prioMedium.png",
     "section": "awaitFeedback",
     "title": "HTML template header and footer",
+    "subtasks": [
+      "",
+      ""
+    ],
+    "subtasksCheck": [
+      true, 
+      false
+    ],
     "date": "17/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
@@ -106,6 +130,14 @@
     "prio": "/assets/icons/prioMedium.png",
     "section": "toDo",
     "title": "CSS Architecture Planning",
+    "subtasks": [
+      "",
+      ""
+    ],
+    "subtasksCheck": [
+      true, 
+      false
+    ],
     "date": "19/08/2024",
     "prioName": "Medium",
     "assignedInitals": [
@@ -131,6 +163,7 @@
       "Adjust layout and styles for large screen sizes (desktops)",
       "Optimize layout and styles for medium screen sizes (tablets)"
     ],
+    "subtasksCheck": [true, false],
     "date": "19/08/2024",
     "prioName": "Low",
     "assignedInitals": [

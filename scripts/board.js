@@ -160,84 +160,6 @@ function moveTo(section) {
   saveTasksToLocalStorage();
 }
 
-
-/**
- * Updates the progress of a task's subtasks and renders the progress bar.
- * 
- * @param {number} taskIndex - The index of the task to update.
- */
-function updateTaskProgress(taskIndex) {
-  if (taskIndex < 0 || taskIndex >= taskAllArray.length) {
-    return;
-  }
-  let task = taskAllArray[taskIndex];
-  if (!task || !task.subtasks || task.subtasks.length === 0) {
-    return;
-  }
-  let progress = calculateSubtaskProgress(task.subtasks, taskIndex);
-  renderSubtaskProgress(taskIndex, progress);
-}
-
-
-/**
- * Calculates the progress of subtasks for a given task.
- * 
- * @param {Array} subtasks - The array of subtasks.
- * @param {number} taskIndex - The index of the task.
- * @returns {Object} - An object containing the number of completed subtasks, total subtasks, and the width percentage of the progress bar.
- */
-function calculateSubtaskProgress(subtasks, taskIndex) {
-  let completedSubtasks = subtasks.reduce((count, _, subtaskIndex) => {
-    let storageKey = `task-${taskIndex}-subtask-${subtaskIndex}`;
-    return count + (localStorage.getItem(storageKey) === 'true' ? 1 : 0);
-  }, 0);
-  
-  let subtaskCount = subtasks.length;
-  let subtaskBarWidth = (completedSubtasks / subtaskCount) * 100;
-
-  return { completedSubtasks, subtaskCount, subtaskBarWidth };
-}
-
-
-/**
- * Renders the progress of subtasks for a task.
- * 
- * @param {number} taskIndex - The index of the task.
- * @param {Object} progress - An object containing the progress data.
- */
-function renderSubtaskProgress(taskIndex, progress) {
-  let subtaskBar = document.getElementById(`subtaskBar${taskIndex}`);
-  let subtaskCount = document.getElementById(`subtaskCount${taskIndex}`);
-  
-  if (subtaskBar && subtaskCount) {
-    subtaskBar.style.width = `${progress.subtaskBarWidth}%`;
-    subtaskCount.textContent = `${progress.completedSubtasks}/${progress.subtaskCount} Subtasks`;
-  }
-}
-
-
-/**
- * Loads the subtask progress for a specific task from localStorage and updates the UI accordingly.
- * 
- * @param {number} taskIndex - The index of the task to load progress for.
- */
-function loadTaskProgress(taskIndex) {
-  let task = taskAllArray[taskIndex];
-  if (!task || !task.subtasks || task.subtasks.length === 0) {
-    return;
-  }
-  task.subtasks.forEach((subtask, subtaskIndex) => {
-    let storageKey = `task-${taskIndex}-subtask-${subtaskIndex}`;
-    let isChecked = localStorage.getItem(storageKey) === 'true';
-    let checkbox = document.getElementById(`subtask-image-${taskIndex}-${subtaskIndex}`);
-    if (checkbox) {
-      checkbox.src = isChecked ? '/assets/icons/checkButtonChecked.png' : '/assets/icons/checkButtonblank.png';
-    }
-  });
-  updateTaskProgress(taskIndex);
-}
-
-
 /**
  * Formats the category name into a valid CSS class name.
  * 
@@ -288,13 +210,3 @@ function renderInitials(assignedInitals, colors, prio) {
   return generateInitialsAndPriorityHTML(initialElements, remainingElement, prio);
 }
 
-
-/**
- * Initializes the application by loading all data and rendering task progress.
- */
-window.onload = function() {
-  loadAll(); 
-  for (let i = 0; i < taskAllArray.length; i++) {
-    loadTaskProgress(i);
-  }
-};

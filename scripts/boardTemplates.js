@@ -11,15 +11,18 @@ function generateTasksHTML(element, i) {
   let capitalizedTitle = capitalizeFirstLetter(title);
   let capitalizedDescription = capitalizeFirstLetter(description);
   let truncatedDescription = truncateDescription(capitalizedDescription, 7);
-  let subtaskHTML = generateSubtaskProgressHTML(subtasks, i);
+
+  // Generate the HTML for subtasks progress only if there are non-empty subtasks
+  let progressHTML = subtasks.length > 0 ? generateSubtaskProgressHTML(subtasks, i) : '';
+
   let initials = renderInitials(assignedInitals, color, prio);
-  
+
   return `
    <div class="task" draggable="true" data-task="${title}" ondragstart="startDragging(${i})" ondragover="allowDrop(event)" ondrop="moveTo('${element.section}')" onclick="showTaskDetail(${i})">
       <div class="category ${categoryClass}">${category}</div>
       <div class="title">${capitalizedTitle}</div>
       <div class="description">${truncatedDescription}</div>
-      ${subtaskHTML}
+      ${progressHTML}
       ${initials}
     </div>
   `;
@@ -44,22 +47,28 @@ function generateInitialsAndPriorityHTML(initialElements, remainingElement, prio
 }
 
 
-/**
- * Generates the HTML structure for displaying subtask progress.
- * 
- * @param {Array} subtasks - The array of subtasks.
- * @param {number} taskIndex - The index of the task.
- * @returns {string} - The HTML string representing the subtask progress bar.
- */
 function generateSubtaskProgressHTML(subtasks, taskIndex) {
-  if (subtasks.length === 0) return '';
-  let subtaskProgress = calculateSubtaskProgress(subtasks, taskIndex);
-  
+  // Filter out empty subtasks
+  let nonEmptySubtasks = subtasks.filter(subtask => subtask.trim() !== '');
+
+  if (nonEmptySubtasks.length === 0) return ''; // Return nothing if all subtasks are empty
+  let amountSubtasks = nonEmptySubtasks.length;
+  // Calculate the progress
+  let subtaskProgress = calculateSubtaskProgress(amountSubtasks, taskIndex);
+
   return `
     <div class="subtasks">
       <div class="subtaskBarContainer">
         <div class="subtaskBar" id="subtaskBar${taskIndex}" style="width: ${subtaskProgress.subtaskBarWidth}%"></div>
       </div>
-      <span class="subtaskCount" id="subtaskCount${taskIndex}">${subtaskProgress.completedSubtasks}/${subtaskProgress.subtaskCount} Subtasks</span>
+      <span class="subtaskCount" id="subtaskCount${taskIndex}">${subtaskProgress.completedSubtasks}/${subtaskProgress.amountSubtasks} Subtasks</span>
     </div>`;
+}
+
+function calculateSubtaskProgress(amountSubtasks, taskIndex) {
+  let x = amountSubtasks + 1;
+  let task = taskAllArray[taskIndex];
+  let completedSubtasks = task.subtasksCheck.filter(check => check === true).length;
+  let subtaskBarWidth = (completedSubtasks / amountSubtasks) * 100;
+  return {completedSubtasks, amountSubtasks, subtaskBarWidth, x };
 }

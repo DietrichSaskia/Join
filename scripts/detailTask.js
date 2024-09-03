@@ -8,6 +8,7 @@ let editedTaskArrays = [
     'prioName': 'Medium',
     'section': 'toDo',
     'subtasks': [],
+    'subtasksCheck': [],
     'title': '',
     'assignedInitals': [],
     'assignedName': [],
@@ -30,7 +31,7 @@ function renderTaskDetails(task, taskIndex) {
       taskIndex,
       task
     );
-    updateTaskProgress(taskIndex);
+    calculateSubtaskProgress(taskIndex);
   }
 }
 
@@ -77,7 +78,7 @@ function toggleSubtaskImage(taskIndex, subtaskIndex) {
     localStorage.setItem(storageKey, "true");
   }
 
-  updateTaskProgress(taskIndex);
+  calculateSubtaskProgress(taskIndex);
 }
 
 function deleteTask(taskIndex) {
@@ -259,27 +260,10 @@ function editTask(taskIndex) {
     editTaskTemplate(task, date, taskIndex);
   }, 100);
   setTimeout(() => {
-    if (task.subtasks) {
-      editTaskTemplateSubTasks(0, taskIndex, task);
-      if (task.subtasks.length === 2) {
-        editTaskTemplateSubTasks(1, taskIndex, task);
-      }
-    }
     setpriorityButton(task);
     getusers();
     setAssignedUsers(task);
   }, 150);
-}
-
-
-function subtaskEdit(taskIndex, i) {
-  let task = taskAllArray[taskIndex];
-  let subtask = task.subtasks[i];
-  document.getElementById(`subtaskBox${i}`).remove();
-  subtaskEditInput(subtask, i, taskIndex);
-  let input = document.getElementById(`subtask${i}`);
-  input.focus();
-  input.setSelectionRange(input.value.length, input.value.length);
 }
 
 
@@ -353,9 +337,58 @@ async function editTaskTemplate(task, date, taskIndex) {
           <div class="smallSeparator"></div>
           <img class="subtaskIcon" src="../assets/icons/check.png" onclick="checkSubtask()">
         </div>
-  
+
       </div>  
-      <div class="subtasksBox" id="subtasksBox"></div>
+      <span class="inputError dNone" id="inputerrorSubtask1">Subtask needs Description</span>
+      <span class="inputError dNone" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
+      <div class="subtasksBox" id="subtasksBox">
+
+      <div id="subtaskBox0" class="subtaskBox">
+        <ul>
+            <li id="subtask0">${task.subtasks[0]}</li>
+            <div class="subtaskIconsLower">
+                <img class="subtaskIcon" onclick="subtaskEdit(0)" src="../assets/icons/edit.png">
+                <div class="smallSeparator"></div>
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 0)" src="../assets/icons/delete.png">
+            </div>
+        </ul>
+    </div>
+
+    <div id="subtaskBox1" class="subtaskBox">
+        <ul>
+            <li id="subtask1">${task.subtasks[1]}</li>
+            <div class="subtaskIconsLower">
+                <img class="subtaskIcon" onclick="subtaskEdit(1)" src="../assets/icons/edit.png">
+                <div class="smallSeparator"></div>
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 1)" src="../assets/icons/delete.png">
+            </div>
+        </ul>
+    </div>
+
+    <div id="subtaskBoxEdit0" class="subtaskBox dNone">
+        <div class="dFlexAlign backgroundWhite">
+            <input id="subtaskEdit0" value="${task.subtasks[0]}" class="editSubtaskInput">
+            <div class="subtaskIconsLower">
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 0)" src="../assets/icons/delete.png">
+                <div class="smallSeparator"></div>
+                <img class="subtaskIcon" src="../assets/icons/check.png" onclick="subtaskChange(${taskIndex}, 0)">
+            </div>
+        </div>
+    </div>
+
+    <div id="subtaskBoxEdit1" class="subtaskBox dNone">
+        <div class="dFlexAlign backgroundWhite">
+            <input id="subtaskEdit1" value="${task.subtasks[1]}" class="editSubtaskInput">
+            <div class="subtaskIconsLower">
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 1)" src="../assets/icons/delete.png">
+                <div class="smallSeparator"></div>
+                <img class="subtaskIcon" src="../assets/icons/check.png" onclick="subtaskChange(${taskIndex}, 1)">
+            </div>
+        </div>
+    </div>
+
+      </div>
+
 
       </div>
       <button onclick="saveEditedTasktoLocalStorage(${taskIndex})" class="okButton"><img src="/assets/icons/checkWhite.png"></button>
@@ -363,80 +396,11 @@ async function editTaskTemplate(task, date, taskIndex) {
     `;
 }
 
-function editTaskTemplateSubTasks(i, taskIndex, task) {
-  document.getElementById('subtasksBox').innerHTML += /*html*/`
-  <div id="subtaskBox${i}" class="subtaskBox">
-        <ul>
-            <li id="subtask${i}">${task.subtasks[taskIndex, [i]]}</li>
-            <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="subtaskEdit(${taskIndex}, ${i})" src="../assets/icons/edit.png">
-                <div class="smallSeparator"></div>
-                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${i})" src="../assets/icons/delete.png">
-            </div>
-        </ul>
-    </div>
-    `
+function subtaskEdit(i) {
+  document.getElementById(`subtaskBoxEdit${i}`).classList.remove('dNone');
+  document.getElementById(`subtaskBox${i}`).classList.add('dNone');
 }
 
-
-function subtaskEditInput(subtask, i, taskIndex) {
-  document.getElementById('subtasksBox').innerHTML += /*html*/`
-    <div id="subtaskBox${i}" class="subtaskBox">
-        <div class="dFlexAlign backgroundWhite">
-            <input id="subtask${i}" value="${subtask}" class="editSubtaskInput">
-            <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${i})" src="../assets/icons/delete.png">
-                <div class="smallSeparator"></div>
-                <img class="subtaskIcon" src="../assets/icons/check.png" onclick="subtaskChange(${i}, ${taskIndex})">
-            </div>
-        </div>
-    </div>
-    `
-}
-
-
-function subtaskChange(i, taskIndex) {
-  let input = document.getElementById(`subtask${i}`).value;
-  document.getElementById(`subtaskBox${i}`).remove();
-  subTaskEdited(input, i, taskIndex);
-}
-
-function subtaskEditTwice(i, taskIndex) {
-  let input = document.getElementById(`subtask${i}`).innerText;
-  document.getElementById(`subtaskBox${i}`).remove();
-  subtaskEditedTwice(input, i, taskIndex);
-}
-
-
-function subtaskEditedTwice(input, i, taskIndex) {
-  document.getElementById('subtasksBox').innerHTML += /*html*/`
-    <div id="subtaskBox${i}" class="subtaskBox">
-        <div class="dFlexAlign backgroundWhite">
-            <input id="subtask${i}" value="${input}" class="editSubtaskInput">
-            <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${i})" src="../assets/icons/delete.png">
-                <div class="smallSeparator"></div>
-                <img class="subtaskIcon" src="../assets/icons/check.png" onclick="subtaskChange(${i}, ${taskIndex})">
-            </div>
-        </div>
-    </div>
-    `
-}
-
-function subTaskEdited(input, i, taskIndex) {
-  document.getElementById('subtasksBox').innerHTML += /*html*/`
-    <div id="subtaskBox${i}" class="subtaskBox">
-        <ul>
-            <li id="subtask${i}">${input}</li>
-            <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="subtaskEditTwice(${i}, ${taskIndex})" src="../assets/icons/edit.png">
-                <div class="smallSeparator"></div>
-                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${i})" src="../assets/icons/delete.png">
-            </div>
-        </ul>
-    </div>
-  `
-}
 
 function saveEditedTasktoLocalStorage(taskIndex) {
   setEditedArray(taskIndex);
@@ -499,7 +463,7 @@ function updateSubtasks() {
     editedTaskArray['subtasks'][0] = (document.getElementById('subtask0').innerText);
   }
   if (document.getElementById('subtask1')) {
-    editedTaskArray['subtasks'][1] = (document.getElementById('subtask1').innerText);  
+    editedTaskArray['subtasks'][1] = (document.getElementById('subtask1').innerText);
   }
 }
 
@@ -515,16 +479,16 @@ function updateTaskPriority() {
 }
 
 
+function deleteSubtaskEdit(taskIndex, i) {
+  let subtasks = taskAllArray[taskIndex].subtasks;
+  subtasks.splice(i, 1, "");
+  calculateSubtaskProgress(taskIndex);
+  editTask(taskIndex);
+}
 
-function deleteSubtaskEdit(taskIndex, subtaskIndex) {
-  if (taskIndex >= 0 && taskIndex < taskAllArray.length) {
-    let task = taskAllArray[taskIndex];
-    if (task.subtasks && Array.isArray(task.subtasks)) {
-      task.subtasks.splice(subtaskIndex, 1);
-
-      saveEditedTasktoLocalStorage(taskIndex);
-      updateTaskProgress(taskIndex);
-      renderTaskDetails(task, taskIndex);
-    }
-  }
+function subtaskChange(taskIndex, i) {
+  let subtasks = taskAllArray[taskIndex].subtasks;
+  let input = document.getElementById(`subtaskEdit${i}`).value
+  subtasks.splice(i, 1, input);
+  editTask(taskIndex);
 }
