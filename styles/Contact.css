@@ -734,6 +734,9 @@ body{
     .ContactleftSection{
         margin-left: 8px;
     }
+    .ContactEditDelete{
+        display: none;
+    }
     .ContactfieldInfo{
         margin-left: 100px;
      }

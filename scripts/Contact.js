@@ -8,10 +8,8 @@ let isButtonClicked = false;
 let editDeleteChoiceID = ['MenuEditDeleteOptionsID', 'MenuEditDeleteOptionsID', 'editDeleteChoiceButton']
 let editDeleteChoiceAdd = ['SlideinWindowDW1', 'MenuEditDeleteOptionsSmall', 'none']
 let editDeleteChoiceRemove = ['SlideinWindowDW2', 'none', 'MenuEditDeleteButton']
-
 let editDeleteWindowID = ['ContactfieldInfodiv', 'ContactfieldInfodiv', 'MenuEditDeleteOptionsID']
 let editDeleteWindowRemove = ['Slideinright', 'Slideinleft', 'SlideinWindowDW1']
-
 let showContactWindowIDAdd = ['EveryContact', 'AddContactNewButton', 'ArrowBackClick', 'editDeleteChoiceButton']
 let showContactWindowAddClass= ['none', 'none', 'StyleBackarrowClick', 'MenuEditDeleteButton']
 let showContactWindowIDRemove = ['AddContactNewButton', 'MenuEditDeleteButtonID', 'editDeleteChoiceButton']
@@ -21,6 +19,7 @@ let goBackToContactsremove = ['none', 'none', 'StyleBackarrowClick', 'MenuEditDe
 let goBackToContactsAddID = ['AddContactNewButton', 'editDeleteChoiceButton', 'MenuEditDeleteButtonID']
 let goBackToContactsAdd = ['MenuEditDeleteButton', 'none', 'none']
 contactLoad();
+
 
 /**
  * Fetches the data from the database and converts it into a json.
@@ -42,10 +41,6 @@ function contactLoad() {
 }
 
 
-/**
- * Several arrays are emptied.
- * 
- */
 function cleanarray(){
     contactNameArray = [];
     emailsArray = [];
@@ -113,9 +108,7 @@ function contactloadcontainer1(obj, currentInitial, container){
             container.appendChild(span);
             let lineDiv = document.createElement('div');
             lineDiv.classList.add('gray-line');
-            container.appendChild(lineDiv);
-        }
-    }
+            container.appendChild(lineDiv);}}
     contactloadcontainer2(container, obj);
 }
 
@@ -133,17 +126,6 @@ function contactloadcontainer2(container, obj){
     button.id = `contact-button-${obj.key}`;
     button.classList.add('Backgroundgray');
     contactloadcontainer3(container, obj, button);
-}
-
-
-function contactInfoIDControl(){
-    let windowSize = window.innerWidth;
-    if(windowSize < 900){
-        return 'ContactSmallSize'
-    }
-    else{
-        return 'ContactsInfoSection'
-    }
 }
 
 
@@ -226,10 +208,9 @@ function contactloadcontainer6(buttonColor, clickedButtonId){
     let currentWindowWidth = window.innerWidth;
     if(currentWindowWidth < 900){
         showContactWindow()
-        contactInfo(clickedButtonId, buttonColor, true);
-
+        contactInfo(clickedButtonId, buttonColor);
     }else{
-        contactInfo(clickedButtonId, buttonColor, false);
+        contactInfo(clickedButtonId, buttonColor);
         let ChangeZIndex =document.getElementById('ContactsInfoSection')
         ChangeZIndex.style.zIndex = '5'
         document.getElementById('ContactfieldInfodiv').classList.add('Slideinright')
@@ -239,9 +220,8 @@ function contactloadcontainer6(buttonColor, clickedButtonId){
 
 
 /**
- * Mit einer for schleife werden mehrere class entfernt und anschließend werden welche hinzugefügt. 
- * Dannach wird eine setTimeout funktion ausgeführt die verzögert klassen entfernt und hinzufügt.
- * 
+ * With a for loop, several classes are removed and then some are added. 
+ * Then a setTimeout function is executed which removes and adds classes with a delay.
  */
 function editDeleteWindowBack(){
     for(let i = 0; i < editDeleteWindowID.length;i++){
@@ -259,7 +239,8 @@ function editDeleteWindowBack(){
 
 
 /**
- * 
+ * Classes are added and removed here and the style of two IDs is also changed. 
+ * An onclick element is added to an Id.
  */
 function showContactWindow(){
     for(let i = 0; i < showContactWindowIDAdd.length;i++){
@@ -278,6 +259,9 @@ function showContactWindow(){
 }
 
 
+/**
+ * Classes are added and removed here and the px width is also checked in order to potentially execute an if statement.
+ */
 function goBackToContacts(){
     for(let i = 0; i < goBackToContactsAddID.length;i++){
         document.getElementById(`${goBackToContactsAddID[i]}`).classList.add(`${goBackToContactsAdd[i]}`)
@@ -293,6 +277,10 @@ function goBackToContacts(){
     isButtonClicked = false;
 }
 
+
+/**
+ * Classes are added and removed here.
+ */
 function editDeleteWindow(){
     for(let i = 0; i < editDeleteChoiceID.length;i++){
         document.getElementById(`${editDeleteChoiceID[i]}`).classList.add(`${editDeleteChoiceAdd[i]}`)
@@ -303,6 +291,10 @@ function editDeleteWindow(){
 }
 
 
+/**
+ * A class is added and one is removed. In addition, a setTimeout function is executed which executes classes with a delay.
+ * A function is then executed.
+ */
 function clickContactBack(){
     const editWindow = document.getElementById('EditContactIDWIn');
     editWindow.classList.remove('Slideinright');
@@ -314,6 +306,10 @@ function clickContactBack(){
     clickContactBack2()
 }
 
+
+/**
+ * Here it is checked whether the variable contains the appropriate text and classes are executed depending on this.
+ */
 function clickContactBack2(){
     const element = document.getElementById('EditWindowAddText1Change');
     if (element.textContent.trim() === 'Add contact') {
@@ -328,40 +324,40 @@ function clickContactBack2(){
 }
 
 
+/** 
+ * This checks whether a button has been pressed and, depending on the Px width of the screen, a z-index is passed to a variable that is responsible for the style.
+ */
 window.addEventListener('resize', function() {
     const windowWidth = window.innerWidth;
     let ChangeZIndex =document.getElementById('ContactsInfoSection')
     if (isButtonClicked) {
         if (windowWidth < 900) {ChangeZIndex.style.zIndex = '5'} 
-        else {ChangeZIndex.style.zIndex = '10'}
-    }
+        else {ChangeZIndex.style.zIndex = '10'}}
     else{
         if (windowWidth < 900) {ChangeZIndex.style.zIndex = '-1'} 
-        else {ChangeZIndex.style.zIndex = '10'}
-    }
+        else {ChangeZIndex.style.zIndex = '10'}}
 });
 
 
 /**
  * 
  * The key is extracted from the ID. The corresponding object in the array is also filtered out. 
- * ZUsätzlich wird überprüft ob die px breite kleiner als 900 ist, falls das so ist wird eine class hinzugefügt und eine entfernt.
+ * In addition, the system checks whether the px width is smaller than 900; if this is the case, one class is added and one removed.
  * 
  * @param {*} clickedButtonId 
  * @param {*} buttonColor 
  */
-function contactInfo(clickedButtonId, buttonColor, boolean){
+function contactInfo(clickedButtonId, buttonColor){
     let key = clickedButtonId.split('-').pop(); 
     let contact = charContactArray.find(obj => obj.key === key);
     if (contact) {
         let { initials, name, email, phone } = contact;
-        contactInfoHtml(initials, name, email, phone, buttonColor, key, boolean);
+        contactInfoHtml(initials, name, email, phone, buttonColor, key);
         let windowSize = window.innerWidth
         if(windowSize > 900){
             document.getElementById('MenuEditDeleteOptionsID').classList.add('none')
             document.getElementById('MenuEditDeleteOptionsID').classList.remove('MenuEditDeleteOptionsSmall')
         }
-        booleanForContact(boolean)
     }
 }
 
@@ -380,22 +376,7 @@ function contactLoadTargetid(container){
 }
 
 
-/**
- * Es wird überprüft ob der boolean wahr oder falsch ist und je nach dem werden Klassen ausgeführt.
- * 
- * @param {*} boolean 
- * @returns 
- */
-function booleanForContact(boolean){
-    if(boolean == true){
-        document.getElementById('ContactEditDeleteID').classList.add('none')
-        document.getElementById('ArrowBackClick').classList.remove('none')
-    }
-    else{
-        document.getElementById('ContactEditDeleteID').classList.remove('none')
-        document.getElementById('ArrowBackClick').classList.add('none')
-    }
-}
+
 
 
 
