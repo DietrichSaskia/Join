@@ -383,7 +383,7 @@ function editTaskTemplateSubTasks(i, taskIndex, task) {
             <div class="subtaskIconsLower">
                 <img class="subtaskIcon" onclick="subtaskEdit(${taskIndex}, ${i})" src="../assets/icons/edit.png">
                 <div class="smallSeparator"></div>
-                <img class="subtaskIcon" onclick="deleteSubtask(${taskIndex}, ${i})" src="../assets/icons/delete.png">
+                <img class="subtaskIcon" onclick="deleteSubtask(${i})" src="../assets/icons/delete.png">
             </div>
         </ul>
     </div>
