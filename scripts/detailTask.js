@@ -264,17 +264,17 @@ function editTask(taskIndex) {
   setTimeout(() => {
     editTaskTemplate(task, date, taskIndex);
   }, 100);
-  if (task.subtasks) {
-    editTaskTemplateSubTasks(0, taskIndex);
-    if (task.subtasks.length === 2) {
-      editTaskTemplateSubTasks(1, taskIndex);
-    }
-  }
   setTimeout(() => {
+    if (task.subtasks) {
+      editTaskTemplateSubTasks(0, taskIndex, task);
+      if (task.subtasks.length === 2) {
+        editTaskTemplateSubTasks(1, taskIndex, task);
+      }
+    }
     setpriorityButton(task);
     getusers();
     setAssignedUsers(task);
-  }, 200);
+  }, 150);
 }
 
 
@@ -375,7 +375,7 @@ async function editTaskTemplate(task, date, taskIndex) {
     `;
 }
 
-function editTaskTemplateSubTasks(i, taskIndex) {
+function editTaskTemplateSubTasks(i, taskIndex, task) {
   document.getElementById('subtasksBox').innerHTML += /*html*/`
   <div id="subtaskBox${i}" class="subtaskBox">
         <ul>
