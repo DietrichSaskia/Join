@@ -496,8 +496,12 @@ function setEditedArray(taskIndex) {
   editedTaskArray['description'] = document.getElementById('descriptionInput').value;
   editedTaskArray['id'] = `${taskIndex}`;
   editedTaskArray['title'] = document.getElementById('titleInput').value;
-  editedTaskArray['subtasks'][0] = (document.getElementById('subtask0').innerText);
-  editedTaskArray['subtasks'][1] = (document.getElementById('subtask1').innerText);
+  if (document.getElementById('subtask0')) {
+    editedTaskArray['subtasks'][0] = (document.getElementById('subtask0').innerText);
+  }
+  if (document.getElementById('subtask1')) {
+    editedTaskArray['subtasks'][1] = (document.getElementById('subtask1').innerText);  
+  }
   let prioButtons = document.getElementsByClassName('prioButtonEdit');
   for (let j = 0; j < prioButtons.length; j++) {
     let prioButton = prioButtons[j];
