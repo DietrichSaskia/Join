@@ -8,8 +8,10 @@ let isButtonClicked = false;
 let editDeleteChoiceID = ['MenuEditDeleteOptionsID', 'MenuEditDeleteOptionsID', 'editDeleteChoiceButton']
 let editDeleteChoiceAdd = ['SlideinWindowDW1', 'MenuEditDeleteOptionsSmall', 'none']
 let editDeleteChoiceRemove = ['SlideinWindowDW2', 'none', 'MenuEditDeleteButton']
-let editDeleteWindowID = ['ContactfieldInfodiv', 'ContactfieldInfodiv', 'ContactfieldInfodiv', 'MenuEditDeleteOptionsID']
-let editDeleteWindowRemove = ['Slideinright', 'Slideinleft', 'SlideinBottomNew', 'SlideinWindowDW1']
+
+let editDeleteWindowID = ['ContactfieldInfodiv', 'ContactfieldInfodiv', 'MenuEditDeleteOptionsID']
+let editDeleteWindowRemove = ['Slideinright', 'Slideinleft', 'SlideinWindowDW1']
+
 let showContactWindowIDAdd = ['EveryContact', 'AddContactNewButton', 'ArrowBackClick', 'editDeleteChoiceButton']
 let showContactWindowAddClass= ['none', 'none', 'StyleBackarrowClick', 'MenuEditDeleteButton']
 let showContactWindowIDRemove = ['AddContactNewButton', 'MenuEditDeleteButtonID', 'editDeleteChoiceButton']
@@ -256,7 +258,9 @@ function editDeleteWindowBack(){
 }
 
 
-
+/**
+ * 
+ */
 function showContactWindow(){
     for(let i = 0; i < showContactWindowIDAdd.length;i++){
         document.getElementById(`${showContactWindowIDAdd[i]}`).classList.add(`${showContactWindowAddClass[i]}`)
