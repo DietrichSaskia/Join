@@ -373,6 +373,7 @@ input[type="search"]::-webkit-search-results-decoration {
     background-color: white;
     border-radius: 8px;
     gap: 8px;
+    cursor: pointer;
 }
 
 .prioButton:hover {

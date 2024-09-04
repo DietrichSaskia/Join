@@ -202,6 +202,7 @@ function deleteSubtask(i) {
  */
 function clearSubtask(i) {
     if (document.getElementById(`subtaskBox${i}`)) {
+        task['subtasks'][i] = "";
         document.getElementById(`subtaskBox${i}`).remove();
     }
 }
