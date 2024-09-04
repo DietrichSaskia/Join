@@ -273,7 +273,7 @@ function deleteSubtaskEdit(taskIndex, subtaskIndex) {
     task.subtasks.splice(subtaskIndex, 1);
     task.subtasksCheck.splice(subtaskIndex, 1);
 
-    synchronizeSubtasksAndChecks(task);
+    //synchronizeSubtasksAndChecks(task);
     saveTasksToLocalStorage();
     calculateSubtaskProgress(taskIndex);
 
@@ -285,17 +285,18 @@ function deleteSubtaskEdit(taskIndex, subtaskIndex) {
   } else {
     console.error('Task not found for deletion at index:', taskIndex);
   }
+  saveEditedTasktoLocalStorage(taskIndex);
 }
 
 
-function synchronizeSubtasksAndChecks(task) {
+/*function synchronizeSubtasksAndChecks(task) {
   while (task.subtasksCheck.length > task.subtasks.length) {
     task.subtasksCheck.pop();
   }
   while (task.subtasksCheck.length < task.subtasks.length) {
     task.subtasksCheck.push(false);
   }
-}
+}*/
 
 
 function subtaskChange(taskIndex, i) {
