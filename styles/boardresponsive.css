@@ -57,8 +57,11 @@
 
     .allTasks {
         flex-direction: column;
-        align-items: center;
         padding-top: 224px;
+    }
+
+    .moveBox {
+        display: flex;
     }
 
     .task {
@@ -66,7 +69,7 @@
     }
 
     .headlineTasks {
-        width: 244px;
+        width: 100%
     }
 }
 
