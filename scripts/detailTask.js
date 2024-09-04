@@ -108,6 +108,8 @@ function deleteTask(taskIndex) {
 function editTask(taskIndex) {
   let task = taskAllArray[taskIndex];
   let date = changeDateFormatEdit(task.date);
+  console.log(date);
+  
   setTimeout(() => {
     editTaskTemplate(task, date, taskIndex);
   }, 100);
@@ -122,6 +124,18 @@ function editTask(taskIndex) {
 function changeDateFormatEdit(dateGerman) {
   let [year, month, day] = dateGerman.split("/");
   let formattedDateStr = `${day}-${month}-${year}`;
+  return formattedDateStr;
+}
+
+/**
+ * Changes Date format from Input to German format
+ * 
+ * @returns formatted Date in German
+ */
+function changeDateFormat(dateEnglish) {
+  let formattedDate = dateEnglish.replace(/-/g, '/');
+  let [year, month, day] = formattedDate.split('/');
+  let formattedDateStr = `${day}/${month}/${year}`;
   return formattedDateStr;
 }
 
@@ -241,7 +255,7 @@ function updateTaskDetails(taskIndex) {
   let taskDate = taskAllArray[taskIndex].date;
   editedTaskArray['section'] = taskAllArray[taskIndex].section;
   editedTaskArray['category'] = taskAllArray[taskIndex].category;
-  editedTaskArray['date'] = changeDateFormatEdit(taskDate);
+  editedTaskArray['date'] = changeDateFormat(taskDate);
   editedTaskArray['description'] = document.getElementById('descriptionInput').value;
   editedTaskArray['id'] = `${taskIndex}`;
   editedTaskArray['title'] = document.getElementById('titleInput').value;
