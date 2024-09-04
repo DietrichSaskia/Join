@@ -187,12 +187,12 @@ function showSubtask() {
  * @param {string} input The value of the subtask input
  */
 function createSubtask(input) {
-    if (task['subtasks'][0] === null || task['subtasks'].length === 0) {
+    if (task['subtasks'][0] === "") {
         putSubTask(input, 0);
         task['subtasks'].splice(0, 1, input);
         clearSubtaskInput(0);
     }
-    else if (task['subtasks'][1] === null || task['subtasks'].length === 1) {
+    else if (task['subtasks'][1] === "") {
         putSubTask(input, 1);
         task['subtasks'].splice(1, 1, input);
         clearSubtaskInput(1);

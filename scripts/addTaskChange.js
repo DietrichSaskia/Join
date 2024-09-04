@@ -187,7 +187,7 @@ function checkInput3() {
  * @param {number} i The number of the subtask box
  */
 function deleteSubtask(i) {
-    task['subtasks'][i] = null;
+    task['subtasks'][i] = "";
     document.getElementById(`subtaskBox${i}`).remove();
 }
 
