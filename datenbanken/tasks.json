@@ -34,7 +34,7 @@
   {
     "category": "User Story",
     "description": "Create a login page for the user",
-    "prio": "/assets/icons/prioHigh.png",
+    "prio": "/assets/icons/prioUrgent.png",
     "section": "inProgress",
     "title": "user Login set up",
     "subtasks": [
