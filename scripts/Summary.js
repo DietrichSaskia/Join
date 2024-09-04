@@ -108,7 +108,7 @@ function summarySectionCheck3(SectionTypLength){
     document.getElementById('SummaryToDoCount').innerHTML=`${toDoCount}`;
     document.getElementById('SummaryDoneCount').innerHTML=`${doneCount}`;
     SectionPrioArray.forEach((value, index) => {
-        if (value === "High") {
+        if (value === "Urgent") {
             highCount++;
             highIndices.push(index); 
         }

@@ -38,6 +38,27 @@ body{
     align-items: center;
     position: fixed;
 }
+.UserInforWindow{
+    position: fixed;
+    bottom: -100px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    transition: bottom 2s ease-in-out;
+    z-index: 999;
+}
+.show-popup {
+    bottom: 50px; 
+}
+.UserInformation{
+    width: fit-content;
+    background-color: red;
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .ContactleftSection{
     height: calc(100vh - 140px);
     margin-top: 22.5px;
@@ -257,6 +278,7 @@ body{
 .EditWindowNew{
     width: 1212px;
     position: fixed;
+    opacity: 0.2;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);

@@ -124,7 +124,7 @@ function editNewContactChangeHTML(){
             <img  class="ImgCloseStyle2" src="/assets/icons/close.png">
         </div>
     </button>
-    <button  onclick="createNewContact(), editContactCloseWindow()" class="EditWindowSaveButton">Create contact <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
+    <button  onclick="createNewContact()" class="EditWindowSaveButton">Create contact <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
     `;
 }
 
@@ -146,3 +146,11 @@ function contactInfoHeadlineHtml(){
     `;
 }
 
+
+function ContactInformationPopUpHTML(text){
+    document.getElementById('UserInfoPopUp').innerHTML=`
+    <div class="UserInformation">
+        <div id="UserInformationText">${text}</div>
+    </div>
+    `; 
+}

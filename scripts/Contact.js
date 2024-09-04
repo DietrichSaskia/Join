@@ -270,7 +270,7 @@ function goBackToContacts(){
         document.getElementById(`${goBackToContactsremoveID[i]}`).classList.remove(`${goBackToContactsremove[i]}`)
     }
     let windowsize = window.innerWidth;
-    if(windowsize < 900){
+    if(windowsize < 901){
         let ChangeZIndex =document.getElementById('ContactsInfoSection')
         ChangeZIndex.style.zIndex = '-1'
     }

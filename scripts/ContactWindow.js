@@ -180,7 +180,11 @@ function createNewContact() {
     contactAllArray.push(newContact);
     localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
     editContactCloseWindow();
-    contactLoad();
+    contactLoad()
+    setTimeout(() => {
+        showPopUpInfo('Contact was successfully added');
+    }, 100);
+    
 }
 
 

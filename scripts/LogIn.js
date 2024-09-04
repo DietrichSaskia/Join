@@ -1,4 +1,4 @@
-import { app, database, ref, get, child, set } from './SignUp.js';
+import { app, database, ref, get, child, set } from '/scripts/signUp.js';
 const BaseUrl = "https://join-317-default-rtdb.europe-west1.firebasedatabase.app/";
 let matchingUser;
 window.loginUser = loginUser;

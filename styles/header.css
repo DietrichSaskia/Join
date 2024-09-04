@@ -152,7 +152,7 @@
 }
 #burgerMenu {
     border-radius: 12% 0% 12% 12%;
-    z-index: 3;
+    z-index: 999;
     position: fixed;
     top: 94px;
     right: 20px;

@@ -27,6 +27,22 @@ function getInitials(name) {
 }
 
 
+function showPopUpInfo(text) {
+    console.log('showPopUpInfo aufgerufen');
+    const popupElement = document.getElementById('UserInfoPopUp');
+    popupElement.classList.remove('none');
+    popupElement.classList.add('UserInforWindow');
+    ContactInformationPopUpHTML(text);
+    setTimeout(() => {
+        popupElement.classList.add('show-popup');
+    }, 10);
+    setTimeout(() => {
+        popupElement.classList.add('none');
+        popupElement.classList.remove('UserInforWindow');
+        popupElement.classList.remove('show-popup');
+    }, 6000);
+}
+
 /**
  * When formatting the telephone number, all digits and the plus sign are removed. In addition, the format of a cell phone number is implemented.
  * 
