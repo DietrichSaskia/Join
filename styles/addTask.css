@@ -409,11 +409,11 @@ input[type="search"]::-webkit-search-results-decoration {
     margin-top: 24px;
 }
 
-.subTaskBox {
+.subtaskBox {
     margin-top: 4px;
 }
 
-.subTaskBox:hover {
+.subtaskBox:hover {
     background-color: #D1D1D1;
     border-radius: 10px;
 }
@@ -457,20 +457,20 @@ input[type="search"]::-webkit-search-results-decoration {
     cursor: pointer;
 }
 
-.subTasksBox {
+.subtasksBox {
     height: 100px;
     max-width: 440px;
     width: 100%;
 }
 
-.subTasksBox ul {
+.subtasksBox ul {
     display: flex;
     align-items: center;
     padding-right: 6px;
     padding-bottom: 4px;
 }
 
-.subTasksBox li {
+.subtasksBox li {
     font-size: 16px;
     padding-top: 6px;
 }

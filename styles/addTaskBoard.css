@@ -432,11 +432,11 @@
     margin-top: 24px;
 }
 
-.mainContent .subTaskBox {
+.mainContent .subtaskBox {
     margin-top: 4px;
 }
 
-.mainContent .subTaskBox:hover {
+.mainContent .subtaskBox:hover {
     background-color: #D1D1D1;
     border-radius: 10px;
 }
@@ -481,20 +481,20 @@
     cursor: pointer;
 }
 
-.mainContent .subTasksBox {
+.mainContent .subtasksBox {
     height: 100px;
     width: 100%;
     max-width: 440px;
 }
 
-.mainContent .subTasksBox ul {
+.mainContent .subtasksBox ul {
     display: flex;
     align-items: center;
     padding-right: 6px;
     padding-bottom: 4px;
 }
 
-.mainContent .subTasksBox li {
+.mainContent .subtasksBox li {
     font-size: 16px;
     padding-top: 6px;
     width: 80%;
