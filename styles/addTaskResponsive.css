@@ -123,15 +123,15 @@
 
 @media (max-width:500px) {
     h1 {
-        width: calc(100% - 16px);
+        width: calc(100% - 39px);
     }
 }
 
 @media (max-width:460px) {
     form {
         max-width: -webkit-fill-available;
-        padding-left: 1px;
-        padding-right: 1px;
+        padding-left: 16px;
+        padding-right: 16px;
     }
 
     .wrapper {
