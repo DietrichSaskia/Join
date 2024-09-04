@@ -44,23 +44,15 @@ function toggleTask() {
 function renderSubtasks(taskIndex, task) {
   let subtasks = task.subtasks || [];
   let subtasksCheck = task.subtasksCheck || [];
-
-  // Filtere leere oder undefinierte Subtasks heraus
-  let validSubtasks = subtasks.filter(subtask => subtask && subtask.trim() !== "");
-
-  // Wenn keine gültigen Subtasks vorhanden sind, zeige einen Hinweis an
-  if (!validSubtasks.length) return "<p>No subtasks available.</p>";
-
-  // Mappe über die validen Subtasks und rendere diese
-  return validSubtasks.map((subtask, validSubtaskIndex) => {
-    let isChecked = subtasksCheck[validSubtaskIndex] || false;
+  if (!subtasks.length) return "";
+  return subtasks.map((subtask, subtaskIndex) => {
+    let isChecked = subtasksCheck[subtaskIndex] || false;
     let imageSrc = isChecked 
       ? "/assets/icons/checkButtonChecked.png" 
       : "/assets/icons/checkButtonblank.png";
-
     return `
       <div class="subtask">
-        <img src="${imageSrc}" id="subtask-image-${taskIndex}-${validSubtaskIndex}" class="custom-checkbox" onclick="toggleSubtaskImage(${taskIndex}, ${validSubtaskIndex})" alt="Subtask Status">
+        <img src="${imageSrc}" id="subtask-image-${taskIndex}-${subtaskIndex}" class="custom-checkbox" onclick="toggleSubtaskImage(${taskIndex}, ${subtaskIndex})" alt="Subtask Status">
         <span>${subtask}</span>
       </div>`;
   }).join("");
@@ -268,35 +260,16 @@ function updateTaskPriority() {
 }
 
 
-function deleteSubtaskEdit(taskIndex, subtaskIndex) {
+function deleteSubtaskEdit(taskIndex, i) {
   let task = taskAllArray[taskIndex];
-  if (!task) {
+  if (task) {
+    task.subtasks.splice(i, 1);
+    task.subtasksCheck.splice(i, 1);
+    saveTasksToLocalStorage();
+    calculateSubtaskProgress(taskIndex);
+    editTask(taskIndex);
+  } else {
     console.error('Task not found for deletion at index:', taskIndex);
-    return;
-  }
-
-  // Lösche den Subtask und das zugehörige Check-Element
-  task.subtasks.splice(subtaskIndex, 1);
-  task.subtasksCheck.splice(subtaskIndex, 1);
-
-  // Speichere die aktualisierten Aufgaben im Local Storage
-  saveTasksToLocalStorage();
-
-  // Berechne den Subtask-Fortschritt neu
-  calculateSubtaskProgress(taskIndex);
-
-  // Aktualisiere die Subtask-Liste im Edit-Bereich
-  let subtasksElement = document.getElementById("subtasksDetail");
-  if (subtasksElement) {
-    subtasksElement.innerHTML = renderSubtasks(taskIndex, task);
-  }
-
-  // Editiere den Task erneut, um das UI zu aktualisieren
-  editTask(taskIndex);
-
-  // Leere den Inhalt, wenn keine Subtasks mehr vorhanden sind
-  if (task.subtasks.length === 0) {
-    subtasksElement.innerHTML = "<p>No subtasks available.</p>";
   }
 }
 
