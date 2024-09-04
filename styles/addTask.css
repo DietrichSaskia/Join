@@ -349,6 +349,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 ::-webkit-calendar-picker-indicator {
     opacity: 0;
+    cursor: pointer;
 }
 
 .prio {
