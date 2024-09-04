@@ -479,9 +479,11 @@ function onmouse(subtaskID) {
 }
 
 
-
 //// Leere SubtaskBox ausblenden!!
 //// Required wird bei Add Task Dropdown User überschrieben
 //// + Dinger (Add Task) brauchen Hover Effekt in blau = 100 verschiedene sepia etc
 //// Delete Subtask im EditBoard geht nicht
 //// CSS Responsive und EditBoard
+//// High Urgent in 
+//CSS Responsive Glide in bei Add Task
+// Beim laden vom Board Kontakte checken
