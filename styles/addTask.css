@@ -4,7 +4,7 @@ body {
     display: flex;
 }
 
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
     display: none;
 }
 
