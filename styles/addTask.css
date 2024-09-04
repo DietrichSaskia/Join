@@ -4,20 +4,8 @@ body {
     display: flex;
 }
 
-.mainContent::-webkit-scrollbar{
-    width: 10px;
-}
-
-.mainContent::-webkit-scrollbar-track{
-    background-color: #f5f6f7;
-    border-radius: 8px;
-    margin-top: 180px;
-    margin-bottom: 173px; 
-}
-
-.mainContent::-webkit-scrollbar-thumb{
-    background: #A8A8A8;
-    border-radius: 8px;
+::-webkit-scrollbar {
+    display: none;
 }
 
 .mainContent {

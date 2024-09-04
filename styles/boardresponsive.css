@@ -60,13 +60,18 @@
     
     .moveBox {
         display: flex;
+        overflow-x:auto;
     }
 
+    .moveBox::-webkit-scrollbar{
+        display: none;
+      }
+
     .task {
-        width: 218px;
-        min-width: 218px;
+        width: 200px;
+        min-width: 200px;
         margin: 16px 0 16px 16px;
-        height: 229px;
+        height: 203px;
     }
 
     .headlineTasks {
