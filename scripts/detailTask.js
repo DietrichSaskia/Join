@@ -19,21 +19,21 @@ let editedTaskArray = editedTaskArrays[0];
 
 function showTaskDetail(taskIndex) {
   let task = taskAllArray[taskIndex];
-  renderTaskDetails(task, taskIndex);
+  let taskDetailsHTML = generateTaskDetails(task, taskIndex); 
+  let taskContent = document.getElementById("taskDetailCard");
+
+  if (taskContent) {
+    taskContent.innerHTML = taskDetailsHTML;
+  }
+
+  let subtasksElement = document.getElementById("subtasksDetail");
+  if (subtasksElement && Array.isArray(task.subtasks) && task.subtasks.length > 0) {
+    subtasksElement.innerHTML = renderSubtasks(taskIndex, task); 
+    calculateSubtaskProgress(taskIndex); 
+  }
   toggleTask();
 }
 
-function renderTaskDetails(task, taskIndex) {
-  let taskContent = document.getElementById("taskDetailCard");
-  taskContent.innerHTML = generateTaskDetails(taskIndex);
-  if (document.getElementById("subtasksDetail")) {
-    document.getElementById("subtasksDetail").innerHTML = renderSubtasks(
-      taskIndex,
-      task
-    );
-    calculateSubtaskProgress(taskIndex);
-  }
-}
 
 function toggleTask() {
   let taskDetailContainer = document.getElementById("containerTasksDetail");
@@ -41,45 +41,60 @@ function toggleTask() {
 }
 
 function renderSubtasks(taskIndex, task) {
-  let subtasks = task.subtasks;
-  if (!subtasks || subtasks.length === 0) return "";
+  let subtasks = task.subtasks || [];
+  let subtasksCheck = task.subtasksCheck || [];
+  
+  if (subtasks.length === 0) return "";
 
-  let subtasksHTML = subtasks
-    .map((subtask, subtaskIndex) => {
-      let storageKey = `task-${taskIndex}-subtask-${subtaskIndex}`;
-      let isChecked = localStorage.getItem(storageKey) === "true";
-      let imageSrc = isChecked
-        ? "/assets/icons/checkButtonChecked.png"
-        : "/assets/icons/checkButtonblank.png";
+  let subtasksHTML = subtasks.map((subtask, subtaskIndex) => {
+    let isChecked = subtasksCheck[subtaskIndex] || false;
+    let imageSrc = isChecked
+      ? "/assets/icons/checkButtonChecked.png"
+      : "/assets/icons/checkButtonblank.png";
 
-      return `
-      <div class="subtask">
-        <img src="${imageSrc}" id="subtask-image-${taskIndex}-${subtaskIndex}" class="custom-checkbox" onclick="toggleSubtaskImage(${taskIndex}, ${subtaskIndex})" alt="Subtask Status">
-        <span>${subtask}</span>
-      </div>`;
-    })
-    .join("");
+    return `
+    <div class="subtask">
+      <img src="${imageSrc}" id="subtask-image-${taskIndex}-${subtaskIndex}" class="custom-checkbox" onclick="toggleSubtaskImage(${taskIndex}, ${subtaskIndex})" alt="Subtask Status">
+      <span>${subtask}</span>
+    </div>`;
+  }).join("");
 
   return subtasksHTML;
 }
 
 function toggleSubtaskImage(taskIndex, subtaskIndex) {
-  let storageKey = `task-${taskIndex}-subtask-${subtaskIndex}`;
-  let image = document.getElementById(
-    `subtask-image-${taskIndex}-${subtaskIndex}`
-  );
-  let isChecked = localStorage.getItem(storageKey) === "true";
-
-  if (isChecked) {
-    image.src = "/assets/icons/checkButtonblank.png";
-    localStorage.setItem(storageKey, "false");
-  } else {
-    image.src = "/assets/icons/checkButtonChecked.png";
-    localStorage.setItem(storageKey, "true");
+  let task = taskAllArray[taskIndex];
+  
+  if (!task || !Array.isArray(task.subtasksCheck)) {
+    console.error('Invalid task data or subtasksCheck missing at task index:', taskIndex);
+    return;
   }
-
-  calculateSubtaskProgress(taskIndex);
+  task.subtasksCheck[subtaskIndex] = !task.subtasksCheck[subtaskIndex];
+  let image = document.getElementById(`subtask-image-${taskIndex}-${subtaskIndex}`);
+  if (image) {
+    image.src = task.subtasksCheck[subtaskIndex] 
+      ? "/assets/icons/checkButtonChecked.png" 
+      : "/assets/icons/checkButtonblank.png";
+  }
+  saveTasksToLocalStorage();
+  let progressData = calculateSubtaskProgress(taskIndex);
+  updateSubtaskProgressBar(taskIndex, progressData.subtaskBarWidth, progressData.completedSubtasks, progressData.amountSubtasks);
 }
+
+
+function updateSubtaskProgressBar(taskIndex, subtaskBarWidth, completedSubtasks, amountSubtasks) {
+  let subtaskBar = document.getElementById(`subtaskBar${taskIndex}`);
+  let subtaskCount = document.getElementById(`subtaskCount${taskIndex}`);
+
+  if (subtaskBar) {
+    subtaskBar.style.width = `${subtaskBarWidth}%`;
+  }
+  
+  if (subtaskCount) {
+    subtaskCount.innerText = `${completedSubtasks}/${amountSubtasks} Subtasks`;
+  }
+}
+
 
 function deleteTask(taskIndex) {
   taskAllArray.splice(taskIndex, 1);
@@ -88,17 +103,6 @@ function deleteTask(taskIndex) {
   renderAllTasks();
 }
 
-function generateTaskDetails(taskIndex) {
-  let task = taskAllArray[taskIndex];
-  let categoryClass = task.category
-    ? task.category.replace(/\s+/g, "")
-    : "default-category";
-  if (!task.subtasks || task.subtasks === null) {
-    return generateTaskDetailsNoSubtask(task, categoryClass, taskIndex);
-  } else {
-    return generateTaskDetailsSubtask(task, categoryClass, taskIndex);
-  }
-}
 
 function generateInitalsAndNameDetailHTML(task) {
   if (!task.assignedInitals || task.assignedInitals.length === 0) return "";
@@ -125,84 +129,66 @@ function generateInitalsAndNameDetailHTML(task) {
   return detailHtml;
 }
 
-function generateTaskDetailsNoSubtask(task, categoryClass, taskIndex) {
-  let initialsAndName = generateInitalsAndNameDetailHTML(task);
-  let capitalizedTitle = capitalizeFirstLetter(task.title);
-  let capitalizedDescription = capitalizeFirstLetter(task.description);
 
-  return /*html*/ `
-  <div class="detailtask">
-    <div class="categoryAndClose">
-      <div class="category ${categoryClass}">${task.category}</div>
-      <img onclick="toggleTask()" src="/assets/icons/close.png" alt="Close">
-    </div>
-    <div class="detailtaskinfos">
-      <div class="titleDetail">${capitalizedTitle}</div>
-      <div class="descriptionDetail">${capitalizedDescription}</div>
-      <div>Due date: ${task.date}</div>
-      <div>Priority: ${task.prioName} <img src="${task.prio}" alt="PriorityImage"></div>
-      <div class="assignedTo"> Assigned To:</div>
-        <div class="initalsAndName">
-          ${initialsAndName}
-        </div>
-      <div class="iconContainer">
-      <div class="detailTaskIcon">
-        <img src="/assets/icons/delete.png" alt="">
-        <p onclick="deleteTask(${taskIndex})">Delete</p>
-      </div>
-      <div class="verticalLine"></div>
-      <div class="detailTaskIcon">
-        <img src="/assets/icons/edit.png" alt="">
-        <p onclick="editTask(${taskIndex})">Edit</p>
-      </div>
-    </div>
-    </div>
-  </div>
-  `;
-}
-
-function generateTaskDetailsSubtask(task, categoryClass, taskIndex) {
+function generateTaskDetails(task, taskIndex) {
+  let categoryClass = formatCategoryClass(task.category);
   let initialsAndName = generateInitalsAndNameDetailHTML(task);
-  let capitalizedTitle = capitalizeFirstLetter(task.title);
-  let capitalizedDescription = capitalizeFirstLetter(task.description);
+  let capitalizedTitle = task.title ? capitalizeFirstLetter(task.title) : "No Title";
+  let capitalizedDescription = task.description ? capitalizeFirstLetter(task.description) : "No Description";
+  let hasValidSubtasks = Array.isArray(task.subtasks) && task.subtasks.some(subtask => subtask && subtask.trim() !== "");
+  let subtasksCheck = Array.isArray(task.subtasksCheck) && task.subtasksCheck.length === task.subtasks.length 
+    ? task.subtasksCheck 
+    : task.subtasks.map(() => false);
 
   return /*html*/ `
     <div class="detailtask">
       <div class="categoryAndClose">
-        <div class="category ${categoryClass}">${task.category}</div>
+        <div class="category ${categoryClass}">${task.category || "No Category"}</div>
         <img onclick="toggleTask()" src="/assets/icons/close.png" alt="Close">
       </div>
       <div class="detailtaskinfos">
-      <div class="titleDetail">${capitalizedTitle}</div>
-      <div class="descriptionDetail">${capitalizedDescription}</div>
-      <div>Due date: ${task.date}</div>
-      <div>Priority: ${task.prioName} <img src="${task.prio}" alt="PriorityImage"></div>
-      <div class="assignedTo"> Assigned To:</div>
-        <div class="initalsAndName">
-          ${initialsAndName}
+        <div class="titleDetail">${capitalizedTitle}</div>
+        <div class="descriptionDetail">${capitalizedDescription}</div>
+        <div>Due date: ${task.date || 'No Date'}</div>
+        <div>Priority: ${task.prioName ? task.prioName : 'No Priority'} <img src="${task.prio}" alt="PriorityImage"></div>
+        <div class="assignedTo">Assigned To:</div>
+        <div class="initalsAndName">${initialsAndName}</div>
+        ${hasValidSubtasks ? `
+        <div>Subtasks:</div>
+        <div class="subtasksDetail" id="subtasksDetail">
+          ${task.subtasks.map((subtask, index) => `
+            <div class="subtaskItem">
+              <input type="checkbox" ${subtasksCheck[index] ? 'checked' : ''} disabled>
+              <span>${subtask || 'No Subtask'}</span>
+            </div>
+          `).join('')}
         </div>
-      <div>Subtasks:</div>
-      <div class="subtasksDetail" id="subtasksDetail"></div>
-      <div class="iconContainer">
+        ` : ''}
+      </div>
+      <div onclick="deleteTask(${taskIndex})" class="iconContainer">
         <div class="detailTaskIcon">
-          <img src="/assets/icons/delete.png" alt="">
-          <p onclick="deleteTask(${taskIndex})">Delete</p>
+          <img src="/assets/icons/delete.png" alt="Delete">
+          <p>Delete</p>
         </div>
         <div class="verticalLine"></div>
-        <div class="detailTaskIcon">
-          <img src="/assets/icons/edit.png" alt="">
-          <p onclick="editTask(${taskIndex})">Edit</p>
+        <div onclick="editTask(${taskIndex})" class="detailTaskIcon">
+          <img src="/assets/icons/edit.png" alt="Edit">
+          <p>Edit</p>
         </div>
       </div>
     </div>
-    `;
+  `;
 }
 
 
+
 function changeDateFormatEdit(dateGerman) {
-  let [year, month, day] = dateGerman.split("/");
-  let formattedDateStr = `${day}-${month}-${year}`;
-  return formattedDateStr;
+  let [day, month, year] = dateGerman.split("/");
+  if (!day || !month || !year) {
+    console.error('Invalid date format.');
+    return '';
+  }
+  return `${day}-${month}-${year}`;
 }
 
 
@@ -414,10 +400,8 @@ function saveEditedTasktoLocalStorage(taskIndex) {
 }
 
 function saveToCurrentTask(taskIndex) {
-  taskAllArray.splice(taskIndex, 1);
-  taskAllArray.splice(taskIndex, 0, editedTaskArray);
-  let tasksAsText = JSON.stringify(taskAllArray);
-  localStorage.setItem('taskAllArray', tasksAsText);
+  taskAllArray[taskIndex] = { ...editedTaskArray }; // Verwende eine Kopie für saubere Referenz
+  saveTasksToLocalStorage();
 }
 
 
@@ -480,15 +464,32 @@ function updateTaskPriority() {
 
 
 function deleteSubtaskEdit(taskIndex, i) {
-  let subtasks = taskAllArray[taskIndex].subtasks;
-  subtasks.splice(i, 1, "");
-  calculateSubtaskProgress(taskIndex);
-  editTask(taskIndex);
+  let task = taskAllArray[taskIndex];
+  if (task) {
+    task.subtasks.splice(i, 1);
+    task.subtasksCheck.splice(i, 1);
+    saveTasksToLocalStorage();
+    calculateSubtaskProgress(taskIndex);
+    editTask(taskIndex);
+  } else {
+    console.error('Task not found for deletion at index:', taskIndex);
+  }
 }
 
 function subtaskChange(taskIndex, i) {
-  let subtasks = taskAllArray[taskIndex].subtasks;
-  let input = document.getElementById(`subtaskEdit${i}`).value
-  subtasks.splice(i, 1, input);
-  editTask(taskIndex);
+  let task = taskAllArray[taskIndex];
+  if (task) {
+    let input = document.getElementById(`subtaskEdit${i}`).value.trim();
+    if (input) {
+      task.subtasks.splice(i, 1, input);
+      task.subtasksCheck.splice(i, 1, false);
+      saveTasksToLocalStorage();
+      calculateSubtaskProgress(taskIndex);
+      editTask(taskIndex);
+    } else {
+      console.warn('Empty subtask description. Consider deleting instead.');
+    }
+  } else {
+    console.error('Task not found for subtask change at index:', taskIndex);
+  }
 }

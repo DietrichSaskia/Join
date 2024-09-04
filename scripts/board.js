@@ -3,9 +3,6 @@ let contactAllArray = [];
 let currentDraggedElement;
 
 
-/**
- * Loads all necessary data (contacts and tasks) and renders all tasks on the page.
- */
 function loadAll() {
   loadContact();
   loadTasks();
@@ -13,9 +10,6 @@ function loadAll() {
 }
 
 
-/**
- * Loads contacts from localStorage and parses them into the contactAllArray.
- */
 function loadContact() {
   let contactAsText = localStorage.getItem('contactAllArray');
   if (contactAsText) {
@@ -24,9 +18,6 @@ function loadContact() {
 }
 
 
-/**
- * Loads tasks from localStorage and parses them into the taskAllArray.
- */
 function loadTasks() {
   let tasksAsText = localStorage.getItem('taskAllArray');
   if (tasksAsText) {
@@ -35,17 +26,12 @@ function loadTasks() {
 }
 
 
-/**
- * Saves the current task array to localStorage.
- */
 function saveTasksToLocalStorage() {
   localStorage.setItem('taskAllArray', JSON.stringify(taskAllArray));
 }
 
 
-/**
- * Renders all tasks in their respective sections.
- */
+
 function renderAllTasks() {
   renderSection('toDo', 'toDo');
   renderSection('inProgress', 'inProgress');
@@ -54,12 +40,6 @@ function renderAllTasks() {
 }
 
 
-/**
- * Renders tasks for a specific section into the provided container.
- * 
- * @param {string} section - The section name (e.g., 'toDo', 'inProgress').
- * @param {string} containerId - The ID of the HTML container where tasks should be rendered.
- */
 function renderSection(section, containerId) {
   let container = document.getElementById(containerId);
   container.innerHTML = '';
@@ -78,13 +58,6 @@ function renderSection(section, containerId) {
   }
 }
 
-
-/**
- * Formats a section name to be more readable.
- * 
- * @param {string} section - The section name to format.
- * @returns {string} - The formatted section name.
- */
 function formatSectionName(section) {
   let formattedName = section.charAt(0).toUpperCase() + section.slice(1);
   formattedName = formattedName.replace(/([A-Z])/g, ' $1').trim();
@@ -92,13 +65,7 @@ function formatSectionName(section) {
 }
 
 
-/**
- * Truncates a task description to a specified word limit.
- * 
- * @param {string} description - The task description.
- * @param {number} wordLimit - The maximum number of words to display.
- * @returns {string} - The truncated description.
- */
+
 function truncateDescription(description, wordLimit) {
   let words = (typeof description === 'string' ? description.split(' ') : []);
   return words.length > wordLimit
@@ -107,23 +74,14 @@ function truncateDescription(description, wordLimit) {
 }
 
 
-/**
- * Capitalizes the first letter of the given text, ensuring the rest of the string remains unchanged.
- * 
- * @param {string} text - The input string to capitalize.
- * @returns {string} - The modified string with only the first letter capitalized.
- */
+
 function capitalizeFirstLetter(text) {
   if (!text) return text;
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 
-/**
- * Initiates the dragging process for a task.
- * 
- * @param {number} taskIndex - The index of the task being dragged.
- */
+
 function startDragging(taskIndex) {
   currentDraggedElement = taskIndex;
   let taskElement = document.querySelector(`[data-task="${taskAllArray[taskIndex].title}"]`);
@@ -131,21 +89,12 @@ function startDragging(taskIndex) {
 }
 
 
-/**
- * Allows an element to be dropped.
- * 
- * @param {Event} ev - The dragover event.
- */
+
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
 
-/**
- * Moves a task to a different section.
- * 
- * @param {string} section - The section to move the task to.
- */
 function moveTo(section) {
   if (typeof currentDraggedElement !== 'number' || currentDraggedElement < 0 || currentDraggedElement >= taskAllArray.length) {
       return;
@@ -160,24 +109,12 @@ function moveTo(section) {
   saveTasksToLocalStorage();
 }
 
-/**
- * Formats the category name into a valid CSS class name.
- * 
- * @param {string} category - The category name.
- * @returns {string} - The formatted category class name.
- */
+
 function formatCategoryClass(category) {
   return category ? category.replace(/\s+/g, '') : '';
 }
 
 
-/**
- * Determines the initials to display for assigned users and calculates if there are more users than can be displayed.
- * 
- * @param {Array} assignedInitals - The array of assigned user initials.
- * @param {number} maxInitialsToShow - The maximum number of initials to show.
- * @returns {Object} - An object containing the initials to show and the count of remaining initials.
- */
 function getInitialsToShow(assignedInitals, maxInitialsToShow) {
   let initialsToShow = assignedInitals.slice(0, maxInitialsToShow);
   let remainingInitialsCount = assignedInitals.length - maxInitialsToShow;
@@ -185,18 +122,11 @@ function getInitialsToShow(assignedInitals, maxInitialsToShow) {
 }
 
 
-/**
- * Generates the full HTML structure for the initials and priority of assigned users.
- * 
- * @param {Array} assignedInitals - The array of assigned user initials.
- * @param {Array} colors - The array of colors associated with the initials.
- * @param {string} prio - The path to the priority image.
- * @returns {string} - The HTML string for the initials and priority display.
- */
+
 function renderInitials(assignedInitals, colors, prio) {
   let maxInitialsToShow = 3;
   let { initialsToShow, remainingInitialsCount } = getInitialsToShow(assignedInitals, maxInitialsToShow);
-  
+
   let initialElements = initialsToShow.map((initial, index) => `
     <div class="assignedUser" style="background-color: ${colors[index]};">
       <span class="userInitials">${initial}</span>
@@ -208,5 +138,34 @@ function renderInitials(assignedInitals, colors, prio) {
     : '';
 
   return generateInitialsAndPriorityHTML(initialElements, remainingElement, prio);
+}
+
+
+function calculateSubtaskProgress(taskIndex) {
+  const task = taskAllArray[taskIndex];
+
+  if (!task) {
+    console.error('Task not found at index:', taskIndex);
+    return { subtaskBarWidth: 0, completedSubtasks: 0, amountSubtasks: 0, subtasksStatus: [] };
+  }
+
+  if (!Array.isArray(task.subtasks)) task.subtasks = [];
+  if (!Array.isArray(task.subtasksCheck)) task.subtasksCheck = task.subtasks.map(() => false);
+
+  const amountSubtasks = task.subtasks.length;
+  const completedSubtasks = task.subtasksCheck.filter(isCompleted => isCompleted).length;
+  const subtaskBarWidth = amountSubtasks > 0 ? (completedSubtasks / amountSubtasks) * 100 : 0;
+
+  const subtasksStatus = task.subtasks.map((subtask, index) => ({
+    subtask,
+    isCompleted: task.subtasksCheck[index]
+  }));
+
+  return {
+    subtaskBarWidth,
+    completedSubtasks,
+    amountSubtasks,
+    subtasksStatus
+  };
 }
 

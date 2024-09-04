@@ -10,7 +10,7 @@
       ""
     ],
     "subtasksCheck": [
-      true, 
+      false, 
       false
     ],
     "date": "17/08/2024",
@@ -43,7 +43,7 @@
     ],
     "subtasksCheck": [
       true, 
-      false
+      true
     ],
     "date": "17/08/2024",
     "prioName": "High",
@@ -103,7 +103,7 @@
       ""
     ],
     "subtasksCheck": [
-      true, 
+      false, 
       false
     ],
     "date": "17/08/2024",
@@ -135,7 +135,7 @@
       ""
     ],
     "subtasksCheck": [
-      true, 
+      false, 
       false
     ],
     "date": "19/08/2024",
@@ -163,7 +163,10 @@
       "Adjust layout and styles for large screen sizes (desktops)",
       "Optimize layout and styles for medium screen sizes (tablets)"
     ],
-    "subtasksCheck": [true, false],
+    "subtasksCheck": [
+      false, 
+      false
+    ],
     "date": "19/08/2024",
     "prioName": "Low",
     "assignedInitals": [
