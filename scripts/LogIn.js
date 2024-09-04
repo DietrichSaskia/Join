@@ -138,7 +138,7 @@ function loginUser() {
     const rememberMeChecked = document.getElementById("rememberMe").checked;
     const emailInput = emailInputElement.value;
     const passwordInput = passwordInputElement.value;
-    loginUser1(rememberMeChecked)
+    loginUser1(rememberMeChecked, emailInput, passwordInput)
     const usersRef = ref(database, 'users');
     get(usersRef).then((snapshot) => {
         if (snapshot.exists()) {
@@ -155,7 +155,7 @@ function loginUser() {
  * 
  * @param {*} rememberMeChecked 
  */
-function loginUser1(rememberMeChecked){
+function loginUser1(rememberMeChecked, emailInput, passwordInput){
     if (rememberMeChecked) {
         localStorage.setItem('rememberedEmail', emailInput);
         localStorage.setItem('rememberedPassword', encryptPassword(passwordInput));
@@ -200,7 +200,6 @@ function loginUser2(emailInput, passwordInput, snapshot){
  */
 function encryptPassword(password) {
     return btoa(password);
-    
 }
 
 
@@ -211,9 +210,10 @@ function encryptPassword(password) {
  * @returns 
  */
 function decryptPassword(encryptedPassword) {
+    console.log(encryptedPassword)
     const decodedPassword = atob(encryptedPassword); 
+    console.log(decodedPassword)
     return decodedPassword;
-    
 }
 
 
@@ -230,7 +230,7 @@ function loadRememberedData() {
         document.getElementById('emailInputLogin').value = rememberedEmail;
     }
     if (rememberedPassword) {
-        document.getElementById('passwordInput').value = decryptPassword(rememberedPassword);
+        document.getElementById('passwordInput1').value = decryptPassword(rememberedPassword);
     }
     if (rememberMeChecked === 'true') {
         document.getElementById('rememberMe').checked = true;
