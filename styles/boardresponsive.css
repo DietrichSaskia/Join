@@ -50,53 +50,39 @@
         flex-direction: column;
     }
 
-    h1 {
-        padding-top: 24px;
-        padding-bottom: 40px;
-    }
-
     .allTasks {
         flex-direction: column;
-        padding-top: 224px;
+        margin: 0;
+        max-height: none;
+        margin-bottom: 80px;
+        padding-top: 16px;
     }
-
+    
     .moveBox {
         display: flex;
     }
 
     .task {
         width: 218px;
+        min-width: 218px;
+        margin: 16px 0 16px 16px;
+        height: 229px;
     }
 
     .headlineTasks {
-        width: 100%
-    }
-}
-
-@media (max-width:900px) {
-    .headlineAndSearch {
-        position: fixed;
-        background-color: #f5f6f7;
-        z-index: 2;
         width: 100%;
-        padding-bottom: 12px;
     }
 
-    h1 {
-        padding-top: 40px;
+    .headlineTasks img {
+        margin-right: 16px;
     }
 
-    .boardHeadline {
-        padding-left: 0;
-        padding-top: 80px;
+    .headlineTasks a {
+        padding-left: 16px;
     }
 
     .btnAddTask {
         display: none;
-    }
-
-    .searchContainer {
-        padding-right: 0;
     }
 
     .plusButton {
@@ -107,47 +93,37 @@
         width: 40px;
         background-color: #2a3647;
         border-radius: 10px;
-        position: fixed;
-        right: 16px;
-        top: 136px;
         cursor: pointer;
-    }
-
-    .headlineBox {
-        align-self: flex-start;
-        padding-left: 16px;
-    }
-}
-
-@media (max-width:700px) {
-    .allTasks {
-        margin-left: 5%;
-        margin-right: 0;
-        align-items: flex-start;
-    }
-
-    .headlineTasks img {
-        position: absolute;
-        right: 5%;
+        margin-right: 16px;
     }
 
     .searchContainer {
-        width: 100%;
+        padding-right: 0;
+        width: calc(100% - 32px);
     }
 
     .searchWrapper {
         width: 100%;
-        margin-right: 0;
+        margin: 0;
+    }
+
+    .headlineBox {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    h1  {
+        margin-top: 40px;
+        margin-bottom: 24px;
     }
 }
 
-@media (max-width:600px) {
-    .headlineBox {
+@media (max-width:900px) {
+    .boardHeadline {
         padding-left: 0;
-    }
-
-    h1 {
-        padding-top: 46px;
+        padding-top: 80px;
     }
 }
 
