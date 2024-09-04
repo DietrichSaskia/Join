@@ -45,7 +45,6 @@ function renderSection(section, containerId) {
   container.innerHTML = '';
   let formattedSectionName = formatSectionName(section);
   let tasksFound = false;
-
   for (let i = 0; i < taskAllArray.length; i++) {
     let task = taskAllArray[i];
     if (task && task.section === section) {
@@ -58,12 +57,12 @@ function renderSection(section, containerId) {
   }
 }
 
+
 function formatSectionName(section) {
   let formattedName = section.charAt(0).toUpperCase() + section.slice(1);
   formattedName = formattedName.replace(/([A-Z])/g, ' $1').trim();
   return formattedName;
 }
-
 
 
 function truncateDescription(description, wordLimit) {
@@ -74,12 +73,10 @@ function truncateDescription(description, wordLimit) {
 }
 
 
-
 function capitalizeFirstLetter(text) {
   if (!text) return text;
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
-
 
 
 function startDragging(taskIndex) {
@@ -89,7 +86,6 @@ function startDragging(taskIndex) {
 }
 
 
-
 function allowDrop(ev) {
   ev.preventDefault();
 }
@@ -97,11 +93,10 @@ function allowDrop(ev) {
 
 function moveTo(section) {
   if (typeof currentDraggedElement !== 'number' || currentDraggedElement < 0 || currentDraggedElement >= taskAllArray.length) {
-      return;
+    return;
   }
   let task = taskAllArray[currentDraggedElement];
   task.section = section;
-
   let taskElement = document.querySelector(`[data-task="${taskAllArray[currentDraggedElement].title}"]`);
   taskElement.classList.remove('dragging');
 
@@ -126,46 +121,32 @@ function getInitialsToShow(assignedInitals, maxInitialsToShow) {
 function renderInitials(assignedInitals, colors, prio) {
   let maxInitialsToShow = 3;
   let { initialsToShow, remainingInitialsCount } = getInitialsToShow(assignedInitals, maxInitialsToShow);
-
   let initialElements = initialsToShow.map((initial, index) => `
     <div class="assignedUser" style="background-color: ${colors[index]};">
       <span class="userInitials">${initial}</span>
     </div>
   `).join('');
-
   let remainingElement = remainingInitialsCount > 0 
     ? `<div class="assignedUser remainingUsers"><span class="userInitials">+${remainingInitialsCount}</span></div>` 
     : '';
-
   return generateInitialsAndPriorityHTML(initialElements, remainingElement, prio);
 }
 
 
 function calculateSubtaskProgress(taskIndex) {
-  const task = taskAllArray[taskIndex];
-
-  if (!task) {
-    console.error('Task not found at index:', taskIndex);
-    return { subtaskBarWidth: 0, completedSubtasks: 0, amountSubtasks: 0, subtasksStatus: [] };
-  }
-
-  if (!Array.isArray(task.subtasks)) task.subtasks = [];
-  if (!Array.isArray(task.subtasksCheck)) task.subtasksCheck = task.subtasks.map(() => false);
-
-  const amountSubtasks = task.subtasks.length;
-  const completedSubtasks = task.subtasksCheck.filter(isCompleted => isCompleted).length;
-  const subtaskBarWidth = amountSubtasks > 0 ? (completedSubtasks / amountSubtasks) * 100 : 0;
-
-  const subtasksStatus = task.subtasks.map((subtask, index) => ({
-    subtask,
-    isCompleted: task.subtasksCheck[index]
-  }));
-
+  let task = taskAllArray[taskIndex];
+  if (!task) return { subtaskBarWidth: 0, completedSubtasks: 0, amountSubtasks: 0, subtasksStatus: [] };
+  task.subtasks = Array.isArray(task.subtasks) ? task.subtasks : [];
+  task.subtasksCheck = Array.isArray(task.subtasksCheck) ? task.subtasksCheck : task.subtasks.map(() => false);
+  let amountSubtasks = task.subtasks.length;
+  let completedSubtasks = task.subtasksCheck.filter(Boolean).length;
+  let subtaskBarWidth = amountSubtasks > 0 ? (completedSubtasks / amountSubtasks) * 100 : 0;
   return {
     subtaskBarWidth,
     completedSubtasks,
     amountSubtasks,
-    subtasksStatus
+    subtasksStatus: task.subtasks.map((subtask, index) => ({
+      subtask, isCompleted: task.subtasksCheck[index]
+    }))
   };
 }
-

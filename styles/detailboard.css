@@ -127,12 +127,6 @@
 }
 
 
-.iconContainer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
 .detailTaskIcon {
   display: flex;
   cursor: pointer;
