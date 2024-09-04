@@ -145,6 +145,5 @@ if(id == 'XCloseID'){
 * @param {*} event 
 */
 function protect(event){
-    console.log('protect wurde aufgerufen', event);
     event.stopPropagation();
 }
