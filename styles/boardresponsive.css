@@ -147,3 +147,45 @@
         padding-top: 46px;
     }
 }
+
+@media (min-height:1000px) {
+    .wrapper {
+        margin-top: 11%;
+    }
+}
+
+@media (max-height:1000px) {
+    .wrapper {
+        margin-top: 8%;
+    }
+}
+
+@media (max-height:950px) {
+    .wrapper {
+        margin-top: 5%;
+    }
+}
+
+@media (max-height:900px) {
+    .wrapper {
+        margin-top: 2.5%;
+    }
+}
+
+@media (max-height:850px) {
+    .wrapper {
+        margin-top: 0;
+    }
+}
+
+@media (max-height:800px) {
+    .wrapper {
+        margin-top: 0;
+    }
+}
+
+@media (max-height:750px) {
+    .mainContent h1 {
+        margin-bottom: 12px;
+    }
+}
