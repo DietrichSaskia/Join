@@ -150,18 +150,21 @@ function setpriorityButton(task) {
 
 
 function setPrioHighEdit() {
+  resetprioButtons()
   document.getElementById('prio0').classList.add('high', 'active');
   document.getElementById('prioHigh').src = "../assets/icons/prioUrgentWhite.png";
 }
 
 
 function setPrioMediumEdit() {
+  resetprioButtons()
   document.getElementById('prio1').classList.add('medium', 'active');
   document.getElementById('prioMed').src = "../assets/icons/prioMediumWhite.png";
 }
 
 
 function setPrioLowEdit() {
+  resetprioButtons()
   document.getElementById('prio2').classList.add('low', 'active');
   document.getElementById('prioLow').src = "../assets/icons/prioLowWhite.png";
 }
