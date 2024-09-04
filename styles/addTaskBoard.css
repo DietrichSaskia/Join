@@ -392,7 +392,7 @@
     max-width: 440px;
 }
 
-.mainContent.prioButton {
+.mainContent .prioButton {
     font-size: 20px;
     width: 33%;
     max-width: 136px;
@@ -414,18 +414,18 @@
 }
 
 .high {
-    background-color: #ff3c00;
-    color: white;
+    background-color: #ff3c00!important;
+    color: white!important;
 }
 
 .medium {
-    background-color: #ffaa00;
-    color: white;
+    background-color: #ffaa00!important;
+    color: white!important;
 }
 
 .low {
-    background-color: #79e329;
-    color: white;
+    background-color: #79e329!important;
+    color: white!important;
 }
 
 .mainContent .subtaskHeadline {
