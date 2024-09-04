@@ -33,18 +33,18 @@ function getInitials(name) {
  * @param {*} text 
  */
 function showPopUpInfo(text) {
-    const popupElement = document.getElementById('ContactInfoPopUp');
-    popupElement.classList.remove('none');
-    popupElement.classList.add('ContactInforWindow');
-    ContactInformationPopUpHTML(text);
-    setTimeout(() => {
-        popupElement.classList.add('Contactshow-popup');
-    }, 10);
-    setTimeout(() => {
-        popupElement.classList.add('none');
-        popupElement.classList.remove('ContactInforWindow');
-        popupElement.classList.remove('Contactshow-popup');
-    }, 2000);
+    let WindowSize = window.innerWidth
+    if(WindowSize < 900){
+        const popupElement = document.getElementById('ContactInfoPopUp');
+        popupElement.classList.remove('none');
+        popupElement.classList.add('ContactInforWindow');
+        ContactInformationPopUpHTML(text);
+        setTimeout(() => { popupElement.classList.add('Contactshow-popup'); }, 10);
+        setTimeout(() => {
+            popupElement.classList.add('none');
+            popupElement.classList.remove('ContactInforWindow');
+            popupElement.classList.remove('Contactshow-popup');
+        }, 2000);}
 }
 
 
