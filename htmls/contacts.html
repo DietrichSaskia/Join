@@ -13,6 +13,7 @@
 
 </head>
 <body onload="init('headerContact'), contactInfoHeadlineHtml()">
+  <div id="ContactInfoPopUp" class="none"></div>
   <div onclick="clickContactBack()" class="none" id="EditContactIDWIn"></div>
   <main class="mainareasplit">
     <section id="ContactSectionID2" class="Contactsection">
@@ -31,7 +32,6 @@
         </section>
         <section class="ContactsInfoSectionClass" id="ContactsInfoSection"></section>
     </section>
-    <div id="UserInfoPopUp" class="none"></div>
     <section id="MenuEditDeleteButtonPositionID" class="MenuEditDeleteButtonPosition">
       <button  id="AddContactNewButton" onclick="editContactShowWindow() ,editNewContactHtmlChange()" class="MenuEditDeleteButton">
         <img class="PersonAddButton" src="/assets/icons/person_add.png">
@@ -44,9 +44,10 @@
       <div id="WindowEditDeleteID" class="none"></div>
     </section>
   </main>
-  <script src="/scripts/contacthtml.js"></script>
-  <script src="/scripts/contactWindow.js"></script>
-  <script src="/scripts/contact.js"></script>
-  <script src="/scripts/contact supplement.js"></script>
+  <script src="/scripts/contacthtml.js" defer></script>
+  <script src="/scripts/contact supplement.js" defer></script>
+  <script src="/scripts/contactWindow.js" defer></script>
+  <script src="/scripts/contact.js" defer></script>
+  
 </body>
 </html>

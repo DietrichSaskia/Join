@@ -27,21 +27,26 @@ function getInitials(name) {
 }
 
 
+/**
+ * Classes are added and removed to create a popup that disappears after 2 seconds.
+ * 
+ * @param {*} text 
+ */
 function showPopUpInfo(text) {
-    console.log('showPopUpInfo aufgerufen');
-    const popupElement = document.getElementById('UserInfoPopUp');
+    const popupElement = document.getElementById('ContactInfoPopUp');
     popupElement.classList.remove('none');
-    popupElement.classList.add('UserInforWindow');
+    popupElement.classList.add('ContactInforWindow');
     ContactInformationPopUpHTML(text);
     setTimeout(() => {
-        popupElement.classList.add('show-popup');
+        popupElement.classList.add('Contactshow-popup');
     }, 10);
     setTimeout(() => {
         popupElement.classList.add('none');
-        popupElement.classList.remove('UserInforWindow');
-        popupElement.classList.remove('show-popup');
-    }, 6000);
+        popupElement.classList.remove('ContactInforWindow');
+        popupElement.classList.remove('Contactshow-popup');
+    }, 2000);
 }
+
 
 /**
  * When formatting the telephone number, all digits and the plus sign are removed. In addition, the format of a cell phone number is implemented.
@@ -140,5 +145,6 @@ if(id == 'XCloseID'){
 * @param {*} event 
 */
 function protect(event){
-event.stopPropagation();
+    console.log('protect wurde aufgerufen', event);
+    event.stopPropagation();
 }
