@@ -4,6 +4,7 @@
  * @param {Array} task The array that is used to temporarily save all inputs
  */
 function setPrioHigh(task) {
+    resetprioButtons()
     document.getElementById('prio0').classList.add('high', 'active');
     document.getElementById('prioHigh').src = "../assets/icons/prioUrgentWhite.png";
     task['prio'] = '/assets/icons/prioUrgent.png';
@@ -17,6 +18,7 @@ function setPrioHigh(task) {
  * @param {Array} task The array that is used to temporarily save all inputs
  */
 function setPrioMedium(task) {
+    resetprioButtons()
     document.getElementById('prio1').classList.add('medium', 'active');
     document.getElementById('prioMed').src = "../assets/icons/prioMediumWhite.png";
     task['prio'] = '/assets/icons/prioMedium.png';
@@ -30,6 +32,7 @@ function setPrioMedium(task) {
  * @param {Array} task The array that is used to temporarily save all inputs
  */
 function setPrioLow(task) {
+    resetprioButtons()
     document.getElementById('prio2').classList.add('low', 'active');
     document.getElementById('prioLow').src = "../assets/icons/prioLowWhite.png";
     task['prio'] = '/assets/icons/prioLow.png';
@@ -187,7 +190,7 @@ function checkInput3() {
  * @param {number} i The number of the subtask box
  */
 function deleteSubtask(i) {
-    task['subtasks'][i] = null;
+    task['subtasks'][i] = "";
     document.getElementById(`subtaskBox${i}`).remove();
 }
 
@@ -213,7 +216,7 @@ function editSubtask(i) {
     let info = task['subtasks'][i];
     document.getElementById(`subtaskBox${i}`).remove();
     putSubTaskInput(info, i);
-    let input = document.getElementById(`subTask${i}`);
+    let input = document.getElementById(`subtask${i}`);
     input.focus();
     input.setSelectionRange(input.value.length, input.value.length);
 }

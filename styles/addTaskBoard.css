@@ -105,16 +105,16 @@
 }
 
 .mainContent input {
-    max-width: 440px;
-    width: 100%;
-    height: 48px;
-    border-radius: 8px;
-    border: 1px solid #D1D1D1;
-    box-sizing: border-box;
-    padding-left: 20px;
-    padding-right: 20px;
-    font-size: 20px;
-    flex: none;
+    max-width: 440px!important;
+    width: 100%!important;
+    height: 48px!important;
+    border-radius: 8px!important;
+    border: 1px solid #D1D1D1!important;
+    box-sizing: border-box!important;
+    padding-left: 20px!important;
+    padding-right: 20px!important;
+    font-size: 20px!important;
+    flex: none!important;
 }
 
 .mainContent .redInputBorder {
@@ -392,7 +392,7 @@
     max-width: 440px;
 }
 
-.mainContent.prioButton {
+.mainContent .prioButton {
     font-size: 20px;
     width: 33%;
     max-width: 136px;
@@ -414,29 +414,31 @@
 }
 
 .high {
-    background-color: #ff3c00;
-    color: white;
+    background-color: #ff3c00!important;
+    color: white!important;
 }
 
 .medium {
-    background-color: #ffaa00;
-    color: white;
+    background-color: #ffaa00!important;
+    color: white!important;
 }
 
 .low {
-    background-color: #79e329;
-    color: white;
+    background-color: #79e329!important;
+    color: white!important;
 }
 
 .mainContent .subtaskHeadline {
     margin-top: 24px;
 }
 
-.mainContent .subTaskBox {
+.mainContent .subtaskBox {
     margin-top: 4px;
+    padding: 0;
+    border-bottom: none;
 }
 
-.mainContent .subTaskBox:hover {
+.mainContent .subtaskBox:hover {
     background-color: #D1D1D1;
     border-radius: 10px;
 }
@@ -481,20 +483,20 @@
     cursor: pointer;
 }
 
-.mainContent .subTasksBox {
+.mainContent .subtasksBox {
     height: 100px;
     width: 100%;
     max-width: 440px;
 }
 
-.mainContent .subTasksBox ul {
+.mainContent .subtasksBox ul {
     display: flex;
     align-items: center;
     padding-right: 6px;
     padding-bottom: 4px;
 }
 
-.mainContent .subTasksBox li {
+.mainContent .subtasksBox li {
     font-size: 16px;
     padding-top: 6px;
     width: 80%;
