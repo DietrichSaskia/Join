@@ -182,6 +182,27 @@ function showSubtask() {
 
 
 /**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * REMINDER 
+ * TU DAS
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
  * Pushes the subtask input field into the task Array and puts it into a subtaskbox
  * 
  * @param {string} input The value of the subtask input
