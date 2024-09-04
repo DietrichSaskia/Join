@@ -263,7 +263,6 @@ function updateSubtasks(taskIndex) {
 }
 
 
-
 function updateTaskPriority() {
   let prioButtons = document.getElementsByClassName('prioButtonEdit');
   for (let j = 0; j < prioButtons.length; j++) {
