@@ -171,7 +171,8 @@ function editNewContactHtmlChange() {
  * The new object is created and the values are assigned. They are then sent to the database.
  * The main function is rendered to get the current changes and the window is closed.
  */
-function createNewContact() {
+function createNewContact(event) {
+    if (event) event.preventDefault();
     let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
     const name = document.getElementById('editNameInput').value.trim();
     const email = document.getElementById('editEmailInput').value.trim();
@@ -180,11 +181,8 @@ function createNewContact() {
     contactAllArray.push(newContact);
     localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
     editContactCloseWindow();
+    showPopUpInfo('Contact was successfully added!')
     contactLoad()
-    setTimeout(() => {
-        showPopUpInfo('Contact was successfully added');
-    }, 100);
-    
 }
 
 
@@ -204,14 +202,9 @@ function deleteContactList(index) {
         document.getElementById('ContactfieldInfodiv').classList.remove('Slideinright');
         document.getElementById('ContactfieldInfodiv').classList.add('Slideinleft');
         let windowSize = window.innerWidth
-        if(windowSize < 900){
-            goBackToContacts()
-        }
-        else{
-            document.getElementById('Contenttext').innerHTML='';
-        }
-        contactLoad(); 
-    }
+        if(windowSize < 900){goBackToContacts()}
+        else{ document.getElementById('Contenttext').innerHTML='';}
+        contactLoad(); }
 }
 
 
@@ -339,7 +332,7 @@ function validateEmail(inputFieldId, originalValue) {
 
 
 /**
- * * The status of the input field is viewed here, whether it is empty, an invalid entry has been made or whether it has been entered correctly.
+ * The status of the input field is viewed here, whether it is empty, an invalid entry has been made or whether it has been entered correctly.
  * 
  * @param {*} NameInput 
  * @param {*} parentDiv 
@@ -396,8 +389,7 @@ function applyFocusAndValidation2(inputField, originalValue){
             validateName("editNameInput")
             validateEmail("editEmailInput")
             validatePhone("editPhoneInput")
-        }
-      });
+        }});
 }
 
 

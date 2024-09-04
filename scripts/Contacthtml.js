@@ -119,12 +119,12 @@ function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
 
 function editNewContactChangeHTML(){
     document.getElementById('EditWindowDeleteSaveID2').innerHTML=`
-    <button onclick="editContactCloseWindow()" onmouseover="onmouseClose('XCloseID')" onmouseout="outmouseClose('XCloseID')" id="CloseButtonID" type="button" class="EditWindowDeleteButton2">Cancel 
+    <button type="button" onclick="editContactCloseWindow()" onmouseover="onmouseClose('XCloseID')" onmouseout="outmouseClose('XCloseID')" id="CloseButtonID" type="button" class="EditWindowDeleteButton2">Cancel 
         <div class="XButtonCloseStyle" id="XCloseID">
             <img  class="ImgCloseStyle2" src="/assets/icons/close.png">
         </div>
     </button>
-    <button  onclick="createNewContact()" class="EditWindowSaveButton">Create contact <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
+    <button type="button" onclick="createNewContact()" class="EditWindowSaveButton">Create contact <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
     `;
 }
 
@@ -148,9 +148,9 @@ function contactInfoHeadlineHtml(){
 
 
 function ContactInformationPopUpHTML(text){
-    document.getElementById('UserInfoPopUp').innerHTML=`
-    <div class="UserInformation">
-        <div id="UserInformationText">${text}</div>
+    document.getElementById('ContactInfoPopUp').innerHTML=`
+    <div class="ContactInformation">
+        <div >${text}</div>
     </div>
     `; 
 }

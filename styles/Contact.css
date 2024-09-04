@@ -38,20 +38,20 @@ body{
     align-items: center;
     position: fixed;
 }
-.UserInforWindow{
+.ContactInforWindow{
     position: fixed;
-    bottom: -100px; 
+    bottom: -100%; 
     left: 50%;
     transform: translateX(-50%); 
-    transition: bottom 2s ease-in-out;
+    transition: bottom 0.4s ease-in-out;
     z-index: 999;
 }
-.show-popup {
-    bottom: 50px; 
+.Contactshow-popup {
+    bottom: 25%; 
 }
-.UserInformation{
+.ContactInformation{
     width: fit-content;
-    background-color: red;
+    background-color:#2A3647;
     color: white;
     border-radius: 12px;
     padding: 20px;
@@ -278,7 +278,6 @@ body{
 .EditWindowNew{
     width: 1212px;
     position: fixed;
-    opacity: 0.2;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);

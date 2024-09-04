@@ -22,15 +22,15 @@ let editedTaskArray = editedTaskArrays[0];
 
 function showTaskDetail(taskIndex) {
   let task = taskAllArray[taskIndex];
-  let taskDetailsHTML = generateTaskDetails(task, taskIndex); 
+  let taskDetailsHTML = generateTaskDetails(task, taskIndex);
   let taskContent = document.getElementById("taskDetailCard");
   if (taskContent) {
     taskContent.innerHTML = taskDetailsHTML;
   }
   let subtasksElement = document.getElementById("subtasksDetail");
   if (subtasksElement && Array.isArray(task.subtasks) && task.subtasks.length > 0) {
-    subtasksElement.innerHTML = renderSubtasks(taskIndex, task); 
-    calculateSubtaskProgress(taskIndex); 
+    subtasksElement.innerHTML = renderSubtasks(taskIndex, task);
+    calculateSubtaskProgress(taskIndex);
   }
   toggleTask();
 }
@@ -53,8 +53,8 @@ function renderSubtasks(taskIndex, task) {
 
   return validSubtasks.map((subtask, validIndex) => {
     let isChecked = subtasksCheck[validIndex] || false;
-    let imageSrc = isChecked 
-      ? "/assets/icons/checkButtonChecked.png" 
+    let imageSrc = isChecked
+      ? "/assets/icons/checkButtonChecked.png"
       : "/assets/icons/checkButtonblank.png";
     return `
       <div class="subtask">
@@ -72,8 +72,8 @@ function toggleSubtaskImage(taskIndex, subtaskIndex) {
   task.subtasksCheck[subtaskIndex] = !task.subtasksCheck[subtaskIndex];
   let image = document.getElementById(`subtask-image-${taskIndex}-${subtaskIndex}`);
   if (image) {
-    image.src = task.subtasksCheck[subtaskIndex] 
-      ? "/assets/icons/checkButtonChecked.png" 
+    image.src = task.subtasksCheck[subtaskIndex]
+      ? "/assets/icons/checkButtonChecked.png"
       : "/assets/icons/checkButtonblank.png";
   }
 
@@ -90,7 +90,7 @@ function updateSubtaskProgressBar(taskIndex, subtaskBarWidth, completedSubtasks,
   if (subtaskBar) {
     subtaskBar.style.width = `${subtaskBarWidth}%`;
   }
-  
+
   if (subtaskCount) {
     subtaskCount.innerText = `${completedSubtasks}/${amountSubtasks} Subtasks`;
   }
@@ -150,18 +150,21 @@ function setpriorityButton(task) {
 
 
 function setPrioHighEdit() {
+  resetprioButtons()
   document.getElementById('prio0').classList.add('high', 'active');
   document.getElementById('prioHigh').src = "../assets/icons/prioUrgentWhite.png";
 }
 
 
 function setPrioMediumEdit() {
+  resetprioButtons()
   document.getElementById('prio1').classList.add('medium', 'active');
   document.getElementById('prioMed').src = "../assets/icons/prioMediumWhite.png";
 }
 
 
 function setPrioLowEdit() {
+  resetprioButtons()
   document.getElementById('prio2').classList.add('low', 'active');
   document.getElementById('prioLow').src = "../assets/icons/prioLowWhite.png";
 }
@@ -207,7 +210,7 @@ function setEditedArray(taskIndex) {
   initializeEditedTaskArray();
   updateAssignedUsers();
   updateTaskDetails(taskIndex);
-  updateSubtasks();
+  updateSubtasks(taskIndex);
   updateTaskPriority();
 }
 
@@ -245,14 +248,20 @@ function updateTaskDetails(taskIndex) {
 }
 
 
-function updateSubtasks() {
+function updateSubtasks(taskIndex) {
+  let task = taskAllArray[taskIndex];
   if (document.getElementById('subtask0')) {
     editedTaskArray['subtasks'][0] = (document.getElementById('subtask0').innerText);
-  }
-  if (document.getElementById('subtask1')) {
-    editedTaskArray['subtasks'][1] = (document.getElementById('subtask1').innerText);
+    let checked = task.subtasksCheck[0];
+    editedTaskArray['subtasksCheck'][0] = checked;
+    if (document.getElementById('subtask1')) {
+      editedTaskArray['subtasks'][1] = (document.getElementById('subtask1').innerText);
+      let checked = task.subtasksCheck[1];
+      editedTaskArray['subtasksCheck'][1] = checked;
+    }
   }
 }
+
 
 
 function updateTaskPriority() {
@@ -384,10 +393,10 @@ function editTaskTemplate(task, date, taskIndex) {
         <span class="inputError dNone" id="inputerrorSubtask1">Subtask needs Description</span>
         <span class="inputError dNone" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
         <div class="subtasksBox" id="subtasksBox">
-          <div id="subtaskBox0" class="subtaskBox">
+          <div id="subtaskBox0" onmouseover="onmouse('0')" onmouseout="outmouse('0')" class="subtaskBox">
             <ul>
               <li id="subtask0">${subtask0}</li>
-              <div class="subtaskIconsLower">
+              <div id="subtaskIconsLower0" class="subtaskIconsLower dNone">
                 <img class="subtaskIcon" onclick="subtaskEdit(0)" src="../assets/icons/edit.png">
                 <div class="smallSeparator"></div>
                 <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 0)" src="../assets/icons/delete.png">
@@ -395,10 +404,10 @@ function editTaskTemplate(task, date, taskIndex) {
             </ul>
           </div>
 
-          <div id="subtaskBox1" class="subtaskBox">
+          <div id="subtaskBox1" onmouseover="onmouse('1')" onmouseout="outmouse('1')" class="subtaskBox">
             <ul>
               <li id="subtask1">${subtask1}</li>
-              <div class="subtaskIconsLower">
+              <div id="subtaskIconsLower1" class="subtaskIconsLower dNone">
                 <img class="subtaskIcon" onclick="subtaskEdit(1)" src="../assets/icons/edit.png">
                 <div class="smallSeparator"></div>
                 <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 1)" src="../assets/icons/delete.png">
@@ -434,4 +443,24 @@ function editTaskTemplate(task, date, taskIndex) {
       </div>
     </div>
   `;
+}
+
+
+/**
+* A different path is used depending on which ID is transferred. This is used to exchange icons.
+* 
+* @param {*} id 
+*/
+function outmouse(subtaskID) {
+  document.getElementById(`subtaskIconsLower${subtaskID}`).classList.add('dNone')
+}
+
+
+/**
+* A different path is used depending on which ID is transferred. This is used to exchange icons.
+* 
+* @param {*} id 
+*/
+function onmouse(subtaskID) {
+  document.getElementById(`subtaskIconsLower${subtaskID}`).classList.remove('dNone')
 }
