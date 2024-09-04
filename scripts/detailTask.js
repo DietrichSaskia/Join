@@ -273,27 +273,7 @@ function deleteSubtaskEdit(taskIndex, subtaskIndex) {
     task.subtasks.splice(subtaskIndex, 1);
     task.subtasksCheck.splice(subtaskIndex, 1);
 
-    // Speichere die aktualisierten Aufgaben im Local Storage
-    saveTasksToLocalStorage();
-
-    // Aktualisiere die Subtask-Progress-Bar und das Board
-    calculateSubtaskProgress(taskIndex);
-    renderAllTasks(); // Aktualisiere das Board nach dem Löschen des Subtasks
-  } else {
-    console.error('Task not found for deletion at index:', taskIndex);
-  }
-}
-
-
-function deleteSubtaskEdit(taskIndex, subtaskIndex) {
-  let task = taskAllArray[taskIndex];
-  if (task) {
-    task.subtasks.splice(subtaskIndex, 1);
-    task.subtasksCheck.splice(subtaskIndex, 1);
-
-    // Synchronisiere Subtasks und Checks
     synchronizeSubtasksAndChecks(task);
-
     saveTasksToLocalStorage();
     calculateSubtaskProgress(taskIndex);
 
@@ -301,9 +281,7 @@ function deleteSubtaskEdit(taskIndex, subtaskIndex) {
     if (subtasksElement) {
       subtasksElement.innerHTML = renderSubtasks(taskIndex, task);
     }
-
     editTask(taskIndex);
-    renderAllTasks();
   } else {
     console.error('Task not found for deletion at index:', taskIndex);
   }
@@ -311,14 +289,11 @@ function deleteSubtaskEdit(taskIndex, subtaskIndex) {
 
 
 function synchronizeSubtasksAndChecks(task) {
-  // Entferne überschüssige Check-Einträge
   while (task.subtasksCheck.length > task.subtasks.length) {
-    task.subtasksCheck.pop(); // Entferne überschüssige Checks
+    task.subtasksCheck.pop();
   }
-
-  // Füge fehlende Check-Einträge hinzu
   while (task.subtasksCheck.length < task.subtasks.length) {
-    task.subtasksCheck.push(false); // Standardmäßig auf 'false' setzen
+    task.subtasksCheck.push(false);
   }
 }
 
@@ -394,7 +369,7 @@ function editTaskTemplate(task, date, taskIndex) {
       <div id="assignedUsers" class="assignedUsers"></div>
 
       <div class="subtasksDetail" id="subtasksDetail"></div>
-      <div class="iconContainer">
+      <div class="subtasksContainer">
         <p class="subtaskHeadline">Subtasks</p>
         <input id="subtasksInput" placeholder="Add new subtask" onfocus="showSubtaskIcons()">
         <div class="subtaskIcons">
@@ -453,7 +428,9 @@ function editTaskTemplate(task, date, taskIndex) {
           </div>
         </div>
       </div>
-      </button>
+      <div class="okButtonContainer">
+        <button onclick="saveEditedTasktoLocalStorage(${taskIndex})" class="okButton">Ok<img src="/assets/icons/checkWhite.png"></button>
+      </div>
     </div>
   `;
 }

@@ -135,18 +135,17 @@ function renderInitials(assignedInitals, colors, prio) {
 
 function calculateSubtaskProgress(taskIndex) {
   let task = taskAllArray[taskIndex];
-  if (!task) return { subtaskBarWidth: 0, completedSubtasks: 0, amountSubtasks: 0, subtasksStatus: [] };
-  task.subtasks = Array.isArray(task.subtasks) ? task.subtasks : [];
-  task.subtasksCheck = Array.isArray(task.subtasksCheck) ? task.subtasksCheck : task.subtasks.map(() => false);
-  let amountSubtasks = task.subtasks.length;
+  if (!task) return { subtaskBarWidth: 0, completedSubtasks: 0, amountSubtasks: 0 };
+
+  let validSubtasks = task.subtasks.filter(subtask => subtask && subtask.trim() !== '');
   let completedSubtasks = task.subtasksCheck.filter(Boolean).length;
+  let amountSubtasks = validSubtasks.length;
+
   let subtaskBarWidth = amountSubtasks > 0 ? (completedSubtasks / amountSubtasks) * 100 : 0;
+
   return {
     subtaskBarWidth,
     completedSubtasks,
-    amountSubtasks,
-    subtasksStatus: task.subtasks.map((subtask, index) => ({
-      subtask, isCompleted: task.subtasksCheck[index]
-    }))
+    amountSubtasks
   };
 }

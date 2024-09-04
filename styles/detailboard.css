@@ -272,8 +272,33 @@
   box-sizing: border-box;
 }
 
+.okButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .okButton {
-  background-color: blue;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #2a3647;
+  height: 50px;
+  width: 80px;
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 1px solid;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.subtasksContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 .subtasksInput {
