@@ -435,7 +435,6 @@
 .mainContent .subtaskBox {
     margin-top: 4px;
     padding: 0;
-    border-bottom: none;
 }
 
 .mainContent .subtaskBox:hover {
@@ -507,7 +506,7 @@
     margin-top: -18px;
 }
 
-.mainContent .smallSeparator {
+.smallSeparator {
     width: 2px;
     height: 24px;
     background-color: #d1d1d1;

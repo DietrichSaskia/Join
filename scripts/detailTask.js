@@ -386,10 +386,10 @@ function editTaskTemplate(task, date, taskIndex) {
         <span class="inputError dNone" id="inputerrorSubtask1">Subtask needs Description</span>
         <span class="inputError dNone" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
         <div class="subtasksBox" id="subtasksBox">
-          <div id="subtaskBox0" class="subtaskBox">
+          <div id="subtaskBox0" onmouseover="onmouse('0')" onmouseout="outmouse('0')" class="subtaskBox">
             <ul>
               <li id="subtask0">${subtask0}</li>
-              <div class="subtaskIconsLower">
+              <div id="subtaskIconsLower0" class="subtaskIconsLower dNone">
                 <img class="subtaskIcon" onclick="subtaskEdit(0)" src="../assets/icons/edit.png">
                 <div class="smallSeparator"></div>
                 <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 0)" src="../assets/icons/delete.png">
@@ -397,10 +397,10 @@ function editTaskTemplate(task, date, taskIndex) {
             </ul>
           </div>
 
-          <div id="subtaskBox1" class="subtaskBox">
+          <div id="subtaskBox1" onmouseover="onmouse('1')" onmouseout="outmouse('1')" class="subtaskBox">
             <ul>
               <li id="subtask1">${subtask1}</li>
-              <div class="subtaskIconsLower">
+              <div id="subtaskIconsLower1" class="subtaskIconsLower dNone">
                 <img class="subtaskIcon" onclick="subtaskEdit(1)" src="../assets/icons/edit.png">
                 <div class="smallSeparator"></div>
                 <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 1)" src="../assets/icons/delete.png">
@@ -437,3 +437,23 @@ function editTaskTemplate(task, date, taskIndex) {
     </div>
   `;
 }
+
+
+/**
+* A different path is used depending on which ID is transferred. This is used to exchange icons.
+* 
+* @param {*} id 
+*/
+function outmouse(subtaskID){
+  document.getElementById(`subtaskIconsLower${subtaskID}`).classList.add('dNone')
+  }
+  
+  
+  /**
+  * A different path is used depending on which ID is transferred. This is used to exchange icons.
+  * 
+  * @param {*} id 
+  */
+  function onmouse(subtaskID){
+    document.getElementById(`subtaskIconsLower${subtaskID}`).classList.remove('dNone')
+  }

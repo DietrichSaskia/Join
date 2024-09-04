@@ -135,6 +135,7 @@
 
 .detailTaskIcon {
   display: flex;
+  align-items: center;
   cursor: pointer;
   text-align: center;
   transition: color 0.3s ease, filter 0.3s ease;
@@ -337,7 +338,20 @@
 
 .subtaskBox {
   padding: 8px;
-  border-bottom: 1px solid #ddd;
+}
+
+.subtaskBox ul {
+  display: flex;
+}
+
+.subtaskBox li {
+  width: 85%;
+}
+
+.subtaskBox .subtaskIconsLower {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dFlexAlign.subtaskInputContainer {
