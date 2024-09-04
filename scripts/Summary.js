@@ -128,6 +128,10 @@ function summarySectionCheck3_1(highCount){
         document.getElementById('currentDate').classList.add('none')
         document.getElementById('currentDate').classList.remove('SummarySecondDate')
     }
+    else{
+        document.getElementById('currentDate').classList.remove('none')
+        document.getElementById('currentDate').classList.add('SummarySecondDate')
+    }
 }
 
 
