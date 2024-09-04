@@ -210,9 +210,7 @@ function encryptPassword(password) {
  * @returns 
  */
 function decryptPassword(encryptedPassword) {
-    console.log(encryptedPassword)
     const decodedPassword = atob(encryptedPassword); 
-    console.log(decodedPassword)
     return decodedPassword;
 }
 

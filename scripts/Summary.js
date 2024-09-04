@@ -112,8 +112,22 @@ function summarySectionCheck3(SectionTypLength){
             highCount++;
             highIndices.push(index); 
         }
+        summarySectionCheck3_1(highCount)
     });
     summarySectionCheck4(highCount)
+}
+
+
+/**
+ * class is removed and one is added.
+ * 
+ * @param {*} highCount 
+ */
+function summarySectionCheck3_1(highCount){
+    if(highCount == 0){
+        document.getElementById('currentDate').classList.add('none')
+        document.getElementById('currentDate').classList.remove('SummarySecondDate')
+    }
 }
 
 
