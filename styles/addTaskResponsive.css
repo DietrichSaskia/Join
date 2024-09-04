@@ -125,6 +125,14 @@
     h1 {
         width: calc(100% - 39px);
     }
+
+    .createTaskButton {
+        margin-right: 16px;
+    }
+
+    .required {
+        padding-left: 16px;
+    }
 }
 
 @media (max-width:460px) {
@@ -156,13 +164,5 @@
 
     .dropdownButton {
         font-size: 18px;
-    }
-
-    .required {
-        padding-left: 4px;
-    }
-
-    .createTaskButton {
-        margin-right: 4px;
     }
 }
