@@ -8,6 +8,10 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+.mainContent::-webkit-scrollbar {
+    display: none;
+}
+
 .mainContent {
     margin-left: 232px;
     padding: 96px 96px 0 96px;
