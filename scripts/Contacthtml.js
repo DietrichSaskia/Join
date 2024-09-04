@@ -124,7 +124,7 @@ function editNewContactChangeHTML(){
             <img  class="ImgCloseStyle2" src="/assets/icons/close.png">
         </div>
     </button>
-    <button type="button" onclick="createNewContact()" class="EditWindowSaveButton">Create contact <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
+    <button type="button" id="CreateContactButtonID" onclick="createNewContact()" class="EditWindowSaveButton">Create contact <img class="EditSaveCheck" src="/assets/icons/checkWhite.png"></button>
     `;
 }
 

@@ -177,14 +177,16 @@ function createNewContact(event) {
     const name = document.getElementById('editNameInput').value.trim();
     const email = document.getElementById('editEmailInput').value.trim();
     const phone = document.getElementById('editPhoneInput').value.trim();
-    let newContact = {"name": name,"email": email,"phone": phone,"color": getRandomColor()};
-    contactAllArray.push(newContact);
-    localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
-    editContactCloseWindow();
-    showPopUpInfo('Contact was successfully added!')
-    contactLoad()
+    if (name && email && phone) {
+        let newContact = {"name": name,"email": email,"phone": phone,"color": getRandomColor()};
+        contactAllArray.push(newContact);
+        localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
+        editContactCloseWindow();
+        showPopUpInfo('Contact was successfully added!')
+        contactLoad()}
+    else{document.getElementById('CreateContactButtonID').disabled = true;}
 }
-
+        
 
 /**
  * The data is transferred from the database in an object. The length of the array containing the objects is then determined.

@@ -59,17 +59,15 @@ function cleanarray(){
 function contactloadchar(contactNameArray){
     contactNameArray.forEach((name, index) => {
         let email = emailsArray[index];
-        let [firstName, lastName] = name.split(" ");
-        let initials = `${firstName[0]}${lastName[0]}`;
-        charContactArray[index].initial = firstName[0].toUpperCase();
-        charContactArray[index].initials = initials;
-    });
+        if(name){
+            let [firstName, lastName] = name.split(" ");
+            let initials = `${firstName[0]}${lastName[0]}`;
+            charContactArray[index].initial = firstName[0].toUpperCase();
+            charContactArray[index].initials = initials;
+        }});
     charContactArray.sort((a, b) => {
-        if (a.initial === b.initial) {
-            return a.name.localeCompare(b.name);
-        }
-        return a.initial.localeCompare(b.initial);
-    });
+        if (a.initial === b.initial) {return a.name.localeCompare(b.name);}
+        return a.initial.localeCompare(b.initial);});
     contactloadcontainer();
 }
 
