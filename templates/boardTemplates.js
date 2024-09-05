@@ -202,7 +202,7 @@ function editTaskTemplate(task, date, taskIndex) {
       <div class="closeTaskContainer">
         <img class="closeTask" onclick="toggleTask()" src="/assets/icons/close.png" alt="Close">
       </div>
-      <p class="titleEdit">Title</p>
+      <h1 class="titleEdit">Title</h1>
       <input id="titleInput" class="titleInput" placeholder="Enter a Title" value="${task.title}" type="text" required>
       <span class="inputError" id="inputerror1">This field is required</span>
       <p class="descriptionEdit">Description</p>

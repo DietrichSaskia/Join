@@ -156,6 +156,10 @@
   filter: invert(53%) sepia(94%) saturate(417%) hue-rotate(158deg) brightness(93%) contrast(94%);
 }
 
+#taskDetailCard {
+  margin: 15% 0 15% 0;
+}
+
 .detailtaskEdit {
   display: flex;
   flex-direction: column;
@@ -165,13 +169,18 @@
   width: 400px;
   background-color: white;
   gap: 8px;
-  max-height: 600px;
   overflow-y: auto;
   overflow-x: hidden;
+  max-height: 80vh;
 }
 
 .detailtaskEdit::-webkit-scrollbar {
   width: 10px;
+}
+
+.detailtaskEdit::-webkit-scrollbar-track {
+  margin-top: 14px;
+  margin-bottom: 14px;
 }
 
 .detailtaskEdit::-webkit-scrollbar-thumb {
@@ -203,6 +212,7 @@
 }
 
 .titleInput {
+  flex: none;
   color: black;
   width: 100%;
   max-width: 440px;
@@ -211,11 +221,16 @@
   border-radius: 8px;
   border: 1px solid #D1D1D1;
   box-sizing: border-box;
-  padding-left: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
   font-size: 16px;
   text-align: start;
   margin-bottom: 12px;
   cursor: pointer;
+}
+
+.titleInput:focus {
+  cursor: default;
 }
 
 .descriptionInput {
@@ -235,6 +250,10 @@
   cursor: pointer;
 }
 
+.descriptionInput:focus {
+  cursor: default;
+}
+
 .dateInput {
   width: 100%;
   height: 30px;
@@ -246,6 +265,14 @@
   padding-left: 20px;
   cursor: pointer;
   padding-right: 20px;
+}
+
+.dateInput:focus {
+cursor: default;
+}
+
+.detailtaskEdit .dueDate {
+  width: calc(100% + 20px);
 }
 
 .calendar {
@@ -277,6 +304,14 @@
   border-radius: 8px;
   border: 1px solid #D1D1D1;
   box-sizing: border-box;
+}
+
+.detailtaskEdit .upArrow {
+  top: 4px;
+}
+
+.detailtaskEdit .dropdown {
+  top: -31px;
 }
 
 .dropdownButtonArea {
