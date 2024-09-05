@@ -85,6 +85,10 @@
 }
 
 @media (max-width:900px) {
+    .taskSuccessAdd {
+        left: 30%;
+    }
+
     .addTaskBottomBar {
         bottom: 80px;
         max-width: 100%;
@@ -106,6 +110,10 @@
 }
 
 @media (max-width:750px) {
+    .taskSuccessAdd {
+        left: 25%;
+    }
+
     .clearButton {
         display: none;
     }
@@ -121,7 +129,18 @@
     }
 }
 
+@media (max-width:600px) {
+    .taskSuccessAdd {
+        left: 20%;
+    }
+}
+
 @media (max-width:500px) {
+    .taskSuccessAdd {
+        left: 17.5%;
+        width: 300px;
+    }
+
     h1 {
         width: calc(100% - 39px);
     }
@@ -136,6 +155,10 @@
 }
 
 @media (max-width:460px) {
+    .taskSuccessAdd {
+        left: 12.5%;
+    }
+
     form {
         max-width: -webkit-fill-available;
         padding-left: 16px;
@@ -164,5 +187,11 @@
 
     .dropdownButton {
         font-size: 18px;
+    }
+}
+
+@media (max-width:400px) {
+    .taskSuccessAdd {
+        left: 4%;
     }
 }

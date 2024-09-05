@@ -132,6 +132,10 @@ h1 {
   cursor: pointer;
 }
 
+.headlineTasks:hover img {
+  filter: invert(53%) sepia(94%) saturate(417%) hue-rotate(158deg) brightness(93%) contrast(94%);
+}
+
 .allTasks {
   max-width: 100%;
   max-height: calc(100vh - 360px);
