@@ -298,8 +298,9 @@ h1 {
   background-color: #2F3A4A; 
   border-radius: 10px; 
   position: absolute;
-  top: 40px;
-  right: 0;
+  top: 100%; 
+  left: 50%; 
+  transform: translateX(-50%); 
   width: 150px;
   z-index: 100;
   padding: 10px 0;

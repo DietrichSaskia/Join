@@ -117,9 +117,7 @@ function generateTaskDetails(task, taskIndex) {
     <div class="detailtask">
       <div class="categoryAndClose">
         <div class="category ${categoryClass}">${task.category || "No Category"}</div>
-        <img onclick="toggleTask()" src="/assets/icons/close.png" alt="Close">
-      </div>
-      <div onclick="toggleSectionDropdown()" class="moveToMobile d-None">
+        <div onclick="toggleSectionDropdown()" class="moveToMobile d-None">
         <p>Move To</p>
         <img src="/assets/icons/scrollArrowDown.png" alt="">
           <div id="sectionDropdown" class="section-dropdown d-none">
@@ -129,6 +127,9 @@ function generateTaskDetails(task, taskIndex) {
           <button onclick="moveTaskToSection('done')">Done</button>
         </div>
       </div>
+        <img onclick="toggleTask()" src="/assets/icons/close.png" alt="Close">
+      </div>
+      
       <div class="detailtaskinfos">
         <div class="titleDetail">${capitalizedTitle}</div>
         <div class="descriptionDetail">${capitalizedDescription}</div>
