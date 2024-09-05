@@ -246,7 +246,7 @@ function guestLogIN(){
     let matchingUser = 'Guest'
     localStorage.removeItem('CurrentUser');
     localStorage.setItem('CurrentUser', JSON.stringify(matchingUser));
-    window.location.href = `/htmls/summary.html?name=${encodeURIComponent(matchingUser)}`;
+    window.location.href = `./htmls/summary.html?name=${encodeURIComponent(matchingUser)}`;
 }
 
 
