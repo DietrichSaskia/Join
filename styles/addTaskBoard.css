@@ -552,7 +552,7 @@
 
 .mainContent .addTaskBottomBar {
     position: fixed;
-    z-index: 3;
+    z-index: 2;
     bottom: 90px;
     display: flex;
     width: 70%;
@@ -560,5 +560,3 @@
     justify-content: space-between;
     padding-right: 96px;
 }
-
-/* Ab 1024 px muss JS responsive auf AddTask.html weiterleiten */
