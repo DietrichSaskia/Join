@@ -128,8 +128,7 @@ function generateTaskDetails(task, taskIndex) {
         </div>
       </div>
         <img onclick="toggleTask()" src="../assets/icons/close.png" alt="Close">
-      </div>
-      
+      </div> 
       <div class="detailtaskinfos">
         <div class="titleDetail">${capitalizedTitle}</div>
         <div class="descriptionDetail">${capitalizedDescription}</div>
