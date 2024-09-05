@@ -121,10 +121,10 @@ function generateTaskDetails(task, taskIndex) {
         <p>Move To</p>
         <img src="/assets/icons/scrollArrowDown.png" alt="">
           <div id="sectionDropdown" class="section-dropdown d-none">
-          <button onclick="moveTaskToSection('toDo')">To Do</button>
-          <button onclick="moveTaskToSection('inProgress')">In Progress</button>
-          <button onclick="moveTaskToSection('awaitFeedback')">Awaiting Feedback</button>
-          <button onclick="moveTaskToSection('done')">Done</button>
+          <button onclick="moveTaskToSection('toDo', ${taskIndex})">To Do</button>
+          <button onclick="moveTaskToSection('inProgress', ${taskIndex})">In Progress</button>
+          <button onclick="moveTaskToSection('awaitFeedback', ${taskIndex})">Awaiting Feedback</button>
+          <button onclick="moveTaskToSection('done', ${taskIndex})">Done</button>
         </div>
       </div>
         <img onclick="toggleTask()" src="/assets/icons/close.png" alt="Close">

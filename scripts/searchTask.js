@@ -61,27 +61,27 @@ function renderTasksInSection(sectionId, tasks) {
 }
 
 
-// Zeigt oder versteckt das Dropdown-Menü
+// Toggles the visibility of the section dropdown
 function toggleSectionDropdown() {
   let dropdown = document.getElementById('sectionDropdown');
   dropdown.classList.toggle('d-none');
 }
 
-// Verschiebt das Task in die ausgewählte Sektion
-function moveTaskToSection(section) {
-  let currentTaskIndex = getCurrentTaskIndex(); // Hol den Index des aktuell ausgewählten Tasks
-  if (typeof currentTaskIndex === 'number') {
-      taskAllArray[currentTaskIndex].section = section; // Ändere die Sektion des Tasks
-      saveTasksToLocalStorage(); // Speicher die Änderungen
-      renderAllTasks(); // Aktualisiere die Anzeige aller Tasks
-      toggleSectionDropdown(); // Verstecke das Dropdown
+// Moves the task to the selected section
+function moveTaskToSection(section, taskIndex) {
+  // Directly use the taskIndex passed in
+  if (typeof taskIndex === 'number' && taskIndex >= 0 && taskIndex < taskAllArray.length) {
+      taskAllArray[taskIndex].section = section; // Change the section of the task
+      saveTasksToLocalStorage(); // Save the tasks to local storage
+      renderAllTasks(); // Re-render the tasks
+      toggleSectionDropdown(); // Close the dropdown
   } else {
-      console.error('Task index is not valid');
+      console.error('Task index is not valid:', taskIndex); // Error handling
   }
 }
 
-// Beispiel-Funktion, um den Index des aktuellen Tasks zu holen (muss angepasst werden)
-function getCurrentTaskIndex() {
-  // Hier muss eine Logik implementiert werden, um den aktuellen Task-Index zu ermitteln
-  return 0; // Beispiel: Rückgabe des Index 0
+// Function to get and return the task index (it can just return the index passed to it)
+function getCurrentTaskIndex(taskIndex) {
+  console.log('Current Task Index:', taskIndex); // Log the index for debugging
+  return taskIndex; // Return the task index
 }
