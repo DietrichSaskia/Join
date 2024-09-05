@@ -108,16 +108,25 @@ function deleteTask(taskIndex) {
 function editTask(taskIndex) {
   let task = taskAllArray[taskIndex];
   let date = changeDateFormatEdit(task.date);
-  console.log(date);
-  
   setTimeout(() => {
     editTaskTemplate(task, date, taskIndex);
   }, 100);
   setTimeout(() => {
     setpriorityButton(task);
+    checkEmptysubtasks();
     getusers();
     setAssignedUsers(task);
   }, 150);
+}
+
+
+function checkEmptysubtasks() {
+  if (document.getElementById('subtask0').innerHTML === '') {
+    document.getElementById('subtaskBox0').classList.add('dNone')
+  }
+  if (document.getElementById('subtask1').innerHTML === '') {
+    document.getElementById('subtaskBox1').classList.add('dNone')
+  }
 }
 
 
@@ -293,7 +302,7 @@ function deleteSubtaskEdit(taskIndex, subtaskIndex) {
   let task = taskAllArray[taskIndex];
   if (task) {
     task.subtasks.splice(subtaskIndex, 1);
-    task.subtasksCheck.splice(subtaskIndex, 1);
+    task.subtasksCheck.splice(subtaskIndex, 1, false);
 
     //synchronizeSubtasksAndChecks(task);
     saveTasksToLocalStorage();
@@ -311,29 +320,15 @@ function deleteSubtaskEdit(taskIndex, subtaskIndex) {
 }
 
 
-/*function synchronizeSubtasksAndChecks(task) {
-  while (task.subtasksCheck.length > task.subtasks.length) {
-    task.subtasksCheck.pop();
-  }
-  while (task.subtasksCheck.length < task.subtasks.length) {
-    task.subtasksCheck.push(false);
-  }
-}*/
-
-
 function subtaskChange(taskIndex, i) {
   let task = taskAllArray[taskIndex];
   if (task) {
     let input = document.getElementById(`subtaskEdit${i}`).value.trim();
-    if (input) {
       task.subtasks.splice(i, 1, input);
       task.subtasksCheck.splice(i, 1, false);
       saveTasksToLocalStorage();
       calculateSubtaskProgress(taskIndex);
       editTask(taskIndex);
-    } else {
-      console.warn('Empty subtask description. Consider deleting instead.');
-    }
   } else {
     console.error('Task not found for subtask change at index:', taskIndex);
   }
@@ -400,7 +395,7 @@ function editTaskTemplate(task, date, taskIndex) {
           <div class="dNone dFlexAlign" id="subtaskActive">
             <img class="subtaskIcon" src="../assets/icons/close.png" onclick="clearSubtaskInput()">
             <div class="smallSeparator"></div>
-            <img class="subtaskIcon" src="../assets/icons/check.png" onclick="checkSubtask()">
+            <img class="subtaskIcon" src="../assets/icons/check.png" onclick="checkSubtaskEdit(${taskIndex})">
           </div>
         </div>
         <span class="inputError dNone" id="inputerrorSubtask1">Subtask needs Description</span>
@@ -476,4 +471,46 @@ function outmouse(subtaskID) {
 */
 function onmouse(subtaskID) {
   document.getElementById(`subtaskIconsLower${subtaskID}`).classList.remove('dNone')
+}
+
+
+/**
+ * Checks if there are already 2 subtasks and shows an error message if the user tries to create a third
+ */
+function checkSubtaskEdit(taskIndex) {
+  let input = document.getElementById('subtasksInput').value;
+  document.getElementById('inputerrorSubtask1').style.display = 'none';
+  document.getElementById('inputerrorSubtask2').style.display = 'none';
+  document.getElementById('subtasksInput').classList.remove('redInputBorder');
+  if (input.length === 0) {
+      document.getElementById('inputerrorSubtask1').style.display = 'block';
+      document.getElementById('subtasksInput').classList.add('redInputBorder');
+  }
+  else {
+      createSubtaskEdit(input, taskIndex)
+  }
+}
+
+
+/**
+ * Pushes the subtask input field into the task Array and puts it into a subtaskbox
+ * 
+ * @param {string} input The value of the subtask input
+ */
+function createSubtaskEdit(input, taskIndex) {
+  let task = taskAllArray[taskIndex];
+  if (task.subtasks[0] === "") {
+    subtaskChange(taskIndex, 0)
+    task.subtasks.splice(0, 1, input);
+      clearSubtaskInput(0);
+  }
+  else if (task.subtasks[1] === "") {
+    subtaskChange(taskIndex, 1)
+    task.subtasks.splice(1, 1, input);
+      clearSubtaskInput(1);
+  }
+  else {
+      document.getElementById('inputerrorSubtask2').style.display = 'block';
+      document.getElementById('subtasksInput').classList.add('redInputBorder');
+  }
 }

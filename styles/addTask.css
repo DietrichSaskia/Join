@@ -557,3 +557,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .emptyBox {
     height: 60px;
 }
+
+/* //// Required wird bei Add Task Dropdown User überschrieben
+//// CSS Responsive und EditBoard
+// Beim laden vom Board Kontakte checken */
