@@ -259,5 +259,3 @@ function checkWidthAndExecute() {
 
 
 window.addEventListener('resize', checkWidthAndExecute);
-
-

@@ -125,7 +125,7 @@
     border: 1px solid #29abe3;
 }
 
-.mainContent .inputError {
+.inputError {
     font-size: 12px;
     margin-top: 4px;
     display: none;
@@ -493,6 +493,7 @@
     align-items: center;
     padding-right: 6px;
     padding-bottom: 4px;
+    width: 100%;
 }
 
 .mainContent .subtasksBox li {
