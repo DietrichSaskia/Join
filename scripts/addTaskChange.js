@@ -21,7 +21,7 @@ function setPrioMedium(task) {
     resetprioButtons()
     document.getElementById('prio1').classList.add('medium', 'active');
     document.getElementById('prioMed').src = "../assets/icons/prioMediumWhite.png";
-    task['prio'] = '/assets/icons/prioMedium.png';
+    task['prio'] = '../assets/icons/prioMedium.png';
     task['prioName'] = 'Medium';
 }
 
@@ -35,7 +35,7 @@ function setPrioLow(task) {
     resetprioButtons()
     document.getElementById('prio2').classList.add('low', 'active');
     document.getElementById('prioLow').src = "../assets/icons/prioLowWhite.png";
-    task['prio'] = '/assets/icons/prioLow.png';
+    task['prio'] = '../assets/icons/prioLow.png';
     task['prioName'] = 'Low';
 }
 
@@ -59,7 +59,7 @@ function resetprioButtons() {
  * @param {*} i The index of the Button
  */
 function toggleAssignedUser(i) {
-    let buttonChecked = "/assets/icons/checkButtonMobile.png";
+    let buttonChecked = "../assets/icons/checkButtonMobile.png";
     let buttonUnchecked = "../assets/icons/checkButtonblank.png";
     let check = document.getElementById(`assignedCheck${i}`);
     if (check) {

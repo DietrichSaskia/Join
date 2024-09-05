@@ -119,7 +119,7 @@ function generateTaskDetails(task, taskIndex) {
         <div class="category ${categoryClass}">${task.category || "No Category"}</div>
         <div onclick="toggleSectionDropdown()" class="moveToMobile d-None">
         <p>Move To</p>
-        <img src="/assets/icons/scrollArrowDown.png" alt="">
+        <img src="../assets/icons/scrollArrowDown.png" alt="">
           <div id="sectionDropdown" class="section-dropdown d-none">
           <button onclick="moveTaskToSection('toDo', ${taskIndex})">To Do</button>
           <button onclick="moveTaskToSection('inProgress', ${taskIndex})">In Progress</button>
@@ -151,12 +151,12 @@ function generateTaskDetails(task, taskIndex) {
       </div>
       <div class="iconContainer">
         <div onclick="deleteTask(${taskIndex})" class="detailTaskIcon">
-          <img src="/assets/icons/delete.png" alt="Delete">
+          <img src="../assets/icons/delete.png" alt="Delete">
           <p>Delete</p>
         </div>
         <div class="verticalLine"></div>
         <div onclick="editTask(${taskIndex})" class="detailTaskIcon">
-          <img src="/assets/icons/edit.png" alt="Edit">
+          <img src="../assets/icons/edit.png" alt="Edit">
           <p>Edit</p>
         </div>
       </div>
@@ -306,7 +306,7 @@ function editTaskTemplate(task, date, taskIndex) {
         </div>
       </div>
       <div class="okButtonContainer">
-        <button onclick="saveEditedTasktoLocalStorage(${taskIndex})" class="okButton">Ok<img src="/assets/icons/checkWhite.png"></button>
+        <button onclick="saveEditedTasktoLocalStorage(${taskIndex})" class="okButton">Ok<img src="../assets/icons/checkWhite.png"></button>
       </div>
     </div>
   `;
