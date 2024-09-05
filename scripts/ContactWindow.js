@@ -77,7 +77,7 @@ function editNewContactSave2(index) {
     let WindowSize = window.innerWidth;
     
     if (WindowSize < 900) {
-        document.getElementById('ChangeClosebutton').innerHTML = `<img class="ImgCloseStyle" src="/assets/icons/closeWhite.png">`;
+        document.getElementById('ChangeClosebutton').innerHTML = `<img class="ImgCloseStyle" src="../assets/icons/closeWhite.png">`;
     }
     
     const nameValue = document.getElementById("editNameInput").value;
@@ -155,7 +155,7 @@ function editNewContactHtmlChange() {
     editNewContactHtml2(contactDetails.initials, contactDetails.name, contactDetails.email, contactDetails.phone, contactDetails.buttonColor, contactDetails.index, false);
     document.getElementById('EditWindowAddText1Change').innerHTML='Add contact';
     document.getElementById('EditWindowAddText2Change').innerHTML='Tasks are better with a team!';
-    document.getElementById('EditCircleInitialsID').innerHTML='<img src="/assets/icons/person (1).png">'
+    document.getElementById('EditCircleInitialsID').innerHTML='<img src="../assets/icons/person (1).png">'
      document.getElementById('EditCircleStyleColor').style.background='#D9D9D9'
     document.getElementById('EditWindowDeleteSaveID1').classList.remove('EditWindowDeleteSave')
     document.getElementById('EditWindowDeleteSaveID1').classList.add('none')
