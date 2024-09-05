@@ -557,3 +557,10 @@ input[type="search"]::-webkit-search-results-decoration {
 .emptyBox {
     height: 60px;
 }
+
+/* //// Required wird bei Add Task Dropdown User überschrieben
+//// + Dinger (Add Task) brauchen Hover Effekt in blau = 100 verschiedene sepia etc
+//// CSS Responsive und EditBoard
+//// High Urgent in
+//CSS Responsive Glide in bei Add Task
+// Beim laden vom Board Kontakte checken */
