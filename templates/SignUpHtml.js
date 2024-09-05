@@ -24,13 +24,14 @@ function singUpWindowHtml(){
                 <input id="confirmPasswordInput" title="Repeat your password" required  class="SignUpInput" type="password" placeholder="Confirm Password">
                 <img id="toggleIcon2" onclick="togglePasswordVisibility('toggleIcon2', 'confirmPasswordInput')"  class="LoginInputfieldIconLock" src="../assets/icons/lock.png">
             </div>
-            <div class="SignUpAcceptPrivacy">
+            <label class="custom-checkbox">
                 <input id="checkboxInput" class="LoginCheckbox" type="checkbox">
+                <span class="checkmark"></span>
                 <div class="SignUpPrivacyPolicy">
                     <span class="SignUpAcceptText">I accept the</span>
                     <a class="SignUpPrivacyLegalText" href="/htmls/privacyPolicy.html">Privacy policy</a>
                 </div>
-            </div>
+            </label>
         </section>
     </form>
     <button onclick="submitToFirebase(event)" id="SignUpButtondisabled" class="SignUpButton">Sign up</button>
