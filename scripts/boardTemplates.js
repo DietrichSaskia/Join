@@ -1,3 +1,10 @@
+/**
+ * Generates the HTML for a task card.
+ *
+ * @param {Object} element - The task object containing task data.
+ * @param {number} i - The index of the task in the task array.
+ * @returns {string} - The HTML string for the task card.
+ */
 function generateTasksHTML(element, i) {
   let { category, title, description, subtasks = [], prio, assignedInitals = [], color = [] } = element;
   let categoryClass = formatCategoryClass(category);
@@ -20,6 +27,14 @@ function generateTasksHTML(element, i) {
 }
 
 
+/**
+ * Generates the HTML for the initials and priority of the task.
+ *
+ * @param {string} initialElements - HTML for the initials of assigned users.
+ * @param {string} remainingElement - HTML for the remaining initials, if any.
+ * @param {string} prio - The priority of the task (with an image path or default).
+ * @returns {string} - The HTML string for initials and priority display.
+ */
 function generateInitialsAndPriorityHTML(initialElements, remainingElement, prio) {
   let validPrio = prio || '/assets/icons/defaultPriority.png';
   
@@ -32,6 +47,13 @@ function generateInitialsAndPriorityHTML(initialElements, remainingElement, prio
 }
 
 
+/**
+ * Generates the HTML for the progress bar and count of subtasks completed.
+ *
+ * @param {Array<string>} subtasks - Array of subtask descriptions.
+ * @param {number} taskIndex - The index of the task in the task array.
+ * @returns {string} - The HTML string for the subtask progress bar and count.
+ */
 function generateSubtaskProgressHTML(subtasks, taskIndex) {
   let nonEmptySubtasks = subtasks.filter(subtask => subtask.trim() !== '');
   if (nonEmptySubtasks.length === 0) return ''; 
@@ -53,6 +75,12 @@ function generateSubtaskProgressHTML(subtasks, taskIndex) {
 }
 
 
+/**
+ * Renders the subtasks of a task for display.
+ *
+ * @param {number} taskIndex - The index of the task in the task array.
+ * @returns {string} - The HTML string for rendering the subtasks.
+ */
 function renderSubtasks(taskIndex) {
   let { subtasksStatus } = calculateSubtaskProgress(taskIndex) || { subtasksStatus: [] };
   if (!Array.isArray(subtasksStatus)) {
@@ -68,6 +96,13 @@ function renderSubtasks(taskIndex) {
 }
 
 
+/**
+ * Generates the detailed view HTML for a task.
+ *
+ * @param {Object} task - The task object containing task data.
+ * @param {number} taskIndex - The index of the task in the task array.
+ * @returns {string} - The HTML string for the detailed task view.
+ */
 function generateTaskDetails(task, taskIndex) {
   let categoryClass = formatCategoryClass(task.category);
   let initialsAndName = generateInitalsAndNameDetailHTML(task);
@@ -119,6 +154,12 @@ function generateTaskDetails(task, taskIndex) {
 }
 
 
+/**
+ * Generates the HTML for the initials and name display in the detailed task view.
+ *
+ * @param {Object} task - The task object containing task data.
+ * @returns {string} - The HTML string for initials and name in the detailed view.
+ */
 function generateInitalsAndNameDetailHTML(task) {
   if (!task.assignedInitals || task.assignedInitals.length === 0) return "";
   if (!task.assignedName || task.assignedName.length === 0) return "";
@@ -142,4 +183,120 @@ function generateInitalsAndNameDetailHTML(task) {
     `;
   });
   return detailHtml;
+}
+
+
+/**
+ * Generates the HTML for the task editing view, allowing the user to edit task details such as title, description, and subtasks.
+ *
+ * @param {Object} task - The task object containing task data.
+ * @param {string} date - The due date of the task.
+ * @param {number} taskIndex - The index of the task in the task array.
+ */
+function editTaskTemplate(task, date, taskIndex) {
+  let subtask0 = task.subtasks[0] ? task.subtasks[0] : '';
+  let subtask1 = task.subtasks[1] ? task.subtasks[1] : '';
+
+  document.getElementById("taskDetailCard").innerHTML = /*html*/ `
+    <div class="detailtaskEdit">
+      <div class="closeTaskContainer">
+        <img class="closeTask" onclick="toggleTask()" src="/assets/icons/close.png" alt="Close">
+      </div>
+      <p class="titleEdit">Title</p>
+      <input id="titleInput" class="titleInput" placeholder="Enter a Title" value="${task.title}" type="text" required>
+      <span class="inputError" id="inputerror1">This field is required</span>
+      <p class="descriptionEdit">Description</p>
+      <textarea class="descriptionInput" id="descriptionInput" placeholder="Enter a Description">${task.description}</textarea>
+      <p>Due Date</p>
+      <div class="dueDate">
+        <input id="dueDateInput" class="dateInput" type="date" min="" value="${date || today}" required>
+        <img class="calendar" src="../assets/icons/calendar.png">
+      </div>
+      <span class="inputError" id="inputerror2">This field is required</span>
+      <p class="priorityEdit"><b>Priority</b></p>
+      <div class="prio">
+        <div id="prio0" class="prioButtonEdit" onclick="setPrioHighEdit()">Urgent
+          <img id="prioHigh" src="../assets/icons/prioUrgent.png">
+        </div>
+        <div id="prio1" class="prioButtonEdit" onclick="setPrioMediumEdit()">Medium
+          <img id="prioMed" src="../assets/icons/prioMedium.png">
+        </div>
+        <div id="prio2" class="prioButtonEdit" onclick="setPrioLowEdit()">Low
+          <img id="prioLow" src="../assets/icons/prioLow.png">
+        </div>
+      </div>
+      <p>Assigned to</p>
+      <div class="dropdownWrapper"></div>
+      <button type="button" class="dropdownButtonArea" id="userButton" onclick="toggleUserDropdownEdit()">Select Contacts
+        to assign<img class="arrow" src="../assets/icons/arrowDrop.png"></button>
+      <div class="dropdownWrapper">
+        <div class="dropdown dNone" id="dropdown">
+          <input id="searchUser" class="searchUser" type="search">
+          <img class="upArrow" src="../assets/icons/arrowDrop.png" onclick="toggleUserDropdownEdit()">
+          <div class="dropdownUsers dNone" id="dropdownUsers"></div>
+        </div>
+      </div>
+      <div id="assignedUsers" class="assignedUsers"></div>
+      <div class="subtasksDetail" id="subtasksDetail"></div>
+      <div class="subtasksContainer">
+        <p class="subtaskHeadline">Subtasks</p>
+        <input id="subtasksInput" placeholder="Add new subtask" onfocus="showSubtaskIcons()">
+        <div class="subtaskIcons">
+          <img class="subtaskIcon" id="subtaskInactive" src="../assets/icons/addNoBorder.png" onclick="showSubtask()">
+          <div class="dNone dFlexAlign" id="subtaskActive">
+            <img class="subtaskIcon" src="../assets/icons/close.png" onclick="clearSubtaskInput()">
+            <div class="smallSeparator"></div>
+            <img class="subtaskIcon" src="../assets/icons/check.png" onclick="checkSubtaskEdit(${taskIndex})">
+          </div>
+        </div>
+        <span class="inputError dNone" id="inputerrorSubtask1">Subtask needs Description</span>
+        <span class="inputError dNone" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
+        <div class="subtasksBox" id="subtasksBox">
+          <div id="subtaskBox0" onmouseover="onmouse('0')" onmouseout="outmouse('0')" class="subtaskBox">
+            <ul>
+              <li id="subtask0">${subtask0}</li>
+              <div id="subtaskIconsLower0" class="subtaskIconsLower dNone">
+                <img class="subtaskIcon" onclick="subtaskEdit(0)" src="../assets/icons/edit.png">
+                <div class="smallSeparator"></div>
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 0)" src="../assets/icons/delete.png">
+              </div>
+            </ul>
+          </div>
+          <div id="subtaskBox1" onmouseover="onmouse('1')" onmouseout="outmouse('1')" class="subtaskBox">
+            <ul>
+              <li id="subtask1">${subtask1}</li>
+              <div id="subtaskIconsLower1" class="subtaskIconsLower dNone">
+                <img class="subtaskIcon" onclick="subtaskEdit(1)" src="../assets/icons/edit.png">
+                <div class="smallSeparator"></div>
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 1)" src="../assets/icons/delete.png">
+              </div>
+            </ul>
+          </div>
+          <div id="subtaskBoxEdit0" class="subtaskBox dNone">
+            <div class="dFlexAlign backgroundWhite">
+              <input id="subtaskEdit0" value="${subtask0}" class="editSubtaskInput">
+              <div class="subtaskIconsLower">
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 0)" src="../assets/icons/delete.png">
+                <div class="smallSeparator"></div>
+                <img class="subtaskIcon" src="../assets/icons/check.png" onclick="subtaskChange(${taskIndex}, 0)">
+              </div>
+            </div>
+          </div>
+          <div id="subtaskBoxEdit1" class="subtaskBox dNone">
+            <div class="dFlexAlign backgroundWhite">
+              <input id="subtaskEdit1" value="${subtask1}" class="editSubtaskInput">
+              <div class="subtaskIconsLower">
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 1)" src="../assets/icons/delete.png">
+                <div class="smallSeparator"></div>
+                <img class="subtaskIcon" src="../assets/icons/check.png" onclick="subtaskChange(${taskIndex}, 1)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="okButtonContainer">
+        <button onclick="saveEditedTasktoLocalStorage(${taskIndex})" class="okButton">Ok<img src="/assets/icons/checkWhite.png"></button>
+      </div>
+    </div>
+  `;
 }
