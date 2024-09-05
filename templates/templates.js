@@ -2,7 +2,7 @@ function renderHeader(id) {
     document.getElementById(id).innerHTML = /*html*/`
     <section onclick="hideBurgerMenu()" class="headerOverlay" id="headerOverlay"></section>
         <section class="sideBar">
-        <img class="sideBarLogo" src="../assets/icons/logoWhite.png">
+        <img class="sideBarLogo" src="/assets/icons/logoWhite.png">
         <div id="SidebarMenuFourButtons" class="sideBarMenu">
             <a id="sideBarsummary" href="../htmls/summary.html"><img id="picsummary" class="sideBarPic" src="../assets/icons/summary.png">Summary</a>
             <a id="sideBaraddTask" href="../htmls/addTask.html"><img id="picaddTask" class="sideBarPic" src="../assets/icons/addTask.png">Add Task</a>

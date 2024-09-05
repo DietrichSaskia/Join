@@ -94,7 +94,7 @@ function onmouse(id){
     else{
         pfadextra = IMGPfadon[0]
     }
-    document.getElementById(id).innerHTML=`<img class="ContactDeleteEdit" src="../assets/icons/${pfadextra}.png"></img>`;
+    document.getElementById(id).innerHTML=`<img class="ContactDeleteEdit" src="/assets/icons/${pfadextra}.png"></img>`;
 }
 
 
@@ -111,7 +111,7 @@ let pfadextra;
     else{
         pfadextra = IMGPfadof[0]
     }
-    document.getElementById(id).innerHTML=`<img class="ContactDeleteEdit" src="../assets/icons/${pfadextra}.png"></img>`;
+    document.getElementById(id).innerHTML=`<img class="ContactDeleteEdit" src="/assets/icons/${pfadextra}.png"></img>`;
 }
 
 
@@ -122,7 +122,7 @@ let pfadextra;
 */
 function onmouseClose(id){
 if(id == 'XCloseID'){
-    document.getElementById(id).innerHTML=`<img id="XCloseother" class="ImgCloseStyle2" src="../assets/icons/closeBlue.png">`;
+    document.getElementById(id).innerHTML=`<img id="XCloseother" class="ImgCloseStyle2" src="/assets/icons/closeBlue.png">`;
 }
 }
 
@@ -134,7 +134,7 @@ if(id == 'XCloseID'){
 */
 function outmouseClose(id){
 if(id == 'XCloseID'){
-    document.getElementById(id).innerHTML=`<img id="XClose" class="ImgCloseStyle2" src="../assets/icons/close.png">`;
+    document.getElementById(id).innerHTML=`<img id="XClose" class="ImgCloseStyle2" src="/assets/icons/close.png">`;
 }
 }  
 
