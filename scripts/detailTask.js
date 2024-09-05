@@ -108,16 +108,25 @@ function deleteTask(taskIndex) {
 function editTask(taskIndex) {
   let task = taskAllArray[taskIndex];
   let date = changeDateFormatEdit(task.date);
-  console.log(date);
-  
   setTimeout(() => {
     editTaskTemplate(task, date, taskIndex);
   }, 100);
   setTimeout(() => {
     setpriorityButton(task);
+    checkEmptysubtasks();
     getusers();
     setAssignedUsers(task);
   }, 150);
+}
+
+
+function checkEmptysubtasks() {
+  if (document.getElementById('subtask0').innerHTML === '') {
+    document.getElementById('subtaskBox0').classList.add('dNone')
+  }
+  if (document.getElementById('subtask1').innerHTML === '') {
+    document.getElementById('subtaskBox1').classList.add('dNone')
+  }
 }
 
 
@@ -311,16 +320,6 @@ function deleteSubtaskEdit(taskIndex, subtaskIndex) {
 }
 
 
-/*function synchronizeSubtasksAndChecks(task) {
-  while (task.subtasksCheck.length > task.subtasks.length) {
-    task.subtasksCheck.pop();
-  }
-  while (task.subtasksCheck.length < task.subtasks.length) {
-    task.subtasksCheck.push(false);
-  }
-}*/
-
-
 function subtaskChange(taskIndex, i) {
   let task = taskAllArray[taskIndex];
   if (task) {
@@ -479,11 +478,11 @@ function onmouse(subtaskID) {
 }
 
 
-//// Leere SubtaskBox ausblenden!!
+/// save to local storage
 //// Required wird bei Add Task Dropdown User überschrieben
 //// + Dinger (Add Task) brauchen Hover Effekt in blau = 100 verschiedene sepia etc
 //// Delete Subtask im EditBoard geht nicht
 //// CSS Responsive und EditBoard
-//// High Urgent in 
+//// High Urgent in
 //CSS Responsive Glide in bei Add Task
 // Beim laden vom Board Kontakte checken
