@@ -1,5 +1,5 @@
 function singUpWindowHtml(){
-    document.getElementById('SignUpWindow').innerHTML=`
+    document.getElementById('SignUpWindow').innerHTML=` 
     <header class="SingUpheader">
         <div class="SignUpTextLine">
           <span class="SignUpTextStyle">Sign up</span>

@@ -1,11 +1,10 @@
-
 const BaseUrl = "https://join-317-default-rtdb.europe-west1.firebasedatabase.app/";
 let SignUpWindowArrayIDs = ['LoginWindow', 'SignUpWindow', 'SignUpButtondisabled', 'SignUpButtonWindow']
 let SignUpWindowArrayAdd = ['none', 'SignUpMain', 'ButtonAddDisabled', 'none']
 let SignUpWindowArrayRemove = ['LoginPageMain', 'none', 'ButtonRemoveDisabled', 'LoginPageSignUp']
 import { getDatabase, ref, get, child, set } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
-import {logInAnimation} from './logIn.js';
+import {logInAnimation} from './LogIn.js';
 window.submitToFirebase = submitToFirebase;
 window.backToLogin = backToLogin;
 window.signUpWindow = signUpWindow;
