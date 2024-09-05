@@ -106,7 +106,6 @@ function renderSubtasks(taskIndex) {
 function generateTaskDetails(task, taskIndex) {
   let categoryClass = formatCategoryClass(task.category);
   let initialsAndName = generateInitalsAndNameDetailHTML(task);
-  let capitalizedTitle = task.title ? capitalizeFirstLetter(task.title) : "No Title";
   let capitalizedDescription = task.description ? capitalizeFirstLetter(task.description) : "No Description";
   let hasValidSubtasks = Array.isArray(task.subtasks) && task.subtasks.some(subtask => subtask && subtask.trim() !== "");
   let subtasksCheck = Array.isArray(task.subtasksCheck) && task.subtasksCheck.length === task.subtasks.length 
@@ -130,7 +129,7 @@ function generateTaskDetails(task, taskIndex) {
         <img onclick="toggleTask()" src="../assets/icons/close.png" alt="Close">
       </div> 
       <div class="detailtaskinfos">
-        <div class="titleDetail">${capitalizedTitle}</div>
+        <div class="titleDetail">${task.title}</div>
         <div class="descriptionDetail">${capitalizedDescription}</div>
         <div>Due date: ${task.date || 'No Date'}</div>
         <div>Priority: ${task.prioName ? task.prioName : 'No Priority'} <img src="${task.prio}" alt="PriorityImage"></div>

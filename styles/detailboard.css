@@ -365,11 +365,8 @@ cursor: default;
 
 #subtasksInput {
   padding-right: 30px;
-  /* Platz für das Bild innerhalb des Eingabefeldes */
   width: 100%;
-  /* Optionale Breite für das Eingabefeld */
   box-sizing: border-box;
-  /* Sorgt dafür, dass padding und border in der Breite enthalten sind */
   height: 30px;
   resize: none;
   border-radius: 8px;
@@ -378,12 +375,12 @@ cursor: default;
 
 .subtaskAdd {
   position: absolute;
-  right: 10px; /* Abstand von der rechten Seite des Eingabefelds */
+  right: 10px;
   top: 50%;
-  transform: translateY(-50%); /* Vertikale Zentrierung des Bildes */
-  cursor: pointer; /* Ändert den Mauszeiger in einen Zeigefinger, wenn über dem Bild */
-  height: 20px; /* Optionale Größe des Icons */
-  width: 20px; /* Optionale Größe des Icons */
+  transform: translateY(-50%);
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
 }
 
 .subtaskBox {
@@ -394,6 +391,7 @@ cursor: default;
 
 .subtaskBox ul {
   display: flex;
+  width: 85%;
 }
 
 .subtaskBox li {
@@ -419,8 +417,8 @@ cursor: default;
 
 .editSubtaskInput {
   width: 100%;
-  padding-right: 50px; /* Platz für die Icons schaffen */
-  box-sizing: border-box; /* Sorgt dafür, dass Padding berücksichtigt wird */
+  padding-right: 50px;
+  box-sizing: border-box;
 }
 
 .subtaskIcons {

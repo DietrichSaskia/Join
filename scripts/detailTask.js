@@ -155,14 +155,34 @@ function subtaskEdit(i) {
  * @param {number} taskIndex - The index of the task in the taskAllArray.
  */
 function saveEditedTasktoLocalStorage(taskIndex) {
-  setEditedArray(taskIndex);
-  if (!checkInputs()) {
+  if (!checkInputsEdit()) {
     return;
   }
-  saveToCurrentTask(taskIndex);
-  toggleTask();
-  renderAllTasks();
-  showTaskDetail(taskIndex);
+  else {
+    setEditedArray(taskIndex);
+    saveToCurrentTask(taskIndex);
+    toggleTask();
+    renderAllTasks();
+    showTaskDetail(taskIndex);
+  }
+}
+
+/**
+ * checks if all 2 inputs are filled
+ * 
+ * @returns true if all inputs are validated
+ */
+function checkInputsEdit() {
+  let checked = true;
+  let checked1 = checkInput1();
+  if (!checked1) {
+    checked = false;
+  }
+  let checked2 = checkInput2();
+  if (!checked2) {
+    checked = false;
+  }
+  return checked;
 }
 
 

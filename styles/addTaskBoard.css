@@ -117,7 +117,7 @@
     flex: none!important;
 }
 
-.mainContent .redInputBorder {
+.redInputBorder {
     border: 1px solid #ff8291;
 }
 
@@ -126,6 +126,7 @@
 }
 
 .inputError {
+    color: #ff8291;
     font-size: 12px;
     margin-top: 4px;
     display: none;

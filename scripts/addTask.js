@@ -252,12 +252,21 @@ function createTask() {
  * @returns true if all inputs are validated
  */
 function checkInputs() {
-    let checked = true;
-    checked = checkInput1(checked);
-    checked = checkInput2(checked);
-    checked = checkInput3(checked);
-    return checked;
-}
+        let checked = true;
+        let check1 = checkInput1();
+        if (!check1) {
+          checked = false;
+        }
+        let check2 = checkInput2();
+        if (!check2) {
+          checked = false;
+        }
+        let check3 = checkInput2();
+        if (!check3) {
+          checked = false;
+        }
+        return checked;
+      }
 
 
 /**
