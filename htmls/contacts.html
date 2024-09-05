@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/assets/icons/logo.png">
+  <link rel="icon" type="image/x-icon" href="../assets/icons/logo.png">
   <title>Contacts</title>
-  <link rel="stylesheet" href="/styles/contact.css">
-  <link rel="stylesheet" href="/styles/fonts.css">
-  <link rel="stylesheet" href="/styles/header.css">
-  <script src="../script.js"></script>
-  <script src="../templates/templates.js"></script>
+  <link rel="stylesheet" href="./styles/contact.css">
+  <link rel="stylesheet" href="./styles/fonts.css">
+  <link rel="stylesheet" href="./styles/header.css">
+  <script src="./script.js"></script>
+  <script src="./templates/templates.js"></script>
 
 </head>
 <body onload="init('headerContact'), contactInfoHeadlineHtml()">
@@ -24,7 +24,7 @@
             <div class="contactleft">
               <button id="AddContactNormalButton" onclick="editContactShowWindow() ,editNewContactHtmlChange()" class="AddContactButton">
                 <span class="AddContactText">Add new contact</span>
-                <img class="PersonaddIcon" src="/assets/icons/person_add.png">
+                <img class="PersonaddIcon" src="../assets/icons/person_add.png">
               </button>
             </div>
           </div>
@@ -34,20 +34,20 @@
     </section>
     <section id="MenuEditDeleteButtonPositionID" class="MenuEditDeleteButtonPosition">
       <button  id="AddContactNewButton" onclick="editContactShowWindow() ,editNewContactHtmlChange()" class="MenuEditDeleteButton">
-        <img class="PersonAddButton" src="/assets/icons/person_add.png">
+        <img class="PersonAddButton" src="../assets/icons/person_add.png">
       </button>
       <div id="MenuEditDeleteButtonID" class="none">
         <button  id="editDeleteChoiceButton" onclick="editDeleteWindow()" class="MenuEditDeleteButton">
-          <img class="PersonAddButton" src="/assets/icons/more_vert.png">
+          <img class="PersonAddButton" src="../assets/icons/more_vert.png">
         </button>
       </div>
       <div id="WindowEditDeleteID" class="none"></div>
     </section>
   </main>
-  <script src="../templates/contacthtml.js" defer></script>
-  <script src="../scripts/contact supplement.js" defer></script>
-  <script src="../scripts/contactWindow.js" defer></script>
-  <script src="../scripts/contact.js" defer></script>
+  <script src="./templates/contacthtml.js" defer></script>
+  <script src="./scripts/contact supplement.js" defer></script>
+  <script src="./scripts/contactWindow.js" defer></script>
+  <script src="./scripts/contact.js" defer></script>
   
 </body>
 </html>
