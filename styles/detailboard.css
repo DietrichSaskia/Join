@@ -33,11 +33,18 @@
   max-height: 600px; 
   overflow-y: auto; 
   overflow-x: hidden; 
-  padding-right: 15px; 
+  padding-right: 15px;
 }
 
 .detailtaskinfos::-webkit-scrollbar {
-  width: 10px; 
+  width: 10px;
+  padding-left: 10px; 
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+  margin: 25px;
+  margin-left: 5px;
 }
 
 .detailtaskinfos::-webkit-scrollbar-thumb {
@@ -279,6 +286,10 @@
   box-sizing: border-box;
 }
 
+.dropdownButtonArea {
+  font-size: 16px;
+}
+
 .okButtonContainer {
   display: flex;
   justify-content: flex-end;
@@ -306,6 +317,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   flex-direction: column;
+  width: 100%;
 }
 
 .subtasksInput {
@@ -323,9 +335,9 @@
 }
 
 #subtasksInput {
-  padding-right: 30px; /* Platz für das Bild innerhalb des Eingabefeldes */
-  width: 100%; /* Optionale Breite für das Eingabefeld */
-  box-sizing: border-box; /* Sorgt dafür, dass padding und border in der Breite enthalten sind */
+  padding-right: 30px; 
+  width: 100%; 
+  box-sizing: border-box;
   height: 30px;
   resize: none;
   border-radius: 8px;
@@ -334,16 +346,18 @@
 
 .subtaskAdd {
   position: absolute;
-  right: 10px; /* Abstand von der rechten Seite des Eingabefelds */
+  right: 10px; 
   top: 50%;
-  transform: translateY(-50%); /* Vertikale Zentrierung des Bildes */
-  cursor: pointer; /* Ändert den Mauszeiger in einen Zeigefinger, wenn über dem Bild */
-  height: 20px; /* Optionale Größe des Icons */
-  width: 20px; /* Optionale Größe des Icons */
+  transform: translateY(-50%); 
+  cursor: pointer;
+  height: 20px; 
+  width: 20px;
 }
 
 .subtaskBox {
   padding: 8px;
+  display: flex;
+  width: 100%;
 }
 
 .subtaskBox ul {
@@ -357,7 +371,6 @@
 .subtaskBox .subtaskIconsLower {
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .dFlexAlign.subtaskInputContainer {
@@ -366,10 +379,16 @@
   position: relative;
 }
 
+.dFlexAlign {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
 .editSubtaskInput {
   width: 100%;
-  padding-right: 50px; /* Platz für die Icons schaffen */
-  box-sizing: border-box; /* Sorgt dafür, dass Padding berücksichtigt wird */
+  padding-right: 50px;
+  box-sizing: border-box;
 }
 
 .subtaskIcons {
