@@ -7,7 +7,7 @@ function setPrioHigh(task) {
     resetprioButtons()
     document.getElementById('prio0').classList.add('high', 'active');
     document.getElementById('prioHigh').src = "../assets/icons/prioUrgentWhite.png";
-    task['prio'] = '/assets/icons/prioUrgent.png';
+    task['prio'] = '../assets/icons/prioUrgent.png';
     task['prioName'] = 'Urgent';
 }
 

@@ -196,10 +196,10 @@ function togglePasswordVisibility(id, PasswortID) {
     const toggleIcon = document.getElementById(id);
     if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
-        toggleIcon.src = "/assets/icons/visibilityOff.png"; 
+        toggleIcon.src = "./assets/icons/visibilityOff.png"; 
     } else {
         passwordInput.type = 'password';
-        toggleIcon.src = '/assets/icons/lock.png';
+        toggleIcon.src = './assets/icons/lock.png';
     }
 }
 

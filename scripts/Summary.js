@@ -200,10 +200,10 @@ function convertDateFormat(dateString) {
  */
 function toDoChangeOn(id){
     if(id == 'ChangeIcon1'){
-        document.getElementById(id).innerHTML= `<img  class="SummaryCircleDark" src="/assets/icons/Frame 59.png"> `;
+        document.getElementById(id).innerHTML= `<img  class="SummaryCircleDark" src="../assets/icons/Frame 59.png"> `;
     }
     if(id == 'ChangeIcon2'){
-        document.getElementById(id).innerHTML= `<img class="SummaryCircleDark"  src="/assets/icons/checkCircle.png">`;
+        document.getElementById(id).innerHTML= `<img class="SummaryCircleDark"  src="../assets/icons/checkCircle.png">`;
     }
 }
 
@@ -215,10 +215,10 @@ function toDoChangeOn(id){
  */
 function toDoChangeOut(id){
     if(id == 'ChangeIcon1'){
-        document.getElementById(id).innerHTML= `<img class="SummaryCircleDark" src="/assets/icons/editCircleDark.png"></img>`;
+        document.getElementById(id).innerHTML= `<img class="SummaryCircleDark" src="../assets/icons/editCircleDark.png"></img>`;
     }
     if(id == 'ChangeIcon2'){
-        document.getElementById(id).innerHTML= `<img class="SummaryCircleDark" src="/assets/icons/checkCircleDark.png">`;
+        document.getElementById(id).innerHTML= `<img class="SummaryCircleDark" src="../assets/icons/checkCircleDark.png">`;
     }
 }
 

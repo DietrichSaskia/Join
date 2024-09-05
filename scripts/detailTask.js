@@ -264,7 +264,7 @@ function updateTaskPriority() {
     let prioButton = prioButtons[j];
     if (prioButton.classList.contains('active')) {
       editedTaskArray['prioName'] = prioButton.innerText;
-      editedTaskArray['prio'] = `/assets/icons/prio${prioButton.innerText}.png`;
+      editedTaskArray['prio'] = `../assets/icons/prio${prioButton.innerText}.png`;
     }
   }
 }

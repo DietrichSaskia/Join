@@ -359,8 +359,8 @@ function toggleSubtaskImage(taskIndex, subtaskIndex) {
   let image = document.getElementById(`subtask-image-${taskIndex}-${subtaskIndex}`);
   if (image) {
     image.src = task.subtasksCheck[subtaskIndex]
-      ? "/assets/icons/checkButtonChecked.png"
-      : "/assets/icons/checkButtonblank.png";
+      ? "../assets/icons/checkButtonChecked.png"
+      : "../assets/icons/checkButtonblank.png";
   }
   saveTasksToLocalStorage();
   let { subtaskBarWidth, completedSubtasks, amountSubtasks } = calculateSubtaskProgress(taskIndex);
@@ -384,8 +384,8 @@ function renderSubtasks(taskIndex, task) {
   return validSubtasks.map((subtask, validIndex) => {
     let isChecked = subtasksCheck[validIndex] || false;
     let imageSrc = isChecked
-      ? "/assets/icons/checkButtonChecked.png"
-      : "/assets/icons/checkButtonblank.png";
+      ? "../assets/icons/checkButtonChecked.png"
+      : "../assets/icons/checkButtonblank.png";
     return `
       <div class="subtask">
         <img src="${imageSrc}" id="subtask-image-${taskIndex}-${validIndex}" class="custom-checkbox" onclick="toggleSubtaskImage(${taskIndex}, ${validIndex})" alt="Subtask Status">
