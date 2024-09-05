@@ -59,3 +59,29 @@ function renderTasksInSection(sectionId, tasks) {
     });
   }
 }
+
+
+// Zeigt oder versteckt das Dropdown-Menü
+function toggleSectionDropdown() {
+  let dropdown = document.getElementById('sectionDropdown');
+  dropdown.classList.toggle('d-none');
+}
+
+// Verschiebt das Task in die ausgewählte Sektion
+function moveTaskToSection(section) {
+  let currentTaskIndex = getCurrentTaskIndex(); // Hol den Index des aktuell ausgewählten Tasks
+  if (typeof currentTaskIndex === 'number') {
+      taskAllArray[currentTaskIndex].section = section; // Ändere die Sektion des Tasks
+      saveTasksToLocalStorage(); // Speicher die Änderungen
+      renderAllTasks(); // Aktualisiere die Anzeige aller Tasks
+      toggleSectionDropdown(); // Verstecke das Dropdown
+  } else {
+      console.error('Task index is not valid');
+  }
+}
+
+// Beispiel-Funktion, um den Index des aktuellen Tasks zu holen (muss angepasst werden)
+function getCurrentTaskIndex() {
+  // Hier muss eine Logik implementiert werden, um den aktuellen Task-Index zu ermitteln
+  return 0; // Beispiel: Rückgabe des Index 0
+}

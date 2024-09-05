@@ -119,6 +119,16 @@ function generateTaskDetails(task, taskIndex) {
         <div class="category ${categoryClass}">${task.category || "No Category"}</div>
         <img onclick="toggleTask()" src="/assets/icons/close.png" alt="Close">
       </div>
+      <div onclick="toggleSectionDropdown()" class="moveToMobile d-None">
+        <p>Move To</p>
+        <img src="/assets/icons/scrollArrowDown.png" alt="">
+          <div id="sectionDropdown" class="section-dropdown d-none">
+          <button onclick="moveTaskToSection('toDo')">To Do</button>
+          <button onclick="moveTaskToSection('inProgress')">In Progress</button>
+          <button onclick="moveTaskToSection('awaitFeedback')">Awaiting Feedback</button>
+          <button onclick="moveTaskToSection('done')">Done</button>
+        </div>
+      </div>
       <div class="detailtaskinfos">
         <div class="titleDetail">${capitalizedTitle}</div>
         <div class="descriptionDetail">${capitalizedDescription}</div>
