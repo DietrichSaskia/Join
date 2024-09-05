@@ -28,7 +28,7 @@ function singUpWindowHtml(){
                 <input id="checkboxInput" class="LoginCheckbox" type="checkbox">
                 <div class="SignUpPrivacyPolicy">
                     <span class="SignUpAcceptText">I accept the</span>
-                    <a class="SignUpPrivacyLegalText" href="">Privacy policy</a>
+                    <a class="SignUpPrivacyLegalText" href="/htmls/privacyPolicy.html">Privacy policy</a>
                 </div>
             </div>
         </section>
