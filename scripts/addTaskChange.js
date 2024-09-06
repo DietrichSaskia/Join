@@ -187,7 +187,9 @@ function checkInput1() {
  * @returns true if input is validated / false if not 
  */
 function checkInput2() {
-    if (document.getElementById('dueDateInput').value === "") {
+    let date = document.getElementById('dueDateInput').value
+    let today = new Date().toISOString().split('T')[0];
+    if(date < today || date === "") {
         document.getElementById('inputerror2').style.display = 'block';
         document.getElementById('dueDateInput').classList.add('redInputBorder');
         checked = false;
@@ -290,6 +292,23 @@ function toggleCategory() {
     let dropdown = document.getElementById("dropdownCategory");
     dropdown.classList.toggle("dNone");
 }
+
+
+setTimeout(function () {
+    if (document.getElementById('dueDateInput')) {
+        const dateInput = document.getElementById('dueDateInput')
+        let today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute("min", today);
+
+        dateInput.addEventListener('input', function () {
+            if (dateInput.value) {
+                dateInput.classList.add('has-value');
+            } else {
+                dateInput.classList.remove('has-value');
+            }
+        });
+    }
+}, 100);
 
 
 /**

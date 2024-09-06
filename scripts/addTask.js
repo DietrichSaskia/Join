@@ -53,22 +53,6 @@ document.addEventListener('focus', (event) => {
 });
 
 
-setTimeout(function () {
-    if (document.getElementById('dueDateInput')) {
-        const dateInput = document.getElementById('dueDateInput')
-        let today = new Date().toISOString().split('T')[0];
-        dateInput.setAttribute("min", today);
-        dateInput.addEventListener('input', function () {
-            if (dateInput.value) {
-                dateInput.classList.add('has-value');
-            } else {
-                dateInput.classList.remove('has-value');
-            }
-        });
-    }
-}, 100);
-
-
 document.addEventListener('dblclick', function (dblclickEvent) {
     let subTaskInput0 = document.getElementById("subtaskBox0");
     let subTaskInput1 = document.getElementById("subtaskBox1");
