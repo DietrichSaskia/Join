@@ -91,6 +91,7 @@ function closeAddTask() {
     if (event.target.id === 'addTaskoverlay') {
         document.getElementById('addTaskoverlay').classList.add('dNone');
         document.getElementById('xButton').classList.add('dNone');
+        document.getElementById('mainContent').innerHTML = ``;
     }
 }
 
@@ -101,6 +102,7 @@ function closeAddTask() {
 function closeAddTask2() {
     document.getElementById('addTaskoverlay').classList.add('dNone');
     document.getElementById('xButton').classList.add('dNone');
+    document.getElementById('mainContent').innerHTML = ``;
 }
 /**
  * Resets all priority Buttons and activates the clicked priority Button and it's Function

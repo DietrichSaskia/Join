@@ -209,7 +209,7 @@ function editTaskTemplate(task, date, taskIndex) {
   document.getElementById("taskDetailCard").innerHTML = /*html*/ `
     <div class="detailtaskEdit">
       <div class="closeTaskContainer">
-        <img class="closeTask" onclick="toggleTask()" src="../assets/icons/close.png" alt="Close">
+        <img class="closeTask" onclick="closeTask()" src="../assets/icons/close.png" alt="Close">
       </div>
       <h1 class="titleEdit">Title</h1>
       <input id="titleInput" class="titleInput" placeholder="Enter a Title" value="${task.title}" type="text" required>
