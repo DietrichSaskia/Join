@@ -20,6 +20,7 @@ let tasks = [
 ];
 let task = tasks[0];
 let taskAllArray = [];
+let contactAllArray = [];
 
 
 /**
@@ -50,22 +51,6 @@ document.addEventListener('focus', (event) => {
         })
     }
 });
-
-
-setTimeout(function () {
-    if (document.getElementById('dueDateInput')) {
-        const dateInput = document.getElementById('dueDateInput')
-        let today = new Date().toISOString().split('T')[0];
-        dateInput.setAttribute("min", today);
-        dateInput.addEventListener('input', function () {
-            if (dateInput.value) {
-                dateInput.classList.add('has-value');
-            } else {
-                dateInput.classList.remove('has-value');
-            }
-        });
-    }
-}, 100);
 
 
 document.addEventListener('dblclick', function (dblclickEvent) {
@@ -132,6 +117,7 @@ function getusers(users) {
     document.getElementById('assignedUsers').innerHTML = ``;
     for (let i = 0; i < users.length; i++) {
         let user = users[i];
+
         loadUser(user, i)
     }
 }
@@ -144,6 +130,7 @@ function getusers(users) {
  * @param {number} i The index of the Object in the Array
  */
 function loadUser(user, i) {
+    contactAllArray.push(user);
     let nameParts = user.name.split(' ');
     let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
     renderAssignedTo(user, initials, i);
@@ -187,7 +174,6 @@ function showSubtask() {
  * @param {string} input The value of the subtask input
  */
 function createSubtask(input) {
-
     if (task['subtasks'][0] === "") {
         putSubTask(input, 0);
         task['subtasks'].splice(0, 1, input);
@@ -252,12 +238,21 @@ function createTask() {
  * @returns true if all inputs are validated
  */
 function checkInputs() {
-    let checked = true;
-    checked = checkInput1(checked);
-    checked = checkInput2(checked);
-    checked = checkInput3(checked);
-    return checked;
-}
+        let checked = true;
+        let check1 = checkInput1(checked);
+        if (!check1) {
+          checked = false;
+        }
+        let check2 = checkInput2(checked);
+        if (!check2) {
+          checked = false;
+        }
+        let check3 = checkInput2(checked);
+        if (!check3) {
+          checked = false;
+        }
+        return checked;
+      }
 
 
 /**

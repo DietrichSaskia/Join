@@ -62,12 +62,49 @@ function toggleAssignedUser(i) {
     let buttonChecked = "../assets/icons/checkButtonMobile.png";
     let buttonUnchecked = "../assets/icons/checkButtonblank.png";
     let check = document.getElementById(`assignedCheck${i}`);
+    let checkedImg = check.src
     if (check) {
         let currentCheck = check.src.split('/').pop();
         document.getElementById(`user${i}`).classList.toggle('dropdownButtonSelectedUser');
-        document.getElementById(`userCircle${i}`).classList.toggle('dNone');
         check.src = currentCheck === 'checkButtonMobile.png' ? buttonUnchecked : buttonChecked;
+        toggleAssignedUserCircle(i);
     }
+
+
+    /**
+     * This function is fancy
+     * 
+     * @param {number} i Index of the Button of the assigned User Dropdown
+     */
+    function toggleAssignedUserCircle(i) {
+        let visibleUserCircles = countVisibleUserCircles();
+        if (visibleUserCircles <= 4) {
+            if (!checkedImg.includes("checkButtonMobile.png")) {
+                document.getElementById(`userCircle${i}`).classList.remove('dNone')
+            }
+            else {
+                document.getElementById('extraUsers').classList.add('dNone');
+                document.getElementById(`userCircle${i}`).classList.add('dNone')
+            }
+        }
+        else if (visibleUserCircles > 4) {
+            document.getElementById('extraUsers').classList.remove('dNone');
+            document.getElementById('extraUsers').innerHTML = `+${visibleUserCircles - 4}`;
+        }
+    }
+};
+
+
+function countVisibleUserCircles() {
+    let count = 0;
+    for (let i = 0; i < contactAllArray.length; i++) {
+        let check = document.getElementById(`assignedCheck${i}`);
+        let checkedImg = check.src;
+        if (checkedImg.includes("checkButtonMobile.png")) {
+            count++;
+        }
+    }
+    return count;
 }
 
 
@@ -106,7 +143,9 @@ function selectTechTask(userstory, techTask) {
 function clearCategory() {
     document.getElementById('userStory').classList.remove('dropdownButtonSelected');
     document.getElementById('techTask').classList.remove('dropdownButtonSelected');
-    document.getElementById('category').innerHTML = "Select task category";
+    document.getElementById('category').innerHTML = /*html*/`
+    Select task category<img class="arrow" src="../assets/icons/arrowDrop.png">
+    `;
 }
 
 
@@ -138,6 +177,7 @@ function checkInput1() {
         document.getElementById('inputerror1').style.display = 'block';
         document.getElementById('titleInput').classList.add('redInputBorder');
         checked = false;
+        return false;
     }
     else {
         document.getElementById('inputerror1').style.display = 'none';
@@ -152,10 +192,13 @@ function checkInput1() {
  * @returns true if input is validated / false if not 
  */
 function checkInput2() {
-    if (document.getElementById('dueDateInput').value === "") {
+    let date = document.getElementById('dueDateInput').value
+    let today = new Date().toISOString().split('T')[0];
+    if (date < today || date === "") {
         document.getElementById('inputerror2').style.display = 'block';
         document.getElementById('dueDateInput').classList.add('redInputBorder');
         checked = false;
+        return false;
     }
     else {
         document.getElementById('inputerror2').style.display = 'none';
@@ -170,12 +213,13 @@ function checkInput2() {
  * @returns true if input is validated / false if not 
  */
 function checkInput3() {
-    if(!document.getElementById('category')) {
+    if (!document.getElementById('category')) {
         return true
     }
     if (document.getElementById('category').innerText === 'Select task category') {
         document.getElementById('inputerror3').style.display = 'block';
         checked = false;
+        return false;
     }
     else {
         document.getElementById('inputerror3').style.display = 'none';
@@ -253,6 +297,23 @@ function toggleCategory() {
     let dropdown = document.getElementById("dropdownCategory");
     dropdown.classList.toggle("dNone");
 }
+
+
+setTimeout(function () {
+    if (document.getElementById('dueDateInput')) {
+        const dateInput = document.getElementById('dueDateInput')
+        let today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute("min", today);
+
+        dateInput.addEventListener('input', function () {
+            if (dateInput.value) {
+                dateInput.classList.add('has-value');
+            } else {
+                dateInput.classList.remove('has-value');
+            }
+        });
+    }
+}, 100);
 
 
 /**

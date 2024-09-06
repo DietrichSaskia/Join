@@ -155,14 +155,34 @@ function subtaskEdit(i) {
  * @param {number} taskIndex - The index of the task in the taskAllArray.
  */
 function saveEditedTasktoLocalStorage(taskIndex) {
-  setEditedArray(taskIndex);
-  if (!checkInputs()) {
+  if (!checkInputsEdit()) {
     return;
   }
-  saveToCurrentTask(taskIndex);
-  toggleTask();
-  renderAllTasks();
-  showTaskDetail(taskIndex);
+  else {
+    setEditedArray(taskIndex);
+    saveToCurrentTask(taskIndex);
+    toggleTask();
+    renderAllTasks();
+    showTaskDetail(taskIndex);
+  }
+}
+
+/**
+ * checks if all 2 inputs are filled
+ * 
+ * @returns true if all inputs are validated
+ */
+function checkInputsEdit() {
+  let checked = true;
+  let checked1 = checkInput1();
+  if (!checked1) {
+    checked = false;
+  }
+  let checked2 = checkInput2();
+  if (!checked2) {
+    checked = false;
+  }
+  return checked;
 }
 
 
@@ -279,7 +299,7 @@ function updateTaskPriority() {
 function deleteSubtaskEdit(taskIndex, subtaskIndex) {
   let task = taskAllArray[taskIndex];
   if (task) {
-    task.subtasks.splice(subtaskIndex, 1);
+    task.subtasks.splice(subtaskIndex, 1, "");
     task.subtasksCheck.splice(subtaskIndex, 1, false);
     saveTasksToLocalStorage();
     calculateSubtaskProgress(taskIndex);
@@ -343,13 +363,13 @@ function onmouse(subtaskID) {
  * @param {number} taskIndex - The index of the task in the taskAllArray.
  */
 function checkSubtaskEdit(taskIndex) {
-  let input = document.getElementById('subtasksInput').value;
-  document.getElementById('inputerrorSubtask1').style.display = 'none';
-  document.getElementById('inputerrorSubtask2').style.display = 'none';
-  document.getElementById('subtasksInput').classList.remove('redInputBorder');
-  if (input.length === 0) {
-    document.getElementById('inputerrorSubtask1').style.display = 'block';
-    document.getElementById('subtasksInput').classList.add('redInputBorder');
+    let input = document.getElementById('subtasksInput').value;
+    document.getElementById('inputerrorSubtask1').style.display = 'none';
+    document.getElementById('inputerrorSubtask2').style.display = 'none';
+    document.getElementById('subtasksInput').classList.remove('redInputBorder');
+    if (input.length === 0) {
+        document.getElementById('inputerrorSubtask1').style.display = 'block';
+        document.getElementById('subtasksInput').classList.add('redInputBorder');
   } else {
     createSubtaskEdit(input, taskIndex);
   }

@@ -333,6 +333,16 @@ function toggleTask() {
 
 
 /**
+ * Closes the current Task
+ */
+function closeTask() {
+  let taskDetailContainer = document.getElementById("containerTasksDetail");
+  taskDetailContainer.classList.toggle("d-none");
+  document.getElementById("taskDetailCard").innerHTML = ``;
+}
+
+
+/**
  * Deletes a task from the taskAllArray and updates the task display.
  *
  * @param {number} taskIndex - The index of the task in the taskAllArray.

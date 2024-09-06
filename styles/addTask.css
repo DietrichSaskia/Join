@@ -2,6 +2,7 @@ body {
     overflow-y: hidden;
     max-width: 1920px;
     display: flex;
+    background-color: #f5f6f7;
 }
 
 body::-webkit-scrollbar {
@@ -15,7 +16,6 @@ body::-webkit-scrollbar {
 .mainContent {
     margin-left: 232px;
     padding: 96px 96px 0 96px;
-    background-color: #f5f6f7;
     font-size: 20px;
     height: calc(100vh - 96px);
     overflow-y: scroll;
@@ -309,6 +309,23 @@ input[type="search"]::-webkit-search-results-decoration {
     align-items: center;
 }
 
+.extraUser {
+    height: 40px;
+    width: 40px;
+    border: 1px solid white;
+    border-radius: 50%;
+    color: white;
+    background-color: #2A3647;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -45px;
+    left: 208px;
+    margin-bottom: -40px;
+}
+
 .dropdownUser {
     display: flex;
     align-items: center;
@@ -500,6 +517,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .createTaskButton {
+    border-radius: 10px;
     background-color: #2A3647;
     cursor: pointer;
     height: 56px;
@@ -507,6 +525,7 @@ input[type="search"]::-webkit-search-results-decoration {
     padding: 16px;
     font-size: 21px;
     color: white;
+    border: none;
 }
 
 .createTaskButton:hover {
@@ -557,7 +576,3 @@ input[type="search"]::-webkit-search-results-decoration {
 .emptyBox {
     height: 60px;
 }
-
-
-/* //// CSS Responsive und EditBoard
-// Beim laden vom Board Kontakte checken */

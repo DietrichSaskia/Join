@@ -91,6 +91,7 @@ function closeAddTask() {
     if (event.target.id === 'addTaskoverlay') {
         document.getElementById('addTaskoverlay').classList.add('dNone');
         document.getElementById('xButton').classList.add('dNone');
+        document.getElementById('mainContent').innerHTML = ``;
     }
 }
 
@@ -101,6 +102,7 @@ function closeAddTask() {
 function closeAddTask2() {
     document.getElementById('addTaskoverlay').classList.add('dNone');
     document.getElementById('xButton').classList.add('dNone');
+    document.getElementById('mainContent').innerHTML = ``;
 }
 /**
  * Resets all priority Buttons and activates the clicked priority Button and it's Function
@@ -252,9 +254,12 @@ function createTask() {
  */
 function checkInputs() {
     let checked = true;
-    checked = checkInput1(checked);
-    checked = checkInput2(checked);
-    checked = checkInput3(checked);
+    check1 = checkInput1(checked);
+    check2 = checkInput2(checked);
+    check3 = checkInput3(checked);
+    if (check1 === false || check2 === false || check3 === false) {
+        checked = false; 
+    }
     return checked;
 }
 

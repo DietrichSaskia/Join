@@ -106,7 +106,6 @@ function renderSubtasks(taskIndex) {
 function generateTaskDetails(task, taskIndex) {
   let categoryClass = formatCategoryClass(task.category);
   let initialsAndName = generateInitalsAndNameDetailHTML(task);
-  let capitalizedTitle = task.title ? capitalizeFirstLetter(task.title) : "No Title";
   let capitalizedDescription = task.description ? capitalizeFirstLetter(task.description) : "No Description";
   let hasValidSubtasks = Array.isArray(task.subtasks) && task.subtasks.some(subtask => subtask && subtask.trim() !== "");
   let subtasksCheck = Array.isArray(task.subtasksCheck) && task.subtasksCheck.length === task.subtasks.length 
@@ -117,20 +116,20 @@ function generateTaskDetails(task, taskIndex) {
     <div class="detailtask">
       <div class="categoryAndClose">
         <div class="category ${categoryClass}">${task.category || "No Category"}</div>
-        <div onclick="toggleSectionDropdown()" class="moveToMobile d-None">
-        <p>Move To</p>
-        <img src="../assets/icons/scrollArrowDown.png" alt="">
+        <div onclick="toggleSectionDropdown()" id="moveToMobile" class="moveToMobile">
+          <p>Move To</p>
+          <img src="../assets/icons/scrollArrowDown.png" class="imgMoveToMobile" alt="">
           <div id="sectionDropdown" class="section-dropdown d-none">
-          <button onclick="moveTaskToSection('toDo', ${taskIndex})">To Do</button>
-          <button onclick="moveTaskToSection('inProgress', ${taskIndex})">In Progress</button>
-          <button onclick="moveTaskToSection('awaitFeedback', ${taskIndex})">Awaiting Feedback</button>
-          <button onclick="moveTaskToSection('done', ${taskIndex})">Done</button>
+            <button onclick="moveTaskToSection('toDo', ${taskIndex})">To Do</button>
+            <button onclick="moveTaskToSection('inProgress', ${taskIndex})">In Progress</button>
+            <button onclick="moveTaskToSection('awaitFeedback', ${taskIndex})">Awaiting Feedback</button>
+            <button onclick="moveTaskToSection('done', ${taskIndex})">Done</button>
+          </div>
         </div>
-      </div>
         <img onclick="toggleTask()" src="../assets/icons/close.png" alt="Close">
       </div> 
       <div class="detailtaskinfos">
-        <div class="titleDetail">${capitalizedTitle}</div>
+        <div class="titleDetail">${task.title}</div>
         <div class="descriptionDetail">${capitalizedDescription}</div>
         <div>Due date: ${task.date || 'No Date'}</div>
         <div>Priority: ${task.prioName ? task.prioName : 'No Priority'} <img src="${task.prio}" alt="PriorityImage"></div>
@@ -210,7 +209,7 @@ function editTaskTemplate(task, date, taskIndex) {
   document.getElementById("taskDetailCard").innerHTML = /*html*/ `
     <div class="detailtaskEdit">
       <div class="closeTaskContainer">
-        <img class="closeTask" onclick="toggleTask()" src="../assets/icons/close.png" alt="Close">
+        <img class="closeTask" onclick="closeTask()" src="../assets/icons/close.png" alt="Close">
       </div>
       <h1 class="titleEdit">Title</h1>
       <input id="titleInput" class="titleInput" placeholder="Enter a Title" value="${task.title}" type="text" required>
@@ -247,6 +246,7 @@ function editTaskTemplate(task, date, taskIndex) {
         </div>
       </div>
       <div id="assignedUsers" class="assignedUsers"></div>
+      <div id="extraUsers" class="extraUser dNone"></div>
       <div class="subtasksDetail" id="subtasksDetail"></div>
       <div class="subtasksContainer">
         <p class="subtaskHeadline">Subtasks</p>
@@ -259,8 +259,8 @@ function editTaskTemplate(task, date, taskIndex) {
             <img class="subtaskIcon" src="../assets/icons/check.png" onclick="checkSubtaskEdit(${taskIndex})">
           </div>
         </div>
-        <span class="inputError dNone" id="inputerrorSubtask1">Subtask needs Description</span>
-        <span class="inputError dNone" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
+        <span class="inputError" id="inputerrorSubtask1">Subtask needs Description</span>
+        <span class="inputError" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
         <div class="subtasksBox" id="subtasksBox">
           <div id="subtaskBox0" onmouseover="onmouse('0')" onmouseout="outmouse('0')" class="subtaskBox">
             <ul>
