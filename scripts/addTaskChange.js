@@ -71,12 +71,12 @@ function toggleAssignedUser(i) {
     }
 
 
-/**
- * This function is fancy
- * 
- * @param {number} i Index of the Button of the assigned User Dropdown
- */
-function toggleAssignedUserCircle(i) {
+    /**
+     * This function is fancy
+     * 
+     * @param {number} i Index of the Button of the assigned User Dropdown
+     */
+    function toggleAssignedUserCircle(i) {
         let visibleUserCircles = countVisibleUserCircles();
         if (visibleUserCircles <= 4) {
             if (!checkedImg.includes("checkButtonMobile.png")) {
@@ -85,11 +85,14 @@ function toggleAssignedUserCircle(i) {
             else {
                 document.getElementById('extraUsers').classList.add('dNone');
                 document.getElementById(`userCircle${i}`).classList.add('dNone')
-            }}
+            }
+        }
         else if (visibleUserCircles > 4) {
             document.getElementById('extraUsers').classList.remove('dNone');
             document.getElementById('extraUsers').innerHTML = `+${visibleUserCircles - 4}`;
-        }}};
+        }
+    }
+};
 
 
 function countVisibleUserCircles() {
@@ -140,7 +143,9 @@ function selectTechTask(userstory, techTask) {
 function clearCategory() {
     document.getElementById('userStory').classList.remove('dropdownButtonSelected');
     document.getElementById('techTask').classList.remove('dropdownButtonSelected');
-    document.getElementById('category').innerHTML = "Select task category";
+    document.getElementById('category').innerHTML = /*html*/`
+    Select task category<img class="arrow" src="../assets/icons/arrowDrop.png">
+    `;
 }
 
 
@@ -189,7 +194,7 @@ function checkInput1() {
 function checkInput2() {
     let date = document.getElementById('dueDateInput').value
     let today = new Date().toISOString().split('T')[0];
-    if(date < today || date === "") {
+    if (date < today || date === "") {
         document.getElementById('inputerror2').style.display = 'block';
         document.getElementById('dueDateInput').classList.add('redInputBorder');
         checked = false;

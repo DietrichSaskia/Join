@@ -299,7 +299,7 @@ function updateTaskPriority() {
 function deleteSubtaskEdit(taskIndex, subtaskIndex) {
   let task = taskAllArray[taskIndex];
   if (task) {
-    task.subtasks.splice(subtaskIndex, 1);
+    task.subtasks.splice(subtaskIndex, 1, "");
     task.subtasksCheck.splice(subtaskIndex, 1, false);
     saveTasksToLocalStorage();
     calculateSubtaskProgress(taskIndex);
@@ -363,13 +363,13 @@ function onmouse(subtaskID) {
  * @param {number} taskIndex - The index of the task in the taskAllArray.
  */
 function checkSubtaskEdit(taskIndex) {
-  let input = document.getElementById('subtasksInput').value;
-  document.getElementById('inputerrorSubtask1').style.display = 'none';
-  document.getElementById('inputerrorSubtask2').style.display = 'none';
-  document.getElementById('subtasksInput').classList.remove('redInputBorder');
-  if (input.length === 0) {
-    document.getElementById('inputerrorSubtask1').style.display = 'block';
-    document.getElementById('subtasksInput').classList.add('redInputBorder');
+    let input = document.getElementById('subtasksInput').value;
+    document.getElementById('inputerrorSubtask1').style.display = 'none';
+    document.getElementById('inputerrorSubtask2').style.display = 'none';
+    document.getElementById('subtasksInput').classList.remove('redInputBorder');
+    if (input.length === 0) {
+        document.getElementById('inputerrorSubtask1').style.display = 'block';
+        document.getElementById('subtasksInput').classList.add('redInputBorder');
   } else {
     createSubtaskEdit(input, taskIndex);
   }

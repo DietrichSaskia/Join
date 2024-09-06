@@ -259,8 +259,8 @@ function editTaskTemplate(task, date, taskIndex) {
             <img class="subtaskIcon" src="../assets/icons/check.png" onclick="checkSubtaskEdit(${taskIndex})">
           </div>
         </div>
-        <span class="inputError dNone" id="inputerrorSubtask1">Subtask needs Description</span>
-        <span class="inputError dNone" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
+        <span class="inputError" id="inputerrorSubtask1">Subtask needs Description</span>
+        <span class="inputError" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
         <div class="subtasksBox" id="subtasksBox">
           <div id="subtaskBox0" onmouseover="onmouse('0')" onmouseout="outmouse('0')" class="subtaskBox">
             <ul>
