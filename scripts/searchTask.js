@@ -61,16 +61,22 @@ function renderTasksInSection(sectionId, tasks) {
 }
 
 
-/**
- * Toggles the visibility of the section dropdown menu.
- * 
- * This function adds or removes the 'd-none' class on the section dropdown
- * to either show or hide the dropdown when the function is called.
- */
+
 function toggleSectionDropdown() {
-  let dropdown = document.getElementById('sectionDropdown');
-  dropdown.classList.toggle('d-none');
+  const sectionDropdown = document.getElementById('sectionDropdown');
+  // Toggle the visibility of the dropdown menu
+  if (sectionDropdown.classList.contains('d-none')) {
+      sectionDropdown.classList.remove('d-none');
+  } else {
+      sectionDropdown.classList.add('d-none');
+  }
 }
+
+
+  
+
+
+
 
 
 /**
@@ -84,14 +90,13 @@ function toggleSectionDropdown() {
  * of the task list and hides the dropdown after the task is moved.
  */
 function moveTaskToSection(section, taskIndex) {
-  // Check if the taskIndex is a valid number and within the bounds of taskAllArray
   if (typeof taskIndex === 'number' && taskIndex >= 0 && taskIndex < taskAllArray.length) {
-      taskAllArray[taskIndex].section = section; // Update the task's section
-      saveTasksToLocalStorage(); // Save the updated tasks to local storage
-      renderAllTasks(); // Re-render the task list
-      toggleSectionDropdown(); // Close the section dropdown
+      taskAllArray[taskIndex].section = section;
+      saveTasksToLocalStorage(); 
+      renderAllTasks(); 
+      toggleSectionDropdown(); 
   } else {
-      console.error('Task index is not valid:', taskIndex); // Log error if taskIndex is invalid
+      console.error('Task index is not valid:', taskIndex); 
   }
 }
 
@@ -105,6 +110,6 @@ function moveTaskToSection(section, taskIndex) {
  * This function logs the current task index for debugging and simply returns the index.
  */
 function getCurrentTaskIndex(taskIndex) {
-  console.log('Current Task Index:', taskIndex); // Log the task index for debugging
-  return taskIndex; // Return the task index
+  console.log('Current Task Index:', taskIndex);  
+  return taskIndex; 
 }

@@ -283,50 +283,7 @@ h1 {
   font-weight: 400;
 }
 
-
-.moveToMobile {
-  position: relative;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-
-.section-dropdown {
-  display: flex;
-  flex-direction: column;
-  background-color: #2F3A4A; 
-  border-radius: 10px; 
-  position: absolute;
-  top: 100%; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  width: 150px;
-  z-index: 100;
-  padding: 10px 0;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
-}
-
-
-.section-dropdown button {
-  background: none;
-  border: none;
-  color: #ffffff;
-  padding: 10px 20px;
-  text-align: left;
-  font-size: 14px;
-  width: 100%;
-  cursor: pointer;
-}
-
-.section-dropdown button:hover {
-  background-color: #394B5A; 
-}
-
-.d-none {
+#moveToMobile {
   display: none;
 }
 
-img {
-  cursor: pointer;
-}

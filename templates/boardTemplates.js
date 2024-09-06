@@ -116,16 +116,16 @@ function generateTaskDetails(task, taskIndex) {
     <div class="detailtask">
       <div class="categoryAndClose">
         <div class="category ${categoryClass}">${task.category || "No Category"}</div>
-        <div onclick="toggleSectionDropdown()" class="moveToMobile d-None">
-        <p>Move To</p>
-        <img src="../assets/icons/scrollArrowDown.png" alt="">
+        <div onclick="toggleSectionDropdown()" id="moveToMobile" class="moveToMobile">
+          <p>Move To</p>
+          <img src="../assets/icons/scrollArrowDown.png" class="imgMoveToMobile" alt="">
           <div id="sectionDropdown" class="section-dropdown d-none">
-          <button onclick="moveTaskToSection('toDo', ${taskIndex})">To Do</button>
-          <button onclick="moveTaskToSection('inProgress', ${taskIndex})">In Progress</button>
-          <button onclick="moveTaskToSection('awaitFeedback', ${taskIndex})">Awaiting Feedback</button>
-          <button onclick="moveTaskToSection('done', ${taskIndex})">Done</button>
+            <button onclick="moveTaskToSection('toDo', ${taskIndex})">To Do</button>
+            <button onclick="moveTaskToSection('inProgress', ${taskIndex})">In Progress</button>
+            <button onclick="moveTaskToSection('awaitFeedback', ${taskIndex})">Awaiting Feedback</button>
+            <button onclick="moveTaskToSection('done', ${taskIndex})">Done</button>
+          </div>
         </div>
-      </div>
         <img onclick="toggleTask()" src="../assets/icons/close.png" alt="Close">
       </div> 
       <div class="detailtaskinfos">
