@@ -70,26 +70,26 @@ function toggleAssignedUser(i) {
         toggleAssignedUserCircle(i);
     }
 
-    
+
 /**
  * This function is fancy
  * 
  * @param {number} i Index of the Button of the assigned User Dropdown
  */
-    function toggleAssignedUserCircle(i) {
+function toggleAssignedUserCircle(i) {
         let visibleUserCircles = countVisibleUserCircles();
         if (visibleUserCircles <= 4) {
             if (!checkedImg.includes("checkButtonMobile.png")) {
-                document.getElementById(`userCircle${i}`).classList.remove('dNone') }
+                document.getElementById(`userCircle${i}`).classList.remove('dNone')
+            }
             else {
                 document.getElementById('extraUsers').classList.add('dNone');
-                document.getElementById(`userCircle${i}`).classList.add('dNone')}}
+                document.getElementById(`userCircle${i}`).classList.add('dNone')
+            }}
         else if (visibleUserCircles > 4) {
             document.getElementById('extraUsers').classList.remove('dNone');
-            document.getElementById('extraUsers').innerHTML = `+${visibleUserCircles - 4}`;}
-        else {
-            document.getElementById('extraUsers').classList.remove('dNone');
-            document.getElementById('extraUsers').innerHTML = `+${visibleUserCircles - 4}`;}}}
+            document.getElementById('extraUsers').innerHTML = `+${visibleUserCircles - 4}`;
+        }}};
 
 
 function countVisibleUserCircles() {
@@ -172,6 +172,7 @@ function checkInput1() {
         document.getElementById('inputerror1').style.display = 'block';
         document.getElementById('titleInput').classList.add('redInputBorder');
         checked = false;
+        return false;
     }
     else {
         document.getElementById('inputerror1').style.display = 'none';
@@ -190,6 +191,7 @@ function checkInput2() {
         document.getElementById('inputerror2').style.display = 'block';
         document.getElementById('dueDateInput').classList.add('redInputBorder');
         checked = false;
+        return false;
     }
     else {
         document.getElementById('inputerror2').style.display = 'none';
@@ -210,6 +212,7 @@ function checkInput3() {
     if (document.getElementById('category').innerText === 'Select task category') {
         document.getElementById('inputerror3').style.display = 'block';
         checked = false;
+        return false;
     }
     else {
         document.getElementById('inputerror3').style.display = 'none';

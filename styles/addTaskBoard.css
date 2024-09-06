@@ -361,6 +361,23 @@
     padding-top: 10px;
 }
 
+.extraUser {
+    min-height: 40px;
+    width: 40px;
+    border: 1px solid white;
+    border-radius: 50%;
+    color: white;
+    background-color: #2A3647;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -50px;
+    left: 208px;
+    margin-bottom: -40px;
+}
+
 .dueDate {
     display: flex;
 }

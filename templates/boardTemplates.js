@@ -246,6 +246,7 @@ function editTaskTemplate(task, date, taskIndex) {
         </div>
       </div>
       <div id="assignedUsers" class="assignedUsers"></div>
+      <div id="extraUsers" class="extraUser dNone"></div>
       <div class="subtasksDetail" id="subtasksDetail"></div>
       <div class="subtasksContainer">
         <p class="subtaskHeadline">Subtasks</p>
