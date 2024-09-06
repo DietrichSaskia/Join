@@ -6,22 +6,21 @@ function  contactInfoHtml(initials, name, email, phone, buttonColor, index){
                     <div class="CircleInitial" style="background-color: ${buttonColor}">
                         ${initials}
                     </div>
-
                 </header>
                 <section class="NameEditDelete">
                     <div class="ContactName">${name}</div>
                     <div id="ContactEditDeleteID"  class="ContactEditDelete">
-                        <button onclick="editNewContact('${initials}', '${name}', '${email}', '${phone}', '${buttonColor}', '${index}'), editContactShowWindow()" class="ContactEditButton" onmouseover="onmouse('ContactEditChange')" onmouseout="outmouse('ContactEditChange')"> 
-                            <div id="ContactEditChange">
+                        <button onclick="editNewContact('${initials}', '${name}', '${email}', '${phone}', '${buttonColor}', '${index}'), editContactShowWindow()" class="ContactEditButton" onmouseover="onmouse('ContactEditChange1', 'ContactDeleteTextHover')" onmouseout="outmouse('ContactEditChange1', 'ContactDeleteTextHover')"> 
+                            <div id="ContactEditChange1">
                                  <img class="ContactDeleteEdit" src="../assets/icons/edit.png">
                             </div>
-                            <span class="ContactDeleteEditText">Edit</span>
+                            <span id="ContactDeleteTextHover" class="ContactDeleteEditText">Edit</span>
                         </button>
-                        <button class="ContactDeleteButton" onclick="deleteContactList(${index})" onmouseover="onmouse('ContactDeleteChange')" onmouseout="outmouse('ContactDeleteChange')">   
-                            <div id="ContactDeleteChange">
+                        <button class="ContactDeleteButton" onclick="deleteContactList(${index})" onmouseover="onmouse('ContactDeleteChange2', 'ContactDeleteEditHover')" onmouseout="outmouse('ContactDeleteChange2', 'ContactDeleteEditHover')">   
+                            <div id="ContactDeleteChange2">
                                 <img class="ContactDeleteEdit" src="../assets/icons/delete.png">
                             </div>
-                            <span class="ContactDeleteEditText">Delete</span>
+                            <span id="ContactDeleteEditHover" class="ContactDeleteEditText">Delete</span>
                         </button>
                     </div>
                 </section>
@@ -42,14 +41,14 @@ function  contactInfoHtml(initials, name, email, phone, buttonColor, index){
             </div>
         </div>
          <div onclick="protect(event)" id="MenuEditDeleteOptionsID" class="none">
-            <button onclick="editNewContact('${initials}', '${name}', '${email}', '${phone}', '${buttonColor}', '${index}'), editContactShowWindow()" class="ContactEditButton" onmouseover="onmouse('ContactEditChange2')" onmouseout="outmouse('ContactEditChange2')"> 
-                <div id="ContactEditChange2">
+            <button onclick="editNewContact('${initials}', '${name}', '${email}', '${phone}', '${buttonColor}', '${index}'), editContactShowWindow()" class="ContactEditButton" onmouseover="onmouse('ContactEditChange3')" onmouseout="outmouse('ContactEditChange3')"> 
+                <div id="ContactEditChange3">
                     <img class="ContactDeleteEdit" src="../assets/icons/edit.png">
                 </div>
                 <span class="ContactDeleteEditText">Edit</span>
             </button>
-             <button class="ContactDeleteButton" onclick="deleteContactList(${index})" onmouseover="onmouse('ContactDeleteChange2')" onmouseout="outmouse('ContactDeleteChange2')">   
-                <div id="ContactDeleteChange2">
+             <button class="ContactDeleteButton" onclick="deleteContactList(${index})" onmouseover="onmouse('ContactDeleteChange4')" onmouseout="outmouse('ContactDeleteChange4')">   
+                <div id="ContactDeleteChange4">
                     <img class="ContactDeleteEdit" src="../assets/icons/delete.png">
                 </div>
                 <span class="ContactDeleteEditText">Delete</span>

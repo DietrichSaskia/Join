@@ -113,7 +113,7 @@ export function submitToFirebase(event) {
         } else {
             submitToFirebase2(newUser, database);}
     }).catch(() => {
-        userInformationPopUp('Fehler beim Abrufen der Benutzerdaten!');});
+        userInformationPopUp('Error when retrieving user data!');});
 }
 
 
@@ -126,11 +126,11 @@ export function submitToFirebase(event) {
 function submitToFirebase2(newUser, database) {
     set(ref(database, 'users/0'), newUser)
     .then(() => {
-        userInformationPopUp('Benutzer erfolgreich registriert!');
+        userInformationPopUp('User successfully registered!');
         backToLogin();
     })
     .catch(() => {
-        userInformationPopUp('Benutzer konnte nicht registriert werden!');
+        userInformationPopUp('User could not be registered!');
     });
 }
 
@@ -150,15 +150,15 @@ function submitToFirebase1(snapshot, newUser, emailInput, usersRef) {
     const signUpButton = document.getElementById("SignUpButtondisabled");
     const emailExists = Object.values(usersData).some(user => user.email === emailInput);
     if (emailExists) {
-        userInformationPopUp('Diese Email wird bereits verwendet!');
+        userInformationPopUp('This email is already in use!');
         signUpButton.disabled = true; return;}
     const existingKeys = Object.keys(usersData).map(key => parseInt(key, 10));
     const nextIndex = existingKeys.length > 0 ? Math.max(...existingKeys) + 1 : 0;
     const newUserRef = child(usersRef, nextIndex.toString());
     set(newUserRef, newUser).then(() => {
-        userInformationPopUp('Benutzer erfolgreich registriert!');
+        userInformationPopUp('User successfully registered!');
         backToLogin();})
-    .catch(() => {userInformationPopUp('Benutzer konnte nicht registriert werden!'); signUpButton.disabled = true;});
+    .catch(() => {userInformationPopUp('User could not be registered!'); signUpButton.disabled = true;});
 }
 
 
@@ -294,7 +294,7 @@ function validateForm(nameInput, emailInput, passwordInput, confirmPasswordInput
     const confirmPasswordContainer = document.getElementById('SignInputIconfourth');
     const namePattern = /^[A-Z][a-z]*\s[A-Z][a-z]*$/;
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const passwordPattern = /^.{8,}$/;
     const isNameValid = validateValue(nameInput, nameContainer, namePattern);
     const isEmailValid = validateValue(emailInput, emailContainer, emailPattern);
     const isPasswordValid = validateValue(passwordInput, passwordContainer, passwordPattern);

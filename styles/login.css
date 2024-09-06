@@ -5,6 +5,7 @@ body{
   width: 100%;
   font-family: 'Inter';
   overflow: hidden;
+  background-color: rgb(246, 247, 248);
 }
 .LoginPageSignUp,
 .LoginPageMain,

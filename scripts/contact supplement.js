@@ -86,15 +86,16 @@ function editContactShowWindow() {
  * 
  * @param {*} id 
  */
-function onmouse(id){
+function onmouse(id, textId){
     let pfadextra;
-    if((id == 'ContactEditChange') || (id == 'ContactEditChange2')){
+    if((id == 'ContactEditChange1') || (id == 'ContactEditChange3')){
         pfadextra = IMGPfadon[1]
     }
-    else{
+    else {
         pfadextra = IMGPfadon[0]
     }
-    document.getElementById(id).innerHTML=`<img class="ContactDeleteEdit" src="../assets/icons/${pfadextra}.png"></img>`;
+    document.querySelector(`#${id} img`).src =`../assets/icons/${pfadextra}.png`;
+    document.getElementById(textId).style.color = "#007CEE";
 }
 
 
@@ -103,15 +104,16 @@ function onmouse(id){
 * 
 * @param {*} id 
 */
-function outmouse(id){
-let pfadextra;
-    if((id == 'ContactEditChange') || (id == 'ContactEditChange2')){
+function outmouse(id, textId){
+    let pfadextra;
+    if((id == 'ContactEditChange1') || (id == 'ContactEditChange3')){
         pfadextra = IMGPfadof[1]
     }
     else{
         pfadextra = IMGPfadof[0]
     }
-    document.getElementById(id).innerHTML=`<img class="ContactDeleteEdit" src="../assets/icons/${pfadextra}.png"></img>`;
+    document.querySelector(`#${id} img`).src =`../assets/icons/${pfadextra}.png`;
+    document.getElementById(textId).style.color = "";
 }
 
 

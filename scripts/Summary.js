@@ -199,11 +199,16 @@ function convertDateFormat(dateString) {
  * @param {*} id 
  */
 function toDoChangeOn(id){
+    console.log(id);
     if(id == 'ChangeIcon1'){
-        document.getElementById(id).innerHTML= `<img  class="SummaryCircleDark" src="../assets/icons/Frame 59.png"> `;
+        const imgElement = document.querySelector(`#${id} img`);
+        imgElement.src = "../assets/icons/Frame 59.png"; 
     }
     if(id == 'ChangeIcon2'){
-        document.getElementById(id).innerHTML= `<img class="SummaryCircleDark"  src="../assets/icons/checkCircle.png">`;
+        
+        
+        const imgElement = document.querySelector(`#${id} img`);
+        imgElement.src = "../assets/icons/checkCircle.png";
     }
 }
 
@@ -215,10 +220,12 @@ function toDoChangeOn(id){
  */
 function toDoChangeOut(id){
     if(id == 'ChangeIcon1'){
-        document.getElementById(id).innerHTML= `<img class="SummaryCircleDark" src="../assets/icons/editCircleDark.png"></img>`;
+        const imgElement = document.querySelector(`#${id} img`);
+        imgElement.src = "../assets/icons/editCircleDark.png";
     }
     if(id == 'ChangeIcon2'){
-        document.getElementById(id).innerHTML= `<img class="SummaryCircleDark" src="../assets/icons/checkCircleDark.png">`;
+        const imgElement = document.querySelector(`#${id} img`);
+        imgElement.src = "../assets/icons/checkCircleDark.png";
     }
 }
 
