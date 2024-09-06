@@ -48,6 +48,7 @@ h1 {
   display: flex;
   align-items: center;
   padding-right: 96px;
+  z-index: 2;
 }
 
 .searchWrapper {
@@ -174,7 +175,25 @@ h1 {
   align-items: flex-start;
   cursor: pointer;
   flex-wrap: wrap;
-  
+}
+
+.noTasks {
+  border: 2px dashed #acacac;
+  background-color: #e7e7e7;
+  box-sizing: 10px;
+  margin: 10px 10px 10px 0px;
+  width: 200px;
+  border-radius: 24px;
+  padding: 16px;
+  display: flex;
+  color: #acacac;
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  text-align: center;
 }
 
 .TechnicalTask {
@@ -267,20 +286,6 @@ h1 {
 
 .remainingUsers {
   background-color: #2a3647;
-}
-
-.noTasks {
-  border: 2px dashed #acacac;
-  background-color: #e7e7e7;
-  box-sizing: 10px;
-  margin: 10px;
-  width: 200px;
-  border-radius: 24px;
-  padding: 16px;
-  display: flex;
-  color: #acacac;
-  font-size: 16px;
-  font-weight: 400;
 }
 
 #moveToMobile {
