@@ -20,6 +20,7 @@ let tasks = [
 ];
 let task = tasks[0];
 let taskAllArray = [];
+let contactAllArray = [];
 
 
 /**
@@ -132,6 +133,7 @@ function getusers(users) {
     document.getElementById('assignedUsers').innerHTML = ``;
     for (let i = 0; i < users.length; i++) {
         let user = users[i];
+
         loadUser(user, i)
     }
 }
@@ -144,6 +146,7 @@ function getusers(users) {
  * @param {number} i The index of the Object in the Array
  */
 function loadUser(user, i) {
+    contactAllArray.push(user);
     let nameParts = user.name.split(' ');
     let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
     renderAssignedTo(user, initials, i);
@@ -187,7 +190,6 @@ function showSubtask() {
  * @param {string} input The value of the subtask input
  */
 function createSubtask(input) {
-
     if (task['subtasks'][0] === "") {
         putSubTask(input, 0);
         task['subtasks'].splice(0, 1, input);

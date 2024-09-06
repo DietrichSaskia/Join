@@ -7,7 +7,7 @@ function setPrioHigh(task) {
     resetprioButtons()
     document.getElementById('prio0').classList.add('high', 'active');
     document.getElementById('prioHigh').src = "../assets/icons/prioUrgentWhite.png";
-    task['prio'] = '/assets/icons/prioUrgent.png';
+    task['prio'] = '../assets/icons/prioUrgent.png';
     task['prioName'] = 'Urgent';
 }
 
@@ -62,12 +62,46 @@ function toggleAssignedUser(i) {
     let buttonChecked = "../assets/icons/checkButtonMobile.png";
     let buttonUnchecked = "../assets/icons/checkButtonblank.png";
     let check = document.getElementById(`assignedCheck${i}`);
+    let checkedImg = check.src
     if (check) {
         let currentCheck = check.src.split('/').pop();
         document.getElementById(`user${i}`).classList.toggle('dropdownButtonSelectedUser');
-        document.getElementById(`userCircle${i}`).classList.toggle('dNone');
         check.src = currentCheck === 'checkButtonMobile.png' ? buttonUnchecked : buttonChecked;
+        toggleAssignedUserCircle(i);
     }
+
+    
+/**
+ * This function is fancy
+ * 
+ * @param {number} i Index of the Button of the assigned User Dropdown
+ */
+    function toggleAssignedUserCircle(i) {
+        let visibleUserCircles = countVisibleUserCircles();
+        if (visibleUserCircles <= 4) {
+            if (!checkedImg.includes("checkButtonMobile.png")) {
+                document.getElementById(`userCircle${i}`).classList.remove('dNone') }
+            else {
+                document.getElementById('extraUsers').classList.add('dNone');
+                document.getElementById(`userCircle${i}`).classList.add('dNone')}}
+        else if (visibleUserCircles > 4) {
+            document.getElementById('extraUsers').classList.remove('dNone');
+            document.getElementById('extraUsers').innerHTML = `+${visibleUserCircles - 4}`;}
+        else {
+            document.getElementById('extraUsers').classList.remove('dNone');
+            document.getElementById('extraUsers').innerHTML = `+${visibleUserCircles - 4}`;}}}
+
+
+function countVisibleUserCircles() {
+    let count = 0;
+    for (let i = 0; i < contactAllArray.length; i++) {
+        let check = document.getElementById(`assignedCheck${i}`);
+        let checkedImg = check.src;
+        if (checkedImg.includes("checkButtonMobile.png")) {
+            count++;
+        }
+    }
+    return count;
 }
 
 
@@ -170,7 +204,7 @@ function checkInput2() {
  * @returns true if input is validated / false if not 
  */
 function checkInput3() {
-    if(!document.getElementById('category')) {
+    if (!document.getElementById('category')) {
         return true
     }
     if (document.getElementById('category').innerText === 'Select task category') {
