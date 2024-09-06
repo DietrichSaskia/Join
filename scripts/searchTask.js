@@ -61,22 +61,24 @@ function renderTasksInSection(sectionId, tasks) {
 }
 
 
-
+/**
+ * Toggles the visibility of the dropdown menu.
+ * 
+ * This function selects the element with the ID 'sectionDropdown' and
+ * toggles its visibility by adding or removing the 'd-none' class.
+ * 
+ * If the 'd-none' class is present, the function removes it to show the
+ * dropdown menu. If the class is absent, the function adds it to hide the
+ * dropdown menu.
+ */
 function toggleSectionDropdown() {
   const sectionDropdown = document.getElementById('sectionDropdown');
-  // Toggle the visibility of the dropdown menu
   if (sectionDropdown.classList.contains('d-none')) {
       sectionDropdown.classList.remove('d-none');
   } else {
       sectionDropdown.classList.add('d-none');
   }
 }
-
-
-  
-
-
-
 
 
 /**
