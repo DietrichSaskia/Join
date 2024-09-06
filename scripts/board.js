@@ -338,7 +338,7 @@ function toggleTask() {
 function closeTask() {
   let taskDetailContainer = document.getElementById("containerTasksDetail");
   taskDetailContainer.classList.toggle("d-none");
-  document.getElementById("containerTasksDetail").innerHTML = ``;
+  document.getElementById("taskDetailCard").innerHTML = ``;
 }
 
 
