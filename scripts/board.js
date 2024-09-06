@@ -1,21 +1,5 @@
-/**
- * @type {Array<Object>}
- * Array to store all task objects.
- */
 let taskAllArray = [];
-
-
-/**
- * @type {Array<Object>}
- * Array to store all contact objects.
- */
 let contactAllArray = [];
-
-
-/**
- * @type {number}
- * Index of the currently dragged task element.
- */
 let currentDraggedElement;
 
 
@@ -178,6 +162,15 @@ function moveTo(section) {
 
   renderAllTasks();
   saveTasksToLocalStorage();
+}
+
+
+function highlightBox(sectionId) {
+  document.getElementById(sectionId).classList.add('dragHover');
+}
+
+function removeHighlightBox(sectionId) {
+  document.getElementById(sectionId).classList.remove('dragHover');
 }
 
 

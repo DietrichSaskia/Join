@@ -55,7 +55,7 @@
           <a href="#">To do</a>
           <img onclick="loadFunctions()" src="../assets/icons/add.png" alt="">
         </div>
-        <div class="moveBox" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)"></div>
+        <div class="moveBox" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)" ondragenter="highlightBox('toDo')" ondragleave="removeHighlightBox('toDo')"></div>
       </div>
 
       <div>
@@ -63,7 +63,7 @@
           <a href="#">In progress</a>
           <img onclick="loadFunctions()" src="../assets/icons/add.png" alt="">
         </div>
-        <div class="moveBox" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)"></div>
+        <div class="moveBox" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)" ondragenter="highlightBox('inProgress')" ondragleave="removeHighlightBox('inProgress')"></div>
       </div>
 
       <div>
@@ -71,14 +71,14 @@
           <a href="#">Await feedback</a>
           <img onclick="loadFunctions()" src="../assets/icons/add.png" alt="">
         </div>
-        <div class="moveBox" id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)"></div>
+        <div class="moveBox" id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)" ondragenter="highlightBox('awaitFeedback')" ondragleave="removeHighlightBox('awaitFeedback')"></div>
       </div>
 
       <div>
         <div class="headlineTasks">
           <a href="#">Done</a>
         </div>
-        <div class="moveBox" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)"></div>
+        <div class="moveBox" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)" ondragenter="highlightBox('done')" ondragleave="removeHighlightBox('done')"></div>
       </div>
     </div>
 
