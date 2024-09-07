@@ -112,6 +112,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+  padding: 5px;
 }
 
 .subtask:hover {
@@ -210,6 +211,13 @@
   border-radius: 50%;
   background-color: #D9D9D9;
   padding: 2px;
+}
+
+.titleEdit {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 400;
+  font-family: Inter;
 }
 
 .titleInput {
@@ -383,18 +391,27 @@ cursor: default;
   width: 20px;
 }
 
-.subtaskBox {
+.subtasksBox {
   padding: 8px 8px 8px 0px;
-  display: flex;
   width: 100%;
-  margin: 0px 10px 10px 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.subtaskBox {
+  display: flex;
 }
 
 .subtaskBox ul {
   display: flex;
   width: 85%;
   align-items: center;
-  height: 20px;
+  padding-inline-start: 30px;
+}
+
+.subtaksUlEdit {
+  height: 100%;
+  display: flex;
 }
 
 .subtaskBox li {
@@ -403,7 +420,12 @@ cursor: default;
   height: 100%;
 }
 
-.subtaskBox .subtaskIconsLower {
+.subtaskLiEdit {
+  height: 100%;
+  width: 100%;
+}
+
+.subtasksBox .subtaskIconsLower {
   display: flex;
   align-items: center;
 }

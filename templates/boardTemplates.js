@@ -262,25 +262,25 @@ function editTaskTemplate(task, date, taskIndex) {
         <span class="inputError" id="inputerrorSubtask1">Subtask needs Description</span>
         <span class="inputError" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
         <div class="subtasksBox" id="subtasksBox">
-          <div id="subtaskBox0" onmouseover="onmouse('0')" onmouseout="outmouse('0')" class="subtaskBox">
-            <ul>
-              <li id="subtask0">${subtask0}</li>
-              <div id="subtaskIconsLower0" class="subtaskIconsLower dNone">
-                <img class="subtaskIcon" onclick="subtaskEdit(0)" src="../assets/icons/edit.png">
-                <div class="smallSeparator"></div>
-                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 0)" src="../assets/icons/delete.png">
-              </div>
+          <div id="subtaskBox0" class="subtaskBox">
+            <ul class="subtaksUlEdit">
+              <li id="subtask0" class="subtaskLiEdit">${subtask0}</li>
             </ul>
+            <div id="subtaskIconsLower0" class="subtaskIconsLower">
+              <img class="subtaskIcon" onclick="subtaskEdit(0)" src="../assets/icons/edit.png">
+              <div class="smallSeparator"></div>
+              <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 0)" src="../assets/icons/delete.png">
+            </div>
           </div>
-          <div id="subtaskBox1" onmouseover="onmouse('1')" onmouseout="outmouse('1')" class="subtaskBox">
+          <div id="subtaskBox1" class="subtaskBox">
             <ul>
-              <li id="subtask1">${subtask1}</li>
-              <div id="subtaskIconsLower1" class="subtaskIconsLower dNone">
-                <img class="subtaskIcon" onclick="subtaskEdit(1)" src="../assets/icons/edit.png">
-                <div class="smallSeparator"></div>
-                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 1)" src="../assets/icons/delete.png">
-              </div>
+              <li id="subtask1" class="subtaskLiEdit">${subtask1}</li>
             </ul>
+            <div id="subtaskIconsLower1" class="subtaskIconsLower">
+              <img class="subtaskIcon" onclick="subtaskEdit(1)" src="../assets/icons/edit.png">
+              <div class="smallSeparator"></div>
+              <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 1)" src="../assets/icons/delete.png">
+            </div>
           </div>
           <div id="subtaskBoxEdit0" class="subtaskBox dNone">
             <div class="dFlexAlign backgroundWhite">

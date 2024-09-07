@@ -337,24 +337,7 @@ function subtaskChange(taskIndex, i) {
 }
 
 
-/**
- * Hides the subtask icons when the mouse leaves the subtask element.
- *
- * @param {string} subtaskID - The ID of the subtask element.
- */
-function outmouse(subtaskID) {
-  document.getElementById(`subtaskIconsLower${subtaskID}`).classList.add('dNone');
-}
 
-
-/**
- * Shows the subtask icons when the mouse hovers over the subtask element.
- *
- * @param {string} subtaskID - The ID of the subtask element.
- */
-function onmouse(subtaskID) {
-  document.getElementById(`subtaskIconsLower${subtaskID}`).classList.remove('dNone');
-}
 
 
 /**
