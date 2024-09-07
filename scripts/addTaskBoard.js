@@ -32,6 +32,7 @@ function loadFunctions() {
         getusers();
         searchUsers();
         openAddTask();
+        configureDueDateInput()
     }
 }
 
@@ -241,8 +242,8 @@ function createTask() {
         return;
     }
     save();
-    closeAddTask2();
     clearAddTask();
+    closeAddTask2();
     loadAll();
 }
 
