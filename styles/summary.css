@@ -150,7 +150,7 @@ body{
 .SummarySecondDeadline{
     display: flex;
     flex-direction: column;
-    width: 178px;
+    width: fit-content;
     align-items: start;
 }
 .SummarySecondDate{
