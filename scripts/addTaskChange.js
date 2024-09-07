@@ -299,9 +299,12 @@ function toggleCategory() {
 }
 
 
-setTimeout(function () {
-    if (document.getElementById('dueDateInput')) {
-        const dateInput = document.getElementById('dueDateInput')
+/**
+ * This function restricts the User to set a date in the past
+ */
+function configureDueDateInput() {
+    const dateInput = document.getElementById('dueDateInput');
+    if (dateInput) {
         let today = new Date().toISOString().split('T')[0];
         dateInput.setAttribute("min", today);
 
@@ -313,7 +316,7 @@ setTimeout(function () {
             }
         });
     }
-}, 100);
+}
 
 
 /**

@@ -550,6 +550,7 @@
 }
 
 .mainContent .createTaskButton {
+    border-radius: 10px;
     background-color: #2A3647;
     cursor: pointer;
     height: 56px;
@@ -557,6 +558,7 @@
     padding: 16px;
     font-size: 21px;
     color: white;
+    border: none;
 }
 
 .mainContent .createTaskButton:hover {

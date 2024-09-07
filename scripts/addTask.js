@@ -32,6 +32,7 @@ function loadFunctions() {
     loadMembers();
     searchUsers();
     load();
+    configureDueDateInput()
 }
 
 
