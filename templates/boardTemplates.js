@@ -16,7 +16,7 @@ function generateTasksHTML(element, i) {
   let initials = renderInitials(assignedInitals, color, prio);
 
   return `
-    <div class="task" draggable="true" data-task="${title}" ondragstart="startDragging(${i})" ondragover="allowDrop(event)" ondrop="moveTo('${element.section}')" onclick="showTaskDetail(${i})">
+    <div class="task" draggable="true" data-task="${title}" ondragstart="startDragging(${i})" ondrop="moveTo('${element.section}')" onclick="showTaskDetail(${i})">
        <div class="category ${categoryClass}">${category}</div>
        <div class="title">${capitalizedTitle}</div>
        <div class="description">${truncatedDescription}</div>

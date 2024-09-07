@@ -151,7 +151,7 @@ h1 {
   height: 100%;
 }
 
-.dropBox .dragHover {
+.moveBox.dragHover {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   min-height: calc(100vh - 360px);
