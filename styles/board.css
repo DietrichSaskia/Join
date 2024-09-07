@@ -151,7 +151,7 @@ h1 {
   height: 100%;
 }
 
-.moveBox.dragHover {
+.dropBox .dragHover {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   min-height: calc(100vh - 360px);
@@ -164,9 +164,9 @@ h1 {
 
 .task {
   border: 1px solid lightgray;
+  margin: 10px 10px 10px 0px;
   background-color: white;
   box-sizing: 10px;
-  margin: 10px 10px 10px 10px;
   width: 200px;
   max-height: 263px;
   border-radius: 24px;
