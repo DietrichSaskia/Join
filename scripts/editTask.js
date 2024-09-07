@@ -304,7 +304,7 @@ function deleteSubtaskEdit(taskIndex, subtaskIndex) {
     task.subtasksCheck.splice(subtaskIndex, 1, false);
     saveTasksToLocalStorage();
     calculateSubtaskProgress(taskIndex);
-
+    document.getElementById('taskDetailCard').innerHTML = ``;
     let subtasksElement = document.getElementById("subtasksDetail");
     if (subtasksElement) {
       subtasksElement.innerHTML = renderSubtasks(taskIndex, task);
@@ -338,22 +338,19 @@ function subtaskChange(taskIndex, i) {
 }
 
 
-
-
-
 /**
  * Validates and adds a new subtask in the edit view.
  *
  * @param {number} taskIndex - The index of the task in the taskAllArray.
  */
 function checkSubtaskEdit(taskIndex) {
-    let input = document.getElementById('subtasksInput').value;
-    document.getElementById('inputerrorSubtask1').style.display = 'none';
-    document.getElementById('inputerrorSubtask2').style.display = 'none';
-    document.getElementById('subtasksInput').classList.remove('redInputBorder');
-    if (input.length === 0) {
-        document.getElementById('inputerrorSubtask1').style.display = 'block';
-        document.getElementById('subtasksInput').classList.add('redInputBorder');
+  let input = document.getElementById('subtasksInput').value;
+  document.getElementById('inputerrorSubtask1').style.display = 'none';
+  document.getElementById('inputerrorSubtask2').style.display = 'none';
+  document.getElementById('subtasksInput').classList.remove('redInputBorder');
+  if (input.length === 0) {
+    document.getElementById('inputerrorSubtask1').style.display = 'block';
+    document.getElementById('subtasksInput').classList.add('redInputBorder');
   } else {
     createSubtaskEdit(input, taskIndex);
   }
@@ -372,10 +369,12 @@ function createSubtaskEdit(input, taskIndex) {
     subtaskChange(taskIndex, 0);
     task.subtasks.splice(0, 1, input);
     clearSubtaskInput(0);
+    document.getElementById('subtasksInput').focus();
   } else if (task.subtasks[1] === "") {
     subtaskChange(taskIndex, 1);
     task.subtasks.splice(1, 1, input);
     clearSubtaskInput(1);
+    document.getElementById('subtasksInput').focus();
   } else {
     document.getElementById('inputerrorSubtask2').style.display = 'block';
     document.getElementById('subtasksInput').classList.add('redInputBorder');
