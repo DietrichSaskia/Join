@@ -147,28 +147,54 @@ function allowDrop(ev) {
 
 
 /**
- * Moves a dragged task to a new section and updates the task array and local storage.
- *
- * @param {string} section - The section to move the task to.
+ * Moves a dragged task to a specified section and updates the UI.
+ * 
+ * This function handles the movement of a currently dragged task to the target section.
+ * It removes the 'dragging' class from the task element and removes the 'dragHover' class
+ * from the target section once the task is dropped. The tasks are re-rendered and saved to local storage.
+ * 
+ * @param {string} section - The ID of the section where the task should be moved.
  */
 function moveTo(section) {
   if (typeof currentDraggedElement !== 'number' || currentDraggedElement < 0 || currentDraggedElement >= taskAllArray.length) {
     return;
   }
+
   let task = taskAllArray[currentDraggedElement];
   task.section = section;
+
   let taskElement = document.querySelector(`[data-task="${taskAllArray[currentDraggedElement].title}"]`);
   taskElement.classList.remove('dragging');
+
+  let sectionElement = document.getElementById(section);
+  sectionElement.classList.remove('dragHover');
 
   renderAllTasks();
   saveTasksToLocalStorage();
 }
 
 
+/**
+ * Adds a 'dragHover' class to the specified section.
+ * 
+ * This function is triggered when a draggable task enters a section during drag-and-drop.
+ * It adds the 'dragHover' class to the section to provide visual feedback.
+ * 
+ * @param {string} sectionId - The ID of the section where the task is dragged over.
+ */
 function highlightBox(sectionId) {
   document.getElementById(sectionId).classList.add('dragHover');
 }
 
+
+/**
+ * Removes the 'dragHover' class from the specified section.
+ * 
+ * This function is triggered when a draggable task leaves a section during drag-and-drop.
+ * It removes the 'dragHover' class from the section, removing the visual feedback.
+ * 
+ * @param {string} sectionId - The ID of the section where the task is no longer dragged over.
+ */
 function removeHighlightBox(sectionId) {
   document.getElementById(sectionId).classList.remove('dragHover');
 }
@@ -265,134 +291,4 @@ function updateSubtaskProgressBar(taskIndex, subtaskBarWidth, completedSubtasks,
   if (subtaskCount) {
     subtaskCount.innerText = `${completedSubtasks}/${amountSubtasks} Subtasks`;
   }
-}
-
-
-/**
- * Displays the details of a specific task, including subtasks.
- *
- * @param {number} taskIndex - The index of the task in the taskAllArray.
- */
-function showTaskDetail(taskIndex) {
-  let task = taskAllArray[taskIndex];
-  let taskDetailsHTML = generateTaskDetails(task, taskIndex);
-  let taskContent = document.getElementById("taskDetailCard");
-  if (taskContent) {
-    taskContent.innerHTML = taskDetailsHTML;
-  }
-  let subtasksElement = document.getElementById("subtasksDetail");
-  if (subtasksElement && Array.isArray(task.subtasks) && task.subtasks.length > 0) {
-    subtasksElement.innerHTML = renderSubtasks(taskIndex, task);
-    calculateSubtaskProgress(taskIndex);
-  }
-  toggleTask();
-}
-
-
-/**
- * Converts a date from German format (DD/MM/YYYY) to standard format (YYYY-MM-DD).
- *
- * @param {string} dateGerman - The date in German format.
- * @returns {string} - The date in standard format.
- */
-function changeDateFormatEdit(dateGerman) {
-  let [year, month, day] = dateGerman.split("/");
-  let formattedDateStr = `${day}-${month}-${year}`;
-  return formattedDateStr;
-}
-
-
-/**
- * Converts a date from standard format (YYYY-MM-DD) to German format (DD/MM/YYYY).
- *
- * @param {string} dateEnglish - The date in standard format.
- * @returns {string} - The date in German format.
- */
-function changeDateFormat(dateEnglish) {
-  let formattedDate = dateEnglish.replace(/-/g, '/');
-  let [year, month, day] = formattedDate.split('/');
-  let formattedDateStr = `${day}/${month}/${year}`;
-  return formattedDateStr;
-}
-
-
-/**
- * Toggles the visibility of the task detail view.
- */
-function toggleTask() {
-  let taskDetailContainer = document.getElementById("containerTasksDetail");
-  taskDetailContainer.classList.toggle("d-none");
-}
-
-
-/**
- * Closes the current Task
- */
-function closeTask() {
-  let taskDetailContainer = document.getElementById("containerTasksDetail");
-  taskDetailContainer.classList.toggle("d-none");
-  document.getElementById("taskDetailCard").innerHTML = ``;
-}
-
-
-/**
- * Deletes a task from the taskAllArray and updates the task display.
- *
- * @param {number} taskIndex - The index of the task in the taskAllArray.
- */
-function deleteTask(taskIndex) {
-  taskAllArray.splice(taskIndex, 1);
-  saveTasksToLocalStorage();
-  toggleTask();
-  renderAllTasks();
-}
-
-
-/**
- * Toggles the completion status of a subtask and updates its display.
- *
- * @param {number} taskIndex - The index of the task in the taskAllArray.
- * @param {number} subtaskIndex - The index of the subtask within the task.
- */
-function toggleSubtaskImage(taskIndex, subtaskIndex) {
-  let task = taskAllArray[taskIndex];
-  if (!task || !Array.isArray(task.subtasksCheck)) return console.error('Invalid task data', taskIndex);
-
-  task.subtasksCheck[subtaskIndex] = !task.subtasksCheck[subtaskIndex];
-  let image = document.getElementById(`subtask-image-${taskIndex}-${subtaskIndex}`);
-  if (image) {
-    image.src = task.subtasksCheck[subtaskIndex]
-      ? "../assets/icons/checkButtonChecked.png"
-      : "../assets/icons/checkButtonblank.png";
-  }
-  saveTasksToLocalStorage();
-  let { subtaskBarWidth, completedSubtasks, amountSubtasks } = calculateSubtaskProgress(taskIndex);
-  updateSubtaskProgressBar(taskIndex, subtaskBarWidth, completedSubtasks, amountSubtasks);
-}
-
-
-/**
- * Renders the subtasks of a task.
- *
- * @param {number} taskIndex - The index of the task in the taskAllArray.
- * @param {Object} task - The task object containing subtasks.
- * @returns {string} - The HTML string for rendering subtasks.
- */
-function renderSubtasks(taskIndex, task) {
-  let subtasks = task.subtasks || [];
-  let subtasksCheck = task.subtasksCheck || [];
-  let validSubtasks = subtasks.filter(subtask => subtask && subtask.trim() !== "");
-  if (!validSubtasks.length) return "<p>No subtasks available.</p>";
-
-  return validSubtasks.map((subtask, validIndex) => {
-    let isChecked = subtasksCheck[validIndex] || false;
-    let imageSrc = isChecked
-      ? "../assets/icons/checkButtonChecked.png"
-      : "../assets/icons/checkButtonblank.png";
-    return `
-      <div class="subtask">
-        <img src="${imageSrc}" id="subtask-image-${taskIndex}-${validIndex}" class="custom-checkbox" onclick="toggleSubtaskImage(${taskIndex}, ${validIndex})" alt="Subtask Status">
-        <span>${subtask}</span>
-      </div>`;
-  }).join("");
 }

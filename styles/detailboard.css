@@ -384,10 +384,10 @@ cursor: default;
 }
 
 .subtaskBox {
-  padding: 8px;
+  padding: 8px 8px 8px 0px;
   display: flex;
   width: 100%;
-  height: 12px;
+  margin: 0px 10px 10px 0px;
 }
 
 .subtaskBox ul {
@@ -398,10 +398,9 @@ cursor: default;
 }
 
 .subtaskBox li {
-  width: 85%;
   width: 284px;
   max-width: 50vw;
-  height: 18px;
+  height: 100%;
 }
 
 .subtaskBox .subtaskIconsLower {
