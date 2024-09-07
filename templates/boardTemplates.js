@@ -272,16 +272,7 @@ function editTaskTemplate(task, date, taskIndex) {
               <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 0)" src="../assets/icons/delete.png">
             </div>
           </div>
-          <div id="subtaskBox1" class="subtaskBox">
-            <ul>
-              <li id="subtask1" class="subtaskLiEdit">${subtask1}</li>
-            </ul>
-            <div id="subtaskIconsLower1" class="subtaskIconsLower">
-              <img class="subtaskIcon" onclick="subtaskEdit(1)" src="../assets/icons/edit.png">
-              <div class="smallSeparator"></div>
-              <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 1)" src="../assets/icons/delete.png">
-            </div>
-          </div>
+
           <div id="subtaskBoxEdit0" class="subtaskBox dNone">
             <div class="dFlexAlign backgroundWhite">
               <input id="subtaskEdit0" value="${subtask0}" class="editSubtaskInput">
@@ -292,6 +283,18 @@ function editTaskTemplate(task, date, taskIndex) {
               </div>
             </div>
           </div>
+          
+          <div id="subtaskBox1" class="subtaskBox">
+            <ul>
+              <li id="subtask1" class="subtaskLiEdit">${subtask1}</li>
+            </ul>
+            <div id="subtaskIconsLower1" class="subtaskIconsLower">
+              <img class="subtaskIcon" onclick="subtaskEdit(1)" src="../assets/icons/edit.png">
+              <div class="smallSeparator"></div>
+              <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 1)" src="../assets/icons/delete.png">
+            </div>
+          </div>
+
           <div id="subtaskBoxEdit1" class="subtaskBox dNone">
             <div class="dFlexAlign backgroundWhite">
               <input id="subtaskEdit1" value="${subtask1}" class="editSubtaskInput">
@@ -302,6 +305,7 @@ function editTaskTemplate(task, date, taskIndex) {
               </div>
             </div>
           </div>
+
         </div>
       </div>
       <div class="okButtonContainer">

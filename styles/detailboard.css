@@ -423,11 +423,14 @@ cursor: default;
 .subtaskLiEdit {
   height: 100%;
   width: 100%;
+  margin-top: 4px;
 }
 
 .subtasksBox .subtaskIconsLower {
   display: flex;
   align-items: center;
+  position: relative;
+  top: 4px;
 }
 
 .dFlexAlign.subtaskInputContainer {
@@ -450,6 +453,11 @@ cursor: default;
   height: 20px;
   border: none;
   border-bottom:1px solid #29abe2;
+  position: relative;
+  top: 12px;
+  right: 32px;
+  font-size: 16px;
+  margin-bottom: 15px;
 }
 
 .editSubtaskInput:focus {
