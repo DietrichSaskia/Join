@@ -274,6 +274,10 @@ function editSubtask(i) {
  */
 function changeSubtask(i) {
     let input = document.getElementById(`subtask${i}`).value;
+    if(input === "") {
+        deleteSubtask(i);
+        return;
+    }
     document.getElementById(`subtaskBox${i}`).remove();
     putSubTask(input, i);
 }
