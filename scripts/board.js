@@ -70,7 +70,7 @@ function renderSection(section, containerId) {
   container.innerHTML = '';
   let formattedSectionName = formatSectionName(section);
   let tasksFound = false;
-  
+
   for (let i = 0; i < taskAllArray.length; i++) {
     let task = taskAllArray[i];
     if (task && task.section === section) {
@@ -78,7 +78,7 @@ function renderSection(section, containerId) {
       tasksFound = true;
     }
   }
-  
+
   if (!tasksFound) {
     container.innerHTML = `<div class="noTasks">No Tasks in ${formattedSectionName}</div>`;
   }
@@ -242,8 +242,8 @@ function renderInitials(assignedInitals, colors, prio) {
       <span class="userInitials">${initial}</span>
     </div>
   `).join('');
-  let remainingElement = remainingInitialsCount > 0 
-    ? `<div class="assignedUser remainingUsers"><span class="userInitials">+${remainingInitialsCount}</span></div>` 
+  let remainingElement = remainingInitialsCount > 0
+    ? `<div class="assignedUser remainingUsers"><span class="userInitials">+${remainingInitialsCount}</span></div>`
     : '';
   return generateInitialsAndPriorityHTML(initialElements, remainingElement, prio);
 }
@@ -318,6 +318,7 @@ function checkContacts() {
       if (!check) {
         task.assignedInitals.splice(j, 1);
         assignedNames.splice(j, 1);
+        task.color.splice(j, i);
         saveTasksToLocalStorage()
       }
     }
