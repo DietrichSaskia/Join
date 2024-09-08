@@ -40,38 +40,6 @@ function loadTasks() {
 
 
 /**
- * Checks if the contactAllArray contains the User from the task
- * 
- * @param {string} key The key-string for the Array
- * @param {string} value The value of the Array
- * @returns 
- */
-function containsValue(key, value) {
-  return contactAllArray.some(contact => contact[key] === value);
-}
-
-
-/**
- * Checks the contactAllArray with the TaskAllarray and deletes the users in the tasks that are deleted
- */
-function checkContacts() {
-  for (let i = 0; i < taskAllArray.length; i++) {
-    let task = taskAllArray[i];
-    let assignedNames = task.assignedName;
-    for (let j = 0; j < assignedNames.length; j++) {
-      let name = assignedNames[j];
-      let check = containsValue("name", name);
-      if (!check) {
-        task.assignedInitals.splice(j, 1);
-        assignedNames.splice(j, 1);
-        saveTasksToLocalStorage()
-      }
-    }
-  }
-}
-
-
-/**
  * Saves the task array to local storage.
  */
 function saveTasksToLocalStorage() {
@@ -321,5 +289,37 @@ function updateSubtaskProgressBar(taskIndex, subtaskBarWidth, completedSubtasks,
 
   if (subtaskCount) {
     subtaskCount.innerText = `${completedSubtasks}/${amountSubtasks} Subtasks`;
+  }
+}
+
+
+/**
+ * Checks if the contactAllArray contains the User from the task
+ * 
+ * @param {string} key The key-string for the Array
+ * @param {string} value The value of the Array
+ * @returns 
+ */
+function containsValue(key, value) {
+  return contactAllArray.some(contact => contact[key] === value);
+}
+
+
+/**
+ * Checks the contactAllArray with the TaskAllarray and deletes the users in the tasks that are deleted
+ */
+function checkContacts() {
+  for (let i = 0; i < taskAllArray.length; i++) {
+    let task = taskAllArray[i];
+    let assignedNames = task.assignedName;
+    for (let j = 0; j < assignedNames.length; j++) {
+      let name = assignedNames[j];
+      let check = containsValue("name", name);
+      if (!check) {
+        task.assignedInitals.splice(j, 1);
+        assignedNames.splice(j, 1);
+        saveTasksToLocalStorage()
+      }
+    }
   }
 }
