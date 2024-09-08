@@ -156,7 +156,6 @@ h1 {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   min-height: calc(100vh - 360px);
-  transition: transform 0.1s ease-in-out;
 }
 
 .task.dragging {
