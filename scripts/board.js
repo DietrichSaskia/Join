@@ -317,8 +317,8 @@ function checkContacts() {
       let check = containsValue("name", name);
       if (!check) {
         task.assignedInitals.splice(j, 1);
-        assignedNames.splice(j, 1);
-        task.color.splice(j, i);
+        task.assignedName.splice(j, 1);
+        task.color.splice(j, 1);
         saveTasksToLocalStorage()
       }
     }
