@@ -290,3 +290,34 @@ function updateSubtaskProgressBar(taskIndex, subtaskBarWidth, completedSubtasks,
     subtaskCount.innerText = `${completedSubtasks}/${amountSubtasks} Subtasks`;
   }
 }
+
+
+function deleteContactByEmail(contactEmail) {
+  // Finde den Namen des Kontakts anhand der E-Mail
+  let contact = contactAllArray.find(c => c.email === contactEmail);
+  
+  if (!contact) {
+    console.log("Kontakt nicht gefunden.");
+    return;
+  }
+
+  let contactName = contact.name;
+
+  // Entferne den Kontakt aus contactAllArray
+  contactAllArray = contactAllArray.filter(c => c.email !== contactEmail);
+
+  // Durchsuche taskAllArray und entferne den Kontakt aus den zugewiesenen Arrays (assignedName, assignedInitals, color)
+  taskAllArray.forEach(task => {
+    let assignedIndex = task.assignedName.indexOf(contactName);
+
+    // Wenn der Kontakt in der Aufgabe existiert, entferne ihn
+    if (assignedIndex !== -1) {
+      task.assignedName.splice(assignedIndex, 1);
+      task.assignedInitals.splice(assignedIndex, 1);
+      task.color.splice(assignedIndex, 1);
+    }
+  });
+
+  // Aktualisiere das Board
+  renderAllTasks();
+}

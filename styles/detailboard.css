@@ -349,6 +349,10 @@ cursor: default;
   cursor: pointer;
 }
 
+.okButton:hover {
+  background-color:  #29abe2;
+}
+
 .subtasksContainer {
   display: flex;
   justify-content: flex-start;

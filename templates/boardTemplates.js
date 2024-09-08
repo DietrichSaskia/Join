@@ -15,7 +15,7 @@ function generateTasksHTML(element, i) {
   let progressHTML = subtasks.length > 0 ? generateSubtaskProgressHTML(subtasks, i) : '';
   let initials = renderInitials(assignedInitals, color, prio);
 
-  return `
+  return /*html*/`
     <div class="task" draggable="true" data-task="${title}" ondragstart="startDragging(${i})" ondrop="moveTo('${element.section}')" onclick="showTaskDetail(${i})">
        <div class="category ${categoryClass}">${category}</div>
        <div class="title">${capitalizedTitle}</div>

@@ -292,15 +292,8 @@
 
 @media (min-width: 1700px) {
     .allTasks {
-        scale: 1.1;
         margin-left: 110px;
         margin-right: 110px;
-    }
-
-    .task {
-        max-height: none;
-        width: 250px;
-        height: 250px;
     }
 
     .noTasks {

@@ -70,6 +70,7 @@ h1 {
   font-size: 20px;
   font-weight: 400;
   width: 80%;
+  background-color: white !important;
 }
 
 .searchButton {
@@ -151,7 +152,7 @@ h1 {
   height: 100%;
 }
 
-.moveBox.dragHover {
+.dragHover {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   min-height: calc(100vh - 360px);
