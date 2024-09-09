@@ -68,6 +68,10 @@ ol li {
     max-height: 80px;
 }
 
+.bottomText {
+    margin-bottom: 40px;
+}
+
 @media(max-width: 1100px){
     .mainContent{
         margin-left: 148px;
@@ -122,7 +126,7 @@ ol li {
         top: 128px;
     } 
     .mainContent::-webkit-scrollbar-track{
-        margin-bottom: 88px; 
+        margin-bottom: 48px; 
     }
 }
 @media(max-width: 500px){
