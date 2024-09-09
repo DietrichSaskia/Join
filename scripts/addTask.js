@@ -118,7 +118,6 @@ function getusers(users) {
     document.getElementById('assignedUsers').innerHTML = ``;
     for (let i = 0; i < users.length; i++) {
         let user = users[i];
-
         loadUser(user, i)
     }
 }
@@ -205,14 +204,22 @@ function clearSubtaskInput() {
  */
 function clearAddTask() {
     loadMembers();
-    document.getElementById('titleInput').value = "";
-    document.getElementById('descriptionInput').value = "";
-    document.getElementById('dueDateInput').value = "";
-    document.getElementById('subtasksInput').value = "";
+    clearInputValues();
     activateprioButton(1);
     clearCategory();
     clearSubtask(0);
     clearSubtask(1);
+}
+
+
+/**
+ * This function clears the input Values of the AddTask.html
+ */
+function clearInputValues() {
+    document.getElementById('titleInput').value = "";
+    document.getElementById('descriptionInput').value = "";
+    document.getElementById('dueDateInput').value = "";
+    document.getElementById('subtasksInput').value = "";
 }
 
 
