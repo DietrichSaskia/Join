@@ -202,6 +202,25 @@ function removeHighlightBox(sectionId) {
 
 
 /**
+ * Handles the drag leave event on a drop zone by removing the highlight 
+ * from the section if the dragged element has left the current target.
+ *
+ * @param {DragEvent} event - The drag leave event object.
+ * @param {string} sectionId - The ID of the section from which to remove the highlight.
+ * 
+ * The function checks if the drag event's related target (the element that 
+ * the pointer moved to) is still inside the current drop zone. If it is not, 
+ * the highlight is removed, and event propagation is stopped.
+ */
+function handleDropLeave(event, sectionId) {
+  if (!event.relatedTarget || !event.currentTarget.contains(event.relatedTarget)) {
+      removeHighlightBox(sectionId);
+      event.stopPropagation();
+  }
+}
+
+
+/**
  * Formats a category string by removing spaces.
  *
  * @param {string} category - The category to format.
