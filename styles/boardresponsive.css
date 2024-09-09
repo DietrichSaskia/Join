@@ -131,6 +131,7 @@
     .noTasks {
         width: 200px;
         min-width: 200px;
+        margin-left: 16px;
     }
 
     .headlineTasks {
