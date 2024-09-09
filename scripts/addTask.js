@@ -240,15 +240,15 @@ function createTask() {
  */
 function checkInputs() {
         let checked = true;
-        let check1 = checkInput1(checked);
+        let check1 = checkInputTitle(checked);
         if (!check1) {
           checked = false;
         }
-        let check2 = checkInput2(checked);
+        let check2 = checkInputDate(checked);
         if (!check2) {
           checked = false;
         }
-        let check3 = checkInput2(checked);
+        let check3 = checkInputCategory(checked);
         if (!check3) {
           checked = false;
         }

@@ -255,9 +255,9 @@ function createTask() {
  */
 function checkInputs() {
     let checked = true;
-    check1 = checkInput1(checked);
-    check2 = checkInput2(checked);
-    check3 = checkInput3(checked);
+    check1 = checkInputTitle(checked);
+    check2 = checkInputDate(checked);
+    check3 = checkInputCategory(checked);
     if (check1 === false || check2 === false || check3 === false) {
         checked = false; 
     }

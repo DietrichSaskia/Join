@@ -175,11 +175,11 @@ function saveEditedTasktoLocalStorage(taskIndex) {
  */
 function checkInputsEdit() {
   let checked = true;
-  let checked1 = checkInput1();
+  let checked1 = checkInputTitle();
   if (!checked1) {
     checked = false;
   }
-  let checked2 = checkInput2();
+  let checked2 = checkInputDate();
   if (!checked2) {
     checked = false;
   }

@@ -172,7 +172,7 @@ function checkSubtask() {
  * 
  * @returns true if input is validated / false if not 
  */
-function checkInput1() {
+function checkInputTitle() {
     if (document.getElementById('titleInput').value === "") {
         document.getElementById('inputerror1').style.display = 'block';
         document.getElementById('titleInput').classList.add('redInputBorder');
@@ -191,7 +191,7 @@ function checkInput1() {
  * 
  * @returns true if input is validated / false if not 
  */
-function checkInput2() {
+function checkInputDate() {
     let date = document.getElementById('dueDateInput').value
     let today = new Date().toISOString().split('T')[0];
     if (date < today || date === "") {
@@ -212,7 +212,7 @@ function checkInput2() {
  * 
  * @returns true if input is validated / false if not 
  */
-function checkInput3() {
+function checkInputCategory() {
     if (!document.getElementById('category')) {
         return true
     }
