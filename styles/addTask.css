@@ -587,6 +587,7 @@ input[type="search"]::-webkit-search-results-decoration {
     justify-content: space-between;
     padding-right: 96px;
     width: 100%;
+    background-color: #f5f6f7;
 }
 
 .emptyBox {
