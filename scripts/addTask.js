@@ -219,7 +219,7 @@ function clearAddTask() {
  */
 function createTask() {
     load();
-    setArray();
+    setArrayUsers();
     if (!checkInputs()) {
         return;
     }
@@ -253,9 +253,9 @@ function checkInputs() {
 
 
 /**
- * fills the Object [task] with all inputs from the user
+ * fills the Object [task] with the assigned users and starts the setArrayInputs function
  */
-function setArray() {
+function setArrayUsers() {
     let users = document.getElementsByClassName('dropdownButton');
     for (let i = 0; i < users.length; i++) {
         if (users[i].classList.contains('dropdownButtonSelectedUser')) {
@@ -264,6 +264,14 @@ function setArray() {
             task['color'].push(document.getElementById(`userCircle${i}`).style.backgroundColor);
         }
     }
+    setArrayInputs();
+}
+
+
+/**
+ * fills the Object [task] with the inputs from the addTask form
+ */
+function setArrayInputs() {
     task['date'] = changeDateFormat();
     task['description'] = document.getElementById('descriptionInput').value;
     let id = taskAllArray.length;
