@@ -320,33 +320,42 @@ function searchUsers() {
     document.getElementById('searchUser').addEventListener('input', function () {
         clearTimeout(timeout);
         timeout = setTimeout(() => {
-            searchUser(this.value);
+            filterUsers(this.value);
         }, 300);
     })
 };
 
 
 /**
- * filters the dropdown users by the input and only shows the users that matches the input
+ * filters the dropdown users by the input
  * 
  * @param {string} input the input the user writes in searchUser ID
  */
-function searchUser(input) {
+function filterUsers(input) {
     input = input.toLowerCase();
     let users = document.getElementsByClassName('dropdownButton');
     for (let i = 0; i < users.length; i++) {
         let userNameElement = users[i].getElementsByClassName('searchUserName')[0];
-        let userName = userNameElement.innerHTML;
-        const id = userName.toLowerCase();
-        if (input.length >= 3) {
-            if (id.includes(input)) {
-                users[i].style.display = 'flex';
-            } else {
-                users[i].style.display = 'none';
-            }
-        } else {
-            users[i].style.display = 'flex';
+        if (userNameElement) {
+            let userName = userNameElement.innerHTML.toLowerCase();
+            updateUserDisplay(users[i], userName, input);
         }
+    }
+}
+
+
+/**
+ * shows the user that matches the input
+ * 
+ * @param {*} userBox The Dropdown-Div for the the User and the initals
+ * @param {*} userName The Username
+ * @param {*} input The input from the user
+ */
+function updateUserDisplay(userBox, userName, input) {
+    if (input.length >= 3) {
+        userBox.style.display = userName.includes(input) ? 'flex' : 'none';
+    } else {
+        userBox.style.display = 'flex';
     }
 }
 

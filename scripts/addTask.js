@@ -335,9 +335,9 @@ function filterUsers(input) {
  */
 function updateUserDisplay(userBox, userName, input) {
     if (input.length >= 3) {
-        user.style.display = userName.includes(input) ? 'flex' : 'none';
+        userBox.style.display = userName.includes(input) ? 'flex' : 'none';
     } else {
-        user.style.display = 'flex';
+        userBox.style.display = 'flex';
     }
 }
 
