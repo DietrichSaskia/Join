@@ -5,12 +5,16 @@
  */
 function searchTask() {
   let searchQuery = document.getElementById('searchInput').value.toLowerCase();
+  
   if (searchQuery.length >= 3) {
-    let filteredTasks = taskAllArray.filter(task => {
+    let filteredTasks = taskAllArray.map((task, index) => {
       let titleMatch = task.title.toLowerCase().includes(searchQuery);
       let descriptionMatch = task.description.toLowerCase().includes(searchQuery);
-      return titleMatch || descriptionMatch;
-    });
+      if (titleMatch || descriptionMatch) {
+        return { ...task, taskIndex: index };
+      }
+      return null;
+    }).filter(task => task !== null);
     renderFilteredTasks(filteredTasks);
   } else {
     renderAllTasks();
@@ -32,10 +36,10 @@ function renderFilteredTasks(tasks) {
   let awaitFeedbackTasks = tasks.filter(task => task.section === 'awaitFeedback');
   let doneTasks = tasks.filter(task => task.section === 'done');
 
-  renderTasksInSearch('toDo', toDoTasks);
-  renderTasksInSearch('inProgress', inProgressTasks);
-  renderTasksInSearch('awaitFeedback', awaitFeedbackTasks);
-  renderTasksInSearch('done', doneTasks);
+  renderTasksInSection('toDo', toDoTasks);
+  renderTasksInSection('inProgress', inProgressTasks);
+  renderTasksInSection('awaitFeedback', awaitFeedbackTasks);
+  renderTasksInSection('done', doneTasks);
 }
 
 
@@ -45,15 +49,15 @@ function renderFilteredTasks(tasks) {
  * @param {string} sectionId - The ID of the HTML element where the tasks should be rendered.
  * @param {Array<Object>} tasks - Array of task objects to be rendered in the section.
  */
-function renderTasksInSearch(sectionId, tasks) {
+function renderTasksInSection(sectionId, tasks) {
   let container = document.getElementById(sectionId);
   container.innerHTML = '';
 
   if (tasks.length === 0) {
     container.innerHTML = `<div class="noTasks">No tasks in ${sectionId}</div>`;
   } else {
-    tasks.forEach((subtasks, taskIndex) => {
-      container.innerHTML += generateTasksHTML(subtasks, taskIndex);
+    tasks.forEach(task => {
+      container.innerHTML += generateTasksHTML(task, task.taskIndex);
     });
   }
 }

@@ -55,17 +55,17 @@ function generateInitialsAndPriorityHTML(initialElements, remainingElement, prio
  * @returns {string} - The HTML string for the subtask progress bar and count.
  */
 function generateSubtaskProgressHTML(subtasks, taskIndex) {
-  let nonEmptySubtasks = subtasks.filter(subtask => subtask.trim() !== '');
+  let nonEmptySubtasks = subtasks.filter(subtask => subtask && typeof subtask === 'string' && subtask.trim() !== '');
   if (nonEmptySubtasks.length === 0) return ''; 
   let subtaskProgress = calculateSubtaskProgress(taskIndex);
-  if (!subtaskProgress || typeof subtaskProgress.subtaskBarWidth === 'undefined') {
+  if (!subtaskProgress || typeof subtaskProgress.subtaskBarWidth !== 'number') {
     console.error('Invalid subtaskProgress:', subtaskProgress);
     return '';
   }
   return `
     <div class="subtasks">
       <div class="subtaskBarContainer">
-        <div class="subtaskBar" id="subtaskBar${taskIndex}" style="width: ${subtaskProgress.subtaskBarWidth}%"></div>
+        <div class="subtaskBar" id="subtaskBar${taskIndex}" style="width: ${subtaskProgress.subtaskBarWidth}%;"></div>
       </div>
       <span class="subtaskCount" id="subtaskCount${taskIndex}">${subtaskProgress.completedSubtasks}/${subtaskProgress.amountSubtasks} Subtasks</span>
     </div>`;
