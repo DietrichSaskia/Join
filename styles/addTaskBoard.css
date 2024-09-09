@@ -480,11 +480,12 @@
 }
 
 .mainContent .editSubtaskInput {
-    border-radius: 0;
+    border-radius: 0!important;
     border: none !important;
-    height: 26px;
-    font-size: 16px;
-    width: 80%;
+    height: 22px!important;
+    width: 80%!important;
+    position:static!important;
+    margin-bottom: 0!important;
 }
 
 .mainContent .editSubtaskInput:focus {
@@ -523,6 +524,25 @@
     height: 100px;
     width: 100%;
     max-width: 440px;
+    overflow: auto;
+    padding: 0;
+}
+
+.mainContent .subtasksBox::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+}
+
+.mainContent .subtasksBox::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.mainContent .subtasksBox::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
 }
 
 .mainContent .subtasksBox ul {
@@ -598,4 +618,5 @@
         justify-content: space-between;
         position: relative;
         padding-bottom: 12px;
+        top: 24px;
 }

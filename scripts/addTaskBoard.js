@@ -9,8 +9,8 @@ let tasks = [
         'prio': '/assets/icons/prioMedium.png',
         'prioName': 'Medium',
         'section': 'toDo',
-        'subtasks': ["", ""],
-        'subtasksCheck': [false, false],
+        'subtasks': [],
+        'subtasksCheck': [],
         'title': '',
         'assignedInitals': [],
         'assignedName': [],
@@ -101,6 +101,7 @@ function closeAddTask() {
         document.getElementById('addTaskoverlay').classList.add('dNone');
         document.getElementById('xButton').classList.add('dNone');
         document.getElementById('mainContent').innerHTML = ``;
+        task.subtasks = [];
     }
 }
 
@@ -108,11 +109,14 @@ function closeAddTask() {
 /**
  * Closes the AddTask Window in the board.html
  */
-function closeAddTask2() {
+function closeAddTaskWithX() {
     document.getElementById('addTaskoverlay').classList.add('dNone');
     document.getElementById('xButton').classList.add('dNone');
     document.getElementById('mainContent').innerHTML = ``;
+    task.subtasks = [];
 }
+
+
 /**
  * Resets all priority Buttons and activates the clicked priority Button and it's Function
  * 
@@ -198,16 +202,18 @@ function showSubtask() {
  * @param {string} input The value of the subtask input
  */
 function createSubtask(input) {
-    if (task['subtasks'][0] === "") {
-        putSubTask(input, 0);
-        task['subtasks'].splice(0, 1, input);
-        clearSubtaskInput(0);
+    let subtasks = task['subtasks'];
+    for (let i = 0; i < subtasks.length; i++) {
+        if (subtasks[i] === "") {
+            subtasks[i] = input;
+            putSubTask(input, i);
+            clearSubtaskInput();
+            return;
+        }
     }
-    else if (task['subtasks'][1] === "") {
-        putSubTask(input, 1);
-        task['subtasks'].splice(1, 1, input);
-        clearSubtaskInput(1);
-    }
+    subtasks.push(input);
+    putSubTask(input, subtasks.length - 1);
+    clearSubtaskInput();
 }
 
 
@@ -244,7 +250,7 @@ function createTask() {
     }
     save();
     clearAddTask();
-    closeAddTask2();
+    closeAddTaskWithX();
     loadAll();
 }
 
