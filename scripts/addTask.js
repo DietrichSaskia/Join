@@ -10,8 +10,8 @@ let tasks = [
         'prio': '/assets/icons/prioMedium.png',
         'prioName': 'Medium',
         'section': 'toDo',
-        'subtasks': ["", ""],
-        'subtasksCheck': [false, false],
+        'subtasks': [],
+        'subtasksCheck': [],
         'title': '',
         'assignedInitals': [],
         'assignedName': [],
@@ -174,20 +174,18 @@ function showSubtask() {
  * @param {string} input The value of the subtask input
  */
 function createSubtask(input) {
-    if (task['subtasks'][0] === "") {
-        putSubTask(input, 0);
-        task['subtasks'].splice(0, 1, input);
-        clearSubtaskInput(0);
+    let subtasks = task['subtasks'];
+    for (let i = 0; i < subtasks.length; i++) {
+        if (subtasks[i] === "") {
+            subtasks[i] = input;
+            putSubTask(input, i);
+            clearSubtaskInput();
+            return;
+        }
     }
-    else if (task['subtasks'][1] === "") {
-        putSubTask(input, 1);
-        task['subtasks'].splice(1, 1, input);
-        clearSubtaskInput(1);
-    }
-    else {
-        document.getElementById('inputerrorSubtask2').style.display = 'block';
-        document.getElementById('subtasksInput').classList.add('redInputBorder');
-    }
+    subtasks.push(input);
+    putSubTask(input, subtasks.length - 1);
+    clearSubtaskInput();
 }
 
 
@@ -195,7 +193,7 @@ function createSubtask(input) {
  * clears the value of the subtask input field
  */
 function clearSubtaskInput() {
-    document.getElementById('subtasksInput').value = "";
+    document.getElementById(`subtasksInput`).value = "";
 }
 
 

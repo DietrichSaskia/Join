@@ -144,7 +144,6 @@ function loadAddTaskComplete() {
       </div>
   
       <span class="inputError" id="inputerrorSubtask1">Subtask needs Description</span>
-      <span class="inputError" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
       <div class="subtasksBox" id="subtasksBox"></div>
   
       <div class="emptyBox"></div>

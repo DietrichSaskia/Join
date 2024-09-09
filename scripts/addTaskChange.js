@@ -162,7 +162,6 @@ function clearCategory() {
 function checkSubtask() {
     let input = document.getElementById('subtasksInput').value;
     document.getElementById('inputerrorSubtask1').style.display = 'none';
-    document.getElementById('inputerrorSubtask2').style.display = 'none';
     document.getElementById('subtasksInput').classList.remove('redInputBorder');
     if (input.length === 0) {
         document.getElementById('inputerrorSubtask1').style.display = 'block';
@@ -241,7 +240,7 @@ function checkInputCategory() {
  * @param {number} i The number of the subtask box
  */
 function deleteSubtask(i) {
-    task['subtasks'][i] = "";
+    task['subtasks'].splice(i, 1);
     document.getElementById(`subtaskBox${i}`).remove();
 }
 

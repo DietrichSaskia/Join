@@ -208,10 +208,6 @@ function createSubtask(input) {
         task['subtasks'].splice(1, 1, input);
         clearSubtaskInput(1);
     }
-    else {
-        document.getElementById('inputerrorSubtask2').style.display = 'block';
-        document.getElementById('subtasksInput').classList.add('redInputBorder');
-    }
 }
 
 

@@ -347,7 +347,6 @@ function subtaskChange(taskIndex, i) {
 function checkSubtaskEdit(taskIndex) {
   let input = document.getElementById('subtasksInput').value;
   document.getElementById('inputerrorSubtask1').style.display = 'none';
-  document.getElementById('inputerrorSubtask2').style.display = 'none';
   document.getElementById('subtasksInput').classList.remove('redInputBorder');
   if (input.length === 0) {
     document.getElementById('inputerrorSubtask1').style.display = 'block';
@@ -376,8 +375,5 @@ function createSubtaskEdit(input, taskIndex) {
     task.subtasks.splice(1, 1, input);
     clearSubtaskInput(1);
     document.getElementById('subtasksInput').focus();
-  } else {
-    document.getElementById('inputerrorSubtask2').style.display = 'block';
-    document.getElementById('subtasksInput').classList.add('redInputBorder');
   }
 }
