@@ -334,3 +334,14 @@ function toggleUserDropdown() {
     dropdownUsers.classList.toggle("dNone");
     document.getElementById('searchUser').focus();
 }
+
+
+/**
+ * This function clears the input Values of the AddTask.html
+ */
+function clearInputValues() {
+    document.getElementById('titleInput').value = "";
+    document.getElementById('descriptionInput').value = "";
+    document.getElementById('dueDateInput').value = "";
+    document.getElementById('subtasksInput').value = "";
+}

@@ -213,17 +213,6 @@ function clearAddTask() {
 
 
 /**
- * This function clears the input Values of the AddTask.html
- */
-function clearInputValues() {
-    document.getElementById('titleInput').value = "";
-    document.getElementById('descriptionInput').value = "";
-    document.getElementById('dueDateInput').value = "";
-    document.getElementById('subtasksInput').value = "";
-}
-
-
-/**
  * Creates a new Task and adds it to the local storage
  * 
  * @returns stops the function if not all inputs needed are filled

@@ -27,13 +27,21 @@ function loadFunctions() {
         window.location.href = 'addTask.html';
     }
     else {
-        loadAddTaskComplete();
-        activateprioButton(1);
-        getusers();
-        searchUsers();
-        openAddTask();
-        configureDueDateInput()
+        loadAddTaskInBoard();
     }
+}
+
+
+/**
+ * This function loads the addTask Page in the board.html
+ */
+function loadAddTaskInBoard() {
+    loadAddTaskComplete();
+    activateprioButton(1);
+    getusers();
+    searchUsers();
+    openAddTask();
+    configureDueDateInput()
 }
 
 
@@ -220,10 +228,7 @@ function clearSubtaskInput() {
  */
 function clearAddTask() {
     getusers();
-    document.getElementById('titleInput').value = "";
-    document.getElementById('descriptionInput').value = "";
-    document.getElementById('dueDateInput').value = "";
-    document.getElementById('subtasksInput').value = "";
+    clearInputValues();
     activateprioButton(1);
     clearCategory();
     clearSubtask(0);
