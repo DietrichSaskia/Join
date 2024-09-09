@@ -67,42 +67,49 @@ function toggleAssignedUser(i) {
         let currentCheck = check.src.split('/').pop();
         document.getElementById(`user${i}`).classList.toggle('dropdownButtonSelectedUser');
         check.src = currentCheck === 'checkButtonMobile.png' ? buttonUnchecked : buttonChecked;
-        toggleAssignedUserCircle(i);
+        toggleAssignedUserCircle(i, checkedImg);
     }
+}
 
 
-    /**
-     * This function is fancy
-     * 
-     * @param {number} i Index of the Button of the assigned User Dropdown
-     */
-    function toggleAssignedUserCircle(i) {
-        let visibleUserCircles = countVisibleUserCircles();
-        if (visibleUserCircles <= 4) {
-            if (!checkedImg.includes("checkButtonMobile.png")) {
-                document.getElementById(`userCircle${i}`).classList.remove('dNone')
-            }
-            else {
-                document.getElementById('extraUsers').classList.add('dNone');
-                document.getElementById(`userCircle${i}`).classList.add('dNone')
-            }
+/**
+ * This function is fancy
+ * 
+ * @param {number} i Index of the Button of the assigned User Dropdown
+ */
+function toggleAssignedUserCircle(i, checkedImg) {
+    let visibleUserCircles = countVisibleUserCircles();
+    if (visibleUserCircles <= 4) {
+        if (!checkedImg.includes("checkButtonMobile.png")) {
+            document.getElementById(`userCircle${i}`).classList.remove('dNone')
         }
-        else if (visibleUserCircles > 4) {
-            document.getElementById('extraUsers').classList.remove('dNone');
-            document.getElementById('extraUsers').innerHTML = `+${visibleUserCircles - 4}`;
+        else {
+            document.getElementById('extraUsers').classList.add('dNone');
+            document.getElementById(`userCircle${i}`).classList.add('dNone')
         }
     }
-};
+    else if (visibleUserCircles > 4) {
+        document.getElementById('extraUsers').classList.remove('dNone');
+        document.getElementById('extraUsers').innerHTML = `+${visibleUserCircles - 4}`;
+    }
+}
 
 
+/**
+ * This function counts the amount of checked Assigned Users in the dropdown menu
+ * 
+ * @returns the amount of visible Usercircles with the Initials
+ */
 function countVisibleUserCircles() {
     let count = 0;
     for (let i = 0; i < contactAllArray.length; i++) {
         let check = document.getElementById(`assignedCheck${i}`);
-        if (check) {let checkedImg = check.src;
+        if (check) {
+            let checkedImg = check.src;
             if (checkedImg.includes("checkButtonMobile.png")) {
                 count++;
-            }}
+            }
+        }
     }
     return count;
 }
@@ -274,7 +281,7 @@ function editSubtask(i) {
  */
 function changeSubtask(i) {
     let input = document.getElementById(`subtask${i}`).value;
-    if(input === "") {
+    if (input === "") {
         deleteSubtask(i);
         return;
     }
