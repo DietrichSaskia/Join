@@ -42,6 +42,7 @@ function editTask(taskIndex) {
     setpriorityButton(task);
     checkEmptysubtasks();
     getusers();
+    searchUsers();
     configureDueDateInput();
     setAssignedUsers(task);
   }, 150);
