@@ -237,7 +237,14 @@ body{
 }
 .ContactDeleteButton:hover{
     cursor: pointer;
-    color: #007CEE;
+}
+.ContactEditChangeClass1{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.ContactEditChangeClass1:hover{
+    filter: invert(53%) sepia(94%) saturate(417%) hue-rotate(158deg) brightness(93%) contrast(94%);
 }
 .ContactEditDelete{
     display: flex;

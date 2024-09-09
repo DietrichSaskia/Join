@@ -70,6 +70,7 @@ function formatPhoneNumber(value) {
     return value.trim();
 }
 
+
 /**
  * The element is made visible to start the slide in animation.
  * 
@@ -82,50 +83,14 @@ function editContactShowWindow() {
 
 
 /**
- * A different path is used depending on which ID is transferred. This is used to exchange icons.
- * 
- * @param {*} id 
- */
-function onmouse(id, textId){
-    let pfadextra;
-    if((id == 'ContactEditChange1') || (id == 'ContactEditChange3')){
-        pfadextra = IMGPfadon[1]
-    }
-    else {
-        pfadextra = IMGPfadon[0]
-    }
-    document.querySelector(`#${id} img`).src =`../assets/icons/${pfadextra}.png`;
-    document.getElementById(textId).style.color = "#007CEE";
-}
-
-
-/**
-* A different path is used depending on which ID is transferred. This is used to exchange icons.
-* 
-* @param {*} id 
-*/
-function outmouse(id, textId){
-    let pfadextra;
-    if((id == 'ContactEditChange1') || (id == 'ContactEditChange3')){
-        pfadextra = IMGPfadof[1]
-    }
-    else{
-        pfadextra = IMGPfadof[0]
-    }
-    document.querySelector(`#${id} img`).src =`../assets/icons/${pfadextra}.png`;
-    document.getElementById(textId).style.color = "";
-}
-
-
-/**
 * A different path is used depending on which ID is transferred. This is used to exchange icons.
 * 
 * @param {*} id 
 */
 function onmouseClose(id){
-if(id == 'XCloseID'){
-    document.getElementById(id).innerHTML=`<img id="XCloseother" class="ImgCloseStyle2" src="../assets/icons/closeBlue.png">`;
-}
+    if(id == 'XCloseID'){
+        document.getElementById(id).innerHTML=`<img id="XCloseother" class="ImgCloseStyle2" src="../assets/icons/closeBlue.png">`;
+    }
 }
 
 
@@ -135,9 +100,9 @@ if(id == 'XCloseID'){
 * @param {*} id 
 */
 function outmouseClose(id){
-if(id == 'XCloseID'){
-    document.getElementById(id).innerHTML=`<img id="XClose" class="ImgCloseStyle2" src="../assets/icons/close.png">`;
-}
+    if(id == 'XCloseID'){
+        document.getElementById(id).innerHTML=`<img id="XClose" class="ImgCloseStyle2" src="../assets/icons/close.png">`;
+    }
 }  
 
 

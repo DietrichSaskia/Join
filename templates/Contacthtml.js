@@ -10,17 +10,19 @@ function  contactInfoHtml(initials, name, email, phone, buttonColor, index){
                 <section class="NameEditDelete">
                     <div class="ContactName">${name}</div>
                     <div id="ContactEditDeleteID"  class="ContactEditDelete">
-                        <button onclick="editNewContact('${initials}', '${name}', '${email}', '${phone}', '${buttonColor}', '${index}'), editContactShowWindow()" class="ContactEditButton" onmouseover="onmouse('ContactEditChange1', 'ContactDeleteTextHover')" onmouseout="outmouse('ContactEditChange1', 'ContactDeleteTextHover')"> 
-                            <div id="ContactEditChange1">
+                        <button onclick="editNewContact('${initials}', '${name}', '${email}', '${phone}', '${buttonColor}', '${index}'), editContactShowWindow()" class="ContactEditButton"> 
+                            <div id="ContactEditChange1" class="ContactEditChangeClass1">
                                  <img class="ContactDeleteEdit" src="../assets/icons/edit.png">
+                                  <span id="ContactDeleteTextHover" class="ContactDeleteEditText">Edit</span>
                             </div>
-                            <span id="ContactDeleteTextHover" class="ContactDeleteEditText">Edit</span>
+                           
                         </button>
-                        <button class="ContactDeleteButton" onclick="deleteContactList(${index})" onmouseover="onmouse('ContactDeleteChange2', 'ContactDeleteEditHover')" onmouseout="outmouse('ContactDeleteChange2', 'ContactDeleteEditHover')">   
-                            <div id="ContactDeleteChange2">
+                        <button class="ContactDeleteButton" onclick="deleteContactList(${index})">   
+                            <div id="ContactDeleteChange2" class="ContactEditChangeClass1">
                                 <img class="ContactDeleteEdit" src="../assets/icons/delete.png">
+                                <span id="ContactDeleteEditHover" class="ContactDeleteEditText">Delete</span>
                             </div>
-                            <span id="ContactDeleteEditHover" class="ContactDeleteEditText">Delete</span>
+                            
                         </button>
                     </div>
                 </section>

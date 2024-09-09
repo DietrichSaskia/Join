@@ -40,6 +40,7 @@ body{
 .SummaryCircleDark{
     width: 69px;
     height: 69px;
+    pointer-events: none;
 }
 .SummaryCircleDark2{
     width: 60px;
