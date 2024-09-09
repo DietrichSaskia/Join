@@ -99,10 +99,10 @@ function countVisibleUserCircles() {
     let count = 0;
     for (let i = 0; i < contactAllArray.length; i++) {
         let check = document.getElementById(`assignedCheck${i}`);
-        let checkedImg = check.src;
-        if (checkedImg.includes("checkButtonMobile.png")) {
-            count++;
-        }
+        if (check) {let checkedImg = check.src;
+            if (checkedImg.includes("checkButtonMobile.png")) {
+                count++;
+            }}
     }
     return count;
 }
@@ -278,8 +278,9 @@ function changeSubtask(i) {
         deleteSubtask(i);
         return;
     }
-    document.getElementById(`subtaskBox${i}`).remove();
     putSubTask(input, i);
+    task['subtasks'].splice(i, 1, input);
+    document.getElementById(`subtaskBox${i}`).remove();
 }
 
 
