@@ -151,6 +151,7 @@ function loadAddTaskComplete() {
   
     </div>
   
+    </form>
     <div class="addTaskBottomBar">
     <p class="required"><span>*</span>This field is required</p>
     <div class="taskButtons">
@@ -158,8 +159,6 @@ function loadAddTaskComplete() {
         <button class="createTaskButton" onclick="createTask()">Create Task</button>
       </div>
     </div>
-  
-    </form>
   </section>
       `
 }

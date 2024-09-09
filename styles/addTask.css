@@ -562,16 +562,15 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .addTaskBottomBar {
-    position: fixed;
+    position: relative;
     z-index: 2;
-    bottom: 0;
+    bottom: 87px;
     display: flex;
-    width: 962px;
-    max-width: calc(100% - 434px);
+    width: 70%;
+    max-width: 962px;
     justify-content: space-between;
-    margin: 0;
-    background-color: #f5f6f7;
-    height: 88px;
+    padding-right: 96px;
+    width: 100%;
 }
 
 .emptyBox {
