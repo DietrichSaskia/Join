@@ -276,12 +276,13 @@ function renderInitials(assignedInitals, colors, prio) {
  */
 function calculateSubtaskProgress(taskIndex) {
   let task = taskAllArray[taskIndex];
-  if (!task) return { subtaskBarWidth: 0, completedSubtasks: 0, amountSubtasks: 0 };
+  if (!task || !task.subtasks || task.subtasks.length === 0) {
+    return { subtaskBarWidth: 0, completedSubtasks: 0, amountSubtasks: 0 };
+  }
   let validSubtasks = task.subtasks.filter(subtask => subtask && subtask.trim() !== '');
-  let completedSubtasks = task.subtasksCheck.filter(Boolean).length;
+  let completedSubtasks = task.subtasksCheck ? task.subtasksCheck.filter(Boolean).length : 0;
   let amountSubtasks = validSubtasks.length;
   let subtaskBarWidth = amountSubtasks > 0 ? (completedSubtasks / amountSubtasks) * 100 : 0;
-
   return {
     subtaskBarWidth,
     completedSubtasks,
@@ -301,11 +302,9 @@ function calculateSubtaskProgress(taskIndex) {
 function updateSubtaskProgressBar(taskIndex, subtaskBarWidth, completedSubtasks, amountSubtasks) {
   let subtaskBar = document.getElementById(`subtaskBar${taskIndex}`);
   let subtaskCount = document.getElementById(`subtaskCount${taskIndex}`);
-
   if (subtaskBar) {
     subtaskBar.style.width = `${subtaskBarWidth}%`;
   }
-
   if (subtaskCount) {
     subtaskCount.innerText = `${completedSubtasks}/${amountSubtasks} Subtasks`;
   }

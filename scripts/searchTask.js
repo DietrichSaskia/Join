@@ -5,7 +5,6 @@
  */
 function searchTask() {
   let searchQuery = document.getElementById('searchInput').value.toLowerCase();
-  
   if (searchQuery.length >= 3) {
     let filteredTasks = taskAllArray.filter(task => {
       let titleMatch = task.title.toLowerCase().includes(searchQuery);
@@ -16,7 +15,6 @@ function searchTask() {
   } else {
     renderAllTasks();
   }
-
   if (searchQuery.length === 0) {
     renderAllTasks();
   }
@@ -34,10 +32,10 @@ function renderFilteredTasks(tasks) {
   let awaitFeedbackTasks = tasks.filter(task => task.section === 'awaitFeedback');
   let doneTasks = tasks.filter(task => task.section === 'done');
 
-  renderTasksInSection('toDo', toDoTasks);
-  renderTasksInSection('inProgress', inProgressTasks);
-  renderTasksInSection('awaitFeedback', awaitFeedbackTasks);
-  renderTasksInSection('done', doneTasks);
+  renderTasksInSearch('toDo', toDoTasks);
+  renderTasksInSearch('inProgress', inProgressTasks);
+  renderTasksInSearch('awaitFeedback', awaitFeedbackTasks);
+  renderTasksInSearch('done', doneTasks);
 }
 
 
@@ -47,15 +45,15 @@ function renderFilteredTasks(tasks) {
  * @param {string} sectionId - The ID of the HTML element where the tasks should be rendered.
  * @param {Array<Object>} tasks - Array of task objects to be rendered in the section.
  */
-function renderTasksInSection(sectionId, tasks) {
+function renderTasksInSearch(sectionId, tasks) {
   let container = document.getElementById(sectionId);
   container.innerHTML = '';
 
   if (tasks.length === 0) {
     container.innerHTML = `<div class="noTasks">No tasks in ${sectionId}</div>`;
   } else {
-    tasks.forEach(task => {
-      container.innerHTML += generateTasksHTML(task);
+    tasks.forEach((subtasks, taskIndex) => {
+      container.innerHTML += generateTasksHTML(subtasks, taskIndex);
     });
   }
 }

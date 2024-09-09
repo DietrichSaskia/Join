@@ -118,7 +118,6 @@
 .subtask:hover {
   background-color: #D9D9D9;
   border-radius: 30px;
-  cursor: pointer;
 }
 
 .custom-checkbox {

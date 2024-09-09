@@ -57,14 +57,11 @@ function generateInitialsAndPriorityHTML(initialElements, remainingElement, prio
 function generateSubtaskProgressHTML(subtasks, taskIndex) {
   let nonEmptySubtasks = subtasks.filter(subtask => subtask.trim() !== '');
   if (nonEmptySubtasks.length === 0) return ''; 
-
   let subtaskProgress = calculateSubtaskProgress(taskIndex);
-
   if (!subtaskProgress || typeof subtaskProgress.subtaskBarWidth === 'undefined') {
     console.error('Invalid subtaskProgress:', subtaskProgress);
     return '';
   }
-
   return `
     <div class="subtasks">
       <div class="subtaskBarContainer">
