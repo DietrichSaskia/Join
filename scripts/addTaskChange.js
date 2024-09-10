@@ -296,8 +296,10 @@ function changeSubtask(i) {
  */
 function showSubtaskIcons() {
     setTimeout(function () {
-        document.getElementById('subtaskActive').classList.toggle('dNone');
-        document.getElementById('subtaskInactive').classList.toggle('dNone');
+        if (document.getElementById('subtaskActive')) {
+            document.getElementById('subtaskActive').classList.toggle('dNone');
+            document.getElementById('subtaskInactive').classList.toggle('dNone');
+        }
     }, 150);
 }
 
