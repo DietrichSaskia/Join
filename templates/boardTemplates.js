@@ -123,7 +123,7 @@ function generateTaskDetails(task, taskIndex) {
             <button onclick="moveTaskToSection('done', ${taskIndex})">Done</button>
           </div>
         </div>
-        <img onclick="toggleTask()" src="../assets/icons/close.png" alt="Close">
+        <img onclick="closeTask()" src="../assets/icons/close.png" alt="Close">
       </div> 
       <div class="detailtaskinfos">
         <div class="titleDetail">${task.title}</div>

@@ -2,8 +2,9 @@
  * Displays the details of a specific task, including subtasks.
  *
  * @param {number} taskIndex - The index of the task in the taskAllArray.
+ * @param {boolean} - The parameter that decides if the animation is played or not
  */
-function showTaskDetail(taskIndex) {
+function showTaskDetail(taskIndex, boolean) {
   let task = taskAllArray[taskIndex];
   let taskDetailsHTML = generateTaskDetails(task, taskIndex);
   let taskContent = document.getElementById("taskDetailCard");
@@ -15,7 +16,7 @@ function showTaskDetail(taskIndex) {
     subtasksElement.innerHTML = renderSubtasks(taskIndex, task);
     calculateSubtaskProgress(taskIndex);
   }
-  toggleTask();
+  toggleTask(boolean);
 }
 
 
@@ -49,19 +50,48 @@ function changeDateFormat(dateEnglish) {
 /**
  * Toggles the visibility of the task detail view.
  */
-function toggleTask() {
+function toggleTask(boolean) {
   let taskDetailContainer = document.getElementById("containerTasksDetail");
+  if (boolean === false) {
+    taskDetailContainer.classList.remove('slideinright');
+    taskDetailContainer.classList.remove('slideinleft');
+  } else {
+    taskDetailContainer.classList.add('slideinright');
+    taskDetailContainer.classList.remove('slideinleft');
+  }
   taskDetailContainer.classList.toggle("d-none");
 }
 
+/**
+ * Opens the task detail without animation (used after editing).
+ */
+function openTaskWithoutAnimation() {
+  toggleTask(false);
+}
 
 /**
  * Closes the current Task
  */
 function closeTask() {
   let taskDetailContainer = document.getElementById("containerTasksDetail");
-  taskDetailContainer.classList.toggle("d-none");
-  document.getElementById("taskDetailCard").innerHTML = ``;
+
+  taskDetailContainer.classList.remove('slideinright');
+  taskDetailContainer.classList.add('slideinleft');
+
+  setTimeout(() => {
+    taskDetailContainer.classList.add("d-none");
+    document.getElementById("taskDetailCard").innerHTML = ``;
+  }, 400);
+}
+
+
+/**
+ * Closes the current Task with the Overlay
+ */
+function closeTaskWithOverlay () {
+  if (event.target.id === "containerTasksDetail"){
+    closeTask();
+  }
 }
 
 

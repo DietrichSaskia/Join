@@ -201,9 +201,9 @@ function saveEditedTasktoLocalStorage(taskIndex) {
   else {
     setEditedArray(taskIndex);
     saveToCurrentTask(taskIndex);
-    toggleTask();
+    openTaskWithoutAnimation();
     renderAllTasks();
-    showTaskDetail(taskIndex);
+    showTaskDetail(taskIndex, false);
   }
 }
 

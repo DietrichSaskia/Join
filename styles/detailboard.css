@@ -2,6 +2,14 @@
   display: none !important;
 }
 
+.containerTasksDetail.slide-in {
+  transform: translateX(-100%); /* Hereinschieben */
+}
+
+.containerTasksDetail.slide-out {
+  transform: translateX(100%); /* Herausschieben */
+}
+
 .containerTasksDetail {
   position: fixed;
   display: flex;
@@ -13,6 +21,7 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 13;
+  transition: transform 0.5s ease; /* Übergangsanimation */
 }
 
 .detailtask {
