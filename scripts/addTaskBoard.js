@@ -1,5 +1,4 @@
 const dateInput = document.getElementById('dueDateInput');
-
 let tasks = [
     {
         'category': '',
@@ -262,8 +261,9 @@ function createTask() {
         return;
     }
     save();
-    clearAddTask();
+    successfullSlide();
     closeAddTaskWithX();
+    clearAddTask();
     loadAll();
 }
 
@@ -382,4 +382,19 @@ function save() {
     taskAllArray.push(task);
     let tasksAsText = JSON.stringify(taskAllArray);
     localStorage.setItem('taskAllArray', tasksAsText);
+}
+
+
+/**
+ * This function shows the User with a slider that the task has been successfully added
+ */
+function successfullSlide() {
+    document.getElementById('taskSuccessAdd').classList.remove('dNone');
+    setTimeout(function () {
+        document.querySelector('.taskSuccessAdd').classList.add('taskSuccessAdded');
+    }, 10);
+    setTimeout(() => {
+        document.getElementById('taskSuccessAdd').classList.add('dNone')
+        document.querySelector('.taskSuccessAdd').classList.remove('taskSuccessAdded')
+    }, 800);
 }

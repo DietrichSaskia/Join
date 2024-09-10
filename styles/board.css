@@ -295,6 +295,28 @@ h1 {
   display: none;
 }
 
+.taskSuccessAdd {
+  position: absolute;
+  bottom: -15%;
+  offset-position: bottom;
+  left: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 20px;
+  background-color: #2a3647;
+  color: white;
+  width: 326px;
+  height: 74px;
+  border-radius: 20px;
+  transform: translateY(0);
+}
+
+.taskSuccessAdded {
+  transition: all 400ms ease-out;
+  transform: translateY(-58vh);
+}
+
 .slideinleft{
   animation: slideInLeft 0.4s ease-out forwards;
 }
