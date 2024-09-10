@@ -247,6 +247,17 @@ function deleteSubtask(i) {
 
 
 /**
+ * THis function clears all Subtasks
+ */
+function clearAllSubtasks() {
+    let subtasks = document.getElementsByClassName(`subtaskBox`).length;
+    for (let i = 0; i < subtasks; i++) {
+        deleteSubtask(i);
+    }
+}
+
+
+/**
  * Deletes a subtask box
  * 
  * @param {number} i The number of the subtask box

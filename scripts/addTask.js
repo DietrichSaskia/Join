@@ -207,8 +207,7 @@ function clearAddTask() {
     clearInputValues();
     activateprioButton(1);
     clearCategory();
-    clearSubtask(0);
-    clearSubtask(1);
+    clearAllSubtasks();
 }
 
 
