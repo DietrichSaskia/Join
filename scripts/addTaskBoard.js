@@ -233,7 +233,9 @@ function clearSubtaskInput() {
  * clears all Input Fields and buttons and puts them into their default state
  */
 function clearAddTask() {
-    getusers();
+    loadMembers();
+    searchUsers();
+    clearCircle();
     clearInputValues();
     activateprioButton(1);
     clearCategory();

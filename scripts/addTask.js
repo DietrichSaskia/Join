@@ -202,6 +202,8 @@ function clearSubtaskInput() {
  */
 function clearAddTask() {
     loadMembers();
+    searchUsers();
+    clearCircle();
     clearInputValues();
     activateprioButton(1);
     clearCategory();

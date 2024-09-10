@@ -354,3 +354,14 @@ function clearInputValues() {
     document.getElementById('dueDateInput').value = "";
     document.getElementById('subtasksInput').value = "";
 }
+
+
+/**
+ * This function clears the extraUser Circle if it was displayed
+ */
+function clearCircle() {
+    if (document.getElementById('extraUsers')) {
+        document.getElementById('extraUsers').innerHTML = ``;
+        document.getElementById('extraUsers').classList.add('dNone');
+    }
+}

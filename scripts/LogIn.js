@@ -184,7 +184,7 @@ function loginUser2(emailInput, passwordInput, snapshot){
             localStorage.removeItem('CurrentUser');
             let decodedName = decodeURIComponent(matchingUser.name);
             localStorage.setItem('CurrentUser', JSON.stringify(decodedName));
-            window.location.href = `./htmls/summary.html`;
+            window.location.href = `../htmls/summary.html`;
         } else {
             userInformationPopUp('Passwort ist falsch!')}
     } else {
