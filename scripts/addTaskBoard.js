@@ -99,16 +99,8 @@ function openAddTask() {
  * Closes the AddTask Window in the board.html if you click on the Overlay
  */
 function closeAddTask() {
-    let addTaskOverlay = document.getElementById('addTaskoverlay');
     if (event.target.id === 'addTaskoverlay') {
-        addTaskOverlay.classList.remove('slideinright');
-        addTaskOverlay.classList.add('slideinleft');
-        setTimeout(() => {
-            addTaskOverlay.classList.add('dNone');
-            document.getElementById('xButton').classList.add('dNone');
-            document.getElementById('mainContent').innerHTML = ``;
-            task.subtasks = [];
-        }, 400);
+        closeAddTaskWithX();
     }
 }
 
