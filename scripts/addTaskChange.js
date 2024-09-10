@@ -247,6 +247,17 @@ function deleteSubtask(i) {
 
 
 /**
+ * THis function clears all Subtasks
+ */
+function clearAllSubtasks() {
+    let subtasks = document.getElementsByClassName(`subtaskBox`).length;
+    for (let i = 0; i < subtasks; i++) {
+        deleteSubtask(i);
+    }
+}
+
+
+/**
  * Deletes a subtask box
  * 
  * @param {number} i The number of the subtask box
@@ -353,4 +364,15 @@ function clearInputValues() {
     document.getElementById('descriptionInput').value = "";
     document.getElementById('dueDateInput').value = "";
     document.getElementById('subtasksInput').value = "";
+}
+
+
+/**
+ * This function clears the extraUser Circle if it was displayed
+ */
+function clearCircle() {
+    if (document.getElementById('extraUsers')) {
+        document.getElementById('extraUsers').innerHTML = ``;
+        document.getElementById('extraUsers').classList.add('dNone');
+    }
 }

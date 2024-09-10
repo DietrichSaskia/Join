@@ -91,6 +91,10 @@
         display: block;
     }
 
+    .section-dropdown button:active {
+        background-color: #091931;
+    }
+
     .show {
         display: block;
     }

@@ -105,6 +105,7 @@ function deleteTask(taskIndex) {
   saveTasksToLocalStorage();
   toggleTask();
   renderAllTasks();
+  document.getElementById('searchInput').value = "";
 }
 
 
@@ -209,6 +210,5 @@ function moveTaskToSection(section, taskIndex) {
  * This function logs the current task index for debugging and simply returns the index.
  */
 function getCurrentTaskIndex(taskIndex) {
-  console.log('Current Task Index:', taskIndex);  
   return taskIndex; 
 }

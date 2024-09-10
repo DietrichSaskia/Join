@@ -380,6 +380,10 @@
     padding-top: 10px;
 }
 
+.mainContent .extraUser {
+    top: -45px!important;
+}
+
 .extraUser {
     min-height: 40px;
     width: 40px;
