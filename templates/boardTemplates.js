@@ -243,7 +243,6 @@ function editTaskTemplate(task, date, taskIndex) {
       <div id="extraUsers" class="extraUser dNone"></div>
       <div class="subtasksDetail" id="subtasksDetail"></div>
       <div class="subtasksContainer">
-
         <p class="subtaskHeadline">Subtasks</p>
         <input id="subtasksInput" placeholder="Add new subtask" onfocus="showSubtaskIcons()">
         <div class="subtaskIcons">
@@ -256,8 +255,6 @@ function editTaskTemplate(task, date, taskIndex) {
         </div>
         <span class="inputError" id="inputerrorSubtask1">Subtask needs Description</span>
         <div class="subtasksBox" id="subtasksBox">
-
-
         </div>
       </div>
       <div class="okButtonContainer">
@@ -268,6 +265,13 @@ function editTaskTemplate(task, date, taskIndex) {
 }
 
 
+/**
+ * Generates HTML for subtasks and adds it to the subtasks box in the DOM.
+ * This function creates both the regular display of a subtask and an edit form for each subtask.
+ *
+ * @param {string} subtask - The text of the subtask to be displayed and edited.
+ * @param {number} i - The index of the subtask, used to uniquely identify elements.
+ */
 function generateSubtasksEdit(subtask, i) {
   document.getElementById('subtasksBox').innerHTML += /*html*/`
   <div id="subtaskBox${i}" class="subtaskBox">
@@ -280,7 +284,6 @@ function generateSubtasksEdit(subtask, i) {
               <img class="subtaskIcon" onclick="deleteSubtaskEdit(${i})" src="../assets/icons/delete.png">
             </div>
           </div>
-
           <div id="subtaskBoxEdit${i}" class="subtaskBox dNone">
             <div class="dFlexAlign backgroundWhite">
               <input id="subtaskEdit${i}" value="${subtask}" class="editSubtaskInput">
@@ -291,5 +294,5 @@ function generateSubtasksEdit(subtask, i) {
               </div>
             </div>
           </div>
-          `
+          `;
 }
