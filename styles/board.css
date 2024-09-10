@@ -295,3 +295,30 @@ h1 {
   display: none;
 }
 
+.slideinleft{
+  animation: slideInLeft 0.4s ease-out forwards;
+}
+.slideinright{
+  animation: slideInRight 0.4s ease-out forwards;
+}
+
+@keyframes slideInRight {
+  from {
+      transform: translateX(100%);
+      opacity: 0;
+  }
+  to {
+      transform: translateX(0);
+      opacity: 1;
+  }
+}
+@keyframes slideInLeft {
+  from {
+      transform: translateX(0);
+      opacity: 1;
+  }
+  to {
+      transform: translateX(100%);
+      opacity: 0;
+  }
+}

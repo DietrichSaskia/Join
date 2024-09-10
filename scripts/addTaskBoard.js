@@ -88,7 +88,10 @@ document.addEventListener('click', function (clickEvent) {
  * Opens the AddTask Window in the board.html
  */
 function openAddTask() {
-    document.getElementById('addTaskoverlay').classList.remove('dNone');
+    let addTaskOverlay = document.getElementById('addTaskoverlay');
+    addTaskOverlay.classList.add('slideinright');
+    addTaskOverlay.classList.remove('slideinleft');
+    addTaskOverlay.classList.remove('dNone');
     document.getElementById('xButton').classList.remove('dNone');
 }
 
@@ -97,11 +100,16 @@ function openAddTask() {
  * Closes the AddTask Window in the board.html if you click on the Overlay
  */
 function closeAddTask() {
+    let addTaskOverlay = document.getElementById('addTaskoverlay');
     if (event.target.id === 'addTaskoverlay') {
-        document.getElementById('addTaskoverlay').classList.add('dNone');
-        document.getElementById('xButton').classList.add('dNone');
-        document.getElementById('mainContent').innerHTML = ``;
-        task.subtasks = [];
+        addTaskOverlay.classList.remove('slideinright');
+        addTaskOverlay.classList.add('slideinleft');
+        setTimeout(() => {
+            addTaskOverlay.classList.add('dNone');
+            document.getElementById('xButton').classList.add('dNone');
+            document.getElementById('mainContent').innerHTML = ``;
+            task.subtasks = [];
+        }, 400);
     }
 }
 
@@ -110,10 +118,15 @@ function closeAddTask() {
  * Closes the AddTask Window in the board.html
  */
 function closeAddTaskWithX() {
-    document.getElementById('addTaskoverlay').classList.add('dNone');
-    document.getElementById('xButton').classList.add('dNone');
-    document.getElementById('mainContent').innerHTML = ``;
-    task.subtasks = [];
+    let addTaskOverlay = document.getElementById('addTaskoverlay');
+    addTaskOverlay.classList.remove('slideinright');
+    addTaskOverlay.classList.add('slideinleft');
+    setTimeout(() => {
+        addTaskOverlay.classList.add('dNone');
+        document.getElementById('xButton').classList.add('dNone');
+        document.getElementById('mainContent').innerHTML = ``;
+        task.subtasks = [];
+    }, 400);
 }
 
 
