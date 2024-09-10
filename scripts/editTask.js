@@ -337,8 +337,10 @@ function updateTaskPriority() {
  * @param {number} subtaskIndex - The index of the subtask to delete.
  */
 function deleteSubtaskEdit(subtaskIndex) {
-  editedTaskArray['subtasks'].splice(subtaskIndex, 1);
-  editedTaskArray['subtasksCheck'].splice(subtaskIndex, 1);
+  console.log(subtaskIndex);
+  
+  editedTaskArray['subtasks'].splice(subtaskIndex, 1, "");
+  editedTaskArray['subtasksCheck'].splice(subtaskIndex, 1, false);
   document.getElementById(`subtaskBox${subtaskIndex}`).remove();
   document.getElementById(`subtaskBoxEdit${subtaskIndex}`).remove();
 }
