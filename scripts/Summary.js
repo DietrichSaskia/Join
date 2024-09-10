@@ -199,7 +199,6 @@ function convertDateFormat(dateString) {
  * @param {*} id 
  */
 function toDoChangeOn(id){
-    console.log(id);
     if(id == 'ChangeIcon1'){
         const imgElement = document.querySelector(`#${id} img`);
         imgElement.src = "../assets/icons/Frame 59.png"; 

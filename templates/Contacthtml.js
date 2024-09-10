@@ -120,7 +120,7 @@ function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
 
 function editNewContactChangeHTML(){
     document.getElementById('EditWindowDeleteSaveID2').innerHTML=`
-    <button type="button" onclick="editContactCloseWindow()" onmouseover="onmouseClose('XCloseID')" onmouseout="outmouseClose('XCloseID')" id="CloseButtonID" type="button" class="EditWindowDeleteButton2">Cancel 
+    <button type="button" onclick="editContactCloseWindow()" id="CloseButtonID" type="button" class="EditWindowDeleteButton2">Cancel 
         <div class="XButtonCloseStyle" id="XCloseID">
             <img  class="ImgCloseStyle2" src="../assets/icons/close.png">
         </div>
