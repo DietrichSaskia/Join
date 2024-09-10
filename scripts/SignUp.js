@@ -36,7 +36,7 @@ function signUpWindow(){
         document.getElementById(`${SignUpWindowArrayIDs[i]}`).classList.remove(`${SignUpWindowArrayRemove[i]}`);
     }
     document.getElementById('SignUpButtondisabled').disabled = true;
-    SignUpLoad()
+    signUpLoad()
 }
 
 
@@ -56,7 +56,7 @@ function backToLogin(){
 /**
  * Checks each input field to see if it has been clicked and if so, a function is executed.
  */
-function SignUpLoad(){
+function signUpLoad(){
     const nameInput = document.getElementById("nameInput");
     const emailInput = document.getElementById("emailInput");
     const passwordInput = document.getElementById("passwordInput");
@@ -68,7 +68,7 @@ function SignUpLoad(){
     emailInput.addEventListener('input', () => {
         validateForm(nameInput, emailInput, passwordInput, confirmPasswordInput, checkbox);
     });
-    SignUpLoad2(nameInput, emailInput, passwordInput, confirmPasswordInput, checkbox)
+    signUpInputChange(nameInput, emailInput, passwordInput, confirmPasswordInput, checkbox)
 }
 
 
@@ -81,7 +81,7 @@ function SignUpLoad(){
  * @param {*} confirmPasswordInput 
  * @param {*} checkbox 
  */
-function SignUpLoad2(nameInput, emailInput, passwordInput, confirmPasswordInput, checkbox){
+function signUpInputChange(nameInput, emailInput, passwordInput, confirmPasswordInput, checkbox){
     passwordInput.addEventListener('input', () => {
         validateForm(nameInput, emailInput, passwordInput, confirmPasswordInput, checkbox);
     });
@@ -109,9 +109,9 @@ export function submitToFirebase(event) {
     const usersRef = ref(database, 'users');
     get(usersRef).then((snapshot) => {
         if (snapshot.exists()) {
-            submitToFirebase1(snapshot, newUser, emailInput, usersRef);
+            checkEmailExist(snapshot, newUser, emailInput, usersRef);
         } else {
-            submitToFirebase2(newUser, database);}
+            submitTryUser(newUser, database);}
     }).catch(() => {
         userInformationPopUp('Error when retrieving user data!');});
 }
@@ -123,7 +123,7 @@ export function submitToFirebase(event) {
  * @param {*} newUser 
  * @param {*} database 
  */
-function submitToFirebase2(newUser, database) {
+function submitTryUser(newUser, database) {
     set(ref(database, 'users/0'), newUser)
     .then(() => {
         userInformationPopUp('User successfully registered!');
@@ -145,7 +145,7 @@ function submitToFirebase2(newUser, database) {
  * @param {*} usersRef 
  * @returns 
  */
-function submitToFirebase1(snapshot, newUser, emailInput, usersRef) {
+function checkEmailExist(snapshot, newUser, emailInput, usersRef) {
     const usersData = snapshot.val();
     const signUpButton = document.getElementById("SignUpButtondisabled");
     const emailExists = Object.values(usersData).some(user => user.email === emailInput);
@@ -299,7 +299,7 @@ function validateForm(nameInput, emailInput, passwordInput, confirmPasswordInput
     const isEmailValid = validateValue(emailInput, emailContainer, emailPattern);
     const isPasswordValid = validateValue(passwordInput, passwordContainer, passwordPattern);
     const isConfirmPasswordValid = validateConfirmPassword(confirmPasswordInput, confirmPasswordContainer, passwordInput);
-    validateForm2(isNameValid, isEmailValid, isPasswordValid, isConfirmPasswordValid, checkbox, signUpButton)
+    validateEveryone(isNameValid, isEmailValid, isPasswordValid, isConfirmPasswordValid, checkbox, signUpButton)
 }
 
 
@@ -314,7 +314,7 @@ function validateForm(nameInput, emailInput, passwordInput, confirmPasswordInput
  * @param {*} checkbox 
  * @param {*} signUpButton 
  */
-function validateForm2(isNameValid, isEmailValid, isPasswordValid, isConfirmPasswordValid, checkbox, signUpButton){
+function validateEveryone(isNameValid, isEmailValid, isPasswordValid, isConfirmPasswordValid, checkbox, signUpButton){
     const isCheckboxChecked = validateCheckbox(checkbox);
     if (isNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid && isCheckboxChecked) {
         signUpButton.disabled = false; 

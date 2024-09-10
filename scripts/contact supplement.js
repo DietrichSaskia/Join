@@ -38,7 +38,7 @@ function showPopUpInfo(text) {
         const popupElement = document.getElementById('ContactInfoPopUp');
         popupElement.classList.remove('none');
         popupElement.classList.add('ContactInforWindow');
-        ContactInformationPopUpHTML(text);
+        contactInformationPopUpHTML(text);
         setTimeout(() => { popupElement.classList.add('Contactshow-popup'); }, 10);
         setTimeout(() => {
             popupElement.classList.add('none');

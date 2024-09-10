@@ -69,7 +69,7 @@ function summarySectionCheck(){
                 break;
         }
     });
-    summarySectionCheck2()
+    summarySectionCheckNext()
 }
 
 
@@ -78,7 +78,7 @@ function summarySectionCheck(){
  * is present. The number of times an element occurs is stored in a variable. 
  * 
  */
-function summarySectionCheck2(){
+function summarySectionCheckNext(){
     SectionTypArray.forEach(type => {
         switch(type) {
             case "done":
@@ -90,7 +90,7 @@ function summarySectionCheck2(){
         }
     });
     SectionTypLength = SectionTypArray.length
-    summarySectionCheck3(SectionTypLength)
+    summarySectionChangeText(SectionTypLength)
 }
 
 
@@ -101,7 +101,7 @@ function summarySectionCheck2(){
  * 
  * @param {*} SectionTypLength 
  */
-function summarySectionCheck3(SectionTypLength){
+function summarySectionChangeText(SectionTypLength){
     document.getElementById('SummaryTaskProgressCount').innerHTML=`${inProgressCount}`;
     document.getElementById('SummaryBoardCount').innerHTML=`${SectionTypLength}`;
     document.getElementById('SummaryAwaitFeedbackCount').innerHTML=`${awaitFeedbackCount}`;
@@ -112,9 +112,9 @@ function summarySectionCheck3(SectionTypLength){
             highCount++;
             highIndices.push(index); 
         }
-        summarySectionCheck3_1(highCount)
+        summarySectionCheckCounter(highCount)
     });
-    summarySectionCheck4(highCount)
+    summarySectionFilterDate(highCount)
 }
 
 
@@ -123,7 +123,7 @@ function summarySectionCheck3(SectionTypLength){
  * 
  * @param {*} highCount 
  */
-function summarySectionCheck3_1(highCount){
+function summarySectionCheckCounter(highCount){
     if(highCount == 0){
         document.getElementById('currentDate').classList.add('none')
         document.getElementById('currentDate').classList.remove('SummarySecondDate')
@@ -141,15 +141,15 @@ function summarySectionCheck3_1(highCount){
  * 
  * @param {*} highCount 
  */
-function summarySectionCheck4(highCount){
+function summarySectionFilterDate(highCount){
     let filteredDates = highIndices
         .map(index => convertDateFormat(SectionPrioDateArray[index]))
         .filter(date => date !== null); 
     filteredDates.sort((a, b) => new Date(a) - new Date(b));
     if (filteredDates.length > 0) {
-        summarySectionCheck5(filteredDates, highCount)
+        summarySectionEarlyDate(filteredDates, highCount)
     }
-    LoginGoodMorning()
+    loginGoodMorning()
 }
 
 
@@ -160,7 +160,7 @@ function summarySectionCheck4(highCount){
  * @param {*} filteredDates 
  * @param {*} highCount 
  */
-function summarySectionCheck5(filteredDates, highCount){
+function summarySectionEarlyDate(filteredDates, highCount){
     const earliestDate = filteredDates[0];
     filteredDates = filteredDates.filter(date => date === earliestDate);
     document.getElementById('SummaryCount').innerHTML=`${highCount}`
@@ -205,8 +205,6 @@ function toDoChangeOn(id){
         imgElement.src = "../assets/icons/Frame 59.png"; 
     }
     if(id == 'ChangeIcon2'){
-        
-        
         const imgElement = document.querySelector(`#${id} img`);
         imgElement.src = "../assets/icons/checkCircle.png";
     }
@@ -234,7 +232,7 @@ function toDoChangeOut(id){
  * The current name of the user is read from the local storage and assigned to the id as text.
  * 
  */
-function LoginGoodMorning(){
+function loginGoodMorning(){
     let GoodMorningName = '';
     let Currentname = localStorage.getItem('CurrentUser');
     if (Currentname) {

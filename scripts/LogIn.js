@@ -3,7 +3,7 @@ const BaseUrl = "https://join-317-default-rtdb.europe-west1.firebasedatabase.app
 let matchingUser;
 window.loginUser = loginUser;
 window.addInputListeners = addInputListeners;
-window.guestLogIN = guestLogIN;
+window.guestLogIn = guestLogIn;
 window.loadRememberedData = loadRememberedData;
 window.logInAnimation = logInAnimation;
 fetchContactTask();
@@ -19,9 +19,9 @@ function logInvalidateEmail() {
     const emailContainer = document.getElementById("LoginInputIconID1");
     const emailInput = emailInputElement.value;
     const usersRef = ref(database, 'users');
-    logInvalidateEmail1(emailInput, emailContainer);
+    logInvalidateEmailNull(emailInput, emailContainer);
     get(usersRef).then((snapshot) => {
-        logInvalidateEmail2(snapshot, emailInput, emailContainer);
+        logInvalidateEmailExist(snapshot, emailInput, emailContainer);
     }).catch(() => {
         emailContainer.style.border = '1px solid red';
     });
@@ -35,7 +35,7 @@ function logInvalidateEmail() {
  * @param {*} emailContainer 
  * @returns 
  */
-function logInvalidateEmail1(emailInput, emailContainer) {
+function logInvalidateEmailNull(emailInput, emailContainer) {
     if (emailInput.trim() === '') {
         emailContainer.style.border = '1px solid black';
         matchingUser = null;
@@ -51,7 +51,7 @@ function logInvalidateEmail1(emailInput, emailContainer) {
  * @param {*} emailInput 
  * @param {*} emailContainer 
  */
-function logInvalidateEmail2(snapshot, emailInput, emailContainer) {
+function logInvalidateEmailExist(snapshot, emailInput, emailContainer) {
     if (snapshot.exists()) {
         try {
             const usersData = snapshot.val();
@@ -138,11 +138,11 @@ function loginUser() {
     const rememberMeChecked = document.getElementById("rememberMe").checked;
     const emailInput = emailInputElement.value;
     const passwordInput = passwordInputElement.value;
-    loginUser1(rememberMeChecked, emailInput, passwordInput)
+    loginUserChecked(rememberMeChecked, emailInput, passwordInput)
     const usersRef = ref(database, 'users');
     get(usersRef).then((snapshot) => {
         if (snapshot.exists()) {
-            loginUser2(emailInput, passwordInput, snapshot)
+            loginUserCorrect(emailInput, passwordInput, snapshot)
         } else {
             userInformationPopUp('Keine Benutzer gefunden.')
         }})
@@ -155,7 +155,7 @@ function loginUser() {
  * 
  * @param {*} rememberMeChecked 
  */
-function loginUser1(rememberMeChecked, emailInput, passwordInput){
+function loginUserChecked(rememberMeChecked, emailInput, passwordInput){
     if (rememberMeChecked) {
         localStorage.setItem('rememberedEmail', emailInput);
         localStorage.setItem('rememberedPassword', encryptPassword(passwordInput));
@@ -175,7 +175,7 @@ function loginUser1(rememberMeChecked, emailInput, passwordInput){
  * @param {*} emailInput 
  * @param {*} passwordInput 
  */
-function loginUser2(emailInput, passwordInput, snapshot){
+function loginUserCorrect(emailInput, passwordInput, snapshot){
     const usersData = snapshot.val();
     const matchingUser = Object.values(usersData).find(user => 
         user.email === emailInput);
@@ -242,7 +242,7 @@ function loadRememberedData() {
  * The current CurrentUser is also transferred to the summary.html file. 
  * 
  */
-function guestLogIN(){
+function guestLogIn(){
     let matchingUser = 'Guest'
     localStorage.removeItem('CurrentUser');
     localStorage.setItem('CurrentUser', JSON.stringify(matchingUser));
@@ -284,7 +284,7 @@ async function fetchContactTask(){
     let Summaryallshow = await Summaryall.json();
     let Contactall = await fetch(BaseUrl + pathContacts + '.json');
     let Contactallshow = await Contactall.json();
-    fetchContactTask2(Contactallshow, Summaryallshow, contactAllArray, taskAllArray)
+    contactLoadStorage(Contactallshow, Summaryallshow, contactAllArray, taskAllArray)
 }
 
 
@@ -296,7 +296,7 @@ async function fetchContactTask(){
  * @param {*} contactAllArray 
  * @param {*} taskAllArray 
  */
-function fetchContactTask2(Contactallshow, Summaryallshow, contactAllArray, taskAllArray){
+function contactLoadStorage(Contactallshow, Summaryallshow, contactAllArray, taskAllArray){
     for (let key in Summaryallshow) {
         taskAllArray.push(Summaryallshow[key]);
     }

@@ -28,7 +28,7 @@ contactLoad();
  * @param {*} name
  */
 function contactLoad() {
-    cleanarray();
+    cleanArray();
     let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
     for (let key in contactAllArray) {  
         contactNameArray.push(contactAllArray[key].name);
@@ -37,11 +37,11 @@ function contactLoad() {
         charContactArray.push({ key: key, name: contactAllArray[key].name, email: contactAllArray[key].email, phone: contactAllArray[key].phone });
         colorPalette.push(contactAllArray[key].color);
     }
-    contactloadchar(contactNameArray);
+    contactLoadChar(contactNameArray);
 }
 
 
-function cleanarray(){
+function cleanArray(){
     contactNameArray = [];
     emailsArray = [];
     PhonenumberArray = [];
@@ -56,7 +56,7 @@ function cleanarray(){
  * 
  * @param {*} contactNameArray 
  */
-function contactloadchar(contactNameArray){
+function contactLoadChar(contactNameArray){
     contactNameArray.forEach((name, index) => {
         let email = emailsArray[index];
         if(name){
@@ -68,7 +68,7 @@ function contactloadchar(contactNameArray){
     charContactArray.sort((a, b) => {
         if (a.initial === b.initial) {return a.name.localeCompare(b.name);}
         return a.initial.localeCompare(b.initial);});
-    contactloadcontainer();
+    contactLoadcontainer();
 }
 
 
@@ -76,13 +76,13 @@ function contactloadchar(contactNameArray){
  * A div container is created here and extensive functions are called up.
  * 
  */
-function contactloadcontainer(){
+function contactLoadcontainer(){
     let container = document.createElement('div');
     let currentInitial = '';
     charContactArray.forEach((obj) => {
-        contactloadcontainer1(obj, currentInitial, container)
+        contactLoadInitialLineSpan(obj, currentInitial, container)
     });
-    contactLoadTargetid(container);
+    contactLoadTargetId(container);
 }
 
 
@@ -94,7 +94,7 @@ function contactloadcontainer(){
  * @param {*} currentInitial 
  * @param {*} container 
  */
-function contactloadcontainer1(obj, currentInitial, container){
+function contactLoadInitialLineSpan(obj, currentInitial, container){
     if (obj.initial !== currentInitial) {
         currentInitial = obj.initial;
         let initialExists = Array.from(container.children).some(child => 
@@ -107,7 +107,7 @@ function contactloadcontainer1(obj, currentInitial, container){
             let lineDiv = document.createElement('div');
             lineDiv.classList.add('gray-line');
             container.appendChild(lineDiv);}}
-    contactloadcontainer2(container, obj);
+    contactLoadCreateButton(container, obj);
 }
 
 
@@ -118,12 +118,12 @@ function contactloadcontainer1(obj, currentInitial, container){
  * @param {*} container 
  * @param {*} obj 
  */
-function contactloadcontainer2(container, obj){
+function contactLoadCreateButton(container, obj){
     let button = document.createElement('button');
     button.classList.add('person-button');
     button.id = `contact-button-${obj.key}`;
     button.classList.add('Backgroundgray');
-    contactloadcontainer3(container, obj, button);
+    contactLoadCreateCircleColor(container, obj, button);
 }
 
 
@@ -136,7 +136,7 @@ function contactloadcontainer2(container, obj){
  * @param {*} obj 
  * @param {*} button 
  */
-function contactloadcontainer3(container, obj, button) {
+function contactLoadCreateCircleColor(container, obj, button) {
     let circleDiv = document.createElement('div');
     circleDiv.textContent = obj.initials;
     circleDiv.classList.add('initial-circle');
@@ -146,7 +146,7 @@ function contactloadcontainer3(container, obj, button) {
     button.appendChild(circleDiv);
     let nameEmailDiv = document.createElement('div');
     nameEmailDiv.classList.add('name-email');
-    contactloadcontainer4(container, nameEmailDiv, button, obj);
+    contactLoadNameEmailDiv(container, nameEmailDiv, button, obj);
 }
 
 
@@ -159,7 +159,7 @@ function contactloadcontainer3(container, obj, button) {
  * @param {*} button 
  * @param {*} obj 
  */
-function contactloadcontainer4(container, nameEmailDiv, button, obj){
+function contactLoadNameEmailDiv(container, nameEmailDiv, button, obj){
     let nameDiv = document.createElement('div');
     nameDiv.textContent = obj.name;
     nameDiv.classList.add('person-name');
@@ -169,7 +169,7 @@ function contactloadcontainer4(container, nameEmailDiv, button, obj){
     emailDiv.classList.add('person-email');
     nameEmailDiv.appendChild(emailDiv);
     button.appendChild(nameEmailDiv);
-    contactloadcontainer5(container, button);
+    contactLoadClickButton(container, button);
 }
 
 
@@ -180,7 +180,7 @@ function contactloadcontainer4(container, nameEmailDiv, button, obj){
  * @param {*} container 
  * @param {*} button 
  */
-function contactloadcontainer5(container, button){
+function contactLoadClickButton(container, button){
     button.addEventListener('click', function() {
         document.querySelectorAll('.person-button').forEach(btn => {
             btn.classList.remove('button-active');
@@ -190,7 +190,7 @@ function contactloadcontainer5(container, button){
         button.classList.remove('Backgroundgray');
         let clickedButtonId = event.currentTarget.id;
         let buttonColor = event.currentTarget.querySelector('.initial-circle').style.backgroundColor;
-        contactloadcontainer6(buttonColor, clickedButtonId)
+        contactloadOtherWidth(buttonColor, clickedButtonId)
     });
     container.appendChild(button);
 }
@@ -202,7 +202,7 @@ function contactloadcontainer5(container, button){
  * @param {} buttonColor 
  * @param {*} clickedButtonId 
  */
-function contactloadcontainer6(buttonColor, clickedButtonId){
+function contactloadOtherWidth(buttonColor, clickedButtonId){
     let currentWindowWidth = window.innerWidth;
     if(currentWindowWidth < 900){
         showContactWindow()
@@ -301,14 +301,14 @@ function clickContactBack(){
         editWindow.classList.add("none");
         editWindow.classList.remove("EditContactWindow");
     }, 400); 
-    clickContactBack2()
+    clickContactBackClass()
 }
 
 
 /**
  * Here it is checked whether the variable contains the appropriate text and classes are executed depending on this.
  */
-function clickContactBack2(){
+function clickContactBackClass(){
     const element = document.getElementById('EditWindowAddText1Change');
     if (element.textContent.trim() === 'Add contact') {
         document.getElementById('editDeleteChoiceButton').classList.add('none');
@@ -365,7 +365,7 @@ function contactInfo(clickedButtonId, buttonColor){
  * 
  * @param {*} container 
  */
-function contactLoadTargetid(container){
+function contactLoadTargetId(container){
     document.getElementById('EveryContact').innerHTML= ``;
     let targetElement = document.getElementById('EveryContact'); 
     if (targetElement) {

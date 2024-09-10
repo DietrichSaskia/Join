@@ -19,9 +19,9 @@ function editNewContact(initials, name, email, phone, buttonColor, index) {
     document.getElementById("MenuEditDeleteOptionsID").classList.remove("SlideinWindowDW1");
     document.getElementById("MenuEditDeleteOptionsID").classList.add("SlideinWindowDW2");
     document.getElementById("MenuEditDeleteButtonID").classList.add("none");
-  document.getElementById("EditContactIDWIn").classList.remove("none");
-  document.getElementById("EditContactIDWIn").classList.add("EditContactWindow");
-  editNewContactHtml2(initials, name, email, phone, buttonColor, index, true);
+    document.getElementById("EditContactIDWIn").classList.remove("none");
+    document.getElementById("EditContactIDWIn").classList.add("EditContactWindow");
+    editNewContactCheckValues(initials, name, email, phone, buttonColor, index, true);
 }
 
 
@@ -38,11 +38,11 @@ function editNewContactSave(name, email, phone, index) {
   let nameelement = document.getElementById("editNameInput").value
   let emailelement = document.getElementById("editEmailInput").value
   let phoneelement = document.getElementById("editPhoneInput").value
-  editNewContactSave1(nameelement, emailelement, phoneelement)
-  applyFocusAndValidation("editNameInput", name, validateName);
-  applyFocusAndValidation("editEmailInput", email, validateEmail);
-  applyFocusAndValidation("editPhoneInput", phone, validatePhone);
-  editNewContactSave2(index) 
+  editNewContactValidateCheck(nameelement, emailelement, phoneelement)
+  validationInputAndBlur("editNameInput", name, validateName);
+  validationInputAndBlur("editEmailInput", email, validateEmail);
+  validationInputAndBlur("editPhoneInput", phone, validatePhone);
+  editNewContactCheckInput(index) 
 }
 
 
@@ -53,7 +53,7 @@ function editNewContactSave(name, email, phone, index) {
  * @param {*} emailelement 
  * @param {*} phoneelement 
  */
-function editNewContactSave1(nameelement, emailelement, phoneelement){
+function editNewContactValidateCheck(nameelement, emailelement, phoneelement){
     if(nameelement === '')
         {validateName("editNameInput")
     }
@@ -73,40 +73,20 @@ function editNewContactSave1(nameelement, emailelement, phoneelement){
  * 
  * @param {*} index 
  */
-function editNewContactSave2(index) {
+function editNewContactCheckInput(index) {
     let WindowSize = window.innerWidth;
-    
     if (WindowSize < 900) {
         document.getElementById('ChangeClosebutton').innerHTML = `<img class="ImgCloseStyle" src="../assets/icons/closeWhite.png">`;
     }
-    
     const nameValue = document.getElementById("editNameInput").value;
     const emailValue = document.getElementById("editEmailInput").value;
     const phoneValue = document.getElementById("editPhoneInput").value;
     const phoneRegex = /^\+\d{2} \d{4} \d{3} \d{2} \d{1}$/;
-
-
     if (!phoneRegex.test(phoneValue)) {
         return; 
     } else {
         editNewContactChange(nameValue, emailValue, phoneValue,index);
     }
-}
-
-
-/**
- * Classes are added and removed here according to the px width.
- */
-function editNewContactSave3(){
-    let WindowSize = window.innerWidth;
-    if(WindowSize < 900){
-        document.getElementById('MenuEditDeleteOptionsID').classList.remove('SlideinWindowDW1');
-        document.getElementById('MenuEditDeleteOptionsID').classList.add('SlideinWindowDW2');
-     }
-     else{
-        document.getElementById('ContactfieldInfodiv').classList.remove('Slideinright');
-        document.getElementById('ContactfieldInfodiv').classList.add('Slideinleft');
-     }
 }
 
 
@@ -121,7 +101,7 @@ function editNewContactSave3(){
  * @param {*} index 
  * @param {*} showValues 
  */
-function editNewContactHtml2(initialsValue, nameValue, emailValue, phoneValue, buttonColorValue, index, showValues = true) {
+function editNewContactCheckValues(initialsValue, nameValue, emailValue, phoneValue, buttonColorValue, index, showValues = true) {
     const name = showValues && nameValue ? nameValue : '';  
     const email = showValues && emailValue ? emailValue : '';
     const phone = showValues && phoneValue ? phoneValue : '';
@@ -152,7 +132,7 @@ function setContactDetails(initials, name, email, phone, buttonColor, index) {
  */
 function editNewContactHtmlChange() {
     editContactShowWindow();
-    editNewContactHtml2(contactDetails.initials, contactDetails.name, contactDetails.email, contactDetails.phone, contactDetails.buttonColor, contactDetails.index, false);
+    editNewContactCheckValues(contactDetails.initials, contactDetails.name, contactDetails.email, contactDetails.phone, contactDetails.buttonColor, contactDetails.index, false);
     document.getElementById('EditWindowAddText1Change').innerHTML='Add contact';
     document.getElementById('EditWindowAddText2Change').innerHTML='Tasks are better with a team!';
     document.getElementById('EditCircleInitialsID').innerHTML='<img src="../assets/icons/person (1).png">'
@@ -241,7 +221,7 @@ function editNewContactChange(name, email, phone ,index) {
         contact.name === name && contact.email === email && contact.phone === phone
     );
     if (index >= 0 && index < contactAllArray.length && !duplicate) {
-        editNewContactChange2(name, email, phone,index, contactAllArray)
+        editChangeContact(name, email, phone,index, contactAllArray)
     }
 }
 
@@ -259,7 +239,7 @@ function editNewContactChange(name, email, phone ,index) {
  * @param {*} index 
  * @param {*} contactAllArray 
  */
-function editNewContactChange2(name, email, phone, index, contactAllArray){
+function editChangeContact(name, email, phone, index, contactAllArray){
     document.getElementById('editContactForm').addEventListener('submit', function(event) {
         event.preventDefault();
         contactAllArray.splice(index, 1);
@@ -362,9 +342,9 @@ function validateBorderChange(NameInput, parentDiv, NameRegex){
  * @param {*} originalValue 
  * @param {*} validationFunction 
  */
-function applyFocusAndValidation(inputFieldId,originalValue,validationFunction) {
+function validationInputAndBlur(inputFieldId,originalValue,validationFunction) {
   const inputField = document.getElementById(inputFieldId);
-  applyFocusAndValidation2(inputField, originalValue)
+  applyFocusAndValidation(inputField, originalValue)
   inputField.addEventListener("input", function () {
     validationFunction(inputFieldId, originalValue);
   });
@@ -382,7 +362,7 @@ function applyFocusAndValidation(inputFieldId,originalValue,validationFunction) 
  * 
  * @param {*} inputField 
  */
-function applyFocusAndValidation2(inputField, originalValue){
+function applyFocusAndValidation(inputField, originalValue){
     inputField.addEventListener("focus", function () {
         this.style.border = "none";
         this.style.outline = "none";

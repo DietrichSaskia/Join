@@ -43,17 +43,19 @@ function  contactInfoHtml(initials, name, email, phone, buttonColor, index){
             </div>
         </div>
          <div onclick="protect(event)" id="MenuEditDeleteOptionsID" class="none">
-            <button onclick="editNewContact('${initials}', '${name}', '${email}', '${phone}', '${buttonColor}', '${index}'), editContactShowWindow()" class="ContactEditButton" onmouseover="onmouse('ContactEditChange3')" onmouseout="outmouse('ContactEditChange3')"> 
-                <div id="ContactEditChange3">
+            <button onclick="editNewContact('${initials}', '${name}', '${email}', '${phone}', '${buttonColor}', '${index}'), editContactShowWindow()" class="ContactEditButton"> 
+                <div id="ContactEditChange3" class="ContactEditChangeClass1">
                     <img class="ContactDeleteEdit" src="../assets/icons/edit.png">
+                    <span class="ContactDeleteEditText">Edit</span>
                 </div>
-                <span class="ContactDeleteEditText">Edit</span>
+                
             </button>
-             <button class="ContactDeleteButton" onclick="deleteContactList(${index})" onmouseover="onmouse('ContactDeleteChange4')" onmouseout="outmouse('ContactDeleteChange4')">   
-                <div id="ContactDeleteChange4">
+             <button class="ContactDeleteButton" onclick="deleteContactList(${index})">   
+                <div id="ContactDeleteChange4" class="ContactEditChangeClass1">
                     <img class="ContactDeleteEdit" src="../assets/icons/delete.png">
+                    <span class="ContactDeleteEditText">Delete</span>
                 </div>
-                <span class="ContactDeleteEditText">Delete</span>
+                
             </button>
         </div>
     `;
@@ -105,7 +107,7 @@ function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
                         </div>
                         <div class="EditWindowDeleteSave" id="EditWindowDeleteSaveID1">
                             <button id="EditWindowDeleteButtonID" onclick="deleteContactList(${index}); editContactCloseWindow();" type="button" class="EditWindowDeleteButton">Delete</button>
-                            <button typ="submit id="EditNewContactButtonID" onclick="editNewContactSave2(${index}), clickContactBack()" class="EditWindowSaveButton">Save <img class="EditSaveCheck" src="../assets/icons/checkWhite.png"></button>
+                            <button typ="submit id="EditNewContactButtonID" onclick="editNewContactCheckInput(${index}), clickContactBack()" class="EditWindowSaveButton">Save <img class="EditSaveCheck" src="../assets/icons/checkWhite.png"></button>
                         </div>
                         <div id="EditWindowDeleteSaveID2"></div>
                     </div>
@@ -148,7 +150,7 @@ function contactInfoHeadlineHtml(){
 }
 
 
-function ContactInformationPopUpHTML(text){
+function contactInformationPopUpHTML(text){
     document.getElementById('ContactInfoPopUp').innerHTML=`
     <div class="ContactInformation">
         <div >${text}</div>
