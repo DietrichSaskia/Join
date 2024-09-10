@@ -40,24 +40,37 @@ function editTask(taskIndex) {
   }, 100);
   setTimeout(() => {
     setpriorityButton(task);
-    checkEmptysubtasks();
     getusers();
     searchUsers();
     configureDueDateInput();
     setAssignedUsers(task);
+    loadSubtasksFromArray(taskIndex);
+    checkEmptysubtasks();
   }, 150);
 }
 
 
 /**
- * Hides subtask fields if they are empty.
+ * loads the taskAllArray into the editedTaskArray 
+ * 
+ * @param {number} taskIndex the index of the task in taskAllArray
+ * @returns the edited Task Array
+ */
+function loadSubtasksFromArray(taskIndex) {
+  editedTaskArray = taskAllArray[taskIndex];
+  return editedTaskArray;
+}
+
+
+/**
+ * Hides subtask fields if they are empty or starts
  */
 function checkEmptysubtasks() {
-  if (document.getElementById('subtask0').innerHTML === '') {
-    document.getElementById('subtaskBox0').classList.add('dNone');
+  if (editedTaskArray.subtasks.length === 0) {
+    return
   }
-  if (document.getElementById('subtask1').innerHTML === '') {
-    document.getElementById('subtaskBox1').classList.add('dNone');
+  else {
+    renderSubtaskEdit();
   }
 }
 
@@ -148,6 +161,31 @@ function setAssignedUsers(task) {
 function subtaskEdit(i) {
   document.getElementById(`subtaskBoxEdit${i}`).classList.remove('dNone');
   document.getElementById(`subtaskBox${i}`).classList.add('dNone');
+}
+
+
+/**
+ * renders the subtasks in the editCard
+ */
+function renderSubtaskEdit() {
+  let subtasks = editedTaskArray.subtasks;
+  document.getElementById('subtasksBox').innerHTML = ``;
+  for (let i = 0; i < subtasks.length; i++) {
+    let subtask = subtasks[i];
+    generateSubtasksEdit(subtask, i)
+  }
+}
+
+
+/**
+ * renders a new subtask in the editCard
+ * 
+ * @param {string} subtask The new subtask the user has entered
+ */
+function renderNewSubtaskEdit(subtask) {
+  let i = document.getElementsByClassName('editSubtaskInput').length;
+  generateSubtasksEdit(subtask, i);
+  document.getElementById('subtasksInput').value = "";
 }
 
 
@@ -295,26 +333,30 @@ function updateTaskPriority() {
 /**
  * Deletes a subtask from the task and updates the display.
  *
- * @param {number} taskIndex - The index of the task in the taskAllArray.
+ *
  * @param {number} subtaskIndex - The index of the subtask to delete.
  */
-function deleteSubtaskEdit(taskIndex, subtaskIndex) {
-  let task = taskAllArray[taskIndex];
-  if (task) {
-    task.subtasks.splice(subtaskIndex, 1, "");
-    task.subtasksCheck.splice(subtaskIndex, 1, false);
-    saveTasksToLocalStorage();
-    calculateSubtaskProgress(taskIndex);
-    document.getElementById('taskDetailCard').innerHTML = ``;
-    let subtasksElement = document.getElementById("subtasksDetail");
-    if (subtasksElement) {
-      subtasksElement.innerHTML = renderSubtasks(taskIndex, task);
-    }
-    editTask(taskIndex);
-  } else {
-    console.error('Task not found for deletion at index:', taskIndex);
+function deleteSubtaskEdit(subtaskIndex) {
+  editedTaskArray['subtasks'].splice(subtaskIndex, 1);
+  document.getElementById(`subtaskBox${subtaskIndex}`).remove();
+  document.getElementById(`subtaskBoxEdit${subtaskIndex}`).remove();
+}
+
+
+/**
+ * Creates a new subtask for the task in the edit view.
+ *
+ */
+function createSubtaskEdit() {
+  let input = document.getElementById('subtasksInput').value;
+  if (input === "") {
+    return
   }
-  saveEditedTasktoLocalStorage(taskIndex);
+  else {
+    let i = editedTaskArray.subtasks.length;
+    editedTaskArray.subtasks[i] = input
+  }
+  renderNewSubtaskEdit(input);
 }
 
 
@@ -324,56 +366,12 @@ function deleteSubtaskEdit(taskIndex, subtaskIndex) {
  * @param {number} taskIndex - The index of the task in the taskAllArray.
  * @param {number} i - The index of the subtask being changed.
  */
-function subtaskChange(taskIndex, i) {
-  let task = taskAllArray[taskIndex];
-  if (task) {
-    let input = document.getElementById(`subtaskEdit${i}`).value.trim();
-    task.subtasks.splice(i, 1, input);
-    task.subtasksCheck.splice(i, 1, false);
-    saveTasksToLocalStorage();
-    calculateSubtaskProgress(taskIndex);
-    editTask(taskIndex);
-  } else {
-    console.error('Task not found for subtask change at index:', taskIndex);
+function subtaskChange(i) {
+  let input = document.getElementById(`subtaskEdit${i}`).value.trim();
+  if (input === "") {
+    deleteSubtaskEdit(i);
+    return;
   }
-}
-
-
-/**
- * Validates and adds a new subtask in the edit view.
- *
- * @param {number} taskIndex - The index of the task in the taskAllArray.
- */
-function checkSubtaskEdit(taskIndex) {
-  let input = document.getElementById('subtasksInput').value;
-  document.getElementById('inputerrorSubtask1').style.display = 'none';
-  document.getElementById('subtasksInput').classList.remove('redInputBorder');
-  if (input.length === 0) {
-    document.getElementById('inputerrorSubtask1').style.display = 'block';
-    document.getElementById('subtasksInput').classList.add('redInputBorder');
-  } else {
-    createSubtaskEdit(input, taskIndex);
-  }
-}
-
-
-/**
- * Creates a new subtask for the task in the edit view.
- *
- * @param {string} input - The subtask content.
- * @param {number} taskIndex - The index of the task in the taskAllArray.
- */
-function createSubtaskEdit(input, taskIndex) {
-  let task = taskAllArray[taskIndex];
-  if (task.subtasks[0] === "") {
-    subtaskChange(taskIndex, 0);
-    task.subtasks.splice(0, 1, input);
-    clearSubtaskInput(0);
-    document.getElementById('subtasksInput').focus();
-  } else if (task.subtasks[1] === "") {
-    subtaskChange(taskIndex, 1);
-    task.subtasks.splice(1, 1, input);
-    clearSubtaskInput(1);
-    document.getElementById('subtasksInput').focus();
-  }
+  editedTaskArray.subtasks.splice(i, 1, input);
+  checkEmptysubtasks();
 }

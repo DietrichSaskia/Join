@@ -37,7 +37,7 @@ function generateTasksHTML(element, i) {
  */
 function generateInitialsAndPriorityHTML(initialElements, remainingElement, prio) {
   let validPrio = prio || '../assets/icons/defaultPriority.png';
-  
+
   return `
     <div class="assignedToAndPrio">
       <div>${initialElements}${remainingElement}</div>
@@ -56,7 +56,7 @@ function generateInitialsAndPriorityHTML(initialElements, remainingElement, prio
  */
 function generateSubtaskProgressHTML(subtasks, taskIndex) {
   let nonEmptySubtasks = subtasks.filter(subtask => subtask && typeof subtask === 'string' && subtask.trim() !== '');
-  if (nonEmptySubtasks.length === 0) return ''; 
+  if (nonEmptySubtasks.length === 0) return '';
   let subtaskProgress = calculateSubtaskProgress(taskIndex);
   if (!subtaskProgress || typeof subtaskProgress.subtaskBarWidth !== 'number') {
     console.error('Invalid subtaskProgress:', subtaskProgress);
@@ -105,8 +105,8 @@ function generateTaskDetails(task, taskIndex) {
   let initialsAndName = generateInitalsAndNameDetailHTML(task);
   let capitalizedDescription = task.description ? capitalizeFirstLetter(task.description) : "No Description";
   let hasValidSubtasks = Array.isArray(task.subtasks) && task.subtasks.some(subtask => subtask && subtask.trim() !== "");
-  let subtasksCheck = Array.isArray(task.subtasksCheck) && task.subtasksCheck.length === task.subtasks.length 
-    ? task.subtasksCheck 
+  let subtasksCheck = Array.isArray(task.subtasksCheck) && task.subtasksCheck.length === task.subtasks.length
+    ? task.subtasksCheck
     : task.subtasks.map(() => false);
 
   return /*html*/ `
@@ -200,9 +200,6 @@ function generateInitalsAndNameDetailHTML(task) {
  * @param {number} taskIndex - The index of the task in the task array.
  */
 function editTaskTemplate(task, date, taskIndex) {
-  let subtask0 = task.subtasks[0] ? task.subtasks[0] : '';
-  let subtask1 = task.subtasks[1] ? task.subtasks[1] : '';
-
   document.getElementById("taskDetailCard").innerHTML = /*html*/ `
     <div class="detailtaskEdit">
       <div class="closeTaskContainer">
@@ -246,6 +243,7 @@ function editTaskTemplate(task, date, taskIndex) {
       <div id="extraUsers" class="extraUser dNone"></div>
       <div class="subtasksDetail" id="subtasksDetail"></div>
       <div class="subtasksContainer">
+
         <p class="subtaskHeadline">Subtasks</p>
         <input id="subtasksInput" placeholder="Add new subtask" onfocus="showSubtaskIcons()">
         <div class="subtaskIcons">
@@ -253,55 +251,12 @@ function editTaskTemplate(task, date, taskIndex) {
           <div class="dNone dFlexAlign" id="subtaskActive">
             <img class="subtaskIcon" src="../assets/icons/close.png" onclick="clearSubtaskInput()">
             <div class="smallSeparator"></div>
-            <img class="subtaskIcon" src="../assets/icons/check.png" onclick="checkSubtaskEdit(${taskIndex})">
+            <img class="subtaskIcon" src="../assets/icons/check.png" onclick="createSubtaskEdit()">
           </div>
         </div>
         <span class="inputError" id="inputerrorSubtask1">Subtask needs Description</span>
-        <span class="inputError" id="inputerrorSubtask2">Max 2 Subtasks allowed</span>
         <div class="subtasksBox" id="subtasksBox">
-          <div id="subtaskBox0" class="subtaskBox">
-            <ul class="subtaksUlEdit">
-              <li id="subtask0" class="subtaskLiEdit">${subtask0}</li>
-            </ul>
-            <div id="subtaskIconsLower0" class="subtaskIconsLower">
-              <img class="subtaskIcon" onclick="subtaskEdit(0)" src="../assets/icons/edit.png">
-              <div class="smallSeparator"></div>
-              <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 0)" src="../assets/icons/delete.png">
-            </div>
-          </div>
 
-          <div id="subtaskBoxEdit0" class="subtaskBox dNone">
-            <div class="dFlexAlign backgroundWhite">
-              <input id="subtaskEdit0" value="${subtask0}" class="editSubtaskInput">
-              <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 0)" src="../assets/icons/delete.png">
-                <div class="smallSeparator"></div>
-                <img class="subtaskIcon" src="../assets/icons/check.png" onclick="subtaskChange(${taskIndex}, 0)">
-              </div>
-            </div>
-          </div>
-          
-          <div id="subtaskBox1" class="subtaskBox">
-            <ul>
-              <li id="subtask1" class="subtaskLiEdit">${subtask1}</li>
-            </ul>
-            <div id="subtaskIconsLower1" class="subtaskIconsLower">
-              <img class="subtaskIcon" onclick="subtaskEdit(1)" src="../assets/icons/edit.png">
-              <div class="smallSeparator"></div>
-              <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 1)" src="../assets/icons/delete.png">
-            </div>
-          </div>
-
-          <div id="subtaskBoxEdit1" class="subtaskBox dNone">
-            <div class="dFlexAlign backgroundWhite">
-              <input id="subtaskEdit1" value="${subtask1}" class="editSubtaskInput">
-              <div class="subtaskIconsLower">
-                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${taskIndex}, 1)" src="../assets/icons/delete.png">
-                <div class="smallSeparator"></div>
-                <img class="subtaskIcon" src="../assets/icons/check.png" onclick="subtaskChange(${taskIndex}, 1)">
-              </div>
-            </div>
-          </div>
 
         </div>
       </div>
@@ -310,4 +265,31 @@ function editTaskTemplate(task, date, taskIndex) {
       </div>
     </div>
   `;
+}
+
+
+function generateSubtasksEdit(subtask, i) {
+  document.getElementById('subtasksBox').innerHTML += /*html*/`
+  <div id="subtaskBox${i}" class="subtaskBox">
+            <ul class="subtaksUlEdit">
+              <li id="subtask${i}" class="subtaskLiEdit">${subtask}</li>
+            </ul>
+            <div id="subtaskIconsLower${i}" class="subtaskIconsLower">
+              <img class="subtaskIcon" onclick="subtaskEdit(${i})" src="../assets/icons/edit.png">
+              <div class="smallSeparator"></div>
+              <img class="subtaskIcon" onclick="deleteSubtaskEdit(${i})" src="../assets/icons/delete.png">
+            </div>
+          </div>
+
+          <div id="subtaskBoxEdit${i}" class="subtaskBox dNone">
+            <div class="dFlexAlign backgroundWhite">
+              <input id="subtaskEdit${i}" value="${subtask}" class="editSubtaskInput">
+              <div class="subtaskIconsLower">
+                <img class="subtaskIcon" onclick="deleteSubtaskEdit(${i})" src="../assets/icons/delete.png">
+                <div class="smallSeparator"></div>
+                <img class="subtaskIcon" src="../assets/icons/check.png" onclick="subtaskChange(${i})">
+              </div>
+            </div>
+          </div>
+          `
 }

@@ -179,7 +179,8 @@ function checkSubtask() {
  * @returns true if input is validated / false if not 
  */
 function checkInputTitle() {
-    if (document.getElementById('titleInput').value === "") {
+    let x = document.getElementById('titleInput').value;
+    if (x === "") {
         document.getElementById('inputerror1').style.display = 'block';
         document.getElementById('titleInput').classList.add('redInputBorder');
         checked = false;
@@ -279,7 +280,7 @@ function editSubtask(i) {
  * @param {number} i The number of the subtask box
  */
 function changeSubtask(i) {
-    let input = document.getElementById(`subtask${i}`).value;
+    let input = document.getElementById(`subtask${i}`).value.trim();
     if (input === "") {
         deleteSubtask(i);
         return;
@@ -297,7 +298,7 @@ function showSubtaskIcons() {
     setTimeout(function () {
         document.getElementById('subtaskActive').classList.toggle('dNone');
         document.getElementById('subtaskInactive').classList.toggle('dNone');
-    }, 100);
+    }, 150);
 }
 
 
