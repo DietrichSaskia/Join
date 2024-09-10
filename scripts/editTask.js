@@ -338,6 +338,7 @@ function updateTaskPriority() {
  */
 function deleteSubtaskEdit(subtaskIndex) {
   editedTaskArray['subtasks'].splice(subtaskIndex, 1);
+  editedTaskArray['subtasksCheck'].splice(subtaskIndex, 1);
   document.getElementById(`subtaskBox${subtaskIndex}`).remove();
   document.getElementById(`subtaskBoxEdit${subtaskIndex}`).remove();
 }
