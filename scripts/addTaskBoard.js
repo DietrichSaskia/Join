@@ -36,8 +36,8 @@ function loadFunctions() {
  */
 function loadAddTaskInBoard() {
     loadAddTaskComplete();
-    activateprioButton(1);
-    getusers();
+    activatePrioButton(1);
+    getUsers();
     searchUsers();
     openAddTask();
     configureDueDateInput()
@@ -126,8 +126,8 @@ function closeAddTaskWithX() {
  * 
  * @param {number} i This is the number of the priority Button
  */
-function activateprioButton(i) {
-    resetprioButtons()
+function activatePrioButton(i) {
+    resetPrioButtons()
     switch (i) {
         case 0:
             setPrioHigh(task);
@@ -146,7 +146,7 @@ function activateprioButton(i) {
  * Breaks up the array and load the individual user
  * 
  */
-function getusers() {
+function getUsers() {
     document.getElementById('dropdownUsers').innerHTML = ``;
     document.getElementById('assignedUsers').innerHTML = ``;
     for (let i = 0; i < contactAllArray.length; i++) {
@@ -210,13 +210,13 @@ function createSubtask(input) {
     for (let i = 0; i < subtasks.length; i++) {
         if (subtasks[i] === "") {
             subtasks[i] = input;
-            putSubTask(input, i);
+            putSubtask(input, i);
             clearSubtaskInput();
             return;
         }
     }
     subtasks.push(input);
-    putSubTask(input, subtasks.length - 1);
+    putSubtask(input, subtasks.length - 1);
     clearSubtaskInput();
 }
 
@@ -234,11 +234,11 @@ function clearSubtaskInput() {
  */
 function clearAddTask() {
     loadContact();
-    getusers();
+    getUsers();
     searchUsers();
     clearCircle();
     clearInputValues();
-    activateprioButton(1);
+    activatePrioButton(1);
     clearCategory();
     clearAllSubtasks();
 }

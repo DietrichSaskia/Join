@@ -101,15 +101,15 @@ function loadAddTaskComplete() {
   
       <div class="prio">
   
-        <div id="prio0" class="prioButton" onclick="activateprioButton(0)">Urgent
+        <div id="prio0" class="prioButton" onclick="activatePrioButton(0)">Urgent
           <img id="prioHigh" src="../assets/icons/prioUrgent.png">
         </div>
   
-        <div id="prio1" class="prioButton" onclick="activateprioButton(1)">Medium
+        <div id="prio1" class="prioButton" onclick="activatePrioButton(1)">Medium
           <img id="prioMed" src="../assets/icons/prioMedium.png">
         </div>
   
-        <div id="prio2" class="prioButton" onclick="activateprioButton(2)">Low
+        <div id="prio2" class="prioButton" onclick="activatePrioButton(2)">Low
           <img id="prioLow" src="../assets/icons/prioLow.png">
         </div>
   
@@ -203,7 +203,7 @@ function renderAssignedUser(user, initials, i) {
 * @param {string} input The value of the subtask input
 * @param {number} i The number of the subtask box
 */
-function putSubTask(input, i) {
+function putSubtask(input, i) {
   document.getElementById('subtasksBox').innerHTML += /*html*/`
     <div id="subtaskBox${i}" class="subtaskBox">
         <ul>
@@ -225,7 +225,7 @@ function putSubTask(input, i) {
 * @param {string} input The value of the subtask input
 * @param {number} i The number of the subtask box
 */
-function putSubTaskInput(input, i) {
+function putSubtaskInput(input, i) {
   document.getElementById('subtasksBox').innerHTML += /*html*/`
     <div id="subtaskBox${i}" class="subtaskBox">
         <div class="dFlexAlign backgroundWhite">

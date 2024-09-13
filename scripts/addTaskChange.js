@@ -4,7 +4,7 @@
  * @param {Array} task The array that is used to temporarily save all inputs
  */
 function setPrioHigh(task) {
-    resetprioButtons()
+    resetPrioButtons()
     document.getElementById('prio0').classList.add('high', 'active');
     document.getElementById('prioHigh').src = "../assets/icons/prioUrgentWhite.png";
     task['prio'] = '../assets/icons/prioUrgent.png';
@@ -18,7 +18,7 @@ function setPrioHigh(task) {
  * @param {Array} task The array that is used to temporarily save all inputs
  */
 function setPrioMedium(task) {
-    resetprioButtons()
+    resetPrioButtons()
     document.getElementById('prio1').classList.add('medium', 'active');
     document.getElementById('prioMed').src = "../assets/icons/prioMediumWhite.png";
     task['prio'] = '../assets/icons/prioMedium.png';
@@ -32,7 +32,7 @@ function setPrioMedium(task) {
  * @param {Array} task The array that is used to temporarily save all inputs
  */
 function setPrioLow(task) {
-    resetprioButtons()
+    resetPrioButtons()
     document.getElementById('prio2').classList.add('low', 'active');
     document.getElementById('prioLow').src = "../assets/icons/prioLowWhite.png";
     task['prio'] = '../assets/icons/prioLow.png';
@@ -43,7 +43,7 @@ function setPrioLow(task) {
 /**
  * Resets all priority buttons to normal with no colors
  */
-function resetprioButtons() {
+function resetPrioButtons() {
     document.getElementById('prio0').classList.remove('high', 'active');
     document.getElementById('prio1').classList.remove('medium', 'active');
     document.getElementById('prio2').classList.remove('low', 'active');
@@ -278,7 +278,7 @@ function clearSubtask(i) {
 function editSubtask(i) {
     let info = task['subtasks'][i];
     document.getElementById(`subtaskBox${i}`).remove();
-    putSubTaskInput(info, i);
+    putSubtaskInput(info, i);
     let input = document.getElementById(`subtask${i}`);
     input.focus();
     input.setSelectionRange(input.value.length, input.value.length);
@@ -296,7 +296,7 @@ function changeSubtask(i) {
         deleteSubtask(i);
         return;
     }
-    putSubTask(input, i);
+    putSubtask(input, i);
     task['subtasks'].splice(i, 1, input);
     document.getElementById(`subtaskBox${i}`).remove();
 }

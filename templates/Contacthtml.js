@@ -1,5 +1,5 @@
 function  contactInfoHtml(initials, name, email, phone, buttonColor, index){
-    document.getElementById('Contenttext').innerHTML= `
+    document.getElementById('Contenttext').innerHTML= /*html*/`
       <div id="ContactfieldInfodiv" class="ContactfieldInfo">
             <div class="ContactCircleName">
                 <header class="ContactSection">
@@ -63,7 +63,7 @@ function  contactInfoHtml(initials, name, email, phone, buttonColor, index){
 
 
 function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
-    document.getElementById('EditContactIDWIn').innerHTML = `
+    document.getElementById('EditContactIDWIn').innerHTML = /*html*/`
     <div class="EditWindowNew" onclick="protect(event)">
         <section class="EditWindowLeftArea">
             <div class="EditLeftTopStyle">
@@ -107,7 +107,7 @@ function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
                         </div>
                         <div class="EditWindowDeleteSave" id="EditWindowDeleteSaveID1">
                             <button id="EditWindowDeleteButtonID" onclick="deleteContactList(${index}); editContactCloseWindow();" type="button" class="EditWindowDeleteButton">Delete</button>
-                            <button typ="submit id="EditNewContactButtonID" onclick="editNewContactCheckInput(${index}), clickContactBack()" class="EditWindowSaveButton">Save <img class="EditSaveCheck" src="../assets/icons/checkWhite.png"></button>
+                            <button typ="submit" id="EditNewContactButtonID" onclick="editNewContactCheckInput(${index}), clickContactBack()" class="EditWindowSaveButton">Save <img class="EditSaveCheck" src="../assets/icons/checkWhite.png"></button>
                         </div>
                         <div id="EditWindowDeleteSaveID2"></div>
                     </div>
@@ -121,7 +121,7 @@ function editNewContactHtml(initials, name, email, phone, buttonColor, index) {
  
 
 function editNewContactChangeHTML(){
-    document.getElementById('EditWindowDeleteSaveID2').innerHTML=`
+    document.getElementById('EditWindowDeleteSaveID2').innerHTML=/*html*/`
     <button type="button" onclick="editContactCloseWindow()" id="CloseButtonID" type="button" class="EditWindowDeleteButton2">Cancel 
         <div class="XButtonCloseStyle" id="XCloseID">
             <img  class="ImgCloseStyle2" src="../assets/icons/close.png">
@@ -133,7 +133,7 @@ function editNewContactChangeHTML(){
 
 
 function contactInfoHeadlineHtml(){
-    document.getElementById('ContactsInfoSection').innerHTML=`
+    document.getElementById('ContactsInfoSection').innerHTML=/*html*/`
     <section id="RightsectionheadlineID" class="Rightsectionheadline">
         <span class="Contactheadline">Contacts</span>
         <div class="Contactyline"></div>
@@ -151,7 +151,7 @@ function contactInfoHeadlineHtml(){
 
 
 function contactInformationPopUpHTML(text){
-    document.getElementById('ContactInfoPopUp').innerHTML=`
+    document.getElementById('ContactInfoPopUp').innerHTML=/*html*/`
     <div class="ContactInformation">
         <div >${text}</div>
     </div>

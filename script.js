@@ -45,9 +45,9 @@ async function checkUser() {
     let Currentname = localStorage.getItem('CurrentUser');
     let initials;
     if (Currentname == 'null') {
-        initials = checkUser3();
+        initials = removeNoneUserOptions();
     } else {
-        initials = checkUser2(Currentname, name);
+        initials = checkIfUserGuest(Currentname, name);
     }
     document.getElementById('headerProfile').innerHTML = /*html*/`
     <div>${initials}</div>
@@ -64,7 +64,7 @@ async function checkUser() {
  * @param {*} name 
  * @returns 
  */
-function checkUser2(Currentname, name) {
+function checkIfUserGuest(Currentname, name) {
     name = JSON.parse(Currentname);
     let nameParts = name.split(' ');
     let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
@@ -78,7 +78,7 @@ function checkUser2(Currentname, name) {
 /**
  * Classes are added here.
  */
-function checkUser3() {
+function removeNoneUserOptions() {
     document.getElementById('burgerMenu').classList.add('dNone');
     document.getElementById('HelpSideOpen').classList.add('dNone');
     document.getElementById('SidebarMenuFourButtons').classList.add('dNone');

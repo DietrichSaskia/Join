@@ -28,7 +28,7 @@ let contactAllArray = [];
  */
 function loadFunctions() {
     loadAddTaskComplete('mainContent');
-    activateprioButton(1);
+    activatePrioButton(1);
     loadMembers();
     searchUsers();
     load();
@@ -80,8 +80,8 @@ document.addEventListener('click', function (clickEvent) {
  * 
  * @param {number} i This is the number of the priority Button
  */
-function activateprioButton(i) {
-    resetprioButtons
+function activatePrioButton(i) {
+    resetPrioButtons();
     switch (i) {
         case 0:
             setPrioHigh(task);
@@ -104,7 +104,7 @@ function loadMembers() {
     if (tasksAsText) {
         json = JSON.parse(tasksAsText);
     }
-    getusers(json);
+    getUsers(json);
 }
 
 
@@ -113,7 +113,7 @@ function loadMembers() {
  * 
  * @param {Array} users The Array that is used to temporarily save all users
  */
-function getusers(users) {
+function getUsers(users) {
     document.getElementById('dropdownUsers').innerHTML = ``;
     document.getElementById('assignedUsers').innerHTML = ``;
     for (let i = 0; i < users.length; i++) {
@@ -178,13 +178,13 @@ function createSubtask(input) {
     for (let i = 0; i < subtasks.length; i++) {
         if (subtasks[i] === "") {
             subtasks[i] = input;
-            putSubTask(input, i);
+            putSubtask(input, i);
             clearSubtaskInput();
             return;
         }
     }
     subtasks.push(input);
-    putSubTask(input, subtasks.length - 1);
+    putSubtask(input, subtasks.length - 1);
     clearSubtaskInput();
 }
 
@@ -205,7 +205,7 @@ function clearAddTask() {
     searchUsers();
     clearCircle();
     clearInputValues();
-    activateprioButton(1);
+    activatePrioButton(1);
     clearCategory();
     clearAllSubtasks();
 }

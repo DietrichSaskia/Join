@@ -38,7 +38,7 @@ function generateTasksHTML(element, i) {
 function generateInitialsAndPriorityHTML(initialElements, remainingElement, prio) {
   let validPrio = prio || '../assets/icons/defaultPriority.png';
 
-  return `
+  return /*html*/`
     <div class="assignedToAndPrio">
       <div>${initialElements}${remainingElement}</div>
       <img src="${validPrio}" alt="PriorityImage" class="priority-icon">
@@ -62,7 +62,7 @@ function generateSubtaskProgressHTML(subtasks, taskIndex) {
     console.error('Invalid subtaskProgress:', subtaskProgress);
     return '';
   }
-  return `
+  return /*html*/`
     <div class="subtasks">
       <div class="subtaskBarContainer">
         <div class="subtaskBar" id="subtaskBar${taskIndex}" style="width: ${subtaskProgress.subtaskBarWidth}%;"></div>
@@ -84,7 +84,7 @@ function renderSubtasks(taskIndex) {
     console.error('subtasksStatus is not an array:', subtasksStatus);
     return '';
   }
-  return subtasksStatus.map(({ subtask, isCompleted }) => `
+  return subtasksStatus.map(({ subtask, isCompleted }) => /*html*/`
     <div class="subtaskItem">
       <input type="checkbox" ${isCompleted ? 'checked' : ''} disabled>
       <span>${subtask}</span>
