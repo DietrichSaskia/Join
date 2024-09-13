@@ -68,7 +68,7 @@ function contactLoadChar(contactNameArray){
     charContactArray.sort((a, b) => {
         if (a.initial === b.initial) {return a.name.localeCompare(b.name);}
         return a.initial.localeCompare(b.initial);});
-    contactLoadcontainer();
+    contactLoadContainer();
 }
 
 
@@ -76,7 +76,7 @@ function contactLoadChar(contactNameArray){
  * A div container is created here and extensive functions are called up.
  * 
  */
-function contactLoadcontainer(){
+function contactLoadContainer(){
     let container = document.createElement('div');
     let currentInitial = '';
     charContactArray.forEach((obj) => {

@@ -39,13 +39,13 @@ function editTask(taskIndex) {
     editTaskTemplate(task, date, taskIndex);
   }, 100);
   setTimeout(() => {
-    setpriorityButton(task);
-    getusers();
+    setPriorityButton(task);
+    getUsers();
     searchUsers();
     configureDueDateInput();
     setAssignedUsers(task);
     loadSubtasksFromArray(taskIndex);
-    checkEmptysubtasks();
+    checkEmptySubtasks();
   }, 150);
 }
 
@@ -65,7 +65,7 @@ function loadSubtasksFromArray(taskIndex) {
 /**
  * Hides subtask fields if they are empty or starts
  */
-function checkEmptysubtasks() {
+function checkEmptySubtasks() {
   if (editedTaskArray.subtasks.length === 0) {
     return
   }
@@ -92,8 +92,8 @@ function toggleUserDropdownEdit() {
  *
  * @param {Object} task - The task object containing priority data.
  */
-function setpriorityButton(task) {
-  resetprioButtons();
+function setPriorityButton(task) {
+  resetPrioButtons();
   if (task.prioName === "Low") {
     setPrioLowEdit();
   }
@@ -110,7 +110,7 @@ function setpriorityButton(task) {
  * Sets the task priority to "High" in the edit task view.
  */
 function setPrioHighEdit() {
-  resetprioButtons();
+  resetPrioButtons();
   document.getElementById('prio0').classList.add('high', 'active');
   document.getElementById('prioHigh').src = "../assets/icons/prioUrgentWhite.png";
 }
@@ -120,7 +120,7 @@ function setPrioHighEdit() {
  * Sets the task priority to "Medium" in the edit task view.
  */
 function setPrioMediumEdit() {
-  resetprioButtons();
+  resetPrioButtons();
   document.getElementById('prio1').classList.add('medium', 'active');
   document.getElementById('prioMed').src = "../assets/icons/prioMediumWhite.png";
 }
@@ -130,7 +130,7 @@ function setPrioMediumEdit() {
  * Sets the task priority to "Low" in the edit task view.
  */
 function setPrioLowEdit() {
-  resetprioButtons();
+  resetPrioButtons();
   document.getElementById('prio2').classList.add('low', 'active');
   document.getElementById('prioLow').src = "../assets/icons/prioLowWhite.png";
 }
@@ -376,5 +376,5 @@ function subtaskChange(i) {
     return;
   }
   editedTaskArray.subtasks.splice(i, 1, input);
-  checkEmptysubtasks();
+  checkEmptySubtasks();
 }
